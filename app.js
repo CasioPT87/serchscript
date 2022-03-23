@@ -4,7 +4,7 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-const mongoose = require("mongoose");
+const connect = require('./db/connection')
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -17,18 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-const { DATABASE_NAME } = process.env
-
-console.log('env', DATABASE_NAME)
-
-const mongoDB = `mongodb://sergio:sergio@localhost:27017/${DATABASE_NAME}`;
-mongoose
-  .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("connected to the db!!"))
-  .catch((err) => {
-    console.log("Cannot connect to the database!", err);
-    // process.exit();
-  });
+connect()
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
