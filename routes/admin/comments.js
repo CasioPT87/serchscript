@@ -35,7 +35,6 @@ router.get("/:articleId", async (req, res, next) => {
 
 // create new
 router.post("/", async (req, res, next) => {
-  let article = null;
   const { content = null, hidden = false, articleId = null } = req.body;
 
   const comment = new Comment();
@@ -45,14 +44,9 @@ router.post("/", async (req, res, next) => {
   comment
     .save()
     .then(async (c) => {
-      article = await Article.findById(articleId);
-      article.comments.push(c._id);
-      await article.save();
       res.json(c);
     })
     .catch(async (e) => {
-      await comment.remove();
-      if (article) await article.remove();
       next(e);
     });
 });
@@ -76,11 +70,11 @@ router.put("/:id", async (req, res, next) => {
 });
 
 //deletes a comment by id
-router.delete("/:id", function (req, res, next) {
+router.delete("/:id", async (req, res, next) => {
   const { id } = req.params;
   Comment.findById(id)
     .remove()
-    .then((c) => {
+    .then(async (c) => {
       res.json(c);
     })
     .catch((e) => {

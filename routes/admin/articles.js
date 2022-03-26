@@ -5,7 +5,6 @@ var router = express.Router();
 // delete all
 router.delete("/all", (req, res, next) => {
   Article.deleteMany({}).then((d) => {
-    console.log(d);
     res.json(d);
   });
 });

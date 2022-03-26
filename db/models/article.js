@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const ArticleModel = mongoose.model(
   "Article",
-  mongoose.Schema(
+  Schema(
     {
       title: { type: String, required: true },
       description: { type: String, required: true },
