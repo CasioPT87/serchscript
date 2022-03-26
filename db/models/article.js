@@ -5,9 +5,9 @@ const ArticleModel = mongoose.model(
   "Article",
   mongoose.Schema(
     {
-      title: String,
-      description: String,
-      content: String,
+      title: { type: String, required: true },
+      description: { type: String, required: true },
+      content: { type: String, required: true },
       hidden: Boolean,
       user: {
         type: Schema.Types.ObjectId,

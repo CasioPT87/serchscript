@@ -3,22 +3,13 @@ const Comment = require('../db/models/comment')
 const Article = require('../db/models/article')
 var router = express.Router();
 
-// get list for article // for dev purpose only
-router.get('/', (req, res, next) => {
-  Comment.find({})
-    .then(as => res.json(as))
-    .catch(e => {
-      next(e)
-    })
-});
-
 // create new
 router.post('/', async (req, res, next) => {
   let article = null
   const {
-     content=null, 
-     hidden=false,
-     articleId=null
+    content=null, 
+    hidden=false,
+    articleId=null
   } = req.body
   
   const comment = new Comment()

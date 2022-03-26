@@ -1,40 +1,102 @@
-var express = require('express');
-const Article = require('../../db/models/article')
+var express = require("express");
+const Article = require("../../db/models/article");
 var router = express.Router();
 
-
-//gets all articles
-router.get('/', function(req, res, next) {
-    res.send('respond in leches');
+// delete all
+router.delete("/all", (req, res, next) => {
+  Article.deleteMany({}).then((d) => {
+    console.log(d);
+    res.json(d);
+  });
 });
 
-//info for a new article
-router.get('/new', function(req, res, next) {
-    // res.send('respond in new, que es new');
-    console.log('este es el new')
-    next('route')
-}, () => {
-    console.log('anda ya')
+// get list
+router.get("/", (req, res, next) => {
+  Article.find({})
+    .then((as) => res.json(as))
+    .catch((e) => {
+      next(e);
+    });
 });
 
-//create an article
-router.post('/', function(req, res, next) {
-    res.send('respond in leches');
+// get one
+router.get("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  Article.findOne({ _id: id })
+    .populate("comments")
+    .then((a) => res.json(a))
+    .catch((e) => {
+      next(e);
+    });
 });
 
-//gets an article by id
-router.get('/:id', function(req, res, next) {
-  res.send('respond in index');
+// create new
+router.post("/", async (req, res, next) => {
+  const {
+    title = "Escribe un titulo",
+    description = "Escribe una descripcion",
+    content = "El contenido esta vacio",
+    hidden = true,
+  } = req.body;
+  const article = new Article();
+  article.title = title;
+  article.description = description;
+  article.content = content;
+  article.hidden = hidden;
+
+  article
+    .save()
+    .then((a) => res.json(a))
+    .catch((e) => {
+      next(e);
+    });
 });
 
-//updates an article by id
-router.put('/:id', function(req, res, next) {
-    res.send('respond in index');
+// update one
+router.put("/:id", async (req, res, next) => {
+  const { id } = req.params;
+
+  const {
+    title,
+    description,
+    content,
+    hidden,
+  } = req.body;
+
+  const filteredValues = Object.entries({
+    title,
+    description,
+    content,
+    hidden,
+  }).reduce((prev, [k, v]) => {
+    if (v) {
+        return {
+            ...prev,
+            [k]: v
+        }
+    }
+    return prev
+  }, {})
+
+  Article.findOneAndUpdate(
+    { _id: id },
+    filteredValues,
+    { new: true }
+  )
+    .then((a) => res.json(a))
+    .catch((e) => {
+      next(e);
+    });
 });
 
-//deletes an article by id
-router.get('/id', function(req, res, next) {
-    res.send('respond in leches');
+// delete one
+router.delete("/:id", async (req, res, next) => {
+  const { id } = req.params;
+  Article.findOneAndDelete({ _id: id })
+    .then((as) => res.json(as))
+    .catch((e) => {
+      next(e);
+    });
 });
 
 module.exports = router;
