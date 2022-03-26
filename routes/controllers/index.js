@@ -1,11 +1,13 @@
 var express = require("express");
-const app = express()
+// const app = express()
 const routeArticle = require('../articles')
 const routeComment = require('../comments')
 const routeAdmin = require('../admin')
 
-app.use('/admin', routeAdmin)
-app.use('/articles', routeArticle)
-app.use('/comments', routeComment)
+const router = express.Router()
 
-module.exports = app
+router.use('/admin', routeAdmin)
+router.use('/articles', routeArticle)
+router.use('/comments', routeComment)
+
+module.exports = router
