@@ -9,8 +9,17 @@ const ArticleModel = mongoose.model(
       description: String,
       content: String,
       hidden: Boolean,
-      user: { type: Schema.Types.ObjectId, ref: 'User' },
-      comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],      
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      },
+      comments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Comment',
+            required: false
+        }
+      ],      
     },
     { timestamps: true }
   )

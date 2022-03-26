@@ -5,11 +5,10 @@ const CommentModel = mongoose.model(
   "Comment",
   mongoose.Schema(
     {
-      title: String,
-      description: String,
-      published: Boolean,
-      article: { type: Schema.Types.ObjectId, ref: 'Article' },
-      edited: Boolean,
+      content: {
+        type: String,
+        required: true,
+      },
       hidden: Boolean,
     },
     { timestamps: true }
