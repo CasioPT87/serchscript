@@ -1,11 +1,14 @@
 var createError = require("http-errors");
-require('dotenv').config()
+require("dotenv").config();
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-const connect = require('./db/connection')
+const connect = require("./db/connection");
 var routeControllers = require("./routes/controllers");
+const React = require("react");
+const { renderToString } = require("react-dom/server");
+// const App = require("./client/app")
 
 var app = express();
 
@@ -15,9 +18,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-connect()
+connect();
 
-app.use("/", routeControllers);
+app.use("/api", routeControllers);
+
+app.use(handleRender);
+
+function handleRender(req, res) {
+//   const reactHtml = renderToString(<App />);
+//   const htmlTemplate = `<!DOCTYPE html>
+// <html>
+//     <head>
+//         <title>Universal React server bundle</title>
+//     </head>
+//     <body>
+//         <div id="app">${reactHtml}</div>
+//         <script src="public/client.bundle.js"></script>
+//     </body>
+// </html>`;
+//   res.send(htmlTemplate);
+}
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -26,12 +46,12 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
-  const isDev = req.app.get("env") === "development"
+  const isDev = req.app.get("env") === "development";
   // set locals, only providing error in development
   res.locals.message = err.message;
-  
+
   if (isDev) {
-    console.log(err)
+    console.log(err);
     res.locals.error = isDev ? err : {};
   }
 
