@@ -8,9 +8,8 @@ const connect = require("./db/connection");
 var routeControllers = require("./routes/controllers");
 const fs = require('fs')
 require("@babel/register");
-// const component = require('../client/src/component.jsx')
-const App = require( './client/src/component.jsx' );
-// const ReactDOMServer = require( 'react-dom/server' );
+const { AppString } = require( './client/src/component.jsx' );
+const ReactDOMServer = require( 'react-dom/server' );
 
 var app = express();
 
@@ -18,34 +17,28 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static('../client/dist'));
+app.use(express.static('./client/dist'));
 
 connect();
 
 app.use("/api", routeControllers);
 
-app.use(handleRender);
-
-function handleRender(req, res) {
-  // read `index.html` file
+app.get('/aro', (req, res, next) => {
   let indexHTML = fs.readFileSync(
-    path.resolve(__dirname, "../client/dist/index.html"),
+    './client/dist/index.html',
     {
       encoding: "utf8",
     }
   );
 
-  console.log(indexHTML)
+  let appHTML = AppString;
 
-  // let appHTML = ReactDOMServer.renderToString( <App /> );
-
-  // indexHTML = indexHTML.replace( '<body></body>', `<body><div id="root">${ App }</div></body>` );
-
+  indexHTML = indexHTML.replace('<div id="root"></div>', `<div id="root">${appHTML}</div>`);
 
   res.contentType( 'text/html' );
   res.status( 200 );
-  return res.send( indexHTML );
-}
+  return res.send(indexHTML);
+})
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
