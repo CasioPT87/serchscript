@@ -6,9 +6,9 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const connect = require("./db/connection");
 var routeControllers = require("./routes/controllers");
-const React = require("react");
-const { renderToString } = require("react-dom/server");
-// const App = require("./client/app")
+const fs = require('fs')
+// const App = require( '../client/src/component.jsx' );
+// const ReactDOMServer = require( 'react-dom/server' );
 
 var app = express();
 
@@ -16,7 +16,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static('../client/dist'));
 
 connect();
 
@@ -25,18 +25,24 @@ app.use("/api", routeControllers);
 app.use(handleRender);
 
 function handleRender(req, res) {
-//   const reactHtml = renderToString(<App />);
-//   const htmlTemplate = `<!DOCTYPE html>
-// <html>
-//     <head>
-//         <title>Universal React server bundle</title>
-//     </head>
-//     <body>
-//         <div id="app">${reactHtml}</div>
-//         <script src="public/client.bundle.js"></script>
-//     </body>
-// </html>`;
-//   res.send(htmlTemplate);
+  // read `index.html` file
+  let indexHTML = fs.readFileSync(
+    path.resolve(__dirname, "../client/dist/index.html"),
+    {
+      encoding: "utf8",
+    }
+  );
+
+  console.log(indexHTML)
+
+  // let appHTML = ReactDOMServer.renderToString( <App /> );
+
+  // indexHTML = indexHTML.replace( '<body></body>', `<body><div id="root">${ App }</div></body>` );
+
+
+  res.contentType( 'text/html' );
+  res.status( 200 );
+  return res.send( indexHTML );
 }
 
 // catch 404 and forward to error handler
