@@ -7,7 +7,9 @@ var logger = require("morgan");
 const connect = require("./db/connection");
 var routeControllers = require("./routes/controllers");
 const fs = require('fs')
-// const App = require( '../client/src/component.jsx' );
+require("@babel/register");
+// const component = require('../client/src/component.jsx')
+const App = require( './client/src/component.jsx' );
 // const ReactDOMServer = require( 'react-dom/server' );
 
 var app = express();
