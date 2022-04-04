@@ -9,7 +9,6 @@ var routeControllers = require("./routes/controllers");
 const fs = require('fs')
 require("@babel/register");
 const { AppString } = require( './client/src/component.jsx' );
-const ReactDOMServer = require( 'react-dom/server' );
 
 var app = express();
 
@@ -24,20 +23,20 @@ connect();
 app.use("/api", routeControllers);
 
 app.get('/aro', (req, res, next) => {
-  let indexHTML = fs.readFileSync(
-    './client/dist/index.html',
-    {
-      encoding: "utf8",
-    }
-  );
+  // let indexHTML = fs.readFileSync(
+  //   './client/dist/index.html',
+  //   {
+  //     encoding: "utf8",
+  //   }
+  // );
 
-  let appHTML = AppString;
+  // let appHTML = AppString;
 
-  indexHTML = indexHTML.replace('<div id="root"></div>', `<div id="root">${appHTML}</div>`);
+  // indexHTML = indexHTML.replace('<div id="root"></div>', `<div id="root">${appHTML}</div>`);
 
   res.contentType( 'text/html' );
   res.status( 200 );
-  return res.send(indexHTML);
+  return res.send(AppString);
 })
 
 // catch 404 and forward to error handler
