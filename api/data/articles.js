@@ -1,5 +1,5 @@
 var express = require("express");
-const Article = require("../db/models/article");
+const Article = require("../../db/models/article");
 var router = express.Router();
 
 // get list

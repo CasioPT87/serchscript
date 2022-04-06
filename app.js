@@ -5,10 +5,9 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const connect = require("./db/connection");
-var routeControllers = require("./routes/controllers");
-const fs = require('fs')
+var controllers = require("./api/controllers");
 require("@babel/register");
-const { AppString } = require( './client/src/component.jsx' );
+const { AppString } = require( './client/src/components/main/App.jsx' );
 
 var app = express();
 
@@ -20,20 +19,9 @@ app.use(express.static('./client/dist'));
 
 connect();
 
-app.use("/api", routeControllers);
+app.use("*", controllers);
 
-app.get('/aro', (req, res, next) => {
-  // let indexHTML = fs.readFileSync(
-  //   './client/dist/index.html',
-  //   {
-  //     encoding: "utf8",
-  //   }
-  // );
-
-  // let appHTML = AppString;
-
-  // indexHTML = indexHTML.replace('<div id="root"></div>', `<div id="root">${appHTML}</div>`);
-
+app.use('/', (req, res, next) => {
   res.contentType( 'text/html' );
   res.status( 200 );
   return res.send(AppString);

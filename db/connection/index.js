@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { DATABASE_NAME } = process.env
 
 const connect = () => {
-    const mongoDB = `mongodb://root:password@localhost:27017/${DATABASE_NAME}`;
+    const mongoDB = `mongodb://root:password@localhost:27099/${DATABASE_NAME}`;
     mongoose
       .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
       .then(() => console.log("connected to the db!!"))

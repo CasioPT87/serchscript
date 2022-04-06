@@ -1,5 +1,5 @@
 var express = require('express');
-const Comment = require('../db/models/comment')
+const Comment = require('../../db/models/comment')
 var router = express.Router();
 
 // create new
