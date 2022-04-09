@@ -31,7 +31,6 @@ router.get("/:id", async (req, res, next) => {
 
 // create new
 router.post("/", async (req, res, next) => {
-  console.log('vamos a crear un article')
   const {
     title = "Escribe un titulo",
     description = "Escribe una descripcion",
@@ -48,7 +47,6 @@ router.post("/", async (req, res, next) => {
     .save()
     .then((a) => res.json(a))
     .catch((e) => {
-      console.log('this is the error', e)
       next(e);
     });
 });

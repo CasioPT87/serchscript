@@ -4,6 +4,7 @@ var router = express.Router();
 
 // get list
 router.get("/", (req, res, next) => {
+  console.log('get list of articles')
   Article.find({})
     .then((as) => res.json(as))
     .catch((e) => {

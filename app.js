@@ -6,8 +6,6 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const connect = require("./db/connection");
 var controllers = require("./api/controllers");
-require("@babel/register");
-const { AppString } = require( './client/src/components/main/App.jsx' );
 
 var app = express();
 
@@ -19,13 +17,7 @@ app.use(express.static('./client/dist'));
 
 connect();
 
-app.use("*", controllers);
-
-app.use('/', (req, res, next) => {
-  res.contentType( 'text/html' );
-  res.status( 200 );
-  return res.send(AppString);
-})
+app.use("/", controllers);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
