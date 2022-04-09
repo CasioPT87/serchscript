@@ -7,7 +7,7 @@ const router = express.Router()
 
 router.get('/', async (req, res, next) => {
     const articles = await db.articles.index()
-    res.reactComponent = AppString({ articles })
+    res.reactComponent = AppString({ articles }, 'articles')
     next()
 })
 
