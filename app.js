@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('./client/dist'));
 
-// connect();
+connect();
 
 app.use("/", controllers);
 

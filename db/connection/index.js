@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
-const { DATABASE_NAME } = process.env
+const { MONGODB_URI } = process.env
 
 const connect = () => {
-    const mongoDB = `mongodb://jamon:pass@localhost:27017/${DATABASE_NAME}`;
+    const mongoDB = MONGODB_URI;
     mongoose
       .connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
       .then(() => console.log("connected to the db!!"))
