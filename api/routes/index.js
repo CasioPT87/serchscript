@@ -6,7 +6,7 @@ const router = express.Router()
 router.use('/', homeController)
 
 router.use('/', (req, res) => {
-    console.log('que paisha')
+    console.log('killo que pasa')
     res.contentType( 'text/html' );
     res.status(200);
     return res.send(res.reactComponent);

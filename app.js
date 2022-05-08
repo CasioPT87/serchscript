@@ -17,10 +17,6 @@ app.use(express.static('./client/dist'));
 
 // connect();
 
-app.use("/", (req, res) => {
-  res.send('leches')
-});
-
 app.use("/", controllers);
 
 // catch 404 and forward to error handler
