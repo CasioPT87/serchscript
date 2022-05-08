@@ -6,7 +6,8 @@ const { AppString } = require( '../../client/src/components/main/App.jsx' );
 const router = express.Router()
 
 router.get('/', async (req, res, next) => {
-    const articles = await db.articles.index()
+    // const articles = await db.articles.index()
+    const articles = []
     res.reactComponent = AppString({ articles }, 'articles')
     next()
 })
