@@ -18,6 +18,7 @@
     "@babel/plugin-transform-react-jsx": "^7.17.3",
     "@babel/preset-env": "^7.16.11",
     "@babel/register": "^7.17.7",
+    "babel-loader": "^8.2.4",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.0.0",
@@ -33,12 +34,10 @@
     "react-redux": "^7.2.8",
     "react-router-dom": "^6.3.0",
     "webpack": "^5.71.0",
-
-    "babel-loader": "^8.2.4"
+    "webpack-cli": "^4.9.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.15",
-    "source-map-support": "^0.4.14",
-    "webpack-cli": "^4.9.2"
+    "source-map-support": "^0.4.14"
   }
 }
