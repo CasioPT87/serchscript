@@ -5,7 +5,7 @@ const Articles = () => {
   const articles = useSelector((state) => state.articles);
   return (
     <div>
-      <div>{articles[1].title}</div>
+      <div className="capitan">{articles[0].title}</div>
     </div>
   );
 };

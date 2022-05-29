@@ -5,6 +5,8 @@ const renderHtml = (html, preloadedState) => {
     <meta charset="utf-8">
     <title>SSR react</title>
   <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="react.bundle.js"></script></head>
+  <link rel="stylesheet" href="react.css">
+
   <body>
     <div id="root">${html}</div>
     <script>
