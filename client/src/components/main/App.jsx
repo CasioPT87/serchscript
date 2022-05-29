@@ -6,6 +6,7 @@ const reducer = require("../../reducer");
 const renderHtml = require("../../renderHtml");
 const Articles = require("../articles");
 const Article = require("../article");
+const RootComponent = require('../../components/root')
 
 const Components = {
   articles: <Articles />,
@@ -13,11 +14,6 @@ const Components = {
 };
 
 const getComponent = (name) => Components[name];
-
-// this one we have to customize as our app-wrapper
-const RootComponent = (props) => {
-  return <div>{props.children}</div>;
-};
 
 const Root = (store, compName) => {
   return ReactDOMServer.renderToString(
@@ -28,7 +24,7 @@ const Root = (store, compName) => {
 };
 
 module.exports = {
-  App: RootComponent,
+  App: Root,
   AppString: (initialState, compName) => {
     const store = createStore(reducer, initialState);
     const preloadedState = store.getState();
