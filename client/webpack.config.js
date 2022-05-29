@@ -13,7 +13,7 @@ const clientConfig = {
     // react: path.resolve(__dirname, "./src/index.js"),
     // styles: path.resolve(__dirname, "./src/styles/styles.css")
     react: {
-      import: [path.resolve(__dirname, "./src/index.js"), path.resolve(__dirname, "./src/styles/styles.css")],
+      import: [path.resolve(__dirname, "./src/index.js"), path.resolve(__dirname, "./src/styles/styles.scss")],
       // dependOn: ["/\.css$/"],
       chunkLoading: false, // Disable chunks that are loaded on demand and put everything in the main chunk.
     },
@@ -37,7 +37,7 @@ const clientConfig = {
       },
       // CSS rules
       {
-        test: /\.css$/,
+        test: /\.s[ac]ss$/i,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -49,6 +49,7 @@ const clientConfig = {
             }
           },
           { loader: "css-loader" },
+          { loader: 'sass-loader' }
         ]
       }
     ],
