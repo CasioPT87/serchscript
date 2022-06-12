@@ -7,11 +7,13 @@ const renderHtml = require("../../renderHtml");
 const Articles = require("../articles");
 const Article = require("../article");
 const Home = require("../home");
+const ArticleForm = require("../articleForm");
 const RootComponent = require("../root");
 
 const Components = {
   articles: <Articles />,
   article: <Article />,
+  articleForm: <ArticleForm />,
   home: <Home />,
 };
 
