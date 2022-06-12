@@ -1,5 +1,8 @@
 .Root {
-    height: 900px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 400px;
     width: 100%;
-    background-color: green;
+    background-color: #F47C7C;
 }

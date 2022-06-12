@@ -4,8 +4,8 @@ const renderHtml = (html, preloadedState) => {
   <head>
     <meta charset="utf-8">
     <title>SSR react</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="react.bundle.js"></script></head>
-  <link rel="stylesheet" href="react.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="http://localhost:8880/react.bundle.js"></script></head>
+  <link rel="stylesheet" href="http://localhost:8880/react.css">
 
   <body>
     <div id="root">${html}</div>

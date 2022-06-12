@@ -2,10 +2,11 @@ const React = require("react");
 const { useSelector } = require("react-redux");
 
 const Articles = () => {
-  const articles = useSelector((state) => state.articles);
+  const article = useSelector((state) => state.article);
   return (
     <div>
-      <div className="capitan">{articles[0].title}</div>
+      <div className="capitan">{article.title}</div>
+      <div className="capitan">{article.content}</div>
     </div>
   );
 };

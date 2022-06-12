@@ -1,10 +1,10 @@
 var express = require("express");
-const dataControllers = require('../data')
-const routeControllers = require('../routes')
+const dataControllers = require('../routes/data')
+const viewControllers = require('../routes/view')
 
 const router = express.Router()
 
 router.use('/data', dataControllers)
-router.use('/', routeControllers)
+router.use('/', viewControllers)
 
 module.exports = router

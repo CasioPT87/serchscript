@@ -9,6 +9,8 @@ var controllers = require("./api/controllers");
 
 var app = express();
 
+console.log('node env', process.env.NODE_ENV)
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
