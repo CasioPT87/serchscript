@@ -12,8 +12,11 @@ const clientConfig = {
   entry: {
     react: {
       import: [path.resolve(__dirname, "./src/index.js"), path.resolve(__dirname, "./src/styles/styles.scss")],
-      chunkLoading: false, // Disable chunks that are loaded on demand and put everything in the main chunk.
     },
+    // styles: {
+    //   import: path.resolve(__dirname, "./src/styles/styles.scss"),
+    //   // chunkLoading: false, // Disable chunks that are loaded on demand and put everything in the main chunk.
+    // },
   },
   devtool: 'inline-source-map',
   output: {
@@ -48,9 +51,9 @@ const clientConfig = {
   The optimization.runtimeChunk: 'single' was added because in this example we have more than one entrypoint on a single HTML page.
   Without this, we could get into trouble described here. Read the Code Splitting chapter for more details.
   */
-  optimization: {
-    runtimeChunk: 'single',
-  },
+  // optimization: {
+  //   runtimeChunk: 'single',
+  // },
 };
 
 module.exports = [clientConfig];

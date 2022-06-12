@@ -8,8 +8,6 @@ import Article from "./components/article";
 const reducer = require("./reducer");
 const { App: RootComponent } = require("./components/main/App.jsx");
 
-const ReactDOMServer = require("react-dom/server");
-
 const store = createStore(
   reducer,
   window.__PRELOADED_STATE__,
@@ -19,9 +17,10 @@ const store = createStore(
 // Allow the passed state to be garbage-collected
 delete window.__PRELOADED_STATE__;
 
-const leches = ReactDOMServer.renderToString(
+hydrate(
   <Provider store={store}>
     <RootComponent>
+      <>
         <BrowserRouter>
           <div>
             <Link to="/">Articles</Link> | <Link to="/article">One Article</Link>
@@ -31,16 +30,8 @@ const leches = ReactDOMServer.renderToString(
             <Route path="article" element={<Article />} />
           </Routes>
         </BrowserRouter>
+      </>
     </RootComponent>
   </Provider>,
   document.getElementById("root")
 );
-
-setTimeout(() => {
-  alert('ke keeee?')
-  document.getElementById('root').replaceWith('leches')
-}, 2000)
-
-
-
-
