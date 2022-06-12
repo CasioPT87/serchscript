@@ -5,6 +5,7 @@ const { Provider } = require("react-redux");
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Articles from "./components/articles";
 import Article from "./components/article";
+import Home from "./components/home";
 const reducer = require("./reducer");
 const { App: RootComponent } = require("./components/main/App.jsx");
 
@@ -23,11 +24,11 @@ hydrate(
       <>
         <BrowserRouter>
           <div>
-            <Link to="/">Articles</Link> | <Link to="/article">One Article</Link>
+            <Link to="/">Home</Link> | <Link to="/articles">Articles</Link>
           </div>
           <Routes>
-            <Route path="/" element={<Articles />} />
-            <Route path="article" element={<Article />} />
+            <Route path="/" element={<Home />} />
+            <Route path="articles" element={<Articles />} />
           </Routes>
         </BrowserRouter>
       </>

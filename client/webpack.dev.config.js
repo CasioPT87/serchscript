@@ -13,10 +13,6 @@ const clientConfig = {
     react: {
       import: [path.resolve(__dirname, "./src/index.js"), path.resolve(__dirname, "./src/styles/styles.scss")],
     },
-    // styles: {
-    //   import: path.resolve(__dirname, "./src/styles/styles.scss"),
-    //   // chunkLoading: false, // Disable chunks that are loaded on demand and put everything in the main chunk.
-    // },
   },
   devtool: 'inline-source-map',
   output: {

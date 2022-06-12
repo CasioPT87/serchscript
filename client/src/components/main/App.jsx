@@ -7,19 +7,21 @@ const renderHtml = require("../../renderHtml");
 const Articles = require("../articles");
 const Article = require("../article");
 const Home = require("../home");
-const RootComponent = require('../root')
+const RootComponent = require("../root");
 
 const Components = {
   articles: <Articles />,
   article: <Article />,
-  home: <Home />
+  home: <Home />,
 };
 
 const getComponent = (name) => Components[name];
 
 const Root = (store, compName) => {
   return ReactDOMServer.renderToString(
+    <Provider store={store}>
       <RootComponent>{getComponent(compName)}</RootComponent>
+    </Provider>
   );
 };
 
