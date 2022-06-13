@@ -1,5 +1,6 @@
 const actionsArticle = require('./articles')
 const actionsComment = require('./comments')
+const actionsAuth = require('./auth')
 
 module.exports = {
     articles: {
@@ -17,5 +18,9 @@ module.exports = {
         destroyAll: actionsComment.destroyAll,
         create: actionsComment.create,
         update: actionsComment.update
-    }
+    },
+    auth: {
+        show: actionsAuth.show,
+        create: actionsAuth.create,
+    },
 }

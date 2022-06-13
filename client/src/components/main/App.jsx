@@ -7,6 +7,7 @@ const renderHtml = require("../../renderHtml");
 const Articles = require("../articles");
 const Article = require("../article");
 const Home = require("../home");
+const LoginForm = require('../loginForm')
 const ArticleForm = require("../articleForm");
 const RootComponent = require("../root");
 
@@ -15,6 +16,7 @@ const Components = {
   article: <Article />,
   articleForm: <ArticleForm />,
   home: <Home />,
+  loginForm: <LoginForm />
 };
 
 const getComponent = (name) => Components[name];

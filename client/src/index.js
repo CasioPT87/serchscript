@@ -7,6 +7,7 @@ import Articles from "./components/articles";
 import Article from "./components/article";
 import ArticleForm from "./components/articleForm";
 import Home from "./components/home";
+import LoginForm from "./components/loginForm";
 const reducer = require("./reducer");
 const { App: RootComponent } = require("./components/main/App.jsx");
 
@@ -24,12 +25,13 @@ hydrate(
     <RootComponent>
         <BrowserRouter>
           <div>
-            <Link to="/">Home</Link> | <Link to="/articles">Articles</Link> | <Link to="/admin/articles/new">new Article</Link>
+            <Link to="/">Home</Link> | <Link to="/articles">Articles</Link> | <Link to="/admin/articles/new">new Article</Link> | <Link to="/auth">Auth</Link>
           </div>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="articles" element={<Articles />} />
             <Route path="admin/articles/new" element={<ArticleForm />} />
+            <Route path="auth" element={<LoginForm />} />
           </Routes>
         </BrowserRouter>
     </RootComponent>
