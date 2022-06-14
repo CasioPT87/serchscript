@@ -24,11 +24,9 @@ function loginForm() {
           },
           body: new URLSearchParams(payload),
         });
-        if (res.status !== 200) {
-          const data = await res.json()
-          console.log(data)
-          setMessage("Some error occured");
-        }
+
+        const data = await res.json()
+        setMessage(data.message)
       } catch (err) {
         console.log(err);
       }

@@ -1,25 +1,22 @@
 const User = require("../../db/models/user");
 
 // get one
-const show = (req) => {
-  const { name } = req.params;
+const show = async (req) => {
+  const { name } = req.body;
   return User.findOne({ name });
 };
 
 // create new
-const create = (req) => {
+const create = async (req) => {
   const { name, password } = req.body;
   const user = new User();
-  user.name = title;
-  newUser.setPassword(password);
+  user.name = name;
+  user.setPassword(password);
 
-  return newUser.save((err, newUser) => {
-    if (err) {
-      return null
-    } else {
-      return newUser
-    }
-  });
+  const newUser = await user.save();
+  return {
+    name: newUser.name,
+  }
 };
 
 module.exports = { show, create };
