@@ -3,8 +3,10 @@ const db = require('../../../db/actions')
 var router = express.Router();
 
 // get list
-router.get("/", (req, res, next) => {
-  return db.articles.index()
+router.get("/", async (req, res, next) => {
+  const articles = await db.articles.index()
+  console.log('articles en el server', articles)
+  return res.json(articles)
 });
 
 // get one

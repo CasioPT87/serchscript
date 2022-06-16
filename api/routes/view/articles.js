@@ -9,7 +9,9 @@ router.get("/", async (req, res) => {
   const articles = await db.articles.index()
   res.contentType('text/html');
   res.status(200);
-  return res.send(AppString({ articles }, 'articles'));
+  return res.send(AppString({ articles: {
+    list: articles
+  } }, 'articles'));
 });
 
 // get one

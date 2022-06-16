@@ -1,14 +1,12 @@
 const React = require("react");
 const { Provider, useSelector } = require("react-redux");
 const ReactDOMServer = require("react-dom/server");
-const { createStore } = require("redux");
-const { setUpStore } = require('../../store/setUp')
-const combinedStore = require("../../store/reducers");
+const { setUpStore } = require("../../store/setUp");
 const renderHtml = require("../../renderHtml");
 const Articles = require("../articles");
 const Article = require("../article");
 const Home = require("../home");
-const LoginForm = require('../loginForm')
+const LoginForm = require("../loginForm");
 const ArticleForm = require("../articleForm");
 const RootComponent = require("../root");
 
@@ -17,7 +15,7 @@ const Components = {
   article: <Article />,
   articleForm: <ArticleForm />,
   home: <Home />,
-  loginForm: <LoginForm />
+  loginForm: <LoginForm />,
 };
 
 const getComponent = (name) => Components[name];
@@ -33,7 +31,8 @@ const Root = (store, compName) => {
 module.exports = {
   App: RootComponent,
   AppString: (initialState = {}, compName) => {
-    if (!initialState.articles) initialState = { articles: [] }
+    console.log("initial state", initialState);
+    if (!initialState.articles) initialState = { articles: { list: [] } };
     const store = setUpStore(initialState);
     const preloadedState = store.getState();
     const component = Root(store, compName);

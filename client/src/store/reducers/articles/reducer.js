@@ -1,14 +1,13 @@
 const initialState = {
-  someProp: "someValue",
-  anotherProp: "anotherValue",
+  list: []
 };
 
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
-    case "SOME_ACTION":
+    case "ADD_ARTICLES":
       return {
         ...state,
-        someProp: action.someProp,
+        list: action.payload,
       };
     case "ANOTHER_ACTION":
       return {
