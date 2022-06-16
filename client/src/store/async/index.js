@@ -5,7 +5,6 @@ const fetchArticles = async (dispatch, getState) => {
     if (true) {
         const response = await fetch('http://localhost:8880/data/articles')
         const resposeData = await response.json()
-        console.log('resposeData', resposeData)
         dispatch(addArticles(resposeData))
     }
 }

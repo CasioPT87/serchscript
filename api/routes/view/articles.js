@@ -2,6 +2,7 @@ var express = require("express");
 require("@babel/register");
 const db = require('../../../db/actions')
 const { AppString } = require('../../../client/src/components/main/App.jsx')
+const fetchers = require('../../../api/fetchers')
 var router = express.Router();
 
 // get list
@@ -9,9 +10,9 @@ router.get("/", async (req, res) => {
   const articles = await db.articles.index()
   res.contentType('text/html');
   res.status(200);
-  return res.send(AppString({ articles: {
-    list: articles
-  } }, 'articles'));
+  const store = await fetchers(['fetchArticles'])
+  console.log('esa store!!!', store)
+  return res.send(AppString(store, 'articles'));
 });
 
 // get one

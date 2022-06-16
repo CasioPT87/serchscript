@@ -7,8 +7,6 @@ const { useEffect } = React
 const Articles = () => {
   const dispatch = useDispatch()
   const articles = useSelector(state => state.articles)
-  console.log('articles alli', articles)
-  console.log('pasa?', !articles?.list?.length)
   if (!articles || !articles.list?.length) dispatch(fetchArticles)
 
   return (
