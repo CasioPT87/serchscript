@@ -3,11 +3,10 @@ const { useSelector, useDispatch } = require("react-redux");
 const { fetchArticles } = require('../../store/async')
 
 const { useEffect } = React
-const dispatch = useDispatch()
 
 const Articles = () => {
   const articles = [] //useSelector(state => state.articles)
-  // useDispatch(fetchArticles)
+  useDispatch()(fetchArticles)
 
   return (
     <div>
