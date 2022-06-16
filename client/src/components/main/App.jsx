@@ -2,7 +2,8 @@ const React = require("react");
 const { Provider, useSelector } = require("react-redux");
 const ReactDOMServer = require("react-dom/server");
 const { createStore } = require("redux");
-const reducer = require("../../reducer");
+const { setUpStore } = require('../../store/setUp')
+const combinedStore = require("../../store/reducers");
 const renderHtml = require("../../renderHtml");
 const Articles = require("../articles");
 const Article = require("../article");
@@ -31,8 +32,9 @@ const Root = (store, compName) => {
 
 module.exports = {
   App: RootComponent,
-  AppString: (initialState, compName) => {
-    const store = createStore(reducer, initialState);
+  AppString: (initialState = {}, compName) => {
+    if (!initialState.articles) initialState = { articles: [] }
+    const store = setUpStore(initialState);
     const preloadedState = store.getState();
     const component = Root(store, compName);
     return renderHtml(component, preloadedState);

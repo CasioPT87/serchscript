@@ -8,7 +8,7 @@ var router = express.Router();
 router.get("/", async (req, res) => {
   res.contentType('text/html');
   res.status(200);
-  return res.send(AppString(null, 'loginForm'));
+  return res.send(AppString({}, 'loginForm'));
 });
 
 module.exports = router;

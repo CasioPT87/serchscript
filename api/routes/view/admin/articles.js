@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/new", async (req, res) => {
   res.contentType('text/html');
   res.status(200);
-  return res.send(AppString(null, 'articleForm'));
+  return res.send(AppString({}, 'articleForm'));
 });
 
 module.exports = router;

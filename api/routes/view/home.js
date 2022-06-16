@@ -9,7 +9,7 @@ var router = express.Router();
 router.get("/", async (req, res) => {
   res.contentType('text/html');
   res.status(200);
-  return res.send(AppString(null, 'home'));
+  return res.send(AppString({}, 'home'));
 });
 
 module.exports = router;

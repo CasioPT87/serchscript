@@ -1,17 +1,18 @@
 const React = require("react");
-const { useSelector } = require("react-redux");
+const { useSelector, useDispatch } = require("react-redux");
+const { fetchArticles } = require('../../store/async')
+
+const { useEffect } = React
+const dispatch = useDispatch()
 
 const Articles = () => {
-  const articles = useSelector((state) => {
-    console.log('state', state)
-    if (!state) return null
-    return state.articles;
-  })
-  if (!articles) return null
+  const articles = [] //useSelector(state => state.articles)
+  // useDispatch(fetchArticles)
+
   return (
     <div>
       {articles.map((article) => {
-        return <div className="killo">{article.title}</div>;
+        return <div key={Math.random()} className="killo">{article.title}</div>;
       })}
     </div>
   );
