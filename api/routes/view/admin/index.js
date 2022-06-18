@@ -1,6 +1,5 @@
 var express = require('express');
 const adminArticles = require('./articles')
-const adminComments = require('./comments')
 
 const router = express.Router()
 
@@ -10,7 +9,5 @@ router.use('*', (req, res, next) => {
 })
 
 router.use('/articles', adminArticles)
-router.use('/comments', adminComments)
-
 
 module.exports = router;
