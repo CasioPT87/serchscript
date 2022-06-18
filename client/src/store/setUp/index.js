@@ -10,4 +10,4 @@ const setUpStore = (initialState) => {
     return createStore(combinedReducers, { ...defaultState, ...initialState }, composedEnhancer)
 }
 
-module.exports = { setUpStore }
+module.exports = setUpStore

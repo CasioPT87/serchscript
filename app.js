@@ -1,11 +1,10 @@
 var createError = require("http-errors");
 require("dotenv").config();
 var express = require("express");
-var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const connect = require("./db/connection");
-var controllers = require("./api/controllers");
+var routes = require("./api/routes");
 
 var app = express();
 
@@ -19,7 +18,7 @@ app.use(express.static('./client/dist'));
 
 connect();
 
-app.use("/", controllers);
+app.use("/", routes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

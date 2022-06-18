@@ -1,5 +1,5 @@
 const express = require("express");
-require("@babel/register");
+// require("@babel/register");
 const { sendSSRResposeView } = require("../utils");
 const router = express.Router();
 

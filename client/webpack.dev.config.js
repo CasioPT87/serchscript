@@ -11,7 +11,7 @@ const clientConfig = {
   ],
   entry: {
     react: {
-      import: [path.resolve(__dirname, "./src/index.js"), path.resolve(__dirname, "./src/styles/styles.scss")],
+      import: [path.resolve(__dirname, "./src/utils/SPA/index.js"), path.resolve(__dirname, "./src/styles/styles.scss")],
     },
   },
   devtool: 'inline-source-map',

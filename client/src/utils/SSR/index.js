@@ -2,7 +2,7 @@ const React = require("react");
 const { Provider } = require("react-redux");
 const ReactDOMServer = require("react-dom/server");
 const Components = require("../../components");
-const { setUpStore } = require("../../store/setUp");
+const setUpStore = require("../../store/setUp");
 
 const ComponentsKillo = {
   articles: <Components.Articles />,
