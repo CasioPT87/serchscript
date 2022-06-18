@@ -8,7 +8,7 @@ const Article = require("../article");
 const Home = require("../home");
 const LoginForm = require("../loginForm");
 const ArticleForm = require("../articleForm");
-const RootComponent = require("../root");
+const MainFrameComponent = require("../mainFrame");
 
 const Components = {
   articles: <Articles />,
@@ -20,20 +20,20 @@ const Components = {
 
 const getComponent = (name) => Components[name];
 
-const Root = (store, compName) => {
+const getInitialComponentsTree  = (store, componentName) => {
   return ReactDOMServer.renderToString(
     <Provider store={store}>
-      <RootComponent>{getComponent(compName)}</RootComponent>
+      <MainFrameComponent>{getComponent(componentName)}</MainFrameComponent>
     </Provider>
   );
 };
 
 module.exports = {
-  App: RootComponent,
-  AppString: (initialState = {}, compName) => {
+  App: MainFrameComponent,
+  AppString: (initialState = {}, componentName) => {
     const store = setUpStore(initialState);
     const preloadedState = store.getState();
-    const component = Root(store, compName);
-    return renderHtml(component, preloadedState);
+    const componentsTree = getInitialComponentsTree(store, componentName);
+    return renderHtml(componentsTree, preloadedState);
   },
 };

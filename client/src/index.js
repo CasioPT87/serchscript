@@ -4,12 +4,10 @@ const { setUpStore } = require("../src/store/setUp");
 const { Provider } = require("react-redux");
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Articles from "./components/articles";
-import Article from "./components/article";
 import ArticleForm from "./components/articleForm";
 import Home from "./components/home";
 import LoginForm from "./components/loginForm";
 const { App: RootComponent } = require("./components/main/App.jsx");
-const defaultState = require('./store/state')
 
 const store = setUpStore(window.__PRELOADED_STATE__);
 

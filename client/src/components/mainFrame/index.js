@@ -1,7 +1,7 @@
 const React = require("react");
 
-const RootComponent = (props) => {
+const MainFrameComponent = (props) => {
   return <div className="Root">{props.children}</div>;
 };
 
-module.exports = RootComponent;
+module.exports = MainFrameComponent;
