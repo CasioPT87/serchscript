@@ -7,11 +7,9 @@ var router = express.Router();
 
 // get list
 router.get("/", async (req, res) => {
-  const articles = await db.articles.index()
   res.contentType('text/html');
   res.status(200);
   const store = await fetchers(['fetchArticles'])
-  console.log('esa store!!!', store)
   return res.send(AppString(store, 'articles'));
 });
 

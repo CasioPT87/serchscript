@@ -1,25 +1,29 @@
-const _ = require('lodash')
-const db = require('../../db/actions')
-const defaultState = require('../../client/src/store/state')
+const _ = require("lodash");
+const db = require("../../db/actions");
+const defaultState = require("../../client/src/store/state");
 
 const fetchers = {
-    fetchArticles: new Promise(res => {
-        db.articles.index().then(articles => {
-            res({ articles: { list: articles } })
-        })    
-    }),
-    fetchComments: new Promise(res => {
-        res({ leches: 'fritas' })
-    })
-}
+  fetchArticles: {
+    path: "articles.list",
+    fetch: db.articles.index,
+  },
+  fetchComments: {
+    path: "comments.list",
+    fetch: db.comments.index,
+  },
+};
 
 module.exports = async (fetchActions) => {
-  const selectedFetchers = fetchActions.map(fa => fetchers[fa])
-  const storeChanges = await Promise.all(selectedFetchers)
-  return storeChanges.reduce((prev, curr) => {
-    return {
-        ...prev,
-        ...curr
-    }
-  }, defaultState)
-}
+  const store = { ...defaultState };
+  const selectedFetchers = await fetchActions.map(async (fa) => {
+    const action = fetchers[fa];
+    const data = await action.fetch();
+    return { data, path: action.path };
+  });
+  const changesPayload = await Promise.all(selectedFetchers);
+  changesPayload.forEach((cp) => {
+    _.set(store, cp.path, cp.data);
+  });
+
+  return store;
+};

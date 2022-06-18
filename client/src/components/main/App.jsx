@@ -31,7 +31,6 @@ const Root = (store, compName) => {
 module.exports = {
   App: RootComponent,
   AppString: (initialState = {}, compName) => {
-    if (!initialState.articles) initialState = { articles: { list: [] } };
     const store = setUpStore(initialState);
     const preloadedState = store.getState();
     const component = Root(store, compName);
