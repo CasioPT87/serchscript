@@ -20,6 +20,7 @@ module.exports = async (fetchActions) => {
     const data = await action.fetch();
     return { data, path: action.path };
   });
+  
   const changesPayload = await Promise.all(selectedFetchers);
   changesPayload.forEach((cp) => {
     _.set(store, cp.path, cp.data);

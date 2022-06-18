@@ -7,7 +7,7 @@ import Articles from "./components/articles";
 import ArticleForm from "./components/articleForm";
 import Home from "./components/home";
 import LoginForm from "./components/loginForm";
-const { App: RootComponent } = require("./components/main/App.jsx");
+const { MainFrame } = require("./components");
 
 const store = setUpStore(window.__PRELOADED_STATE__);
 
@@ -17,7 +17,7 @@ delete window.__PRELOADED_STATE__;
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-    <RootComponent>
+    <MainFrame>
       <BrowserRouter>
         <div>
           <Link to="/">Home</Link> | <Link to="/articles">Articles</Link> |{" "}
@@ -31,6 +31,6 @@ root.render(
           <Route path="auth" element={<LoginForm />} />
         </Routes>
       </BrowserRouter>
-    </RootComponent>
+    </MainFrame>
   </Provider>
 );
