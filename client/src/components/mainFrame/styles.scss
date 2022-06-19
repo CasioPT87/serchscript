@@ -1,8 +1,6 @@
 .Root {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 400px;
-    width: 100%;
-    background-color: #F47C7C;
+    min-height: 100%;
+    min-width: 100%;
+    background:repeating-linear-gradient(-45deg, yellow, yellow 10%, black 10%, black 20% );
+    background-size: cover;
 }
