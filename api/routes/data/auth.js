@@ -1,11 +1,18 @@
-var express = require("express");
+const express = require("express");
+const jwt = require('jsonwebtoken');
 const db = require("../../../db/actions");
-var router = express.Router();
+const router = express.Router();
+const { secret } = require('../../constants')
 
 // get list
 router.post("/create", async (req, res, next) => {
   const newUser = await db.auth.create(req);
-  return res.json(newUser);
+  if (newUser) {
+    return jwt.sign({ name: newUser.name }, secret, { algorithm: 'RS256' }, token => {
+      return res.json(token)
+    });
+  }
+  res.status(500).send('error creating user')
 });
 
 // get one
@@ -17,8 +24,8 @@ router.post("/login", async (req, res) => {
     });
   } else {
     if (user.validPassword(req.body.password)) {
-      return res.status(201).send({
-        message: `Hola ${user.name}!!!!!`,
+      return jwt.sign({ name: newUser.name }, secret, { algorithm: 'RS256' }, token => {
+        return res.json(token)
       });
     } else {
       return res.status(400).json({
