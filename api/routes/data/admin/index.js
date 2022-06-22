@@ -5,12 +5,10 @@ const adminComments = require('./comments')
 
 const router = express.Router()
 
-router.use('*', (req, res, next) => {
-    const token = req.header.authentication
+router.use('*', async (req, res, next) => {
+    const token = req.cookies['cucarachasAppSession']
     if (token) {
-        return jwt.verify(token, secret, function(err, decoded) {
-            if (!error) return next()
-        });
+        const decoded = await jwt.verify(token, secret)
     }
     res.status(500).send('authentication failed!!') 
 })
