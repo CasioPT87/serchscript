@@ -2,14 +2,14 @@ const React = require("react");
 
 const MainFrame = (props) => {
   return (
-    <div class="container">
-      <header class="header">Header</header>
-      <div class="content-body">
-        <main class="content">Content</main>
-        <nav class="sidenav">Nav</nav>
-        <aside class="ads">Ads</aside>
+    <div className="container">
+      <header className="header">Header</header>
+      <div className="content-body">
+        <main className="content">{props.children}</main>
+        <nav className="sidenav">Nav</nav>
+        <aside className="ads">Ads</aside>
       </div>
-      <footer class="footer">Footer</footer>
+      <footer className="footer">Footer</footer>
     </div>
   );
 };

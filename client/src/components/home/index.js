@@ -3,7 +3,7 @@ const { useSelector } = require("react-redux");
 
 const Home = () => {
   return (
-    <div />
+    <div>que dices chavaaaaaaaal</div>
   );
 };
 
