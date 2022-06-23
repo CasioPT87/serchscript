@@ -1,14 +1,7 @@
 const express = require("express");
-const jwt = require("jsonwebtoken");
 const db = require("../../../db/actions");
 const router = express.Router();
-const { secret } = require("../../constants");
-
-const createToken = async (user) => {
-  console.log('user', user)
-  console.log('secret', secret)
-  return jwt.sign({ name: user.name }, secret);
-};
+const { createToken } = require("../utils");
 
 // get list
 router.post("/create", async (req, res, next) => {
@@ -31,7 +24,6 @@ router.post("/login", async (req, res) => {
   } else {
     if (user.validPassword(req.body.password)) {
       const token = await createToken(user);
-      console.log('token', token)
       res.cookie("cucarachasAppSession", token);
       res.send("ok");
     } else {

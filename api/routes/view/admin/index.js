@@ -1,12 +1,10 @@
-var express = require('express');
+const express = require('express');
 const adminArticles = require('./articles')
+const { authorization } = require('../../middlewares')
 
 const router = express.Router()
 
-router.use('*', (req, res, next) => {
-    console.log('do authorization here')
-    next()
-})
+router.use('*', authorization)
 
 router.use('/articles', adminArticles)
 
