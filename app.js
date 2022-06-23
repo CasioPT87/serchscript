@@ -1,12 +1,13 @@
-var createError = require("http-errors");
+const createError = require("http-errors");
 require("dotenv").config();
-var express = require("express");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+const express = require("express");
+const helmet = require("helmet");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 const connect = require("./db/connection");
-var routes = require("./api/routes");
+const routes = require("./api/routes");
 
-var app = express();
+const app = express();
 
 console.log('node env', process.env.NODE_ENV)
 
@@ -17,6 +18,8 @@ app.use(cookieParser());
 app.use(express.static('./client/dist'));
 
 connect();
+
+app.use(helmet())
 
 app.use("/", routes);
 
