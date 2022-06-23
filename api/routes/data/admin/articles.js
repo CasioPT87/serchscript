@@ -8,8 +8,9 @@ router.delete("/all", (req, res, next) => {
 });
 
 // get list
-router.get("/", (req, res, next) => {
-  return db.articles.index()
+router.get("/", async (req, res, next) => {
+  const articles = await db.articles.index()
+  res.json(articles)
 });
 
 // get one

@@ -5,14 +5,16 @@ const router = express.Router();
 const { secret } = require("../../constants");
 
 const createToken = async (user) => {
-  return jwt.sign({ name: user.name }, secret, { algorithm: "RS256" });
+  console.log('user', user)
+  console.log('secret', secret)
+  return jwt.sign({ name: user.name }, secret);
 };
 
 // get list
 router.post("/create", async (req, res, next) => {
   const newUser = await db.auth.create(req);
   if (newUser) {
-    const token = createToken(newUser);
+    const token = await createToken(newUser);
     res.cookie("cucarachasAppSession", token);
     res.send("ok");
   }
@@ -28,7 +30,8 @@ router.post("/login", async (req, res) => {
     });
   } else {
     if (user.validPassword(req.body.password)) {
-      const token = createToken(newUser);
+      const token = await createToken(user);
+      console.log('token', token)
       res.cookie("cucarachasAppSession", token);
       res.send("ok");
     } else {
