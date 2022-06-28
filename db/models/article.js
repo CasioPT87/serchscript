@@ -13,6 +13,7 @@ const ArticleModel = mongoose.model(
         type: Schema.Types.ObjectId,
         ref: 'User'
       },
+      fecha: { type: Date },
       comments: [
         {
             type: Schema.Types.ObjectId,

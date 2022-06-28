@@ -6,10 +6,12 @@ const index = () => {
 };
 
 // get one
-const show = (req) => {
+const show = async (req) => {
   const { id } = req.params;
-  return Article.findOne({ _id: id })
+  const article = await Article.findOne({ fecha: { $gt: { fecha: new Date(new Date() - (60000 * 60)).toISOString() } } })
     .populate("comments")
+  console.log(article)
+  return article
 };
 
 // delete all
@@ -30,6 +32,7 @@ const create = (req) => {
   article.description = description;
   article.content = content;
   article.hidden = hidden;
+  article.fecha = new Date().toISOString()
 
   return article.save()
    

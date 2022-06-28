@@ -9,8 +9,9 @@ router.get("/", async (req, res, next) => {
 });
 
 // get one
-router.get("/:id", async (req) => {
-  return db.articles.show(req)
+router.get("/:id", async (req, res) => {
+  const article = db.articles.show(req)
+  return res.json(article)
 });
 
 module.exports = router;

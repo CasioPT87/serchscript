@@ -6,7 +6,7 @@ const adminComments = require('./comments')
 
 const router = express.Router()
 
-router.use('*', authorization)
+// router.use('*', authorization)
 
 router.use('/articles', adminArticles)
 router.use('/comments', adminComments)

@@ -1,5 +1,12 @@
 const React = require("react");
-const { Editor, EditorState, RichUtils, convertToRaw } = require("draft-js");;
+const {
+  Editor,
+  EditorState,
+  RichUtils,
+  convertToRaw,
+  AtomicBlockUtils,
+} = require("draft-js");
+const draftToHtml = require('draftjs-to-html');
 
 class ArticleCreator extends React.Component {
   constructor(props) {
@@ -7,6 +14,13 @@ class ArticleCreator extends React.Component {
     this.state = { editorState: EditorState.createEmpty() };
     this.focus = () => this.refs.editor.focus();
   }
+
+  getRawState = (editorState) => {
+    const rawContentState = convertToRaw(editorState.getCurrentContent());
+ 
+    return draftToHtml(rawContentState);
+  }
+
   onChange = (editorState) => {
     this.setState({ editorState });
   };
@@ -19,6 +33,38 @@ class ArticleCreator extends React.Component {
     this.onChange(
       RichUtils.toggleInlineStyle(this.state.editorState, inlineStyle)
     );
+  };
+
+  handlePastedFiles = (files) => {
+    const formData = new FormData();
+    formData.append("file", files[0]);
+    fetch("/api/uploads", { method: "POST", body: formData })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.file) {
+          setEditorState(insertImage(data.file)); //created below
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  insertImage = (url) => {
+    const { editorState } = this.state;
+    const contentState = editorState.getCurrentContent();
+    const contentStateWithEntity = contentState.createEntity(
+      "IMAGE",
+      "IMMUTABLE",
+      { src: url }
+    );
+    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+    const newEditorState = EditorState.set(editorState, {
+      currentContent: contentStateWithEntity,
+    });
+    this.setState({
+      editorState: AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, " ")
+    });
   };
 
   render() {
@@ -46,13 +92,14 @@ class ArticleCreator extends React.Component {
         />
         <div className={className} onClick={this.focus}>
           <Editor
-            blockStyleFn={getBlockStyle}
             customStyleMap={styleMap}
             editorState={editorState}
             onChange={this.onChange}
+            handlePastedFiles={this.handlePastedFiles}
             placeholder="Tell a story..."
             ref="editor"
           />
+          <i onClick={() => this.insertImage('https://ichef.bbci.co.uk/news/976/cpsprodpb/12A9B/production/_111434467_gettyimages-1143489763.jpg')}>Insert image</i>
         </div>
       </div>
     );
@@ -66,30 +113,6 @@ const styleMap = {
     fontSize: 16,
     padding: 2,
   },
-};
-
-function getBlockStyle(block) {
-  switch (block.getType()) {
-    case "blockquote":
-      return "RichEditor-blockquote";
-    case "new-block-type-name":
-      return {
-        component: CustomComponent,
-        editable: false,
-      };
-    default:
-      return null;
-  }
-}
-
-const CustomComponent = ({ children }) => {
-  return (
-    <div>
-      <span> 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 </span>
-      {children}
-      <span> 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 🔥 </span>
-    </div>
-  );
 };
 
 const StyleButton = ({ style, onToggle, active, label }) => {
