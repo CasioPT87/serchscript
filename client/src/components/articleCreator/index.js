@@ -15,15 +15,16 @@ class ArticleCreator extends React.Component {
     this.focus = () => this.refs.editor.focus();
   }
 
+  onChange = (editorState) => {
+    this.setState({ editorState });
+  };
+
+
   getRawState = (editorState) => {
     const rawContentState = convertToRaw(editorState.getCurrentContent());
  
     return draftToHtml(rawContentState);
   }
-
-  onChange = (editorState) => {
-    this.setState({ editorState });
-  };
 
   toggleBlockType = (blockType) => {
     this.onChange(RichUtils.toggleBlockType(this.state.editorState, blockType));
@@ -49,6 +50,29 @@ class ArticleCreator extends React.Component {
         console.log(err);
       });
   };
+
+  uploadImage = async (event) => {
+    const file = event.target.files[0]
+
+    const formData = new FormData();
+    
+      // Update the formData object
+      formData.append(
+        "myFile",
+        file,
+        file.name
+      );
+
+      const response = await fetch('/data/upload', {
+        method: 'POST', 
+        body: formData
+      })
+
+      const data = response.json()
+      const { url } = data
+      this.insertImage(url)
+
+  }
 
   insertImage = (url) => {
     const { editorState } = this.state;
@@ -98,13 +122,36 @@ class ArticleCreator extends React.Component {
             handlePastedFiles={this.handlePastedFiles}
             placeholder="Tell a story..."
             ref="editor"
+            blockRendererFn={mediaBlockRenderer}
           />
-          <i onClick={() => this.insertImage('https://ichef.bbci.co.uk/news/976/cpsprodpb/12A9B/production/_111434467_gettyimages-1143489763.jpg')}>Insert image</i>
+          <label for="myfile">Select a file:</label>
+          <input type="file" multiple onChange={this.insertImage}/>
         </div>
       </div>
     );
   }
 }
+
+function mediaBlockRenderer(block) {
+  if (block.getType() === 'atomic') {
+    return { component: Media, editable: false };
+  }
+  return null;
+}
+
+const Media = (props) => {
+  const entity = props.contentState.getEntity(props.block.getEntityAt(0));
+  const { src } = entity.getData();
+  const type = entity.getType();
+  if (type === 'IMMAGE') {
+    return <Image src={src}/>;
+  }
+  return null;
+};
+
+const Image = (props) => {
+  return <img src={props.src} style={styles.media} alt="Example"/>;
+};
 
 const styleMap = {
   CODE: {
