@@ -13,9 +13,11 @@ class ArticleCreator extends React.Component {
     super(props);
     this.state = { editorState: EditorState.createEmpty() };
     this.focus = () => this.refs.editor.focus();
+    console.log('killoooooooooooooo')
   }
 
   onChange = (editorState) => {
+    console.log('que te den')
     this.setState({ editorState });
   };
 
@@ -74,7 +76,10 @@ class ArticleCreator extends React.Component {
 
   }
 
-  insertImage = (url) => {
+  insertImage = (ev) => {
+    console.log('ev', ev)
+    const { target: { value: url } } = ev
+    console.log('url', url)
     const { editorState } = this.state;
     const contentState = editorState.getCurrentContent();
     const contentStateWithEntity = contentState.createEntity(
@@ -134,22 +139,32 @@ class ArticleCreator extends React.Component {
 
 function mediaBlockRenderer(block) {
   if (block.getType() === 'atomic') {
+    console.log('block', block)
     return { component: Media, editable: false };
   }
   return null;
 }
 
 const Media = (props) => {
+  console.log('media!!!')
   const entity = props.contentState.getEntity(props.block.getEntityAt(0));
+  console.log('entity', entity)
   const { src } = entity.getData();
   const type = entity.getType();
-  if (type === 'IMMAGE') {
+  console.log('cosas', src, type)
+  if (type === 'IMAGE') {
+    console.log('src', src)
     return <Image src={src}/>;
   }
   return null;
 };
 
+const styles = {
+  media: {}
+}
+
 const Image = (props) => {
+  console.log('props', props)
   return <img src={props.src} style={styles.media} alt="Example"/>;
 };
 

@@ -7,19 +7,29 @@ const logger = require("morgan");
 const connect = require("./db/connection");
 const routes = require("./api/routes");
 
+global.__basedir = __dirname;
+
 const app = express();
 
-console.log('node env', process.env.NODE_ENV)
+console.log("node env", process.env.NODE_ENV);
 
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static('./client/dist'));
+app.use(express.static("./client/dist"));
 
 connect();
 
-app.use(helmet())
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        imgSrc: [`'self'`, `data:`, `*`, `c:`],
+      }
+    },
+  })
+);
 
 app.use("/", routes);
 
