@@ -1,6 +1,6 @@
 const { createStore, applyMiddleware } = require('redux')
 const thunkMiddleware = require('redux-thunk').default
-const { composeWithDevTools } = require('redux-devtools-extension/logOnlyInProduction');
+const { composeWithDevTools } = require('@redux-devtools/extension');
 const combinedReducers = require('../reducers')
 const defaultState = require('../state')
 
