@@ -3,7 +3,6 @@ const { useSelector } = require("react-redux");
 
 const Articles = () => {
   const article = useSelector((state) => {
-    console.log('state', state)
     if (!state) return null
     return state.article;
   })

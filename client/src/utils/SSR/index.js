@@ -4,7 +4,7 @@ const ReactDOMServer = require("react-dom/server");
 const Components = require("../../components");
 const setUpStore = require("../../store/setUp");
 
-const ComponentsKillo = {
+const ComponentsLibrary = {
   articles: <Components.Articles />,
   article: <Components.Article />,
   articleForm: <Components.ArticleForm />,
@@ -12,7 +12,7 @@ const ComponentsKillo = {
   loginForm: <Components.LoginForm />,
 };
 
-const getComponent = (name) => ComponentsKillo[name];
+const getComponent = (name) => ComponentsLibrary[name];
 
 const getInitialComponentsTree = (store, componentName) => {
   return ReactDOMServer.renderToString(

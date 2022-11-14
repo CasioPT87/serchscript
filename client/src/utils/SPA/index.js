@@ -1,14 +1,22 @@
+import {
+  BrowserRouter,
+  Link,
+  Route,
+  Routes,
+} from 'react-router-dom';
+
 const React = require("react");
 const ReactDOM = require("react-dom/client");
 const setUpStore = require("../../store/setUp");
 const { Provider } = require("react-redux");
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
 const {
   Articles,
   MainFrame,
   ArticleForm,
   Home,
   LoginForm,
+  Header,
 } = require("../../components");
 
 const replaceElements = () => {
