@@ -1,8 +1,8 @@
-var express = require("express");
-const path = require("path");
+var express = require('express')
+const path = require('path')
 // const multer = require('multer')
-const db = require("../../../../db/actions");
-var router = express.Router();
+const db = require('../../../../db/actions')
+var router = express.Router()
 
 // const upload = multer({ dest: path.resolve(__dirname, "/public") })
 
@@ -13,4 +13,4 @@ var router = express.Router();
 //   console.log(req.file, req.body)
 // });
 
-module.exports = router;
+module.exports = router

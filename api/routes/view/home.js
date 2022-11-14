@@ -1,15 +1,15 @@
-const express = require("express");
-require("@babel/register");
-const { sendSSRResposeView } = require("./utils");
-const router = express.Router();
+const express = require('express')
+require('@babel/register')
+const { sendSSRResposeView } = require('./utils')
+const router = express.Router()
 
 // get list
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   return sendSSRResposeView({
     res,
     fetchers: [],
-    dataName: "home",
-  });
-});
+    dataName: 'home',
+  })
+})
 
-module.exports = router;
+module.exports = router

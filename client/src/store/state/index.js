@@ -2,6 +2,6 @@ const defaultState = {
   articles: {
     list: [],
   },
-};
+}
 
-module.exports = defaultState;
+module.exports = defaultState

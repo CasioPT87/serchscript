@@ -1,25 +1,25 @@
-const createError = require("http-errors");
-require("dotenv").config();
-const express = require("express");
-const helmet = require("helmet");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
-const connect = require("./db/connection");
-const routes = require("./api/routes");
+const createError = require('http-errors')
+require('dotenv').config()
+const express = require('express')
+const helmet = require('helmet')
+const cookieParser = require('cookie-parser')
+const logger = require('morgan')
+const connect = require('./db/connection')
+const routes = require('./api/routes')
 
-global.__basedir = __dirname;
+global.__basedir = __dirname
 
-const app = express();
+const app = express()
 
-console.log("node env", process.env.NODE_ENV);
+console.log('node env', process.env.NODE_ENV)
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static("./client/dist"));
+app.use(logger('dev'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
+app.use(express.static('./client/dist'))
 
-connect();
+connect()
 
 app.use(
   helmet({
@@ -29,29 +29,29 @@ app.use(
       },
     },
   })
-);
+)
 
-app.use("/", routes);
+app.use('/', routes)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  next(createError(404));
-});
+  next(createError(404))
+})
 
 // error handler
 app.use(function (err, req, res, next) {
-  const isDev = req.app.get("env") === "development";
+  const isDev = req.app.get('env') === 'development'
   // set locals, only providing error in development
-  res.locals.message = err.message;
+  res.locals.message = err.message
 
   if (isDev) {
-    console.log(err);
-    res.locals.error = isDev ? err : {};
+    console.log(err)
+    res.locals.error = isDev ? err : {}
   }
 
   // render the error page
-  res.status(err.status || 500);
-  res.send("error");
-});
+  res.status(err.status || 500)
+  res.send('error')
+})
 
-module.exports = app;
+module.exports = app

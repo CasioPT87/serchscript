@@ -1,18 +1,18 @@
-const React = require("react");
-const { useSelector } = require("react-redux");
+const React = require('react')
+const { useSelector } = require('react-redux')
 
 const Articles = () => {
-  const article = useSelector((state) => {
-    if (!state) return null;
-    return state.article;
-  });
-  if (!article) return null;
+  const article = useSelector(state => {
+    if (!state) return null
+    return state.article
+  })
+  if (!article) return null
   return (
     <div>
       <div className="capitan">{article.title}</div>
       <div className="capitan">{article.content}</div>
     </div>
-  );
-};
+  )
+}
 
-module.exports = Articles;
+module.exports = Articles

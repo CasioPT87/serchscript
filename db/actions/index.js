@@ -1,6 +1,6 @@
-const actionsArticle = require("./articles");
-const actionsComment = require("./comments");
-const actionsAuth = require("./auth");
+const actionsArticle = require('./articles')
+const actionsComment = require('./comments')
+const actionsAuth = require('./auth')
 
 module.exports = {
   articles: {
@@ -23,4 +23,4 @@ module.exports = {
     show: actionsAuth.show,
     create: actionsAuth.create,
   },
-};
+}

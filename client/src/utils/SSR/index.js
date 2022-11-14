@@ -1,8 +1,8 @@
-const React = require("react");
-const { Provider } = require("react-redux");
-const ReactDOMServer = require("react-dom/server");
-const Components = require("../../components");
-const setUpStore = require("../../store/setUp");
+const React = require('react')
+const { Provider } = require('react-redux')
+const ReactDOMServer = require('react-dom/server')
+const Components = require('../../components')
+const setUpStore = require('../../store/setUp')
 
 const ComponentsLibrary = {
   articles: <Components.Articles />,
@@ -10,17 +10,17 @@ const ComponentsLibrary = {
   articleForm: <Components.ArticleForm />,
   home: <Components.Home />,
   loginForm: <Components.LoginForm />,
-};
+}
 
-const getComponent = (name) => ComponentsLibrary[name];
+const getComponent = name => ComponentsLibrary[name]
 
 const getInitialComponentsTree = (store, componentName) => {
   return ReactDOMServer.renderToString(
     <Provider store={store}>
       <Components.MainFrame>{getComponent(componentName)}</Components.MainFrame>
     </Provider>
-  );
-};
+  )
+}
 
 const renderHtml = (html, preloadedState) => {
   return `<!DOCTYPE html>
@@ -38,18 +38,18 @@ const renderHtml = (html, preloadedState) => {
         // https://redux.js.org/usage/server-rendering#security-considerations
         window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
           /</g,
-          "\\u003c"
+          '\\u003c'
         )}
       </script>
     </body>
-  </html>`;
-};
+  </html>`
+}
 
 module.exports = {
   SSRComponentsTree: (initialState = {}, componentName) => {
-    const store = setUpStore(initialState);
-    const preloadedState = store.getState();
-    const componentsTree = getInitialComponentsTree(store, componentName);
-    return renderHtml(componentsTree, preloadedState);
+    const store = setUpStore(initialState)
+    const preloadedState = store.getState()
+    const componentsTree = getInitialComponentsTree(store, componentName)
+    return renderHtml(componentsTree, preloadedState)
   },
-};
+}

@@ -1,6 +1,6 @@
-const React = require("react");
+const React = require('react')
 
-const MainFrame = (props) => {
+const MainFrame = props => {
   return (
     <div className="container">
       <header className="header">Header</header>
@@ -11,7 +11,7 @@ const MainFrame = (props) => {
       </div>
       <footer className="footer">Footer</footer>
     </div>
-  );
-};
+  )
+}
 
-module.exports = MainFrame;
+module.exports = MainFrame

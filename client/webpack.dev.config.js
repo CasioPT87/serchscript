@@ -11,7 +11,7 @@ const clientConfig = {
   ],
   entry: {
     react: {
-      import: [path.resolve(__dirname, "./src/utils/SPA/index.js"), path.resolve(__dirname, "./src/styles/styles.scss")],
+      import: [path.resolve(__dirname, "./src/utils/SPA/index.js"), path.resolve(__dirname, "./src/styles/styles.scss"), path.resolve("./public/logo.png")],
     },
   },
   devtool: 'inline-source-map',
@@ -19,6 +19,7 @@ const clientConfig = {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].bundle.js",
     clean: true,
+    assetModuleFilename: 'images/[name][ext]'
   },
   module: {
     rules: [
@@ -40,7 +41,11 @@ const clientConfig = {
           { loader: "css-loader" },
           { loader: 'sass-loader' }
         ]
-      }
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   /**

@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
-const Article = require("./article");
-const { Schema } = mongoose;
+const mongoose = require('mongoose')
+const Article = require('./article')
+const { Schema } = mongoose
 
 const schema = Schema(
   {
@@ -11,15 +11,15 @@ const schema = Schema(
     hidden: Boolean,
     article: {
       type: Schema.Types.ObjectId,
-      ref: "Article",
+      ref: 'Article',
       required: true,
     },
   },
   { timestamps: true }
-);
+)
 
-schema.pre("save", function (next) {
-  const { article: articleId, _id } = this;
+schema.pre('save', function (next) {
+  const { article: articleId, _id } = this
   Article.findOneAndUpdate(
     { _id: articleId },
     {
@@ -28,15 +28,15 @@ schema.pre("save", function (next) {
     { new: true }
   )
     .then(() => {
-      next();
+      next()
     })
-    .catch((e) => {
-      next(e);
-    });
-});
+    .catch(e => {
+      next(e)
+    })
+})
 
-schema.pre("delete", function (next) {
-  const { article: articleId, _id } = this;
+schema.pre('delete', function (next) {
+  const { article: articleId, _id } = this
   Article.findOneAndUpdate(
     { _id: articleId },
     {
@@ -45,13 +45,13 @@ schema.pre("delete", function (next) {
     { new: true }
   )
     .then(() => {
-      next();
+      next()
     })
-    .catch((e) => {
-      next(e);
-    });
-});
+    .catch(e => {
+      next(e)
+    })
+})
 
-const CommentModel = mongoose.model("Comment", schema);
+const CommentModel = mongoose.model('Comment', schema)
 
-module.exports = CommentModel;
+module.exports = CommentModel
