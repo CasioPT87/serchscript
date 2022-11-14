@@ -1,9 +1,9 @@
-const crypto = require('crypto')
+const crypto = require("crypto");
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const UserSchema = 
-  Schema({
+const UserSchema = Schema(
+  {
     name: {
       type: String,
       required: true,
@@ -13,7 +13,7 @@ const UserSchema =
     articles: [{ type: Schema.Types.ObjectId, ref: "Article" }],
   },
   { timestamps: true }
-  );
+);
 
 // Method to set salt and hash the password for a user
 UserSchema.methods.setPassword = function (password) {

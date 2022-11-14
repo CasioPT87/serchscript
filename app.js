@@ -26,7 +26,7 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         imgSrc: [`'self'`, `data:`, `*`, `c:`],
-      }
+      },
     },
   })
 );

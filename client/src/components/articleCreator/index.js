@@ -6,27 +6,26 @@ const {
   convertToRaw,
   AtomicBlockUtils,
 } = require("draft-js");
-const draftToHtml = require('draftjs-to-html');
+const draftToHtml = require("draftjs-to-html");
 
 class ArticleCreator extends React.Component {
   constructor(props) {
     super(props);
     this.state = { editorState: EditorState.createEmpty() };
     this.focus = () => this.refs.editor.focus();
-    console.log('killoooooooooooooo')
+    console.log("killoooooooooooooo");
   }
 
   onChange = (editorState) => {
-    console.log('que te den')
+    console.log("que te den");
     this.setState({ editorState });
   };
 
-
   getRawState = (editorState) => {
     const rawContentState = convertToRaw(editorState.getCurrentContent());
- 
+
     return draftToHtml(rawContentState);
-  }
+  };
 
   toggleBlockType = (blockType) => {
     this.onChange(RichUtils.toggleBlockType(this.state.editorState, blockType));
@@ -54,32 +53,29 @@ class ArticleCreator extends React.Component {
   };
 
   uploadImage = async (event) => {
-    const file = event.target.files[0]
+    const file = event.target.files[0];
 
     const formData = new FormData();
-    
-      // Update the formData object
-      formData.append(
-        "myFile",
-        file,
-        file.name
-      );
 
-      const response = await fetch('/data/upload', {
-        method: 'POST', 
-        body: formData
-      })
+    // Update the formData object
+    formData.append("myFile", file, file.name);
 
-      const data = response.json()
-      const { url } = data
-      this.insertImage(url)
+    const response = await fetch("/data/upload", {
+      method: "POST",
+      body: formData,
+    });
 
-  }
+    const data = response.json();
+    const { url } = data;
+    this.insertImage(url);
+  };
 
   insertImage = (ev) => {
-    console.log('ev', ev)
-    const { target: { value: url } } = ev
-    console.log('url', url)
+    console.log("ev", ev);
+    const {
+      target: { value: url },
+    } = ev;
+    console.log("url", url);
     const { editorState } = this.state;
     const contentState = editorState.getCurrentContent();
     const contentStateWithEntity = contentState.createEntity(
@@ -92,7 +88,11 @@ class ArticleCreator extends React.Component {
       currentContent: contentStateWithEntity,
     });
     this.setState({
-      editorState: AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, " ")
+      editorState: AtomicBlockUtils.insertAtomicBlock(
+        newEditorState,
+        entityKey,
+        " "
+      ),
     });
   };
 
@@ -130,7 +130,7 @@ class ArticleCreator extends React.Component {
             blockRendererFn={mediaBlockRenderer}
           />
           <label for="myfile">Select a file:</label>
-          <input type="file" multiple onChange={this.insertImage}/>
+          <input type="file" multiple onChange={this.insertImage} />
         </div>
       </div>
     );
@@ -138,34 +138,34 @@ class ArticleCreator extends React.Component {
 }
 
 function mediaBlockRenderer(block) {
-  if (block.getType() === 'atomic') {
-    console.log('block', block)
+  if (block.getType() === "atomic") {
+    console.log("block", block);
     return { component: Media, editable: false };
   }
   return null;
 }
 
 const Media = (props) => {
-  console.log('media!!!')
+  console.log("media!!!");
   const entity = props.contentState.getEntity(props.block.getEntityAt(0));
-  console.log('entity', entity)
+  console.log("entity", entity);
   const { src } = entity.getData();
   const type = entity.getType();
-  console.log('cosas', src, type)
-  if (type === 'IMAGE') {
-    console.log('src', src)
-    return <Image src={src}/>;
+  console.log("cosas", src, type);
+  if (type === "IMAGE") {
+    console.log("src", src);
+    return <Image src={src} />;
   }
   return null;
 };
 
 const styles = {
-  media: {}
-}
+  media: {},
+};
 
 const Image = (props) => {
-  console.log('props', props)
-  return <img src={props.src} style={styles.media} alt="Example"/>;
+  console.log("props", props);
+  return <img src={props.src} style={styles.media} alt="Example" />;
 };
 
 const styleMap = {

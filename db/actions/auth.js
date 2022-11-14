@@ -16,7 +16,7 @@ const create = async (req) => {
   const newUser = await user.save();
   return {
     name: newUser.name,
-  }
+  };
 };
 
 module.exports = { show, create };

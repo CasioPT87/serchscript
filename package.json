@@ -10,7 +10,9 @@
     "dev": "NODE_ENV=development nodemon ./bin/www",
     "devBuild": "webpack --config ./client/webpack.dev.config.js --watch",
     "build": "webpack --config ./client/webpack.prod.config.js",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "prepare": "husky install",
+    "pretty": "prettier --write ."
   },
   "dependencies": {
     "@babel/core": "^7.17.8",
@@ -54,7 +56,9 @@
     "webpack-cli": "^4.9.2"
   },
   "devDependencies": {
+    "husky": "^8.0.0",
     "nodemon": "^2.0.15",
+    "prettier": "2.7.1",
     "source-map-support": "^0.4.14"
   }
 }

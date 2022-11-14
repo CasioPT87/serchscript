@@ -3,8 +3,8 @@ const Article = require("./article");
 const Home = require("./home");
 const LoginForm = require("./loginForm");
 const ArticleForm = require("./articleForm");
-const MainFrame = require('./mainFrame')
-const Header = require('./header')
+const MainFrame = require("./mainFrame");
+const Header = require("./header");
 
 module.exports = {
   Article,
@@ -13,5 +13,5 @@ module.exports = {
   LoginForm,
   ArticleForm,
   MainFrame,
-  Header
+  Header,
 };

@@ -2,21 +2,22 @@ const Article = require("../../db/models/article");
 
 // get list
 const index = () => {
-  return Article.find({})
+  return Article.find({});
 };
 
 // get one
 const show = async (req) => {
   const { id } = req.params;
-  const article = await Article.findOne({ fecha: { $gt: { fecha: new Date(new Date() - (60000 * 60)).toISOString() } } })
-    .populate("comments")
-  console.log(article)
-  return article
+  const article = await Article.findOne({
+    fecha: { $gt: { fecha: new Date(new Date() - 60000 * 60).toISOString() } },
+  }).populate("comments");
+  console.log(article);
+  return article;
 };
 
 // delete all
 const destroyAll = () => {
-  return Article.deleteMany({})
+  return Article.deleteMany({});
 };
 
 // create new
@@ -32,22 +33,16 @@ const create = (req) => {
   article.description = description;
   article.content = content;
   article.hidden = hidden;
-  article.fecha = new Date().toISOString()
+  article.fecha = new Date().toISOString();
 
-  return article.save()
-   
+  return article.save();
 };
 
 // update one
 const update = async (req, res, next) => {
   const { id } = req.params;
 
-  const {
-    title,
-    description,
-    content,
-    hidden,
-  } = req.body;
+  const { title, description, content, hidden } = req.body;
 
   const filteredValues = Object.entries({
     title,
@@ -56,25 +51,21 @@ const update = async (req, res, next) => {
     hidden,
   }).reduce((prev, [k, v]) => {
     if (v) {
-        return {
-            ...prev,
-            [k]: v
-        }
+      return {
+        ...prev,
+        [k]: v,
+      };
     }
-    return prev
-  }, {})
+    return prev;
+  }, {});
 
-  return Article.findOneAndUpdate(
-    { _id: id },
-    filteredValues,
-    { new: true }
-  )
+  return Article.findOneAndUpdate({ _id: id }, filteredValues, { new: true });
 };
 
 // delete one
 const destroy = async (req) => {
   const { id } = req.params;
-  return Article.findOneAndDelete({ _id: id })
+  return Article.findOneAndDelete({ _id: id });
 };
 
 module.exports = { index, show, destroyAll, create, update, destroy };

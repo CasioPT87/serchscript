@@ -1,10 +1,7 @@
-
 const defaultState = {
-    articles: {
-        list: []
-    }
-}
+  articles: {
+    list: [],
+  },
+};
 
-module.exports = defaultState
-
-
+module.exports = defaultState;

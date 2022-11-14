@@ -1,9 +1,4 @@
-import {
-  BrowserRouter,
-  Link,
-  Route,
-  Routes,
-} from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 const React = require("react");
 const ReactDOM = require("react-dom/client");

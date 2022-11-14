@@ -11,16 +11,16 @@ const ArticleModel = mongoose.model(
       hidden: Boolean,
       user: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: "User",
       },
       fecha: { type: Date },
       comments: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'Comment',
-            required: false
-        }
-      ],      
+          type: Schema.Types.ObjectId,
+          ref: "Comment",
+          required: false,
+        },
+      ],
     },
     { timestamps: true }
   )
