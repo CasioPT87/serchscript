@@ -1,4 +1,8 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+const {
+  BrowserRouter,
+  Route,
+  Routes,
+} = require("react-router-dom");
 
 const React = require("react");
 const ReactDOM = require("react-dom/client");
@@ -25,11 +29,7 @@ const replaceElements = () => {
     <Provider store={store}>
       <MainFrame>
         <BrowserRouter>
-          <div>
-            <Link to="/">Home</Link> | <Link to="/articles">Articles</Link> |{" "}
-            <Link to="/admin/articles/new">new Article</Link> |{" "}
-            <Link to="/auth">Auth</Link>
-          </div>
+          <Header />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="articles" element={<Articles />} />
