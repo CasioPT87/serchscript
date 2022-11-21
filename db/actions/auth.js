@@ -1,4 +1,5 @@
 const User = require('../../db/models/user')
+const crypto = require('crypto');
 
 // get one
 const show = async req => {
@@ -11,6 +12,7 @@ const create = async req => {
   const { name, password } = req.body
   const user = new User()
   user.name = name
+  user.hash = crypto.createHash('sha256').digest('hex')
   user.setPassword(password)
 
   const newUser = await user.save()

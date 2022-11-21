@@ -16,11 +16,11 @@ function loginForm() {
       let res = await fetch('http://localhost:8880/data/auth/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
           Connection: 'keep-alive',
           Accept: '*/*',
         },
-        body: new URLSearchParams(payload),
+        body: JSON.stringify(payload),
       })
 
       const data = await res.json()
