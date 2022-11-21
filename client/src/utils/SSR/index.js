@@ -33,6 +33,7 @@ const renderHtml = (html, preloadedState) => {
     <head>
       <meta charset="utf-8">
       <title>SSR react</title>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
       <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="http://localhost:8880/react.bundle.js"></script>
       <link rel="stylesheet" type="text/css" href="http://localhost:8880/react.css">
     </head>
