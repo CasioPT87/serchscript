@@ -15,5 +15,5 @@ module.exports = {
   ArticleForm,
   MainFrame,
   Header,
-  Footer
+  Footer,
 }

@@ -3,10 +3,9 @@ const { useSelector } = require('react-redux')
 
 const Articles = () => {
   const article = useSelector(state => {
-    if (!state) return null
-    return state.article
+    return state?.article
   })
-  if (!article) return null
+  if (!article) return <div>que te den</div>
   return (
     <div>
       <div className="capitan">{article.title}</div>

@@ -1,13 +1,12 @@
 const React = require('react')
 const { useSelector, useDispatch } = require('react-redux')
-const { useNavigation } = require('react-router-dom')
 const { fetchArticles } = require('../../store/async')
+const { Link } = require('react-router-dom')
 
 const { useEffect } = React
 
 const Articles = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigation()
   const articles = useSelector(state => state.articles)
   useEffect(() => {
     dispatch(fetchArticles)
@@ -17,10 +16,17 @@ const Articles = () => {
     <ul>
       {articles.list.map(article => {
         return (
-          <li onClick={() => navigate(`/article/${article.id}`)}>
-          <div key={Math.random()} className="killo">
-            {article.title}
-          </div>
+          <li onClick={() => {}}>
+            <Link to={`/articles/${article._id}`}>
+              <div key={article.id}>
+                <div>
+                {article.title}
+                  </div>
+                <div>
+                {article.content}
+                  </div>
+              </div>
+            </Link>
           </li>
         )
       })}

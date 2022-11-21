@@ -6,6 +6,7 @@ const router = express.Router()
 // get list
 router.get('/', async (req, res) => {
   return sendSSRResposeView({
+    req,
     res,
     fetchers: ['fetchArticles'],
     dataName: 'articles',
@@ -15,8 +16,9 @@ router.get('/', async (req, res) => {
 // get one
 router.get('/:id', async (req, res) => {
   return sendSSRResposeView({
+    req,
     res,
-    fetchers: [],
+    fetchers: ['fetchArticle'],
     dataName: 'article',
   })
 })

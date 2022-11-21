@@ -29,7 +29,6 @@ function articleForm() {
       })
       if (res.status === 200) {
         const resJson = await res.json()
-        console.log(resJson)
         setTitle('')
         setDescription('')
         setContent('')

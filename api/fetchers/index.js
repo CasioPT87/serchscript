@@ -7,23 +7,25 @@ const fetchers = {
     path: 'articles.list',
     fetch: db.articles.index,
   },
+  fetchArticle: {
+    path: 'article',
+    fetch: db.articles.show,
+  },
   fetchComments: {
     path: 'comments.list',
     fetch: db.comments.index,
   },
 }
 
-module.exports = async fetchActions => {
+module.exports = async ({ req, fetchers: fetchActions }) => {
   const store = { ...defaultState }
-  console.log({ fetchActions })
   const selectedFetchers = await fetchActions.map(async fa => {
     const action = fetchers[fa]
-    const data = await action.fetch()
+    const data = await action.fetch(req)
     return { data, path: action.path }
   })
 
   const changesPayload = await Promise.all(selectedFetchers)
-  console.log({ changesPayload })
   changesPayload.forEach(cp => {
     _.set(store, cp.path, cp.data)
   })
