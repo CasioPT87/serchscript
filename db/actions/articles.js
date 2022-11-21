@@ -9,7 +9,7 @@ const index = () => {
 const show = async req => {
   const { id } = req.params
   const article = await Article.findOne({
-    id
+    id,
     // fecha: { $gt: { fecha: new Date(new Date() - 60000 * 60).toISOString() } },
   }).populate('comments')
   return article

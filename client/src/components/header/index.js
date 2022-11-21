@@ -7,7 +7,7 @@ const Header = () => {
     <div className="header">
       <Link to="/">
         <img
-          src={'images/logo.png'}
+          src={'/images/logo.png'}
           className="header__img"
           alt="flamyduck logo"
         />

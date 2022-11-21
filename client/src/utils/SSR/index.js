@@ -28,26 +28,25 @@ const getInitialComponentsTree = (store, componentName) => {
 }
 
 const renderHtml = (html, preloadedState) => {
-  const preloadedStateJSON = `${JSON.stringify(preloadedState).replace(
-    /</g,
-    '\\u003c'
-  )}`
   return `<!DOCTYPE html>
   <html>
     <head>
       <meta charset="utf-8">
       <title>SSR react</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="http://localhost:8880/react.bundle.js"></script></head>
-    <link rel="stylesheet" type="text/css" href="http://localhost:8880/react.css">
-    <script>
-      // WARNING: See the following for security issues around embedding JSON in HTML:
-      // https://redux.js.org/usage/server-rendering#security-considerations
-      window.__PRELOADED_STATE__ = ${preloadedStateJSON}
-      window.jamon = 'jamon'
-    </script>
+      <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="http://localhost:8880/react.bundle.js"></script>
+      <link rel="stylesheet" type="text/css" href="http://localhost:8880/react.css">
+    </head>
   
     <body>
       <div id="root">${html}</div>
+      <script>
+        // WARNING: See the following for security issues around embedding JSON in HTML:
+        // https://redux.js.org/usage/server-rendering#security-considerations
+        window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
+          /</g,
+          '\\u003c'
+        )}
+      </script>
     </body>
   </html>`
 }

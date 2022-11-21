@@ -19,12 +19,8 @@ const Articles = () => {
           <li onClick={() => {}}>
             <Link to={`/articles/${article._id}`}>
               <div key={article.id}>
-                <div>
-                {article.title}
-                  </div>
-                <div>
-                {article.content}
-                  </div>
+                <div>{article.title}</div>
+                <div>{article.content}</div>
               </div>
             </Link>
           </li>

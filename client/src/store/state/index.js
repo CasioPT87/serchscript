@@ -2,7 +2,7 @@ const defaultState = {
   articles: {
     list: [],
   },
-  article: null
+  article: null,
 }
 
 module.exports = defaultState
