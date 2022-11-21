@@ -5,6 +5,7 @@ const LoginForm = require('./loginForm')
 const ArticleForm = require('./articleForm')
 const MainFrame = require('./mainFrame')
 const Header = require('./header')
+const Footer = require('./footer')
 
 module.exports = {
   Article,
@@ -14,4 +15,5 @@ module.exports = {
   ArticleForm,
   MainFrame,
   Header,
+  Footer
 }

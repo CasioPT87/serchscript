@@ -1,5 +1,6 @@
 const React = require('react')
 const { Provider } = require('react-redux')
+const { StaticRouter } = require("react-router-dom/server")
 const ReactDOMServer = require('react-dom/server')
 const Components = require('../../components')
 const setUpStore = require('../../store/setUp')
@@ -17,7 +18,11 @@ const getComponent = name => ComponentsLibrary[name]
 const getInitialComponentsTree = (store, componentName) => {
   return ReactDOMServer.renderToString(
     <Provider store={store}>
-      <Components.MainFrame>{getComponent(componentName)}</Components.MainFrame>
+      <StaticRouter>
+        <Components.MainFrame>
+          {getComponent(componentName)}
+        </Components.MainFrame>
+      </StaticRouter>
     </Provider>
   )
 }

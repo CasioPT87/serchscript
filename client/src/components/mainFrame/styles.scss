@@ -1,42 +1,13 @@
-.Root {
-  min-height: 100%;
-  min-width: 100%;
-  background-color: purple;
-}
-
-.container {
+.stack {
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  background-color: purple;
-}
-.header {
-  flex: 0 0 50px;
+  justify-content: center;
+  align-items: center;
   background-color: orange;
+
+  main {
+    width: 100%;
+  }
 }
-.content-body {
-  background-color: red;
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: row;
-}
-.content-body .content {
-  background-color: green;
-  flex: 1 1 auto;
-  overflow: auto;
-}
-.content-body .sidenav {
-  background-color: gray;
-  order: -1;
-  flex: 0 0 100px;
-  overflow: auto;
-}
-.content-body .ads {
-  background-color: yellow;
-  flex: 0 0 100px;
-  overflow: auto;
-}
-.footer {
-  background-color: magenta;
-  flex: 0 0 50px;
-}
+
+

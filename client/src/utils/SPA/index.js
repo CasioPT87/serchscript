@@ -12,6 +12,7 @@ const {
   Home,
   LoginForm,
   Header,
+  Footer,
 } = require('../../components')
 
 const replaceElements = () => {
@@ -22,19 +23,30 @@ const replaceElements = () => {
 
   const root = ReactDOM.createRoot(document.getElementById('root'))
   root.render(
-    <Provider store={store}>
-      <MainFrame>
-        <BrowserRouter>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="articles" element={<Articles />} />
-            <Route path="admin/articles/new" element={<ArticleForm />} />
-            <Route path="auth" element={<LoginForm />} />
-          </Routes>
-        </BrowserRouter>
-      </MainFrame>
-    </Provider>
+    <>
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto"
+        ></link>
+      </head>
+      <body>
+        <Provider store={store}>
+          <MainFrame>
+            <BrowserRouter>
+              <Header />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="articles" element={<Articles />} />
+                <Route path="admin/articles/new" element={<ArticleForm />} />
+                <Route path="auth" element={<LoginForm />} />
+              </Routes>
+              <Footer />
+            </BrowserRouter>
+          </MainFrame>
+        </Provider>
+      </body>
+    </>
   )
 }
 
