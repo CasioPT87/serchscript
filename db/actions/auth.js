@@ -1,5 +1,5 @@
 const User = require('../../db/models/user')
-const crypto = require('crypto');
+const crypto = require('crypto')
 
 // get one
 const show = async req => {

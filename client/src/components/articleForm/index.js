@@ -21,11 +21,11 @@ function articleForm() {
       let res = await fetch('http://localhost:8880/data/admin/articles', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
           Connection: 'keep-alive',
           Accept: '*/*',
         },
-        body: new URLSearchParams(payload),
+        body: JSON.stringify(payload),
       })
       if (res.status === 200) {
         const resJson = await res.json()

@@ -1,7 +1,8 @@
 const React = require('react')
 const { useSelector, useDispatch } = require('react-redux')
-const { fetchArticles } = require('../../store/async')
 const { Link } = require('react-router-dom')
+const Card = require('./card')
+const { fetchArticles } = require('../../store/async')
 
 const { useEffect } = React
 
@@ -13,15 +14,12 @@ const Articles = () => {
   }, [])
 
   return (
-    <ul>
+    <ul className='articlesList'>
       {articles.list.map(article => {
         return (
           <li onClick={() => {}}>
             <Link to={`/articles/${article._id}`}>
-              <div key={article.id}>
-                <div>{article.title}</div>
-                <div>{article.content}</div>
-              </div>
+              <Card article={article} />
             </Link>
           </li>
         )
