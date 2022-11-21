@@ -26,7 +26,10 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         imgSrc: [`'self'`, `data:`, `*`, `c:`],
-        scriptSrc: [`'self'`, "'sha256-kgymhpGtMgP///NynhA5/U+ySxa+nbBQRRPF2woRK24='"]
+        scriptSrc: [
+          `'self'`,
+          "'sha256-kgymhpGtMgP///NynhA5/U+ySxa+nbBQRRPF2woRK24='",
+        ],
       },
     },
   })

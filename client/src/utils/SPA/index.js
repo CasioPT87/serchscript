@@ -20,10 +20,9 @@ const replaceElements = () => {
   const store = setUpStore(window.__PRELOADED_STATE__)
 
   // Allow the passed state to be garbage-collected
-  // delete window.__PRELOADED_STATE__
+  delete window.__PRELOADED_STATE__
 
   const root = ReactDOM.createRoot(document.getElementById('root'))
-  window.leches = 'capullo'
   root.render(
     <Provider store={store}>
       <MainFrame>
