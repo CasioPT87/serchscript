@@ -1,13 +1,10 @@
 const React = require('react')
 
-const MainFrame = props => {
+const MainFrame = ({ children }) => {
   return (
     <div className="container">
-      <header className="header">Header</header>
       <div className="content-body">
-        <main className="content">{props.children}</main>
-        <nav className="sidenav">Nav</nav>
-        <aside className="ads">Ads</aside>
+        <main className="content">{children}</main>
       </div>
       <footer className="footer">Footer</footer>
     </div>

@@ -10,7 +10,7 @@ const Articles = () => {
   useEffect(() => {
     dispatch(fetchArticles)
   }, [])
- 
+
   return (
     <div>
       {articles.list.map(article => {
