@@ -2,11 +2,15 @@ const React = require('react')
 const { useSelector, useDispatch } = require('react-redux')
 const { fetchArticles } = require('../../store/async')
 
+const { useEffect } = React
+
 const Articles = () => {
   const dispatch = useDispatch()
   const articles = useSelector(state => state.articles)
-  if (!articles || !articles.list?.length) dispatch(fetchArticles)
-
+  useEffect(() => {
+    dispatch(fetchArticles)
+  }, [])
+ 
   return (
     <div>
       {articles.list.map(article => {

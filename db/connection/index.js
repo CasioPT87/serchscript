@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 const { MONGODB_URI } = process.env
 
 const connect = () => {
-  const mongoDB = MONGODB_URI || 'mongodb://jamon:pass@localhost:27017/cucarachas'
+  const mongoDB =
+    MONGODB_URI || 'mongodb://jamon:pass@localhost:27017/cucarachas'
   console.log('url', mongoDB)
   mongoose
     .connect(mongoDB)

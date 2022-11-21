@@ -15,6 +15,7 @@ const fetchers = {
 
 module.exports = async fetchActions => {
   const store = { ...defaultState }
+  console.log({ fetchActions })
   const selectedFetchers = await fetchActions.map(async fa => {
     const action = fetchers[fa]
     const data = await action.fetch()
@@ -22,6 +23,7 @@ module.exports = async fetchActions => {
   })
 
   const changesPayload = await Promise.all(selectedFetchers)
+  console.log({ changesPayload })
   changesPayload.forEach(cp => {
     _.set(store, cp.path, cp.data)
   })
