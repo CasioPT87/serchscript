@@ -5,6 +5,7 @@ const router = express.Router()
 
 // get list
 router.get('/', async (req, res) => {
+  console.log('eooooo')
   return sendSSRResposeView({
     res,
     fetchers: ['fetchArticles'],
