@@ -1,107 +1,69 @@
 const React = require('react')
-const {
-  Editor,
-  EditorState,
-  RichUtils,
-  convertToRaw,
-  AtomicBlockUtils,
-} = require('draft-js')
-const draftToHtml = require('draftjs-to-html')
+const { Editor, EditorState, RichUtils, convertToRaw } = require('draft-js')
+const { convertToHTML } = require('draft-convert');
 
-class ArticleCreator extends React.Component {
+class RichText extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = { editorState: EditorState.createEmpty() }
-    this.focus = () => this.refs.editor.focus()
+    super(props);
+    this.state = {editorState: EditorState.createEmpty()};
+
+    this.focus = () => this.refs.editor.focus();
+    this.onChange = (editorState) => {
+      this.setState({editorState}, () => {
+        const html = convertToHTML(editorState.getCurrentContent());
+        this.props.setText(html)
+      });
+    }
+
+    this.handleKeyCommand = (command) => this._handleKeyCommand(command);
+    this.onTab = (e) => this._onTab(e);
+    this.toggleBlockType = (type) => this._toggleBlockType(type);
+    this.toggleInlineStyle = (style) => this._toggleInlineStyle(style);
   }
 
-  onChange = editorState => {
-    this.setState({ editorState })
+  _handleKeyCommand(command) {
+    const {editorState} = this.state;
+    const newState = RichUtils.handleKeyCommand(editorState, command);
+    if (newState) {
+      this.onChange(newState);
+      return true;
+    }
+    return false;
   }
 
-  getRawState = editorState => {
-    const rawContentState = convertToRaw(editorState.getCurrentContent())
-
-    return draftToHtml(rawContentState)
+  _onTab(e) {
+    const maxDepth = 4;
+    this.onChange(RichUtils.onTab(e, this.state.editorState, maxDepth));
   }
 
-  toggleBlockType = blockType => {
-    this.onChange(RichUtils.toggleBlockType(this.state.editorState, blockType))
-  }
-
-  toggleInlineStyle = inlineStyle => {
+  _toggleBlockType(blockType) {
     this.onChange(
-      RichUtils.toggleInlineStyle(this.state.editorState, inlineStyle)
-    )
+      RichUtils.toggleBlockType(
+        this.state.editorState,
+        blockType
+      )
+    );
   }
 
-  handlePastedFiles = files => {
-    const formData = new FormData()
-    formData.append('file', files[0])
-    fetch('/api/uploads', { method: 'POST', body: formData })
-      .then(res => res.json())
-      .then(data => {
-        if (data.file) {
-          setEditorState(insertImage(data.file)) //created below
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
-
-  uploadImage = async event => {
-    const file = event.target.files[0]
-
-    const formData = new FormData()
-
-    // Update the formData object
-    formData.append('myFile', file, file.name)
-
-    const response = await fetch('/data/upload', {
-      method: 'POST',
-      body: formData,
-    })
-
-    const data = response.json()
-    const { url } = data
-    this.insertImage(url)
-  }
-
-  insertImage = ev => {
-    const {
-      target: { value: url },
-    } = ev
-    const { editorState } = this.state
-    const contentState = editorState.getCurrentContent()
-    const contentStateWithEntity = contentState.createEntity(
-      'IMAGE',
-      'IMMUTABLE',
-      { src: url }
-    )
-    const entityKey = contentStateWithEntity.getLastCreatedEntityKey()
-    const newEditorState = EditorState.set(editorState, {
-      currentContent: contentStateWithEntity,
-    })
-    this.setState({
-      editorState: AtomicBlockUtils.insertAtomicBlock(
-        newEditorState,
-        entityKey,
-        ' '
-      ),
-    })
+  _toggleInlineStyle(inlineStyle) {
+    this.onChange(
+      RichUtils.toggleInlineStyle(
+        this.state.editorState,
+        inlineStyle
+      )
+    );
   }
 
   render() {
-    const { editorState } = this.state
+    const {editorState} = this.state;
 
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
-    let className = 'RichEditor-editor'
-    var contentState = editorState.getCurrentContent()
+    let className = 'RichEditor-editor';
+    var contentState = editorState.getCurrentContent();
     if (!contentState.hasText()) {
       if (contentState.getBlockMap().first().getType() !== 'unstyled') {
-        className += ' RichEditor-hidePlaceholder'
+        className += ' RichEditor-hidePlaceholder';
       }
     }
 
@@ -117,48 +79,23 @@ class ArticleCreator extends React.Component {
         />
         <div className={className} onClick={this.focus}>
           <Editor
+            blockStyleFn={getBlockStyle}
             customStyleMap={styleMap}
             editorState={editorState}
+            handleKeyCommand={this.handleKeyCommand}
             onChange={this.onChange}
-            handlePastedFiles={this.handlePastedFiles}
+            onTab={this.onTab}
             placeholder="Tell a story..."
             ref="editor"
-            blockRendererFn={mediaBlockRenderer}
+            spellCheck={true}
           />
-          <label for="myfile">Select a file:</label>
-          <input type="file" multiple onChange={this.insertImage} />
         </div>
       </div>
-    )
+    );
   }
 }
 
-function mediaBlockRenderer(block) {
-  if (block.getType() === 'atomic') {
-    return { component: Media, editable: false }
-  }
-  return null
-}
-
-const Media = props => {
-  const entity = props.contentState.getEntity(props.block.getEntityAt(0))
-  const { src } = entity.getData()
-  const type = entity.getType()
-  if (type === 'IMAGE') {
-    return <Image src={src} />
-  }
-  return null
-}
-
-const styles = {
-  media: {},
-}
-
-const Image = props => {
-  console.log('props', props)
-  return <img src={props.src} style={styles.media} alt="Example" />
-}
-
+// Custom overrides for "code" style.
 const styleMap = {
   CODE: {
     backgroundColor: 'rgba(0, 0, 0, 0.05)',
@@ -166,83 +103,96 @@ const styleMap = {
     fontSize: 16,
     padding: 2,
   },
+};
+
+function getBlockStyle(block) {
+  switch (block.getType()) {
+    case 'blockquote': return 'RichEditor-blockquote';
+    default: return null;
+  }
 }
 
-const StyleButton = ({ style, onToggle, active, label }) => {
-  const onMouseDown = e => {
-    e.preventDefault()
-    onToggle(style)
+class StyleButton extends React.Component {
+  constructor() {
+    super();
+    this.onToggle = (e) => {
+      e.preventDefault();
+      this.props.onToggle(this.props.style);
+    };
   }
 
-  const className = !active
-    ? 'RichEditor-styleButton'
-    : 'RichEditor-styleButton RichEditor-activeButton'
+  render() {
+    let className = 'RichEditor-styleButton';
+    if (this.props.active) {
+      className += ' RichEditor-activeButton';
+    }
 
-  return (
-    <span className={className} onMouseDown={onMouseDown}>
-      {label}
-    </span>
-  )
+    return (
+      <span className={className} onMouseDown={this.onToggle}>
+        {this.props.label}
+      </span>
+    );
+  }
 }
 
 const BLOCK_TYPES = [
-  { label: 'H1', style: 'header-one' },
-  { label: 'H2', style: 'header-two' },
-  { label: 'H3', style: 'header-three' },
-  { label: 'H4', style: 'header-four' },
-  { label: 'H5', style: 'header-five' },
-  { label: 'H6', style: 'header-six' },
-  { label: 'Blockquote', style: 'blockquote' },
-  { label: 'UL', style: 'unordered-list-item' },
-  { label: 'OL', style: 'ordered-list-item' },
-  { label: 'Code Block', style: 'code-block' },
-  { label: 'Fire', style: 'new-block-type-name' },
-]
+  {label: 'H1', style: 'header-one'},
+  {label: 'H2', style: 'header-two'},
+  {label: 'H3', style: 'header-three'},
+  {label: 'H4', style: 'header-four'},
+  {label: 'H5', style: 'header-five'},
+  {label: 'H6', style: 'header-six'},
+  {label: 'Blockquote', style: 'blockquote'},
+  {label: 'UL', style: 'unordered-list-item'},
+  {label: 'OL', style: 'ordered-list-item'},
+  {label: 'Code Block', style: 'code-block'},
+];
 
-const BlockStyleControls = ({ editorState, onToggle }) => {
-  const selection = editorState.getSelection()
+const BlockStyleControls = (props) => {
+  const {editorState} = props;
+  const selection = editorState.getSelection();
   const blockType = editorState
     .getCurrentContent()
     .getBlockForKey(selection.getStartKey())
-    .getType()
+    .getType();
 
   return (
     <div className="RichEditor-controls">
-      {BLOCK_TYPES.map(type => (
+      {BLOCK_TYPES.map((type) =>
         <StyleButton
           key={type.label}
           active={type.style === blockType}
           label={type.label}
-          onToggle={onToggle}
+          onToggle={props.onToggle}
           style={type.style}
         />
-      ))}
+      )}
     </div>
-  )
-}
+  );
+};
 
-const INLINE_STYLES = [
-  { label: 'Bold', style: 'BOLD' },
-  { label: 'Italic', style: 'ITALIC' },
-  { label: 'Underline', style: 'UNDERLINE' },
-  { label: 'Monospace', style: 'CODE' },
-]
+var INLINE_STYLES = [
+  {label: 'Bold', style: 'BOLD'},
+  {label: 'Italic', style: 'ITALIC'},
+  {label: 'Underline', style: 'UNDERLINE'},
+  {label: 'Monospace', style: 'CODE'},
+];
 
-const InlineStyleControls = ({ editorState, onToggle }) => {
-  var currentStyle = editorState.getCurrentInlineStyle()
+const InlineStyleControls = (props) => {
+  var currentStyle = props.editorState.getCurrentInlineStyle();
   return (
     <div className="RichEditor-controls">
-      {INLINE_STYLES.map(type => (
+      {INLINE_STYLES.map(type =>
         <StyleButton
           key={type.label}
           active={currentStyle.has(type.style)}
           label={type.label}
-          onToggle={onToggle}
+          onToggle={props.onToggle}
           style={type.style}
         />
-      ))}
+      )}
     </div>
-  )
-}
+  );
+};
 
-module.exports = ArticleCreator
+module.exports = RichText

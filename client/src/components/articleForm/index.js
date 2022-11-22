@@ -54,7 +54,7 @@ function articleForm() {
           value={description}
           onChange={e => setDescription(e.target.value)}
         />
-        <ArticleCreator />
+        <ArticleCreator setText={setContent}/>
 
         <button type="submit">Create</button>
 

@@ -7,8 +7,8 @@ const { useEffect } = React
 const Card = ({ article }) => {
   return (
     <div className="card" key={article.id}>
-      <div className='card__title'>{article.title}</div>
-      <div className='card__content'>{article.content}</div>
+      <div className="card__title">{article.title}</div>
+      <div className="card__content">{article.content}</div>
     </div>
   )
 }

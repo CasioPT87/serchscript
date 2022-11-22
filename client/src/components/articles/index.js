@@ -14,7 +14,7 @@ const Articles = () => {
   }, [])
 
   return (
-    <ul className='articlesList'>
+    <ul className="articlesList">
       {articles.list.map(article => {
         return (
           <li onClick={() => {}}>
