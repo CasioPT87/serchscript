@@ -48,20 +48,20 @@ class RichText extends React.Component {
     )
   }
 
-  handlePastedFiles = files => {
-    const formData = new FormData()
-    formData.append('file', files[0])
-    fetch('/api/uploads', { method: 'POST', body: formData })
-      .then(res => res.json())
-      .then(data => {
-        if (data.file) {
-          this.setState({ editorState: this.insertImage(data.file) }) //created below
-        }
-      })
-      .catch(err => {
-        console.log(err)
-      })
-  }
+  // handlePastedFiles = files => {
+  //   const formData = new FormData()
+  //   formData.append('file', files[0])
+  //   fetch('/api/uploads', { method: 'POST', body: formData })
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       if (data.file) {
+  //         this.setState({ editorState: this.insertImage(data.file) }) //created below
+  //       }
+  //     })
+  //     .catch(err => {
+  //       console.log(err)
+  //     })
+  // }
 
   insertImage = file => {
     const { editorState } = this.state
@@ -75,14 +75,15 @@ class RichText extends React.Component {
     const newEditorState = EditorState.set(editorState, {
       currentContent: contentStateWithEntity,
     })
-    console.log({ entityKey })
+    const nextState = AtomicBlockUtils.insertAtomicBlock(
+      newEditorState,
+      entityKey,
+      ' '
+    )
+
     this.setState({
-      editorState: AtomicBlockUtils.insertAtomicBlock(
-        newEditorState,
-        entityKey,
-        ''
-      ),
-    })
+      editorState: nextState,
+    }, () => console.log(this.state))
   }
 
   render() {
@@ -147,8 +148,7 @@ const mediaBlockRenderer = block => {
 }
 
 const Media = props => {
-  const lastCreatedKey = props.contentState.getLastCreatedEntityKey()
-  const entity = props.contentState.getEntity(lastCreatedKey)
+  const entity = props.contentState.getEntity(props.block.getEntityAt(0))
   const { file } = entity.getData()
   const type = entity.getType()
   const [base64Image, setBase64Image] = useState(null)
@@ -157,14 +157,8 @@ const Media = props => {
     async function getBase64() {
       if (type === 'IMAGE' && file) {
         fileReader = new FileReader()
-        fileReader.onload = e => {
-          const { result } = e.target
-          if (result) {
-            console.log({ result })
-          }
-        }
-        
-        const _base64Image = await new Promise((resolve) => {
+
+        const _base64Image = await new Promise(resolve => {
           fileReader.onload = e => {
             const { result } = e.target
             if (result) {
@@ -178,7 +172,6 @@ const Media = props => {
     }
 
     getBase64()
-    
   }, [file])
 
   if (!base64Image) return null
