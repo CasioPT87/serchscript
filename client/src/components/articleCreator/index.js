@@ -1,6 +1,6 @@
 const React = require('react')
-const { Editor, EditorState, RichUtils, AtomicBlockUtils } = require('draft-js')
-const { convertToHTML } = require('draft-convert')
+const { Editor, EditorState, RichUtils, AtomicBlockUtils, convertToRaw, convertFromRaw } = require('draft-js')
+// const { convertToHTML } = require('draft-convert')
 
 const { useEffect, useState } = React
 
@@ -12,8 +12,8 @@ class RichText extends React.Component {
     this.focus = () => this.refs.editor.focus()
     this.onChange = editorState => {
       this.setState({ editorState }, () => {
-        const html = convertToHTML(editorState.getCurrentContent())
-        this.props.setText(html)
+        console.log({ eo: convertToRaw(editorState.getCurrentContent()) })
+        this.props.setText(convertToRaw(editorState.getCurrentContent()))
       })
     }
 
@@ -78,12 +78,11 @@ class RichText extends React.Component {
     const nextState = AtomicBlockUtils.insertAtomicBlock(
       newEditorState,
       entityKey,
-      ' '
+      'img'
     )
 
     this.setState({
-      editorState: nextState,
-    }, () => console.log(this.state))
+      editorState: nextState })
   }
 
   render() {
@@ -137,7 +136,6 @@ class RichText extends React.Component {
 }
 
 const mediaBlockRenderer = block => {
-  console.log('media block renderer', block.getType())
   if (block.getType() === 'atomic') {
     return {
       component: Media,

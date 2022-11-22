@@ -28,6 +28,8 @@ const create = req => {
     content = 'El contenido esta vacio',
     hidden = true,
   } = req.body
+  console.log({ content: typeof content })
+  console.log({ req: req.body })
   const article = new Article()
   article.title = title
   article.description = description

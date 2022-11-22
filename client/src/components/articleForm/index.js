@@ -1,5 +1,6 @@
 const React = require('react')
 const { useState } = require('react')
+const { v4: uuidv4 } = require('uuid');
 const ArticleCreator = require('../articleCreator')
 
 function articleForm() {
@@ -8,37 +9,54 @@ function articleForm() {
   const [content, setContent] = useState('this is a fake content')
   const [hidden, setHidden] = useState(false)
   const [message, setMessage] = useState('')
+  
+  const digestEntities = async ({ blocks, entityMap }) => {
+    entityMap.map((entity, index) => {
+      const { data: file } = entity
+      const id = uuidv4()
+      const body = new FormData()
+      body.append('id', id)
+      body.append('document', file)
+    
+      return fetch('/upload', {
+        method: 'POST',
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          Accept: '*/*',
+          'Accept-Encoding': 'gzip, deflate, gr',
+        },
+        body, // body data type must match "Content-Type" header
+      })
+      return null
+    })
+              
+  }
+
+  const submit = async ({ title, description, content, hidden = false }) => {
+    const digestedEntities = digestEntities(content)
+
+    let res = await fetch('http://localhost:8880/data/admin/articles', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Connection: 'keep-alive',
+        Accept: '*/*',
+      },
+      body: JSON.stringify({ title, description, content: JSON.stringify(content), hidden }),
+    })
+
+    console.log(res)
+  }
 
   let handleSubmit = async e => {
     e.preventDefault()
-    try {
-      const payload = {
-        title,
-        description,
-        content,
-        hidden,
-      }
-      let res = await fetch('http://localhost:8880/data/admin/articles', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Connection: 'keep-alive',
-          Accept: '*/*',
-        },
-        body: JSON.stringify(payload),
-      })
-      if (res.status === 200) {
-        const resJson = await res.json()
-        setTitle('')
-        setDescription('')
-        setContent('')
-        setMessage('Articulo creado bien, bien, BIEN!!!!')
-      } else {
-        setMessage('Some error occured')
-      }
-    } catch (err) {
-      console.log(err)
-    }
+    await submit({
+      title,
+      description,
+      content,
+    })
   }
 
   return (
