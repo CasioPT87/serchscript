@@ -12,4 +12,13 @@ router.get('/new', async (req, res) => {
   })
 })
 
+router.get('/:id/edit', async (req, res) => {
+  return sendSSRResposeView({
+    req,
+    res,
+    fetchers: ['fetchArticle'],
+    dataName: 'articleForm',
+  })
+})
+
 module.exports = router

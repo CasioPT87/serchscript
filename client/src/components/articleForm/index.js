@@ -1,5 +1,6 @@
 const React = require('react')
-const { useState } = require('react')
+const { useState, useEffect } = require('react')
+const { useSelector } = require('react-redux')
 const { v4: uuidv4 } = require('uuid')
 const ArticleCreator = require('../articleCreator')
 
@@ -22,7 +23,7 @@ const digestEntities = async ({ entityMap }) => {
         Accept: '*/*',
         'Accept-Encoding': 'gzip, deflate, gr',
       },
-      body
+      body,
     })
     return response.json()
   })
@@ -39,7 +40,7 @@ const digestEntities = async ({ entityMap }) => {
 const submit = async ({ title, description, content, hidden = false }) => {
   const digestedEntities = await digestEntities(content)
 
-  let res = await fetch('http://localhost:8880/data/admin/articles', {
+  await fetch('http://localhost:8880/data/admin/articles', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -56,11 +57,21 @@ const submit = async ({ title, description, content, hidden = false }) => {
 }
 
 function articleForm() {
+  const article = useSelector(store => store.article)
   const [title, setTitle] = useState('this is a fake title')
   const [description, setDescription] = useState('this is a fake description')
   const [content, setContent] = useState('this is a fake content')
   const [hidden, setHidden] = useState(false)
   const [message, setMessage] = useState('')
+
+  useEffect(() => {
+    if (article) {
+      const { title, description, content } = article
+      setTitle(title)
+      setDescription(description)
+      setContent(content)
+    }
+}, [article])
 
   const reset = (error = null) => {
     if (error) {
@@ -99,7 +110,7 @@ function articleForm() {
           value={description}
           onChange={e => setDescription(e.target.value)}
         />
-        <ArticleCreator setText={setContent} />
+        <ArticleCreator setText={setContent} articleContent={article.content} />
 
         <button type="submit">Create</button>
 

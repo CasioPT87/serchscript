@@ -29,6 +29,16 @@ class RichText extends React.Component {
     this.toggleInlineStyle = style => this._toggleInlineStyle(style)
   }
 
+  componentDidMount() {
+    const { articleContent } = this.props
+    if (articleContent) {
+      const articleData = JSON.parse(articleContent)
+    
+      const contentState = convertFromRaw(articleData)
+      this.setState({ editorState: EditorState.createWithContent(contentState) })
+    }
+  }
+
   _handleKeyCommand(command) {
     const { editorState } = this.state
     const newState = RichUtils.handleKeyCommand(editorState, command)
@@ -53,21 +63,6 @@ class RichText extends React.Component {
       RichUtils.toggleInlineStyle(this.state.editorState, inlineStyle)
     )
   }
-
-  // handlePastedFiles = files => {
-  //   const formData = new FormData()
-  //   formData.append('file', files[0])
-  //   fetch('/api/uploads', { method: 'POST', body: formData })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       if (data.file) {
-  //         this.setState({ editorState: this.insertImage(data.file) }) //created below
-  //       }
-  //     })
-  //     .catch(err => {
-  //       console.log(err)
-  //     })
-  // }
 
   insertImage = file => {
     const { editorState } = this.state
@@ -161,18 +156,22 @@ const Media = props => {
   useEffect(() => {
     async function getBase64() {
       if (type === 'IMAGE' && file) {
-        fileReader = new FileReader()
+        if (file instanceof File) {
+          fileReader = new FileReader()
 
-        const _base64Image = await new Promise(resolve => {
-          fileReader.onload = e => {
-            const { result } = e.target
-            if (result) {
-              resolve(result)
+          const _base64Image = await new Promise(resolve => {
+            fileReader.onload = e => {
+              const { result } = e.target
+              if (result) {
+                resolve(result)
+              }
             }
-          }
-          fileReader.readAsDataURL(file)
-        })
-        setBase64Image(_base64Image)
+            fileReader.readAsDataURL(file)
+          })
+          setBase64Image(_base64Image)
+        } else if (typeof file === 'string') {
+          setBase64Image(`http://localhost:8880/${file}`)
+        }    
       }
     }
 

@@ -33,6 +33,7 @@ const replaceElements = () => {
             <Route path="articles" element={<Articles />} />
             <Route path="articles/:queryId" element={<Article />} />
             <Route path="admin/articles/new" element={<ArticleForm />} />
+            <Route path="admin/articles/:id/edit" element={<ArticleForm />} />
             <Route path="auth" element={<LoginForm />} />
           </Routes>
           <Footer />
