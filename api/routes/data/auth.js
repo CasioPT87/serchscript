@@ -6,7 +6,6 @@ const { createToken } = require('../utils')
 // get list
 router.post('/create', async (req, res, next) => {
   const newUser = await db.auth.create(req)
-  console.log({ newUser })
   if (newUser) {
     const token = await createToken(newUser)
     res.cookie('cucarachasAppSession', token)
@@ -18,7 +17,6 @@ router.post('/create', async (req, res, next) => {
 // get one
 router.post('/login', async (req, res) => {
   const user = await db.auth.show(req)
-  console.log({ user })
   if (!user) {
     return res.status(404).json({
       message: 'No te conocemos, ya hemos avisado a la policia de internet...',

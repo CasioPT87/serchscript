@@ -1,5 +1,12 @@
 const React = require('react')
-const { Editor, EditorState, RichUtils, AtomicBlockUtils, convertToRaw, convertFromRaw } = require('draft-js')
+const {
+  Editor,
+  EditorState,
+  RichUtils,
+  AtomicBlockUtils,
+  convertToRaw,
+  convertFromRaw,
+} = require('draft-js')
 // const { convertToHTML } = require('draft-convert')
 
 const { useEffect, useState } = React
@@ -82,7 +89,8 @@ class RichText extends React.Component {
     )
 
     this.setState({
-      editorState: nextState })
+      editorState: nextState,
+    })
   }
 
   render() {

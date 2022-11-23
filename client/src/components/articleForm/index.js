@@ -10,15 +10,16 @@ function articleForm() {
   const [hidden, setHidden] = useState(false)
   const [message, setMessage] = useState('')
   
-  const digestEntities = async ({ blocks, entityMap }) => {
-    entityMap.map((entity, index) => {
+  const digestEntities = async ({ entityMap }) => {
+
+    const uploadRequests = Object.values(entityMap).map((entity, index) => {
       const { data: file } = entity
       const id = uuidv4()
       const body = new FormData()
       body.append('id', id)
-      body.append('document', file)
+      body.append('file', file)
     
-      return fetch('/upload', {
+      return fetch('/data/images', {
         method: 'POST',
         mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -29,9 +30,14 @@ function articleForm() {
         },
         body, // body data type must match "Content-Type" header
       })
-      return null
     })
-              
+
+    const uploadResponses = await Promise.all(uploadRequests)
+    for (let i = 0; i < entityMap.length; i++) {
+      const entity = entityMap[i]
+      entity.data.file = uploadResponses[i]
+    }
+    return entityMap        
   }
 
   const submit = async ({ title, description, content, hidden = false }) => {
@@ -44,7 +50,7 @@ function articleForm() {
         Connection: 'keep-alive',
         Accept: '*/*',
       },
-      body: JSON.stringify({ title, description, content: JSON.stringify(content), hidden }),
+      body: JSON.stringify({ title, description, content: JSON.stringify({ ...content, entityMap: digestedEntities }), hidden }),
     })
 
     console.log(res)
