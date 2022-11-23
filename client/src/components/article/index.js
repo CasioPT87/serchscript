@@ -16,7 +16,7 @@ const Article = () => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       pathname = window.location.pathname
-      const urlArticleId = pathname.split('/')[2]  
+      const urlArticleId = pathname.split('/')[2]
       if (!article || article._id !== urlArticleId) {
         dispatch(fetchArticle(urlArticleId))
       }
@@ -31,7 +31,7 @@ const Article = () => {
   }, [article])
 
   if (!article) return null
-  
+
   return (
     <div>
       <div className="capitan">{article.title}</div>

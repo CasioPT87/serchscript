@@ -15,5 +15,5 @@ const fetchArticle = id => async (dispatch, getState) => {
 
 module.exports = {
   fetchArticles,
-  fetchArticle
+  fetchArticle,
 }

@@ -10,5 +10,5 @@ const addArticle = article => ({
 
 module.exports = {
   addArticles,
-  addArticle
+  addArticle,
 }

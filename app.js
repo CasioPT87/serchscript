@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const connect = require('./db/connection')
 const routes = require('./api/routes')
+const crypto = require('crypto')
 
 global.__basedir = __dirname
 
@@ -27,10 +28,7 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         imgSrc: [`'self'`, `data:`, `*`, `c:`],
-        scriptSrc: [
-          `'self'`,
-          "'sha256-YoIsCMUsyX/98ymoojkpO2rqm+1EX/JWa2ssiVkCPLs='",
-        ],
+        scriptSrc: ["http://localhost:8880"],
       },
     },
   })
