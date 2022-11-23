@@ -20,16 +20,18 @@ const getFormat = mimeType => {
 router.post('/', function (req, res) {
   const bb = busboy({ headers: req.headers })
 
+  let filename
+  let format
+
   bb.on('file', (name, file, info) => {
-    const { filename, encoding, mimeType } = info
-    console.log({ name, file, info })
-    const format = getFormat(mimeType)
-    const saveTo = process.cwd() + `/public/${name}${format}`
+    const { filename: _filename, encoding, mimeType } = info
+    filename = _filename
+    format = getFormat(mimeType)
+    const saveTo = process.cwd() + `/public/${filename}${format}`
     file.pipe(createWriteStream(saveTo))
   })
   bb.on('close', () => {
-    res.writeHead(200, { Connection: 'close' })
-    res.end(`That's all folks!`)
+    res.status(200).json({ filename: filename + format })
   })
   req.pipe(bb)
 })

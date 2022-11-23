@@ -11,15 +11,17 @@ function articleForm() {
   const [message, setMessage] = useState('')
 
   const digestEntities = async ({ entityMap }) => {
-    const uploadRequests = Object.values(entityMap).map((entity, index) => {
-      const { data: { file } } = entity
-      console.log(file)
-      const id = uuidv4()
+    const entityMapValues = Object.values(entityMap)
+    const uploadRequests = entityMapValues.map(async (entity, index) => {
+      const {
+        data: { file },
+      } = entity
+      const name = uuidv4()
       const body = new FormData()
-      body.append('id', id)
-      body.append('file', file)
+      body.append('name', name)
+      body.append('file', file, name)
 
-      return fetch('/data/admin/images', {
+      const response = await fetch('/data/admin/images', {
         method: 'POST',
         // mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -30,18 +32,22 @@ function articleForm() {
         },
         body, // body data type must match "Content-Type" header
       })
+      return response.json()
     })
 
     const uploadResponses = await Promise.all(uploadRequests)
-    for (let i = 0; i < entityMap.length; i++) {
-      const entity = entityMap[i]
-      entity.data.file = uploadResponses[i]
+    for (let i = 0; i < entityMapValues.length; i++) {
+      const entity = entityMapValues[i]
+      entity.data.file = uploadResponses[i].filename
     }
-    return entityMap
+
+    return Object.assign({}, entityMapValues)
   }
 
   const submit = async ({ title, description, content, hidden = false }) => {
-    const digestedEntities = digestEntities(content)
+    const digestedEntities = await digestEntities(content)
+
+    console.log({ ...content, entityMap: digestedEntities })
 
     let res = await fetch('http://localhost:8880/data/admin/articles', {
       method: 'POST',
@@ -57,8 +63,6 @@ function articleForm() {
         hidden,
       }),
     })
-
-    console.log(res)
   }
 
   let handleSubmit = async e => {
