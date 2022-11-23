@@ -8,6 +8,7 @@ const {
   convertFromRaw,
 } = require('draft-js')
 const { v4: uuidv4 } = require('uuid')
+const { getFileExtension } = require('../../utils')
 
 const { useEffect, useState } = React
 
@@ -67,7 +68,9 @@ class RichText extends React.Component {
   }
 
   insertImage = file => {
-    const id = uuidv4()
+    const uuid = uuidv4()
+    const extension = getFileExtension(file.name)
+    const id = `${uuid}.${extension}`
     const { editorState } = this.state
     const contentState = editorState.getCurrentContent()
     const contentStateWithEntity = contentState.createEntity(
@@ -79,10 +82,11 @@ class RichText extends React.Component {
     const newEditorState = EditorState.set(editorState, {
       currentContent: contentStateWithEntity,
     })
+
     const nextState = AtomicBlockUtils.insertAtomicBlock(
       newEditorState,
       entityKey,
-      `http://localhost:8880/${id}.png`
+      `http://localhost:8880/${id}`
     )
 
     this.setState({

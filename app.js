@@ -29,7 +29,7 @@ app.use(
         imgSrc: [`'self'`, `data:`, `*`, `c:`],
         scriptSrc: [
           `'self'`,
-          "'sha256-yhrj9zCurUbqgQWblHaegbuBo6c4XTBRfeiwSI5L42Y='",
+          "'sha256-1Pb1mo5kPe3g4iMYGdUbzHTO4ealcAVBorngw1JBTuQ='",
         ],
       },
     },
