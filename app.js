@@ -28,7 +28,7 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         imgSrc: [`'self'`, `data:`, `*`, `c:`],
-        scriptSrc: ["http://localhost:8880"],
+        scriptSrc: ['http://localhost:8880'], // could we use "'self'" as well?? try
       },
     },
   })

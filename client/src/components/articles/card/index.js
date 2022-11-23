@@ -1,16 +1,26 @@
 const React = require('react')
-const { useSelector, useDispatch } = require('react-redux')
-const { Link } = require('react-router-dom')
-const { Article } = require('../../index')
+const parse = require('html-react-parser')
+const { rawContentToHtml } = require('../../../utils')
 
-const { useEffect } = React
+const { useEffect, useState } = React
 
 const Card = ({ article }) => {
+  const [content, setContent] = useState(null)
+
+  useEffect(() => {
+    if (article) {
+      const contentHtml = rawContentToHtml(JSON.parse(article.content))
+      setContent(contentHtml)
+    }
+  }, [article])
+
+  if (!article) return null
+
   return (
-    <div className="card" key={article.id}>
-      <div className="card__title">{article.title}</div>
-      <div className="card__title">{article.description}</div>
-      <div className="card__content">{article.content}</div>
+    <div>
+      <div className="capitan">{article.title}</div>
+      <div className="capitan">{article.description}</div>
+      {content && <div className="capitan">{parse(content)}</div>}
     </div>
   )
 }

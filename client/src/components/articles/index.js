@@ -7,7 +7,6 @@ const { fetchArticles } = require('../../store/async')
 const { useEffect } = React
 
 const Articles = () => {
-
   const dispatch = useDispatch()
   const articles = useSelector(state => state.articles)
   useEffect(() => {
