@@ -7,7 +7,7 @@ const {
   convertToRaw,
   convertFromRaw,
 } = require('draft-js')
-// const { convertToHTML } = require('draft-convert')
+const { v4: uuidv4 } = require('uuid')
 
 const { useEffect, useState } = React
 
@@ -67,12 +67,13 @@ class RichText extends React.Component {
   }
 
   insertImage = file => {
+    const id = uuidv4()
     const { editorState } = this.state
     const contentState = editorState.getCurrentContent()
     const contentStateWithEntity = contentState.createEntity(
       'IMAGE',
       'IMMUTABLE',
-      { file }
+      { file, id }
     )
     const entityKey = contentStateWithEntity.getLastCreatedEntityKey()
     const newEditorState = EditorState.set(editorState, {
@@ -81,7 +82,7 @@ class RichText extends React.Component {
     const nextState = AtomicBlockUtils.insertAtomicBlock(
       newEditorState,
       entityKey,
-      'img'
+      `http://localhost:8880/${id}.png`
     )
 
     this.setState({

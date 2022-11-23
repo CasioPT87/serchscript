@@ -8,12 +8,11 @@ const digestEntities = async ({ entityMap }) => {
   const entityMapValues = Object.values(entityMap)
   const uploadRequests = entityMapValues.map(async (entity, index) => {
     const {
-      data: { file },
+      data: { file, id },
     } = entity
-    const name = uuidv4()
     const body = new FormData()
-    body.append('name', name)
-    body.append('file', file, name)
+    body.append('name', id)
+    body.append('file', file, id)
 
     const response = await fetch('/data/admin/images', {
       method: 'POST',
@@ -110,7 +109,7 @@ function articleForm() {
           value={description}
           onChange={e => setDescription(e.target.value)}
         />
-        <ArticleCreator setText={setContent} articleContent={article.content} />
+        <ArticleCreator setText={setContent} articleContent={article?.content} />
 
         <button type="submit">Create</button>
 
