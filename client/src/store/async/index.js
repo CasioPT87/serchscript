@@ -45,31 +45,33 @@ const uploadImages = async ({ entityMap }) => {
   return Object.assign({}, entityMapValues)
 }
 
-const createArticle = ({ title, description, content, hidden = false }) => async (dispatch, getState) => {
-  const digestedEntities = await uploadImages(content)
+const createArticle =
+  ({ title, description, content, hidden = false }) =>
+  async (dispatch, getState) => {
+    const digestedEntities = await uploadImages(content)
 
-   const response = await fetch('http://localhost:8880/data/admin/articles', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Connection: 'keep-alive',
-      Accept: '*/*',
-    },
-    body: JSON.stringify({
-      title,
-      description,
-      content: JSON.stringify({ ...content, entityMap: digestedEntities }),
-      hidden,
-    }),
-  })
-  const responseData = await response.json()
-  dispatch(addArticle(responseData))
-  dispatch(addArticlesArticle(responseData))
-}
+    const response = await fetch('http://localhost:8880/data/admin/articles', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Connection: 'keep-alive',
+        Accept: '*/*',
+      },
+      body: JSON.stringify({
+        title,
+        description,
+        content: JSON.stringify({ ...content, entityMap: digestedEntities }),
+        hidden,
+      }),
+    })
+    const responseData = await response.json()
+    dispatch(addArticle(responseData))
+    dispatch(addArticlesArticle(responseData))
+  }
 
 module.exports = {
   fetchArticles,
   fetchArticle,
   createArticle,
-  uploadImages
+  uploadImages,
 }

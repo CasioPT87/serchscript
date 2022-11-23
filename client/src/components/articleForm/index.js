@@ -35,11 +35,13 @@ function articleForm() {
   let handleSubmit = async e => {
     e.preventDefault()
     try {
-      await dispatch(createArticle({
-        title,
-        description,
-        content,
-      }))
+      await dispatch(
+        createArticle({
+          title,
+          description,
+          content,
+        })
+      )
     } catch (e) {
       return reset(e)
     }

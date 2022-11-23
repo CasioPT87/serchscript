@@ -26,7 +26,7 @@ const Article = () => {
 
   useEffect(() => {
     if (article) {
-      console.log({article})
+      console.log({ article })
       const contentHtml = rawContentToHtml(JSON.parse(article.content))
       setContent(contentHtml)
     }

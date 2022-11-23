@@ -16,5 +16,5 @@ const addArticle = article => ({
 module.exports = {
   addArticles,
   addArticle,
-  addArticlesArticle
+  addArticlesArticle,
 }
