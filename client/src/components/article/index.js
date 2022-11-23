@@ -1,8 +1,7 @@
 const React = require('react')
 const { useSelector } = require('react-redux')
-const { convertToHTML } = require('draft-convert')
-const { convertFromRaw } = require('draft-js')
 const parse = require('html-react-parser')
+const { rawContentToHtml } = require('../../utils')
 
 const { useEffect, useState } = React
 
@@ -14,14 +13,9 @@ const Articles = () => {
 
   useEffect(() => {
     if (article) {
-      const cooked = convertFromRaw(JSON.parse(article.content))
-      const preHtml = convertToHTML(cooked)
-      const [start, rest] = preHtml.split('<figure>')
-      const [url, end] = rest.split('</figure>')
-      const contentHtml = start + `<img src="${url}" >` + end
+      const contentHtml = rawContentToHtml(JSON.parse(article.content))
       setContent(contentHtml)
     }
-   
   }, [article])
 
   if (!article) return <div>que te den</div>
