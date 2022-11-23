@@ -33,9 +33,11 @@ class RichText extends React.Component {
     const { articleContent } = this.props
     if (articleContent) {
       const articleData = JSON.parse(articleContent)
-    
+
       const contentState = convertFromRaw(articleData)
-      this.setState({ editorState: EditorState.createWithContent(contentState) })
+      this.setState({
+        editorState: EditorState.createWithContent(contentState),
+      })
     }
   }
 
@@ -171,7 +173,7 @@ const Media = props => {
           setBase64Image(_base64Image)
         } else if (typeof file === 'string') {
           setBase64Image(`http://localhost:8880/${file}`)
-        }    
+        }
       }
     }
 

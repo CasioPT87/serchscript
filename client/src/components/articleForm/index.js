@@ -71,7 +71,7 @@ function articleForm() {
       setDescription(description)
       setContent(content)
     }
-}, [article])
+  }, [article])
 
   const reset = (error = null) => {
     if (error) {
