@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
 
 // get one
 router.get('/:id', async (req, res) => {
-  const article = db.articles.show(req)
+  const article = await db.articles.show(req)
   return res.json(article)
 })
 

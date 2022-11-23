@@ -10,8 +10,8 @@ const Articles = () => {
   const dispatch = useDispatch()
   const articles = useSelector(state => state.articles)
   useEffect(() => {
-    dispatch(fetchArticles)
-  }, [])
+    if (!articles) dispatch(fetchArticles())
+  }, [articles])
 
   return (
     <ul className="articlesList">

@@ -1,15 +1,27 @@
 const React = require('react')
-const { useSelector } = require('react-redux')
+const { useSelector, useDispatch } = require('react-redux')
 const parse = require('html-react-parser')
 const { rawContentToHtml } = require('../../utils')
+const { fetchArticle } = require('../../store/async')
 
 const { useEffect, useState } = React
 
-const Articles = () => {
+const Article = () => {
+  const dispatch = useDispatch()
   const [content, setContent] = useState(null)
   const article = useSelector(state => {
-    return state?.article
+    return state.article
   })
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      pathname = window.location.pathname
+      const urlArticleId = pathname.split('/')[2]  
+      if (!article || article._id !== urlArticleId) {
+        dispatch(fetchArticle(urlArticleId))
+      }
+    }
+  }, [])
 
   useEffect(() => {
     if (article) {
@@ -18,7 +30,8 @@ const Articles = () => {
     }
   }, [article])
 
-  if (!article) return <div>que te den</div>
+  if (!article) return null
+  
   return (
     <div>
       <div className="capitan">{article.title}</div>
@@ -28,4 +41,4 @@ const Articles = () => {
   )
 }
 
-module.exports = Articles
+module.exports = Article

@@ -1,6 +1,7 @@
 const React = require('react')
 const { useSelector, useDispatch } = require('react-redux')
 const { Link } = require('react-router-dom')
+const { Article } = require('../../index')
 
 const { useEffect } = React
 

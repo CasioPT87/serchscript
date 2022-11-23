@@ -8,7 +8,6 @@ const index = () => {
 // get one
 const show = async req => {
   const { id } = req.params
-  console.log({ id })
   const article = await Article.findOne({
     _id: id,
     // fecha: { $gt: { fecha: new Date(new Date() - 60000 * 60).toISOString() } },

@@ -1,14 +1,19 @@
 const fetch = require('node-fetch')
-const { addArticles } = require('../actions')
+const { addArticles, addArticle } = require('../actions')
 
-const fetchArticles = async (dispatch, getState) => {
-  if (true) {
-    const response = await fetch('http://localhost:8880/data/articles')
-    const resposeData = await response.json()
-    dispatch(addArticles(resposeData))
-  }
+const fetchArticles = () => async (dispatch, getState) => {
+  const response = await fetch('http://localhost:8880/data/articles')
+  const responseData = await response.json()
+  dispatch(addArticles(responseData))
+}
+
+const fetchArticle = id => async (dispatch, getState) => {
+  const response = await fetch(`http://localhost:8880/data/articles/${id}`)
+  const responseData = await response.json()
+  dispatch(addArticle(responseData))
 }
 
 module.exports = {
   fetchArticles,
+  fetchArticle
 }
