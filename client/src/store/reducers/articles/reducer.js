@@ -9,10 +9,12 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         list: action.payload,
       }
-    case 'ANOTHER_ACTION':
+    case 'ADD_ARTICLES_ARTICLE':
       return {
         ...state,
-        anotherProp: action.anotherProp,
+        list: state.list.concat(action.payload)
+        
+       
       }
     default:
       return state

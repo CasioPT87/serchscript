@@ -1,6 +1,7 @@
 const React = require('react')
 const { useSelector, useDispatch } = require('react-redux')
 const parse = require('html-react-parser')
+const { Link } = require('react-router-dom')
 const { rawContentToHtml } = require('../../utils')
 const { fetchArticle } = require('../../store/async')
 
@@ -25,6 +26,7 @@ const Article = () => {
 
   useEffect(() => {
     if (article) {
+      console.log({article})
       const contentHtml = rawContentToHtml(JSON.parse(article.content))
       setContent(contentHtml)
     }
@@ -34,6 +36,7 @@ const Article = () => {
 
   return (
     <div>
+      <Link to={`/admin/articles/${article._id}/edit`}>Edit</Link>
       <div className="capitan">{article.title}</div>
       <div className="capitan">{article.description}</div>
       {content && <div className="capitan">{parse(content)}</div>}

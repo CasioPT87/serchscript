@@ -20,7 +20,7 @@ router.get('/:id', async req => {
 
 // create new
 router.post('/', express.urlencoded({ extended: true }), async (req, res) => {
-  const article = db.articles.create(req)
+  const article = await db.articles.create(req)
   return res.json(article)
 })
 

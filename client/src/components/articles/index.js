@@ -10,8 +10,10 @@ const Articles = () => {
   const dispatch = useDispatch()
   const articles = useSelector(state => state.articles)
   useEffect(() => {
-    if (articles?.list.length === 0) dispatch(fetchArticles())
-  }, [articles])
+    if (articles.list.length === 0) dispatch(fetchArticles())
+  }, [])
+
+  if (articles.list.length === 0) return <div>there is no articles yet</div>
 
   return (
     <ul className="articlesList">
