@@ -1,6 +1,6 @@
 const React = require('react')
 const { useState } = require('react')
-const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid')
 const ArticleCreator = require('../articleCreator')
 
 function articleForm() {
@@ -9,19 +9,19 @@ function articleForm() {
   const [content, setContent] = useState('this is a fake content')
   const [hidden, setHidden] = useState(false)
   const [message, setMessage] = useState('')
-  
-  const digestEntities = async ({ entityMap }) => {
 
+  const digestEntities = async ({ entityMap }) => {
     const uploadRequests = Object.values(entityMap).map((entity, index) => {
-      const { data: file } = entity
+      const { data: { file } } = entity
+      console.log(file)
       const id = uuidv4()
       const body = new FormData()
       body.append('id', id)
       body.append('file', file)
-    
-      return fetch('/data/images', {
+
+      return fetch('/data/admin/images', {
         method: 'POST',
-        mode: 'cors', // no-cors, *cors, same-origin
+        // mode: 'cors', // no-cors, *cors, same-origin
         cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
         credentials: 'same-origin', // include, *same-origin, omit
         headers: {
@@ -37,7 +37,7 @@ function articleForm() {
       const entity = entityMap[i]
       entity.data.file = uploadResponses[i]
     }
-    return entityMap        
+    return entityMap
   }
 
   const submit = async ({ title, description, content, hidden = false }) => {
@@ -50,7 +50,12 @@ function articleForm() {
         Connection: 'keep-alive',
         Accept: '*/*',
       },
-      body: JSON.stringify({ title, description, content: JSON.stringify({ ...content, entityMap: digestedEntities }), hidden }),
+      body: JSON.stringify({
+        title,
+        description,
+        content: JSON.stringify({ ...content, entityMap: digestedEntities }),
+        hidden,
+      }),
     })
 
     console.log(res)

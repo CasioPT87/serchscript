@@ -19,7 +19,6 @@ class RichText extends React.Component {
     this.focus = () => this.refs.editor.focus()
     this.onChange = editorState => {
       this.setState({ editorState }, () => {
-        console.log({ eo: convertToRaw(editorState.getCurrentContent()) })
         this.props.setText(convertToRaw(editorState.getCurrentContent()))
       })
     }
