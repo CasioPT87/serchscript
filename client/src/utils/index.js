@@ -8,10 +8,12 @@ const getFileExtension = filename => {
 const rawContentToHtml = rawContent => {
   const cooked = convertFromRaw(rawContent)
   const preHtml = convertToHTML(cooked)
-  return preHtml.replaceAll('<figure>', '<img src="').replaceAll('</figure>', '" >')
+  return preHtml
+    .replaceAll('<figure>', '<img src="')
+    .replaceAll('</figure>', '" >')
 }
 
 module.exports = {
   getFileExtension,
-  rawContentToHtml
+  rawContentToHtml,
 }
