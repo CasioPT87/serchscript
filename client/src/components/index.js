@@ -17,5 +17,5 @@ module.exports = {
   MainFrame,
   Header,
   Footer,
-  Comment
+  Comment,
 }

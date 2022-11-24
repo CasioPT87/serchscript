@@ -5,6 +5,7 @@ const {
   addArticlesArticle,
   updateArticlesArticle,
   setLogged,
+  addArticleComment
 } = require('../actions')
 
 const fetchArticles = () => async (dispatch, getState) => {
@@ -56,7 +57,6 @@ const uploadImages = async ({ entityMap }) => {
 const createArticle =
   ({ title, description, content, hidden = false }) =>
   async (dispatch, getState) => {
-    console.log({ title, description, content, hidden })
     const digestedEntities = await uploadImages(content)
 
     const response = await fetch('http://localhost:8880/data/admin/articles', {
@@ -85,7 +85,6 @@ const createArticle =
 const updateArticle =
   ({ id, title, description, content, hidden = false }) =>
   async (dispatch, getState) => {
-    console.log({ title, description, content, hidden })
     const digestedEntities = await uploadImages(content)
 
     const response = await fetch(
@@ -156,6 +155,36 @@ const logout = () => async (dispatch, getState) => {
   }
 }
 
+const createComment =
+  ({ articleId, content }) =>
+  async (dispatch, getState) => {
+  
+    const response = await fetch(
+      `http://localhost:8880/data/comments`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Connection: 'keep-alive',
+          Accept: '*/*',
+        },
+        body: JSON.stringify({
+          articleId,
+          content         
+        }),
+      }
+    )
+
+    const responseData = await response.json()
+
+    if (response.ok) {
+      dispatch(addArticleComment(responseData))
+      return { message: 'comment created succesfully' }
+    }
+
+    return { message: 'problem creating comment' }
+  }
+
 module.exports = {
   fetchArticles,
   fetchArticle,
@@ -164,4 +193,5 @@ module.exports = {
   updateArticle,
   login,
   logout,
+  createComment
 }

@@ -28,7 +28,6 @@ const getInitialComponentsTree = (store, componentName) => {
 }
 
 const renderHtml = (html, preloadedState) => {
-  console.log({ preloadedState })
   return `<!DOCTYPE html>
   <html>
     <head>

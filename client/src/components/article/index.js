@@ -43,11 +43,9 @@ const Article = () => {
       <div className="capitan">{article.description}</div>
       {content && <div className="capitan">{parse(content)}</div>}
       {article.comments.map(comment => {
-        return (
-          <Comment comment={comment} />
-        )
+        return <Comment key={comment._id} comment={comment} />
       })}
-      <Comment comment={null} />
+      <Comment comment={null} articleId={article._id} />
     </div>
   )
 }

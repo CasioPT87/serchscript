@@ -2,13 +2,15 @@ const Comment = require('../../db/models/comment')
 
 // create new
 const create = req => {
-  const { content = null, hidden = false, articleId = null } = req.body
-
-  const comment = new Comment()
-  comment.content = content
-  comment.hidden = hidden
-  comment.article = articleId
-  return comment.save()
+  const { content, hidden = false, articleId } = req.body
+  if (content && articleId) {
+    const comment = new Comment()
+    comment.content = content
+    comment.hidden = hidden
+    comment.article = articleId
+    return comment.save()
+  } 
+  throw new Error('article id and content are necessary to create a comment')
 }
 
 // delete all

@@ -1,19 +1,30 @@
 const React = require('react')
-const { useSelector, useDispatch } = require('react-redux')
-const parse = require('html-react-parser')
-const { Link } = require('react-router-dom')
-const { rawContentToHtml } = require('../../utils')
-const { fetchArticle } = require('../../store/async')
+const { useDispatch } = require('react-redux')
+const { createComment } = require('../../store/async')
 
-const { useState } = React
+const { useState, useEffect } = React
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, articleId }) => {
+  const dispatch = useDispatch()
   const [value, setValue] = useState(comment?.content || '')
+  const [message, setMessage] = useState('')
+  const messageCountDowns = []
+
+  useEffect(() => {
+    return messageCountDowns.forEach(messageCD => clearTimeout(messageCD))
+  })
 
   const onChange = ev => {
-    ev.preventDefault()
     const value = ev.target.value
     setValue(value)
+  }
+
+  const onSubmit = async () => {
+    const response = await dispatch(createComment({ articleId, content: value }))
+    setMessage(response.message)
+    setValue('')
+    const timeout = setTimeout(() => setMessage(''), 5000)
+    messageCountDowns.push(timeout)
   }
 
   return (
@@ -23,11 +34,12 @@ const Comment = ({ comment }) => {
         disabled={!!comment}
         onChange={onChange}
         value={value}
-        placeholder="leave me a comment :)"
+        placeholder="drop a comment :)"
       />
+      {message && <div>{message}</div>}
       {!comment && (
         <div>
-          <button onClick={() => {}}>Send comment</button>{' '}
+          <button onClick={onSubmit}>Send comment</button>{' '}
         </div>
       )}
     </>

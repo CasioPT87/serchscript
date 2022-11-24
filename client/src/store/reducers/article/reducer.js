@@ -6,6 +6,12 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...action.payload,
       }
+    case 'ADD_ARTICLE_COMMENT':
+
+      return {
+        ...state,
+        comments: state.comments.concat([action.payload])
+      }
     default:
       return state
   }
