@@ -28,5 +28,5 @@ module.exports = {
   addArticle,
   addArticlesArticle,
   updateArticlesArticle,
-  setLogged
+  setLogged,
 }

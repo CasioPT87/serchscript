@@ -6,7 +6,7 @@ const loggedReducer = require('./logged/reducer')
 const combinedStore = combineReducers({
   articles: articlesReducer,
   article: articleReducer,
-  logged: loggedReducer
+  logged: loggedReducer,
 })
 
 module.exports = combinedStore

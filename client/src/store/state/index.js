@@ -3,7 +3,7 @@ const defaultState = {
     list: [],
   },
   article: null,
-  logged: false
+  logged: false,
 }
 
 module.exports = defaultState
