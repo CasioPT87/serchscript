@@ -55,6 +55,7 @@ const uploadImages = async ({ entityMap }) => {
 const createArticle =
   ({ title, description, content, hidden = false }) =>
   async (dispatch, getState) => {
+    console.log({ title, description, content, hidden })
     const digestedEntities = await uploadImages(content)
 
     const response = await fetch('http://localhost:8880/data/admin/articles', {
@@ -79,6 +80,7 @@ const createArticle =
 const updateArticle =
   ({ id, title, description, content, hidden = false }) =>
   async (dispatch, getState) => {
+    console.log({ title, description, content, hidden })
     const digestedEntities = await uploadImages(content)
 
     const response = await fetch(

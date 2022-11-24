@@ -38,10 +38,11 @@ function articleForm() {
       if (mode === MODE.create) {
         reset()
       } else if (mode === MODE.update) {
-        const { title, description, content } = article
+        const { title, description, content, hidden } = article
         setTitle(title)
         setDescription(description)
-        setContent(content)
+        setContent(JSON.parse(content))
+        setHidden(hidden)
       }
     }
   }, [article, mode])
@@ -54,6 +55,7 @@ function articleForm() {
     setDescription('')
     setContent('')
     setMessage(message)
+    setHidden(false)
   }
 
   let handleSubmit = async e => {
@@ -65,6 +67,7 @@ function articleForm() {
             title,
             description,
             content,
+            hidden
           })
         )
 
@@ -76,6 +79,7 @@ function articleForm() {
             title,
             description,
             content,
+            hidden
           })
         )
       }
@@ -100,13 +104,28 @@ function articleForm() {
           onChange={e => setDescription(e.target.value)}
         />
         <ArticleCreator
-          setText={setContent}
+          setText={argo => {
+            console.log({ argo })
+            setContent(argo)
+          }}
           articleContent={article?.content}
         />
 
         <button type="submit">Create</button>
 
         <div className="message">{message ? <p>{message}</p> : null}</div>
+        {mode === MODE.update && (
+          <div>
+            <label htmlFor="hiddenArticle">Hidden article</label>
+            <input
+              type="checkbox"
+              id="hiddenArticle"
+              name="hiddenArticle"
+              checked={hidden}
+              onChange={() => setHidden(!hidden)}
+            />
+          </div>
+        )}
       </form>
     </div>
   )

@@ -18,6 +18,7 @@ class RichText extends React.Component {
     this.state = { editorState: EditorState.createEmpty() }
 
     this.focus = () => this.refs.editor.focus()
+
     this.onChange = editorState => {
       this.setState({ editorState }, () => {
         this.props.setText(convertToRaw(editorState.getCurrentContent()))
@@ -36,9 +37,8 @@ class RichText extends React.Component {
       const articleData = JSON.parse(articleContent)
 
       const contentState = convertFromRaw(articleData)
-      this.setState({
-        editorState: EditorState.createWithContent(contentState),
-      })
+      this.onChange(EditorState.createWithContent(contentState))
+      
     }
   }
 
