@@ -4,6 +4,7 @@ const parse = require('html-react-parser')
 const { Link } = require('react-router-dom')
 const { rawContentToHtml } = require('../../utils')
 const { fetchArticle } = require('../../store/async')
+const Comment = require('../comment')
 
 const { useEffect, useState } = React
 
@@ -41,6 +42,12 @@ const Article = () => {
       <div className="capitan">{article.title}</div>
       <div className="capitan">{article.description}</div>
       {content && <div className="capitan">{parse(content)}</div>}
+      {article.comments.map(comment => {
+        return (
+          <Comment comment={comment} />
+        )
+      })}
+      <Comment comment={null} />
     </div>
   )
 }
