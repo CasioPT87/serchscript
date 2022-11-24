@@ -9,7 +9,7 @@ const create = req => {
     comment.hidden = hidden
     comment.article = articleId
     return comment.save()
-  } 
+  }
   throw new Error('article id and content are necessary to create a comment')
 }
 

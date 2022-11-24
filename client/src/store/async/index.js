@@ -5,7 +5,7 @@ const {
   addArticlesArticle,
   updateArticlesArticle,
   setLogged,
-  addArticleComment
+  addArticleComment,
 } = require('../actions')
 
 const fetchArticles = () => async (dispatch, getState) => {
@@ -158,22 +158,18 @@ const logout = () => async (dispatch, getState) => {
 const createComment =
   ({ articleId, content }) =>
   async (dispatch, getState) => {
-  
-    const response = await fetch(
-      `http://localhost:8880/data/comments`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Connection: 'keep-alive',
-          Accept: '*/*',
-        },
-        body: JSON.stringify({
-          articleId,
-          content         
-        }),
-      }
-    )
+    const response = await fetch(`http://localhost:8880/data/comments`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Connection: 'keep-alive',
+        Accept: '*/*',
+      },
+      body: JSON.stringify({
+        articleId,
+        content,
+      }),
+    })
 
     const responseData = await response.json()
 
@@ -193,5 +189,5 @@ module.exports = {
   updateArticle,
   login,
   logout,
-  createComment
+  createComment,
 }

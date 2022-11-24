@@ -20,7 +20,9 @@ const Comment = ({ comment, articleId }) => {
   }
 
   const onSubmit = async () => {
-    const response = await dispatch(createComment({ articleId, content: value }))
+    const response = await dispatch(
+      createComment({ articleId, content: value })
+    )
     setMessage(response.message)
     setValue('')
     const timeout = setTimeout(() => setMessage(''), 5000)

@@ -5,7 +5,7 @@ const addArticles = articles => ({
 
 const addArticleComment = comment => ({
   type: 'ADD_ARTICLE_COMMENT',
-  payload: comment
+  payload: comment,
 })
 
 const addArticlesArticle = article => ({
@@ -27,7 +27,6 @@ const setLogged = logged => ({
   type: 'SET_LOGGED',
   payload: logged,
 })
-
 
 module.exports = {
   addArticles,
