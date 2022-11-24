@@ -18,10 +18,9 @@ const addArticle = article => ({
   payload: article,
 })
 
-
 module.exports = {
   addArticles,
   addArticle,
   addArticlesArticle,
-  updateArticlesArticle
+  updateArticlesArticle,
 }

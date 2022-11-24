@@ -187,7 +187,6 @@ const Media = props => {
     getBase64()
   }, [file])
 
-
   if (!base64Image) return null
 
   return <img src={base64Image} />

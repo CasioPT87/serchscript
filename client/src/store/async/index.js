@@ -1,5 +1,10 @@
 const fetch = require('node-fetch')
-const { addArticles, addArticle, addArticlesArticle, updateArticlesArticle } = require('../actions')
+const {
+  addArticles,
+  addArticle,
+  addArticlesArticle,
+  updateArticlesArticle,
+} = require('../actions')
 
 const fetchArticles = () => async (dispatch, getState) => {
   const response = await fetch('http://localhost:8880/data/articles')
@@ -71,25 +76,28 @@ const createArticle =
     dispatch(addArticlesArticle(responseData))
   }
 
-  const updateArticle =
+const updateArticle =
   ({ id, title, description, content, hidden = false }) =>
   async (dispatch, getState) => {
     const digestedEntities = await uploadImages(content)
 
-    const response = await fetch(`http://localhost:8880/data/admin/articles/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Connection: 'keep-alive',
-        Accept: '*/*',
-      },
-      body: JSON.stringify({
-        title,
-        description,
-        content: JSON.stringify({ ...content, entityMap: digestedEntities }),
-        hidden,
-      }),
-    })
+    const response = await fetch(
+      `http://localhost:8880/data/admin/articles/${id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Connection: 'keep-alive',
+          Accept: '*/*',
+        },
+        body: JSON.stringify({
+          title,
+          description,
+          content: JSON.stringify({ ...content, entityMap: digestedEntities }),
+          hidden,
+        }),
+      }
+    )
 
     const responseData = await response.json()
     dispatch(addArticle(responseData))
@@ -101,5 +109,5 @@ module.exports = {
   fetchArticle,
   createArticle,
   uploadImages,
-  updateArticle
+  updateArticle,
 }

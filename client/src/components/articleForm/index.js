@@ -6,7 +6,7 @@ const { createArticle, updateArticle } = require('../../store/async')
 
 const MODE = {
   create: 'CREATE',
-  update: 'UPDATE'
+  update: 'UPDATE',
 }
 
 function articleForm() {
@@ -69,7 +69,6 @@ function articleForm() {
         )
 
         reset('article created')
-
       } else if (mode === 'UPDATE') {
         await dispatch(
           updateArticle({
@@ -82,7 +81,6 @@ function articleForm() {
       }
 
       reset('article updated')
-      
     } catch (e) {
       return reset(null, e)
     }
