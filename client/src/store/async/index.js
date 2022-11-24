@@ -74,8 +74,12 @@ const createArticle =
       }),
     })
     const responseData = await response.json()
-    dispatch(addArticle(responseData))
-    dispatch(addArticlesArticle(responseData))
+    if (response.ok) {
+      dispatch(addArticle(responseData))
+      dispatch(addArticlesArticle(responseData))
+    }
+    
+    return { message: responseData.message }
   }
 
 const updateArticle =
@@ -103,8 +107,13 @@ const updateArticle =
     )
 
     const responseData = await response.json()
-    dispatch(addArticle(responseData))
-    dispatch(updateArticlesArticle(responseData))
+
+    if (response.ok) {
+      dispatch(addArticle(responseData))
+      dispatch(updateArticlesArticle(responseData))
+    }
+    
+    return { message: responseData.message }
   }
 
 const login =
@@ -133,23 +142,19 @@ const login =
     }
   }
 
-  const logout =
-  () =>
-  async (dispatch, getState) => {
-    try {
-      let response = await fetch('http://localhost:8880/data/auth/logout')
+const logout = () => async (dispatch, getState) => {
+  try {
+    let response = await fetch('http://localhost:8880/data/auth/logout')
 
-      console.log({ response })
-
-      if (response.ok && response.status < 300) {
-        dispatch(setLogged(false))
-      } 
-
-      return response.json()
-    } catch (e) {
-      console.log('Error login out')
+    if (response.ok && response.status < 300) {
+      dispatch(setLogged(false))
     }
+
+    return response.json()
+  } catch (e) {
+    console.log('Error loging out')
   }
+}
 
 module.exports = {
   fetchArticles,
@@ -158,5 +163,5 @@ module.exports = {
   uploadImages,
   updateArticle,
   login,
-  logout
+  logout,
 }

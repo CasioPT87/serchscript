@@ -7,7 +7,7 @@ const adminImages = require('./images')
 
 const router = express.Router()
 
-// router.use('*', authorization)
+router.use('*', authorization)
 
 router.use('/articles', adminArticles)
 router.use('/comments', adminComments)

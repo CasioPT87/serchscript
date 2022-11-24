@@ -9,6 +9,17 @@ const MODE = {
   update: 'UPDATE',
 }
 
+const getDispatchAction = mode => {
+  switch (mode) {
+    case MODE.create:
+      return createArticle
+    case MODE.update:
+      return updateArticle
+    default:
+      return () => {}
+  }
+}
+
 function articleForm() {
   const dispatch = useDispatch()
   const article = useSelector(store => store.article)
@@ -61,30 +72,17 @@ function articleForm() {
   let handleSubmit = async e => {
     e.preventDefault()
     try {
-      if (mode === 'CREATE') {
-        await dispatch(
-          createArticle({
-            title,
-            description,
-            content,
-            hidden,
-          })
-        )
+      const response = await dispatch(
+        getDispatchAction(mode)({
+          id,
+          title,
+          description,
+          content,
+          hidden,
+        })
+      )
 
-        reset('article created')
-      } else if (mode === 'UPDATE') {
-        await dispatch(
-          updateArticle({
-            id,
-            title,
-            description,
-            content,
-            hidden,
-          })
-        )
-      }
-
-      reset('article updated')
+      reset(response?.message || 'action succeeded')
     } catch (e) {
       return reset(null, e)
     }

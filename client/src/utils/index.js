@@ -13,10 +13,14 @@ const rawContentToHtml = rawContent => {
     .replaceAll('</figure>', '" >')
 }
 
-const getCookie = () => document.cookie.split('; ').filter(row => row.startsWith('serchScriptSession=')).map(c=>c.split('=')[1])[0]
+const getCookie = () =>
+  document.cookie
+    .split('; ')
+    .filter(row => row.startsWith('serchScriptSession='))
+    .map(c => c.split('=')[1])[0]
 
 module.exports = {
   getFileExtension,
   rawContentToHtml,
-  getCookie
+  getCookie,
 }

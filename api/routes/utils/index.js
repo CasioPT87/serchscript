@@ -12,20 +12,19 @@ const verifyToken = token => {
 const COOKIE = {
   // httpOnly: true,
   secure: process.env.NODE_ENV === 'development' ? false : true,
-  sameSite: 'Strict'
+  sameSite: 'Strict',
 }
 
 const createCookie = (res, token) => {
   res.cookie('serchScriptSession', token, {
     ...COOKIE,
-    maxAge: 900000,  // cookie will be removed after 8 hours
-    
+    maxAge: 900000, // cookie will be removed after 8 hours
   })
 }
 
 const clearCookie = res => {
   res.clearCookie('serchScriptSession', {
-    ...COOKIE
+    ...COOKIE,
   })
 }
 
@@ -33,5 +32,5 @@ module.exports = {
   createToken,
   verifyToken,
   createCookie,
-  clearCookie
+  clearCookie,
 }

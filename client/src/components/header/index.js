@@ -31,7 +31,7 @@ const Header = () => {
         <Link to="/admin/articles/new">new Article</Link>
       </div>
       {!logged && <Link to="/auth">Auth</Link>}
-      {logged && 
+      {logged && (
         <a
           onClick={() => {
             dispatch(logout())
@@ -39,7 +39,7 @@ const Header = () => {
         >
           Logout
         </a>
-      }
+      )}
     </div>
   )
 }
