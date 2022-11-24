@@ -1,16 +1,24 @@
 const Article = require('../../db/models/article')
 
 // get list
-const index = () => {
-  return Article.find({})
+const index = req => {
+  if (req.isLogged) {
+    return Article.find({})
+  }
+  return Article.find({ hidden: false })
 }
 
 // get one
 const show = async req => {
   const { id } = req.params
-  const article = await Article.findOne({
+  const queryParams = {
     _id: id,
-    // fecha: { $gt: { fecha: new Date(new Date() - 60000 * 60).toISOString() } },
+  }
+  if (!req.isLogged) {
+    queryParams.hidden = false
+  }
+  const article = await Article.findOne({
+    ...queryParams,
   }).populate('comments')
   return article
 }
@@ -39,27 +47,21 @@ const create = req => {
 }
 
 // update one
-const update = async (req, res, next) => {
+const update = async req => {
   const { id } = req.params
 
   const { title, description, content, hidden } = req.body
 
-  const filteredValues = Object.entries({
-    title,
-    description,
-    content,
-    hidden,
-  }).reduce((prev, [k, v]) => {
-    if (v) {
-      return {
-        ...prev,
-        [k]: v,
-      }
-    }
-    return prev
-  }, {})
-
-  return Article.findOneAndUpdate({ _id: id }, filteredValues, { new: true })
+  return Article.findOneAndUpdate(
+    { _id: id },
+    {
+      title,
+      description,
+      content,
+      hidden,
+    },
+    { new: true }
+  )
 }
 
 // delete one

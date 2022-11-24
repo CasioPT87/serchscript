@@ -28,9 +28,24 @@ const clearCookie = res => {
   })
 }
 
+const hasValidCredentials = req => {
+  const token = req.cookies['serchScriptSession']
+  try {
+    if (token) {
+      verifyToken(token)
+      return true
+    } else {
+      return false
+    }
+  } catch (e) {
+    return false
+  }
+}
+
 module.exports = {
   createToken,
   verifyToken,
   createCookie,
   clearCookie,
+  hasValidCredentials,
 }

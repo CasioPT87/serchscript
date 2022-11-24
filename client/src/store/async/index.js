@@ -78,7 +78,7 @@ const createArticle =
       dispatch(addArticle(responseData))
       dispatch(addArticlesArticle(responseData))
     }
-    
+
     return { message: responseData.message }
   }
 
@@ -112,7 +112,7 @@ const updateArticle =
       dispatch(addArticle(responseData))
       dispatch(updateArticlesArticle(responseData))
     }
-    
+
     return { message: responseData.message }
   }
 

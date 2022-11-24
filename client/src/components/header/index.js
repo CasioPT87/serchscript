@@ -28,7 +28,7 @@ const Header = () => {
       <div className="header__items">
         <Link to="/">Home</Link>
         <Link to="/articles">Articles</Link>
-        <Link to="/admin/articles/new">new Article</Link>
+        {logged && <Link to="/admin/articles/new">new Article</Link>}
       </div>
       {!logged && <Link to="/auth">Auth</Link>}
       {logged && (

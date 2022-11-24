@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const connect = require('./db/connection')
 const routes = require('./api/routes')
-const crypto = require('crypto')
+const { hasValidCredentials } = require('./api/routes/utils')
 
 global.__basedir = __dirname
 
@@ -33,6 +33,11 @@ app.use(
     },
   })
 )
+
+app.use((req, res, next) => {
+  req.isLogged = hasValidCredentials(req)
+  next()
+})
 
 app.use('/', routes)
 

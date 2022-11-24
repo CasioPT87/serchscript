@@ -109,18 +109,17 @@ function articleForm() {
         <button type="submit">Create</button>
 
         <div className="message">{message ? <p>{message}</p> : null}</div>
-        {mode === MODE.update && (
-          <div>
-            <label htmlFor="hiddenArticle">Hidden article</label>
-            <input
-              type="checkbox"
-              id="hiddenArticle"
-              name="hiddenArticle"
-              checked={hidden}
-              onChange={() => setHidden(!hidden)}
-            />
-          </div>
-        )}
+
+        <div>
+          <label htmlFor="hiddenArticle">Hidden article</label>
+          <input
+            type="checkbox"
+            id="hiddenArticle"
+            name="hiddenArticle"
+            checked={hidden}
+            onChange={() => setHidden(!hidden)}
+          />
+        </div>
       </form>
     </div>
   )

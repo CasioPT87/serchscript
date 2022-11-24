@@ -37,6 +37,7 @@ const Article = () => {
   return (
     <div>
       {logged && <Link to={`/admin/articles/${article._id}/edit`}>Edit</Link>}
+      {logged && article.hidden && <h3>hidden for the public</h3>}
       <div className="capitan">{article.title}</div>
       <div className="capitan">{article.description}</div>
       {content && <div className="capitan">{parse(content)}</div>}
