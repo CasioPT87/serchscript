@@ -25,8 +25,9 @@ router.post('/', express.urlencoded({ extended: true }), async (req, res) => {
 })
 
 // update one
-router.put('/:id', async req => {
-  return db.articles.update(req)
+router.put('/:id', async (req, res) => {
+  const article = await db.articles.update(req)
+  return res.json(article)
 })
 
 // delete one

@@ -83,10 +83,12 @@ class RichText extends React.Component {
       currentContent: contentStateWithEntity,
     })
 
+    const imageSrc = `http://localhost:8880/${id}`
+
     const nextState = AtomicBlockUtils.insertAtomicBlock(
       newEditorState,
       entityKey,
-      `http://localhost:8880/${id}`
+      imageSrc
     )
 
     this.setState({
@@ -176,7 +178,7 @@ const Media = props => {
             fileReader.readAsDataURL(file)
           })
           setBase64Image(_base64Image)
-        } else if (typeof file === 'string') {
+        } else if (file && typeof file === 'string') {
           setBase64Image(`http://localhost:8880/${file}`)
         }
       }
@@ -184,6 +186,7 @@ const Media = props => {
 
     getBase64()
   }, [file])
+
 
   if (!base64Image) return null
 

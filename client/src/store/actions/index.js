@@ -8,13 +8,20 @@ const addArticlesArticle = article => ({
   payload: article,
 })
 
+const updateArticlesArticle = article => ({
+  type: 'UPDATE_ARTICLES_ARTICLE',
+  payload: article,
+})
+
 const addArticle = article => ({
   type: 'ADD_ARTICLE',
   payload: article,
 })
 
+
 module.exports = {
   addArticles,
   addArticle,
   addArticlesArticle,
+  updateArticlesArticle
 }

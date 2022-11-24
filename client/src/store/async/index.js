@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const { addArticles, addArticle, addArticlesArticle } = require('../actions')
+const { addArticles, addArticle, addArticlesArticle, updateArticlesArticle } = require('../actions')
 
 const fetchArticles = () => async (dispatch, getState) => {
   const response = await fetch('http://localhost:8880/data/articles')
@@ -19,6 +19,7 @@ const uploadImages = async ({ entityMap }) => {
     const {
       data: { file, id },
     } = entity
+    if (file && typeof file === 'string') return Promise.resolve(entity)
     const body = new FormData()
     body.append('name', id)
     body.append('file', file, id)
@@ -38,8 +39,9 @@ const uploadImages = async ({ entityMap }) => {
 
   const uploadResponses = await Promise.all(uploadRequests)
   for (let i = 0; i < entityMapValues.length; i++) {
+    const filename = uploadResponses[i].filename || uploadResponses[i].data.file
     const entity = entityMapValues[i]
-    entity.data.file = uploadResponses[i].filename
+    entity.data.file = filename
   }
 
   return Object.assign({}, entityMapValues)
@@ -69,9 +71,35 @@ const createArticle =
     dispatch(addArticlesArticle(responseData))
   }
 
+  const updateArticle =
+  ({ id, title, description, content, hidden = false }) =>
+  async (dispatch, getState) => {
+    const digestedEntities = await uploadImages(content)
+
+    const response = await fetch(`http://localhost:8880/data/admin/articles/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Connection: 'keep-alive',
+        Accept: '*/*',
+      },
+      body: JSON.stringify({
+        title,
+        description,
+        content: JSON.stringify({ ...content, entityMap: digestedEntities }),
+        hidden,
+      }),
+    })
+
+    const responseData = await response.json()
+    dispatch(addArticle(responseData))
+    dispatch(updateArticlesArticle(responseData))
+  }
+
 module.exports = {
   fetchArticles,
   fetchArticle,
   createArticle,
   uploadImages,
+  updateArticle
 }
