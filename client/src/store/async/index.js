@@ -4,6 +4,7 @@ const {
   addArticle,
   addArticlesArticle,
   updateArticlesArticle,
+  setLogged
 } = require('../actions')
 
 const fetchArticles = () => async (dispatch, getState) => {
@@ -106,10 +107,40 @@ const updateArticle =
     dispatch(updateArticlesArticle(responseData))
   }
 
+const login =
+  ({ name, password }) =>
+  async (dispatch, getState) => {
+
+    try {
+      let response = await fetch('http://localhost:8880/data/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Connection: 'keep-alive',
+          Accept: '*/*',
+        },
+        body: JSON.stringify({ name, password }),
+      })
+
+      console.log({ response })
+  
+      if (response.ok && response.status < 300) {
+        dispatch(setLogged(true))
+      } else {
+        dispatch(setLogged(false))
+      }  
+      return response.json()
+    } catch (e) {
+      await dispatch(setLogged(false))
+      throw e
+    }
+  }
+
 module.exports = {
   fetchArticles,
   fetchArticle,
   createArticle,
   uploadImages,
   updateArticle,
+  login
 }

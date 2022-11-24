@@ -1,7 +1,10 @@
 const React = require('react')
 const { useState } = require('react')
+const { useDispatch } = require('react-redux')
+const { login } = require('../../store/async')
 
 function loginForm() {
+  const dispatch = useDispatch()
   const [name, setName] = useState('Papa Piquillo')
   const [password, setPassword] = useState('El secreto de la jojoya')
   const [message, setMessage] = useState('')
@@ -9,24 +12,10 @@ function loginForm() {
   let handleSubmit = async e => {
     e.preventDefault()
     try {
-      const payload = {
-        name,
-        password,
-      }
-      let res = await fetch('http://localhost:8880/data/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Connection: 'keep-alive',
-          Accept: '*/*',
-        },
-        body: JSON.stringify(payload),
-      })
-
-      const data = await res.json()
-      setMessage(data.message)
+      const response = await dispatch(login({ name, password }))
+      setMessage(response.message)
     } catch (err) {
-      console.log(err)
+      setMessage(err.message)
     }
   }
 

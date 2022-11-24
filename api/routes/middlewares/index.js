@@ -1,12 +1,12 @@
 const { verifyToken } = require('../utils')
 
 const authorization = async (req, res, next) => {
-  const token = req.cookies['cucarachasAppSession']
+  const token = req.cookies['serchScriptSession']
   if (token) {
-    const decoded = await verifyToken(token)
+    await verifyToken(token)
     return next()
   }
-  res.status(500).send('authentication failed!!')
+  res.status(500).send({ message: 'authentication failed!!' })
 }
 
 module.exports = {

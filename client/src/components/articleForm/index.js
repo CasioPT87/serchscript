@@ -67,7 +67,7 @@ function articleForm() {
             title,
             description,
             content,
-            hidden
+            hidden,
           })
         )
 
@@ -79,7 +79,7 @@ function articleForm() {
             title,
             description,
             content,
-            hidden
+            hidden,
           })
         )
       }
@@ -104,10 +104,7 @@ function articleForm() {
           onChange={e => setDescription(e.target.value)}
         />
         <ArticleCreator
-          setText={argo => {
-            console.log({ argo })
-            setContent(argo)
-          }}
+          setText={setContent}
           articleContent={article?.content}
         />
 

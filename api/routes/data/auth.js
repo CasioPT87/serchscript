@@ -5,13 +5,15 @@ const { createToken } = require('../utils')
 
 // get list
 router.post('/create', async (req, res, next) => {
+  const user = await db.auth.show(req)
+  if (user) return res.status(403).json({ message: `Sorry, user with name: ${user.name} already exists`})
   const newUser = await db.auth.create(req)
   if (newUser) {
     const token = await createToken(newUser)
-    res.cookie('cucarachasAppSession', token)
-    return res.send('ok')
+    res.cookie('serchScriptSession', token)
+    return res.send({ message: `created user with name: ${newUser.name}` })
   }
-  return res.status(500).send('error creating user')
+  return res.status(500).send({ message: 'error creating user' })
 })
 
 // get one
@@ -19,16 +21,16 @@ router.post('/login', async (req, res) => {
   const user = await db.auth.show(req)
   if (!user) {
     return res.status(404).json({
-      message: 'No te conocemos, ya hemos avisado a la policia de internet...',
+      message: `We don't know who you are... we have already called internet police...`,
     })
   } else {
     if (user.validPassword(req.body.password)) {
       const token = await createToken(user)
-      res.cookie('cucarachasAppSession', token)
-      res.send({ name: user.name })
+      res.cookie('serchScriptSession', token)
+      res.send({ message: `Welcome back, ${user.name}` })
     } else {
       return res.status(400).json({
-        message: 'Has metido mal el password, mangurrian',
+        message: 'Your password is not good, man',
       })
     }
   }

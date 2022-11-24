@@ -18,9 +18,15 @@ const addArticle = article => ({
   payload: article,
 })
 
+const setLogged = logged => ({
+  type: 'SET_LOGGED',
+  payload: logged,
+})
+
 module.exports = {
   addArticles,
   addArticle,
   addArticlesArticle,
   updateArticlesArticle,
+  setLogged
 }

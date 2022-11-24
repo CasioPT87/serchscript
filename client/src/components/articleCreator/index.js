@@ -38,7 +38,6 @@ class RichText extends React.Component {
 
       const contentState = convertFromRaw(articleData)
       this.onChange(EditorState.createWithContent(contentState))
-      
     }
   }
 
