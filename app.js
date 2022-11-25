@@ -28,8 +28,8 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         imgSrc: [`'self'`, `data:`, `*`, `c:`],
-        scriptSrc: [`self`, 'http://localhost:8880', 'https://arcane-wildwood-55221.herokuapp.com/'], // could we use "'self'" as well?? try
-        styleSrc: [`self`, 'http://localhost:8880', 'https://arcane-wildwood-55221.herokuapp.com/'], // could we use "'self'" as well?? try
+        scriptSrc: [`'self'`, `${process.env.DOMAIN}`], 
+        styleSrc: [`'self'`, `${process.env.DOMAIN}`], 
       },
     },
   })

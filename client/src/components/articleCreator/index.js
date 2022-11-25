@@ -82,7 +82,7 @@ class RichText extends React.Component {
       currentContent: contentStateWithEntity,
     })
 
-    const imageSrc = `http://localhost:8880/${id}`
+    const imageSrc = `${process.env.DOMAIN}/${id}`
 
     const nextState = AtomicBlockUtils.insertAtomicBlock(
       newEditorState,
@@ -178,7 +178,7 @@ const Media = props => {
           })
           setBase64Image(_base64Image)
         } else if (file && typeof file === 'string') {
-          setBase64Image(`http://localhost:8880/${file}`)
+          setBase64Image(`/${file}`)
         }
       }
     }

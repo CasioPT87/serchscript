@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+// Taking care of env variables
+require('dotenv').config()
+console.log(process.env) // remove this after you've confirmed it is working
+
 /**
  * Module dependencies.
  */

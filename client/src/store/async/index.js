@@ -9,13 +9,13 @@ const {
 } = require('../actions')
 
 const fetchArticles = () => async (dispatch, getState) => {
-  const response = await fetch('http://localhost:8880/data/articles')
+  const response = await fetch(`/data/articles`)
   const responseData = await response.json()
   dispatch(addArticles(responseData))
 }
 
 const fetchArticle = id => async (dispatch, getState) => {
-  const response = await fetch(`http://localhost:8880/data/articles/${id}`)
+  const response = await fetch(`/data/articles/${id}`)
   const responseData = await response.json()
   dispatch(addArticle(responseData))
 }
@@ -59,7 +59,7 @@ const createArticle =
   async (dispatch, getState) => {
     const digestedEntities = await uploadImages(content)
 
-    const response = await fetch('http://localhost:8880/data/admin/articles', {
+    const response = await fetch('/data/admin/articles', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ const updateArticle =
     const digestedEntities = await uploadImages(content)
 
     const response = await fetch(
-      `http://localhost:8880/data/admin/articles/${id}`,
+      `/data/admin/articles/${id}`,
       {
         method: 'PUT',
         headers: {
@@ -119,7 +119,7 @@ const login =
   ({ name, password }) =>
   async (dispatch, getState) => {
     try {
-      let response = await fetch('http://localhost:8880/data/auth/login', {
+      let response = await fetch('/data/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -143,7 +143,7 @@ const login =
 
 const logout = () => async (dispatch, getState) => {
   try {
-    let response = await fetch('http://localhost:8880/data/auth/logout')
+    let response = await fetch('/data/auth/logout')
 
     if (response.ok && response.status < 300) {
       dispatch(setLogged(false))
@@ -158,7 +158,7 @@ const logout = () => async (dispatch, getState) => {
 const createComment =
   ({ articleId, content }) =>
   async (dispatch, getState) => {
-    const response = await fetch(`http://localhost:8880/data/comments`, {
+    const response = await fetch(`/data/comments`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
