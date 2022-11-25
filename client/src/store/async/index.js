@@ -87,23 +87,20 @@ const updateArticle =
   async (dispatch, getState) => {
     const digestedEntities = await uploadImages(content)
 
-    const response = await fetch(
-      `/data/admin/articles/${id}`,
-      {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          Connection: 'keep-alive',
-          Accept: '*/*',
-        },
-        body: JSON.stringify({
-          title,
-          description,
-          content: JSON.stringify({ ...content, entityMap: digestedEntities }),
-          hidden,
-        }),
-      }
-    )
+    const response = await fetch(`/data/admin/articles/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Connection: 'keep-alive',
+        Accept: '*/*',
+      },
+      body: JSON.stringify({
+        title,
+        description,
+        content: JSON.stringify({ ...content, entityMap: digestedEntities }),
+        hidden,
+      }),
+    })
 
     const responseData = await response.json()
 
