@@ -48,13 +48,6 @@ const clientConfig = {
       },
     ],
   },
-  /**
-  The optimization.runtimeChunk: 'single' was added because in this example we have more than one entrypoint on a single HTML page.
-  Without this, we could get into trouble described here. Read the Code Splitting chapter for more details.
-  */
-  // optimization: {
-  //   runtimeChunk: 'single',
-  // },
 };
 
 module.exports = [clientConfig];

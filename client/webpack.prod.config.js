@@ -10,11 +10,8 @@ const clientConfig = {
     }),
   ],
   entry: {
-    // react: path.resolve(__dirname, "./src/index.js"),
-    // styles: path.resolve(__dirname, "./src/styles/styles.css")
     react: {
       import: [path.resolve(__dirname, "./src/index.js"), path.resolve(__dirname, "./src/styles/styles.scss")],
-      // dependOn: ["/\.css$/"],
       chunkLoading: false, // Disable chunks that are loaded on demand and put everything in the main chunk.
     },
   },
@@ -22,12 +19,8 @@ const clientConfig = {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].bundle.js",
     clean: true,
+    assetModuleFilename: 'images/[name][ext]'
   },
-  // plugins: [
-  //   new HtmlWebpackPlugin({
-  //     title: "SSR react",
-  //   }),
-  // ],
   module: {
     rules: [
       {
@@ -42,16 +35,17 @@ const clientConfig = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              // you can specify a publicPath here
-              // by default it use publicPath in webpackOptions.output
               publicPath: './',
-              // include: /\.css$/
             }
           },
           { loader: "css-loader" },
           { loader: 'sass-loader' }
         ]
-      }
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
 };
