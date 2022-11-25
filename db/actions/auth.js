@@ -8,17 +8,17 @@ const show = async req => {
 }
 
 // create new
-const create = async req => {
-  const { name, password } = req.body
-  const user = new User()
-  user.name = name
-  user.hash = crypto.createHash('sha256').digest('hex')
-  user.setPassword(password)
+// const create = async req => {
+//   const { name, password } = req.body
+//   const user = new User()
+//   user.name = name
+//   user.hash = crypto.createHash('sha256').digest('hex')
+//   user.setPassword(password)
 
-  const newUser = await user.save()
-  return {
-    name: newUser.name,
-  }
-}
+//   const newUser = await user.save()
+//   return {
+//     name: newUser.name,
+//   }
+// }
 
-module.exports = { show, create }
+module.exports = { show }
