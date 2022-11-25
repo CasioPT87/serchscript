@@ -82,7 +82,7 @@ class RichText extends React.Component {
       currentContent: contentStateWithEntity,
     })
 
-    const imageSrc = `${process.env.DOMAIN}/${id}`
+    const imageSrc = `/${id}`
 
     const nextState = AtomicBlockUtils.insertAtomicBlock(
       newEditorState,
