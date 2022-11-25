@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const clientConfig = {
+  context: __dirname,
   mode: "development",
   plugins: [
     new MiniCssExtractPlugin({

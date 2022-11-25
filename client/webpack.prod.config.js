@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const clientConfig = {
+  context: __dirname,
   mode: "production",
   plugins: [
     new MiniCssExtractPlugin({
@@ -11,8 +12,7 @@ const clientConfig = {
   ],
   entry: {
     react: {
-      import: [path.resolve(__dirname, "./src/index.js"), path.resolve(__dirname, "./src/styles/styles.scss")],
-      chunkLoading: false, // Disable chunks that are loaded on demand and put everything in the main chunk.
+      import: [path.resolve(__dirname, "./src/utils/SPA/index.js"), path.resolve(__dirname, "./src/styles/styles.scss"), path.resolve("./public/logo.png")],
     },
   },
   output: {
