@@ -19,9 +19,9 @@ const Article = () => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       pathname = window.location.pathname
-      const urlArticleId = pathname.split('/')[2]
-      if (!article || article._id !== urlArticleId) {
-        dispatch(fetchArticle(urlArticleId))
+      const urlArticleTitleId = pathname.split('/')[2]
+      if (!article || article.titleId !== urlArticleTitleId) {
+        dispatch(fetchArticle(urlArticleTitleId))
       }
     }
   }, [])

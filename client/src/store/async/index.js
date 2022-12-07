@@ -14,8 +14,8 @@ const fetchArticles = () => async (dispatch, getState) => {
   dispatch(addArticles(responseData))
 }
 
-const fetchArticle = id => async (dispatch, getState) => {
-  const response = await fetch(`/data/articles/${id}`)
+const fetchArticle = titleId => async (dispatch, getState) => {
+  const response = await fetch(`/data/articles/${titleId}`)
   const responseData = await response.json()
   dispatch(addArticle(responseData))
 }

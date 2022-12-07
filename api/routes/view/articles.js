@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 })
 
 // get one
-router.get('/:id', async (req, res) => {
+router.get('/:titleId', async (req, res) => {
   return sendSSRResposeView({
     req,
     res,

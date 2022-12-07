@@ -9,7 +9,7 @@ router.get('/', async (req, res, next) => {
 })
 
 // get one
-router.get('/:id', async (req, res) => {
+router.get('/:titleId', async (req, res) => {
   const article = await db.articles.show(req)
   return res.json(article)
 })

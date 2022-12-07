@@ -1,3 +1,4 @@
+const { paramCase } = require('param-case')
 const Article = require('../../db/models/article')
 
 // get list
@@ -10,13 +11,16 @@ const index = req => {
 
 // get one
 const show = async req => {
-  const { id } = req.params
-  const queryParams = {
-    _id: id,
-  }
+  const { titleId, id } = req.params
+  console.log({ titleId, id })
+  const queryParams = {}
+  if (id) queryParams._id = id
+  if (titleId) queryParams.titleId = titleId
+
   if (!req.isLogged) {
     queryParams.hidden = false
   }
+  console.log('hola')
   const article = await Article.findOne({
     ...queryParams,
   }).populate('comments')
@@ -29,7 +33,7 @@ const destroyAll = () => {
 }
 
 // create new
-const create = req => {
+const create = async req => {
   const {
     title = 'Escribe un titulo',
     description = 'Escribe una descripcion',
@@ -37,6 +41,13 @@ const create = req => {
     hidden = true,
   } = req.body
   const article = new Article()
+  article.setTitleId(title)
+  if (!article.titleId) throw new Error('couldnt set title for article')
+  const sameTitleIdArticle = await show({
+    isLogged: true,
+    params: { titleId: article.titleId },
+  })
+  if (sameTitleIdArticle) throw new Error ('article with this title already exists')
   article.title = title
   article.description = description
   article.content = content
@@ -56,6 +67,7 @@ const update = async req => {
     { _id: id },
     {
       title,
+      titleId: paramCase(title),
       description,
       content,
       hidden,

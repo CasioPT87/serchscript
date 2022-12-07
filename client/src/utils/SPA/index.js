@@ -31,7 +31,7 @@ const replaceElements = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="articles" element={<Articles />} />
-            <Route path="articles/:queryId" element={<Article />} />
+            <Route path="articles/:titleId" element={<Article />} />
             <Route path="admin/articles/new" element={<ArticleForm />} />
             <Route path="admin/articles/:id/edit" element={<ArticleForm />} />
             <Route path="auth" element={<LoginForm />} />

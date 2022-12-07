@@ -3,7 +3,7 @@ const db = require('../../../../db/actions')
 var router = express.Router()
 
 // delete all
-router.delete('/all', (req, res, next) => {
+router.delete('/', (req, res, next) => {
   return db.articles.destroyAll()
 })
 
@@ -14,7 +14,7 @@ router.get('/', async (req, res, next) => {
 })
 
 // get one
-router.get('/:id', async req => {
+router.get('/:titleId', async req => {
   return db.articles.show(req)
 })
 
