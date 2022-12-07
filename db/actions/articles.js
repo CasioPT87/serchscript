@@ -47,7 +47,8 @@ const create = async req => {
     isLogged: true,
     params: { titleId: article.titleId },
   })
-  if (sameTitleIdArticle) throw new Error ('article with this title already exists')
+  if (sameTitleIdArticle)
+    throw new Error('article with this title already exists')
   article.title = title
   article.description = description
   article.content = content
