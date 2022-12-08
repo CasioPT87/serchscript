@@ -52,7 +52,7 @@ function articleLoad() {
   const [hidden, setHidden] = useState(false)
 
   useEffect(() => {
-    const content = cheatsheetMachine().map(({title, stringContent}) => {
+    const content = cheatsheetMachine().map(({ title, stringContent }) => {
       const blocksFromHTML = convertFromHTML(stringContent)
       const contentState = ContentState.createFromBlockArray(
         blocksFromHTML.contentBlocks,
