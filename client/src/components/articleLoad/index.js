@@ -11,27 +11,37 @@ const {
   convertToRaw,
   convertFromRaw,
   ContentState,
-  convertFromHTML
+  convertFromHTML,
 } = require('draft-js')
 
-const data = require('../../../../data/cheatsheets')
+const data = require('../../../../data/hey')
+
+const getHTMLForCheatsheet = cs => {
+  const key = Object.keys(cs)[0]
+  const title = `<h3>${key}</h3>`
+  const content = cs[key].scenarios.reduce((prev, currScenario) => {
+    const htmlScenario = `
+      <h4>${currScenario.title}</h4>
+      ${currScenario.content.body}
+    `
+    return prev + htmlScenario
+  }, title)
+  return content
+}
 
 const cheatsheetMachine = () => {
-  const names = [Object.keys(data)[0]]
-  console.log({ names })
-  return names
-    .map(name => {
-      const scenariosForCS = data[name]
-      const CSTitle = `<h1>${name}</h1>`
-      return scenariosForCS.reduce((prev, currScenario) => {
-        const scenarioHTML = `       
-        <h3>${currScenario.title}</h3>
-        ${currScenario.content.body}
-      `
-        return prev + scenarioHTML
-      }, CSTitle)
-    })
-    .toString()
+  const groupNames = Object.keys(data)
+  return groupNames.map(groupName => {
+    const cssForGroup = data[groupName].cheatsheets
+    const CSTitle = `<h1>${groupName}</h1>`
+    return {
+      title: groupName,
+      stringContent: cssForGroup.reduce((prev, currCS) => {
+        const currCSHTML = getHTMLForCheatsheet(currCS)
+        return prev + currCSHTML
+      }, CSTitle),
+    }
+  })
 }
 
 function articleLoad() {
@@ -42,29 +52,35 @@ function articleLoad() {
   const [hidden, setHidden] = useState(false)
 
   useEffect(() => {
-    setTitle('this is a test title')
-    setDescription('this is a test description')
-    const blocksFromHTML = convertFromHTML(cheatsheetMachine())
-    const contentState = ContentState.createFromBlockArray(
-      blocksFromHTML.contentBlocks,
-      blocksFromHTML.entityMap
-    )
-    const editorState = EditorState.createWithContent(contentState)
-    const raw = convertToRaw(editorState.getCurrentContent())
-    setContent(raw)
+    const content = cheatsheetMachine().map(({title, stringContent}) => {
+      const blocksFromHTML = convertFromHTML(stringContent)
+      const contentState = ContentState.createFromBlockArray(
+        blocksFromHTML.contentBlocks,
+        blocksFromHTML.entityMap
+      )
+      const editorState = EditorState.createWithContent(contentState)
+      return {
+        title,
+        content: convertToRaw(editorState.getCurrentContent()),
+      }
+    })
+
+    setContent(content)
   }, [])
 
   let handleSubmit = async e => {
     e.preventDefault()
     try {
-      dispatch(
-        createArticle({
-          title,
-          description,
-          content,
-          hidden,
-        })
-      )
+      content.forEach(({ title, content }) => {
+        dispatch(
+          createArticle({
+            title,
+            description,
+            content,
+            hidden,
+          })
+        )
+      })
     } catch (e) {
       console.log(e.message)
     }
