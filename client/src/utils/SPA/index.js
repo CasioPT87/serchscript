@@ -8,6 +8,7 @@ const { Provider } = require('react-redux')
 const {
   Articles,
   Article,
+  ArticleLoad,
   MainFrame,
   ArticleForm,
   Home,
@@ -33,6 +34,7 @@ const replaceElements = () => {
             <Route path="articles" element={<Articles />} />
             <Route path="articles/:titleId" element={<Article />} />
             <Route path="admin/articles/new" element={<ArticleForm />} />
+            <Route path="articles/load" element={<ArticleLoad />} />
             <Route path="admin/articles/:id/edit" element={<ArticleForm />} />
             <Route path="auth" element={<LoginForm />} />
           </Routes>

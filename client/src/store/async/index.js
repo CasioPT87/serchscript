@@ -26,7 +26,7 @@ const uploadImages = async ({ entityMap }) => {
     const {
       data: { file, id },
     } = entity
-    if (file && typeof file === 'string') return Promise.resolve(entity)
+    if (!file || typeof file === 'string') return Promise.resolve(entity)
     const body = new FormData()
     body.append('name', id)
     body.append('file', file, id)
@@ -57,6 +57,7 @@ const uploadImages = async ({ entityMap }) => {
 const createArticle =
   ({ title, description, content, hidden = false }) =>
   async (dispatch, getState) => {
+    console.log('heyyyyy')
     const digestedEntities = await uploadImages(content)
 
     const response = await fetch('/data/admin/articles', {

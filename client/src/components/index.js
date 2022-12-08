@@ -7,9 +7,11 @@ const MainFrame = require('./mainFrame')
 const Header = require('./header')
 const Footer = require('./footer')
 const Comment = require('./comment')
+const ArticleLoad = require('./articleLoad')
 
 module.exports = {
   Article,
+  ArticleLoad,
   Articles,
   Home,
   LoginForm,
