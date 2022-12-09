@@ -20,7 +20,9 @@ const getInitialComponentsTree = (store, componentName) => {
     <Provider store={store}>
       <StaticRouter>
         <Components.MainFrame>
+          <Components.Header />
           {getComponent(componentName)}
+          <Components.Footer />
         </Components.MainFrame>
       </StaticRouter>
     </Provider>
