@@ -2,9 +2,7 @@ const React = require('react')
 
 const MainFrame = ({ children }) => {
   return (
-    <div className="stack">
-      <main>{children}</main>
-    </div>
+    <div className='main-frame'>{children}</div>
   )
 }
 

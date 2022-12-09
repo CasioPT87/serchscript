@@ -1,11 +1,9 @@
-.stack {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: orange;
-
-  main {
+.main-frame {
     width: 100%;
-  }
+}
+
+@media (min-width: 1200px) {
+    .main-frame {
+        max-width: 1200px;
+    }
 }

@@ -6,6 +6,8 @@
 ::before,
 ::after {
   box-sizing: inherit; // Box sizing isn’t a inherited property, but using the inherit keyword, forces it to be.
+  min-width: 0;
+  min-height: 0;
 }
 
 :root {
@@ -33,7 +35,7 @@ body {
   background: #fff;
   color: #000;
   text-rendering: optimizeLegibility;
-  font-family: 'Roboto';
+  font-family: var(--font-family);
 }
 
 body,
