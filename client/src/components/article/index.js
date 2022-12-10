@@ -36,15 +36,26 @@ const Article = () => {
   if (!article) return null
 
   return (
-    <div>
-      {logged && <Link to={`/admin/articles/${article._id}/edit`}>Edit</Link>}
-      {logged && article.hidden && <h3>hidden for the public</h3>}
-      <div className="capitan">{article.title}</div>
-      <div className="capitan">{article.description}</div>
-      {content && <div className="capitan">{parse(content)}</div>}
-      {article.comments.map(comment => {
-        return <Comment key={comment._id} comment={comment} />
-      })}
+    <div className="article article--light">
+      {logged && (
+        <div className="article__edit-button">
+          <Link to={`/admin/articles/${article._id}/edit`}>Edit</Link>
+        </div>
+      )}
+      {logged && article.hidden && (
+        <h3 className="article__warning">
+          this article is hidden for the public
+        </h3>
+      )}
+      <h1 className="article__title">{article.title}</h1>
+      <h3 className="article__description">{article.description}</h3>
+      <div className="article__inner">
+        {content && <div className="capitan">{parse(content)}</div>}
+        {article.comments.map(comment => {
+          return <Comment key={comment._id} comment={comment} />
+        })}
+      </div>
+
       <Comment comment={null} articleId={article._id} />
     </div>
   )

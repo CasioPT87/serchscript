@@ -1,0 +1,40 @@
+.article {
+    padding: 1em;
+}
+
+.article--light {
+    background-color: var(--light);
+}
+
+.article__inner {
+    border: 0.05em solid var(--dark-middle);
+    padding: 1em;
+}
+
+.article__warning {
+    color: var(--secondary-dark)
+}
+
+.article__title, .article__description {
+    display: flex;
+    justify-content: center;
+}
+
+.article__edit-button {
+    display: flex;
+    justify-content: center;
+
+    a {
+        padding: 0.5em 2em;
+        color: var(--light);
+        background-color: var(--primary-dark);
+        text-decoration: none;
+    }
+}
+
+.article {
+    pre {
+        padding: 1em;
+        background-color: var(--dark-light);
+    }
+}
