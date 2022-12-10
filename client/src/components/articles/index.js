@@ -9,7 +9,7 @@ const { fetchArticles } = require('../../store/async')
 const { useEffect } = React
 
 const Articles = () => {
-  const limit = 10
+  const limit = 5
   const dispatch = useDispatch()
   const articles = useSelector(state => state.articles)
   const fetchArticlesByPage = page => dispatch(fetchArticles({ page, limit }))
@@ -21,14 +21,14 @@ const Articles = () => {
     return <div>there is no articles yet</div>
 
   return (
-    <>
-      <ul className="articlesList">
+    <div className="articles articles--bg-light">
+      <ul className="articles__list">
         {articles.list.docs.map(article => (
           <Card key={article._id} article={article} />
         ))}
       </ul>
       <Paginator fetchPage={fetchArticlesByPage} limit={limit} />
-    </>
+    </div>
   )
 }
 

@@ -1,0 +1,13 @@
+.card {
+  padding: 1em;
+  border-bottom: 0.05em solid var(--dark-middle);
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.card__title,
+.card__text {
+  color: var(--dark);
+}

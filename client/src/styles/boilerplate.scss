@@ -32,7 +32,7 @@
 html,
 body {
   min-height: 100%;
-  background: #fff;
+  background: var(--dark-middle);
   color: #000;
   text-rendering: optimizeLegibility;
   font-family: var(--font-family);

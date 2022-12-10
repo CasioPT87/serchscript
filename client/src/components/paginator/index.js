@@ -12,22 +12,26 @@ const Paginator = ({ fetchPage, limit }) => {
   const itemsText = `Showing articles from ${firtItemIndex} to ${lastItemIndex} of ${totalDocs}`
 
   return (
-    <div>
-      {[...Array(totalPages).keys()].map(pageNumber => {
-        const isCurrentPage = page === pageNumber
-        const classNames = []
-        if (isCurrentPage) classNames.push('isCurrent')
-        return (
-          <button
-            key={pageNumber}
-            className={classNames.toString()}
-            onClick={() => fetchPage(pageNumber + 1)}
-          >
-            {pageNumber + 1}
-          </button>
-        )
-      })}
-      <p>{itemsText}</p>
+    <div className="paginator">
+      <div className="paginator__buttons">
+        {[...Array(totalPages).keys()].map(pageNumber => {
+          const isCurrentPage = page === pageNumber + 1
+          let classNames = 'paginator__button'
+          if (isCurrentPage)
+            classNames = classNames.concat(' paginator__button--isCurrent')
+          return (
+            <button
+              key={pageNumber}
+              className={classNames.toString()}
+              onClick={() => fetchPage(pageNumber + 1)}
+            >
+              {pageNumber + 1}
+            </button>
+          )
+        })}
+      </div>
+
+      <p className="paginator__text">{itemsText}</p>
     </div>
   )
 }

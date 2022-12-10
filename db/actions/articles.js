@@ -23,11 +23,7 @@ const index = async req => {
     return Article.paginate({}, options)
   }
 
-  const articles = await Article.paginate({ hidden: false }, options)
-
-  console.log({ articles })
-
-  return articles
+  return Article.paginate({ hidden: false }, options)
 }
 
 // get one

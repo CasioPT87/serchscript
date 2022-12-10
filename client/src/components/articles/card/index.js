@@ -8,12 +8,12 @@ const Card = ({ article }) => {
   if (!article) return null
 
   return (
-    <li key={article._id}>
+    <li key={article._id} className="card">
       <Link to={`/articles/${article.titleId}`}>
         <div>
           {logged && article.hidden && <h3>hidden for the public</h3>}
-          <div className="capitan">{article.title}</div>
-          <div className="capitan">{article.description}</div>
+          <h3 className="card__title">{article.title}</h3>
+          <p className="card__text">{article.description}</p>
         </div>
       </Link>
     </li>
