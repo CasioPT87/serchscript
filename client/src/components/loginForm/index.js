@@ -21,23 +21,28 @@ function loginForm() {
 
   return (
     <div className="login login--dark">
-      <form className='login__form' onSubmit={handleSubmit}>
+      <form className="login__form" onSubmit={handleSubmit}>
         <input
-          className='login__field login__field--pile-separation login__field--clickable'
+          className="login__field login__field--pile-separation login__field--clickable"
           type="text"
           value={name}
-          placeholder='username'
+          placeholder="username"
           onChange={e => setName(e.target.value)}
         />
         <input
-          className='login__field login__field--pile-separation login__field--clickable'
+          className="login__field login__field--pile-separation login__field--clickable"
           type="password"
           value={password}
-          placeholder='your password'
+          placeholder="your password"
           onChange={e => setPassword(e.target.value)}
         />
 
-        <button className='login__field login__submit login__field--clickable' type="submit">Send credentials</button>
+        <button
+          className="login__field login__submit login__field--clickable"
+          type="submit"
+        >
+          Send credentials
+        </button>
         <div className="login__field login__message">{message}</div>
       </form>
     </div>
