@@ -1,6 +1,6 @@
 const defaultState = {
   articles: {
-    list: [],
+    list: {},
   },
   article: null,
   logged: false,

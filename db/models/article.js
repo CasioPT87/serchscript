@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2')
 const { paramCase } = require('param-case')
 const { Schema } = mongoose
 
@@ -26,9 +27,10 @@ const ArticleSchema = Schema(
 )
 
 ArticleSchema.methods.setTitleId = function (title) {
-  console.log({ hyphenate: paramCase(title) })
   this.titleId = paramCase(title)
 }
+
+ArticleSchema.plugin(mongoosePaginate)
 
 const ArticleModel = mongoose.model('Article', Schema(ArticleSchema))
 

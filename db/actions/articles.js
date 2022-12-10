@@ -1,18 +1,38 @@
 const { paramCase } = require('param-case')
+const _ = require('lodash')
+const { defaults } = require('../constants')
 const Article = require('../../db/models/article')
 
 // get list
-const index = req => {
-  if (req.isLogged) {
-    return Article.find({})
+const index = async req => {
+  const limit = _.isEmpty(req.query)
+    ? defaults.limitArticlesPerPage
+    : Number(req.query.limit)
+  const page = _.isEmpty(req.query)
+    ? defaults.initialArticlesPage
+    : Number(req.query.page)
+
+  const options = {
+    select: ['title', 'titleId', 'description'],
+    sort: { createdAt: 'asc' },
+    page,
+    limit,
   }
-  return Article.find({ hidden: false })
+
+  if (req.isLogged) {
+    return Article.paginate({}, options)
+  }
+
+  const articles = await Article.paginate({ hidden: false }, options)
+
+  console.log({ articles })
+
+  return articles
 }
 
 // get one
 const show = async req => {
   const { titleId, id } = req.params
-  console.log({ titleId, id })
   const queryParams = {}
   if (id) queryParams._id = id
   if (titleId) queryParams.titleId = titleId

@@ -8,11 +8,13 @@ const {
   addArticleComment,
 } = require('../actions')
 
-const fetchArticles = () => async (dispatch, getState) => {
-  const response = await fetch(`/data/articles`)
-  const responseData = await response.json()
-  dispatch(addArticles(responseData))
-}
+const fetchArticles =
+  ({ page, limit }) =>
+  async (dispatch, getState) => {
+    const response = await fetch(`/data/articles?page=${page}&limit=${limit}`)
+    const responseData = await response.json()
+    dispatch(addArticles(responseData))
+  }
 
 const fetchArticle = titleId => async (dispatch, getState) => {
   const response = await fetch(`/data/articles/${titleId}`)
@@ -57,7 +59,6 @@ const uploadImages = async ({ entityMap }) => {
 const createArticle =
   ({ title, description, content, hidden = false }) =>
   async (dispatch, getState) => {
-    console.log('heyyyyy')
     const digestedEntities = await uploadImages(content)
 
     const response = await fetch('/data/admin/articles', {

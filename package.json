@@ -44,6 +44,7 @@
     "mini-css-extract-plugin": "^2.6.0",
     "mongo-express": "^1.0.0-alpha.4",
     "mongoose": "^6.2.3",
+    "mongoose-paginate-v2": "^1.7.1",
     "morgan": "~1.9.1",
     "node-fetch": "^2.6.7",
     "node-sass": "^7.0.1",

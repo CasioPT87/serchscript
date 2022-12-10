@@ -8,6 +8,7 @@ const Header = require('./header')
 const Footer = require('./footer')
 const Comment = require('./comment')
 const ArticleLoad = require('./articleLoad')
+const Paginator = require('./paginator')
 
 module.exports = {
   Article,
@@ -20,4 +21,5 @@ module.exports = {
   Header,
   Footer,
   Comment,
+  Paginator,
 }
