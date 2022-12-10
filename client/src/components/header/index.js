@@ -4,6 +4,8 @@ const { useDispatch, useSelector } = require('react-redux')
 const { getCookie } = require('../../utils')
 const { setLogged } = require('../../store/actions')
 const { logout } = require('../../store/async')
+const NavItem = require('./navItem')
+const routes = require('../../routes')
 
 const { useEffect } = React
 
@@ -25,35 +27,23 @@ const Header = () => {
       <nav className="header__inner">
         <Link to="/">
           <img
-            src={'/images/logo.png'}
+            src={routes.homeIcon.src}
             className="header__icon"
-            alt="serchscript blog logo"
+            alt={routes.homeIcon.text}
           />
         </Link>
         <ul className="header__items">
-          <li className="header__item">
-            <Link to="/">Home</Link>
-          </li>
-          <li className="header__item">
-            <Link to="/articles">Articles</Link>
-          </li>
+          <NavItem route={routes.home} />
+          <NavItem route={routes.articles.list} />
 
-          {!logged && (
-            <li className="header__item">
-              <Link to="/auth">Auth</Link>
-            </li>
-          )}
+          {!logged && <NavItem route={routes.auth.login} />}
+          {logged && <NavItem route={routes.articles.create} />}
           {logged && (
-            <li className="header__item">
-              <Link to="/admin/articles/new">new Article</Link>
-            </li>
-          )}
-          {logged && (
-            <li className="header__item">
+            <NavItem route={routes.articles.create}>
               <button className="button header__logout" onClick={userLogout}>
                 Logout
               </button>
-            </li>
+            </NavItem>
           )}
         </ul>
       </nav>
