@@ -5,9 +5,9 @@ const { login } = require('../../store/async')
 
 function loginForm() {
   const dispatch = useDispatch()
-  const [name, setName] = useState('Papa Piquillo')
-  const [password, setPassword] = useState('El secreto de la jojoya')
-  const [message, setMessage] = useState('')
+  const [name, setName] = useState('')
+  const [password, setPassword] = useState('')
+  const [message, setMessage] = useState('Who are you, again?')
 
   let handleSubmit = async e => {
     e.preventDefault()
@@ -20,22 +20,25 @@ function loginForm() {
   }
 
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit}>
+    <div className="login login--dark">
+      <form className='login__form' onSubmit={handleSubmit}>
         <input
+          className='login__field login__field--pile-separation login__field--clickable'
           type="text"
           value={name}
+          placeholder='username'
           onChange={e => setName(e.target.value)}
         />
         <input
-          type="text"
+          className='login__field login__field--pile-separation login__field--clickable'
+          type="password"
           value={password}
+          placeholder='your password'
           onChange={e => setPassword(e.target.value)}
         />
 
-        <button type="submit">Logueate</button>
-
-        <div className="message">{message ? <p>{message}</p> : null}</div>
+        <button className='login__field login__submit login__field--clickable' type="submit">Send credentials</button>
+        <div className="login__field login__message">{message}</div>
       </form>
     </div>
   )
