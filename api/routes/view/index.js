@@ -1,8 +1,8 @@
 var express = require('express')
 const routeArticle = require('./articles')
 const routeAdmin = require('./admin')
-const routeHome = require('./home')
 const routeAuth = require('./auth')
+const routeHome = require('./home')
 
 const router = express.Router()
 

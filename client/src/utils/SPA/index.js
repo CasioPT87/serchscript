@@ -11,7 +11,6 @@ const {
   ArticleLoad,
   MainFrame,
   ArticleForm,
-  Home,
   LoginForm,
   Header,
   Footer,
@@ -30,8 +29,7 @@ const replaceElements = () => {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="articles" element={<Articles />} />
+            <Route path="/" element={<Articles />} />
             <Route path="articles/:titleId" element={<Article />} />
             <Route path="admin/articles/new" element={<ArticleForm />} />
             <Route path="articles/load" element={<ArticleLoad />} />

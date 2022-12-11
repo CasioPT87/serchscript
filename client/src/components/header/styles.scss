@@ -18,7 +18,7 @@
 .header__items {
   flex-grow: 1;
   display: flex;
-  margin: 0 1em;
+  justify-content: flex-end;
   padding: 0;
   list-style-type: none;
 }
@@ -27,8 +27,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
-  a {
+  a, .button {
     padding: 1em;
     color: var(--light);
     text-decoration: none;
@@ -43,12 +44,7 @@
   text-align: center;
   text-decoration: none;
   font-family: var(--font-family);
-}
-
-@media (min-width: 400px) {
-  .header__items > .header__item:last-child {
-    margin-left: auto;
-  }
+  cursor: pointer;
 }
 
 @media (max-width: 400px) {

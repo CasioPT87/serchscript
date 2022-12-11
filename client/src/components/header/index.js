@@ -26,7 +26,7 @@ const Header = () => {
     <header className="header">
       <img src="/keyboard-header.jpg" />
       <nav className="header__inner">
-        <Link to="/">
+        <Link to={routes.home}>
           <img
             src={routes.homeIcon.src}
             className="header__icon"
@@ -34,8 +34,6 @@ const Header = () => {
           />
         </Link>
         <ul className="header__items">
-          <NavItem route={routes.home} />
-          <NavItem route={routes.articles.list} />
 
           {!logged && <NavItem route={routes.auth.login} />}
           {logged && <NavItem route={routes.articles.create} />}
