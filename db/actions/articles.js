@@ -13,7 +13,7 @@ const index = async req => {
     : Number(req.query.page)
 
   const options = {
-    select: ['title', 'titleId', 'description'],
+    select: ['title', 'titleId', 'description', 'hidden'],
     sort: { createdAt: 'asc' },
     page,
     limit,

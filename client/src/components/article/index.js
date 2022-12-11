@@ -5,6 +5,7 @@ const { Link } = require('react-router-dom')
 const { rawContentToHtml } = require('../../utils')
 const { fetchArticle } = require('../../store/async')
 const Comments = require('../comments')
+const Warning = require('../warning')
 
 const { useEffect, useState } = React
 
@@ -42,11 +43,7 @@ const Article = () => {
           <Link to={`/admin/articles/${article._id}/edit`}>Edit</Link>
         </div>
       )}
-      {logged && article.hidden && (
-        <h3 className="article__warning">
-          this article is hidden for the public
-        </h3>
-      )}
+      {logged && <Warning show={article.hidden} text="this article is currently hidden" /> }
       <h1 className="article__title">{article.title}</h1>
       <h3 className="article__description">{article.description}</h3>
       <div className="article__inner">
