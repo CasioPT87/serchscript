@@ -2,8 +2,6 @@ const fetch = require('node-fetch')
 const {
   addArticles,
   addArticle,
-  addArticlesArticle,
-  updateArticlesArticle,
   setLogged,
   addArticleComment,
 } = require('../actions')
@@ -78,7 +76,6 @@ const createArticle =
     const responseData = await response.json()
     if (response.ok) {
       dispatch(addArticle(responseData))
-      dispatch(addArticlesArticle(responseData))
     }
 
     return { message: responseData.message }
@@ -108,7 +105,6 @@ const updateArticle =
 
     if (response.ok) {
       dispatch(addArticle(responseData))
-      dispatch(updateArticlesArticle(responseData))
     }
 
     return { message: responseData.message }

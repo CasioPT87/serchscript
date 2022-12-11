@@ -11,7 +11,7 @@ const ComponentsLibrary = {
   article: <Components.Article />,
   articleForm: {
     create: <Components.ArticleForm.create />,
-    edit: <Components.ArticleForm.edit />
+    edit: <Components.ArticleForm.edit />,
   },
   loginForm: <Components.LoginForm />,
 }

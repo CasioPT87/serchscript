@@ -115,5 +115,5 @@ const ArticleForm = mode => () => {
 
 module.exports = {
   create: ArticleForm(MODE.create),
-  edit: ArticleForm(MODE.edit)
+  edit: ArticleForm(MODE.edit),
 }

@@ -8,16 +8,6 @@ const addArticleComment = comment => ({
   payload: comment,
 })
 
-const addArticlesArticle = article => ({
-  type: 'ADD_ARTICLES_ARTICLE',
-  payload: article,
-})
-
-const updateArticlesArticle = article => ({
-  type: 'UPDATE_ARTICLES_ARTICLE',
-  payload: article,
-})
-
 const addArticle = article => ({
   type: 'ADD_ARTICLE',
   payload: article,
@@ -32,7 +22,5 @@ module.exports = {
   addArticles,
   addArticle,
   addArticleComment,
-  addArticlesArticle,
-  updateArticlesArticle,
   setLogged,
 }
