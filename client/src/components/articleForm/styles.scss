@@ -1,0 +1,15 @@
+.article-form--light {
+    background-color: var(--dark-super-light);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+}
+
+.form__input {
+    font-size: inherit;
+    padding: 1em;
+    margin-bottom: 1em;
+}

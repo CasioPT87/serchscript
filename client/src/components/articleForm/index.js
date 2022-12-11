@@ -89,17 +89,19 @@ function articleForm() {
   }
 
   return (
-    <div className="App">
-      <form onSubmit={handleSubmit}>
+    <div className="article-form article-form--light">
+      <form className="form" onSubmit={handleSubmit}>
         <input
           type="text"
           value={title}
           onChange={e => setTitle(e.target.value)}
+          className='form__input'
         />
         <input
           type="text"
           value={description}
           onChange={e => setDescription(e.target.value)}
+          className='form__input'
         />
         <ArticleCreator
           setText={setContent}

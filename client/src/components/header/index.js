@@ -24,7 +24,7 @@ const Header = () => {
 
   return (
     <header className="header">
-      <img src='/keyboard-header.jpg' />
+      <img src="/keyboard-header.jpg" />
       <nav className="header__inner">
         <Link to="/">
           <img

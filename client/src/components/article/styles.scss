@@ -1,14 +1,22 @@
 .article {
-  padding: 1em;
+  padding: 2em;
 }
 
 .article--light {
-  background-color: var(--light);
+  background-color: var(--dark-super-light);
 }
 
 .article__inner {
-  border: 0.05em solid var(--dark-middle);
-  padding: 1em;
+  padding: 2em;
+}
+
+@media (max-width: 800px) {
+  .ariticle {
+    padding: 1em;
+  }
+  .article__inner {
+    padding: 1em;
+  }
 }
 
 .article__warning {
