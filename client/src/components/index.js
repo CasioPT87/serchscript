@@ -23,5 +23,5 @@ module.exports = {
   Footer,
   Comment,
   Paginator,
-  CheckBox
+  CheckBox,
 }

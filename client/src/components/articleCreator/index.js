@@ -134,12 +134,13 @@ class RichText extends React.Component {
           />
         </div>
 
-        <label htmlFor="myfile">Select a file:</label>
+        <label htmlFor="myfile">Add Image</label>
         <input
           type="file"
           id="myfile"
           name="myfile"
           onChange={e => this.insertImage(e.target.files[0])}
+          className='form__submit'
         ></input>
       </div>
     )
