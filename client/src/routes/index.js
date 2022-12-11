@@ -8,6 +8,10 @@ module.exports = {
     text: 'Home',
   },
   articles: {
+    list: {
+      path: '/',
+      text: 'Articles List'
+    },
     create: {
       path: '/admin/articles/new',
       text: 'New Article',
