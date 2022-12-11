@@ -34,19 +34,10 @@ class RichText extends React.Component {
   }
 
   componentDidMount() {
-    const { articleContent, htmlContent } = this.props
+    const { articleContent } = this.props
     if (articleContent) {
       const articleData = JSON.parse(articleContent)
-
       const contentState = convertFromRaw(articleData)
-      this.onChange(EditorState.createWithContent(contentState))
-    }
-    if (htmlContent) {
-      const blocksFromHTML = convertFromHTML(htmlContent)
-      const contentState = ContentState.createFromBlockArray(
-        blocksFromHTML.contentBlocks,
-        blocksFromHTML.entityMap
-      )
       this.onChange(EditorState.createWithContent(contentState))
     }
   }

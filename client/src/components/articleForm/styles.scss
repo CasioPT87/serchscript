@@ -1,15 +1,26 @@
 .article-form--light {
-    background-color: var(--dark-super-light);
+  background-color: var(--dark-super-light);
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
-    padding: 2em;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
 }
 
 .form__input {
-    font-size: inherit;
-    padding: 1em;
-    margin-bottom: 1em;
+  font-size: inherit;
+  padding: 1em;
+  margin-bottom: 1em;
+  cursor: text;
+}
+
+.form__submit {
+    font-family: var(--font-family);
+    font-size: 1em;
+    background-color: var(--primary);
+    color: var(--light);
+    padding: 1em 2em;
+    border: 0;
+    cursor: pointer;
 }

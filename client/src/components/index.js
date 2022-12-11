@@ -9,6 +9,7 @@ const Footer = require('./footer')
 const Comment = require('./comment')
 const ArticleLoad = require('./articleLoad')
 const Paginator = require('./paginator')
+const CheckBox = require('./checkbox')
 
 module.exports = {
   Article,
@@ -22,4 +23,5 @@ module.exports = {
   Footer,
   Comment,
   Paginator,
+  CheckBox
 }
