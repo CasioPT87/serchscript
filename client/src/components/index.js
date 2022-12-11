@@ -5,7 +5,7 @@ const ArticleForm = require('./articleForm')
 const MainFrame = require('./mainFrame')
 const Header = require('./header')
 const Footer = require('./footer')
-const Comment = require('./comment')
+const Comments = require('./comments')
 const ArticleLoad = require('./articleLoad')
 const Paginator = require('./paginator')
 const CheckBox = require('./checkbox')
@@ -19,7 +19,7 @@ module.exports = {
   MainFrame,
   Header,
   Footer,
-  Comment,
+  Comments,
   Paginator,
   CheckBox,
 }

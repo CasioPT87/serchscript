@@ -1,0 +1,33 @@
+.comments {
+  display: flex;
+  flex-direction: column;
+  border-top: 0.05em solid var(--dark-middle);
+  margin: 2em 0;
+  align-items: stretch;
+}
+
+.comments__title {
+  display: flex;
+  justify-content: center;
+  font-size: 1.6em;
+}
+
+.comment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.comment__field {
+  resize: none;
+  min-height: 120px;
+  padding: 2em;
+  font-size: 1em;
+  width: 80%;
+  margin: 1em 0;
+}
+
+.comment__message {
+  padding: 2em;
+}

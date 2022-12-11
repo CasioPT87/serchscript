@@ -6,8 +6,6 @@ const {
   AtomicBlockUtils,
   convertToRaw,
   convertFromRaw,
-  ContentState,
-  convertFromHTML,
 } = require('draft-js')
 const { v4: uuidv4 } = require('uuid')
 const { getFileExtension } = require('../../utils')

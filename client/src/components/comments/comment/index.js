@@ -1,6 +1,6 @@
 const React = require('react')
 const { useDispatch } = require('react-redux')
-const { createComment } = require('../../store/async')
+const { createComment } = require('../../../store/async')
 
 const { useState, useEffect } = React
 
@@ -30,21 +30,24 @@ const Comment = ({ comment, articleId }) => {
   }
 
   return (
-    <>
+    <div className="comment">
       <textarea
         readOnly={!!comment}
         disabled={!!comment}
         onChange={onChange}
         value={value}
         placeholder="drop a comment :)"
+        className="comment__field"
       />
-      {message && <div>{message}</div>}
+      {message && <div className="comment__message">{message}</div>}
       {!comment && (
-        <div>
-          <button onClick={onSubmit}>Send comment</button>{' '}
+        <div className="">
+          <button className="form__submit" onClick={onSubmit}>
+            Send comment
+          </button>{' '}
         </div>
       )}
-    </>
+    </div>
   )
 }
 

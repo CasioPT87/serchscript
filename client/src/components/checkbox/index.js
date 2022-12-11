@@ -8,7 +8,7 @@ const CheckBox = ({ text, onChange, checked = false }) => {
         type="checkbox"
         checked={checked}
         onChange={() => onChange(!checked)}
-        className='checkbox__input'
+        className="checkbox__input"
       />
       <span class="checkbox__checkmark"></span>
     </label>
