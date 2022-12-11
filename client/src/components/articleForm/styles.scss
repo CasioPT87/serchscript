@@ -23,6 +23,10 @@
   padding: 1em 2em;
   border: 0;
   cursor: pointer;
+
+  &--separated-sides {
+    margin: 0 2em;
+  }
 }
 
 .form__message {

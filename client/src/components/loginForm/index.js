@@ -37,10 +37,7 @@ function loginForm() {
           onChange={e => setPassword(e.target.value)}
         />
 
-        <button
-          className="form__submit"
-          type="submit"
-        >
+        <button className="form__submit" type="submit">
           Send credentials
         </button>
         <div className="form__input form__message">{message}</div>

@@ -140,7 +140,7 @@ class RichText extends React.Component {
           id="myfile"
           name="myfile"
           onChange={e => this.insertImage(e.target.files[0])}
-          className="form__submit"
+          className="form__submit form__submit--separated-sides"
         ></input>
       </div>
     )
