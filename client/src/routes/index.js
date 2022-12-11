@@ -10,7 +10,7 @@ module.exports = {
   articles: {
     list: {
       path: '/',
-      text: 'Articles List'
+      text: 'Articles List',
     },
     create: {
       path: '/admin/articles/new',

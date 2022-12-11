@@ -24,3 +24,10 @@
   border: 0;
   cursor: pointer;
 }
+
+.form__message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--dark);
+}
