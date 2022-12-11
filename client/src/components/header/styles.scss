@@ -3,6 +3,7 @@
 .header__inner {
   display: flex;
   padding: 1em;
+  border-bottom: 0.2em solid var(--primary);
 }
 
 .header__inner > a:first-child {
