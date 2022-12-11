@@ -19,12 +19,6 @@ class RichText extends React.Component {
 
     this.focus = () => this.refs.editor.focus()
 
-    this.onChange = editorState => {
-      this.setState({ editorState }, () => {
-        this.props.setText(convertToRaw(editorState.getCurrentContent()))
-      })
-    }
-
     this.handleKeyCommand = command => this._handleKeyCommand(command)
     this.onTab = e => this._onTab(e)
     this.toggleBlockType = type => this._toggleBlockType(type)
@@ -38,6 +32,12 @@ class RichText extends React.Component {
       const contentState = convertFromRaw(articleData)
       this.onChange(EditorState.createWithContent(contentState))
     }
+  }
+
+  onChange = editorState => {
+    this.setState({ editorState }, () => {
+      this.props.setText(convertToRaw(editorState.getCurrentContent()))
+    })
   }
 
   _handleKeyCommand(command) {

@@ -2,18 +2,21 @@ const React = require('react')
 const { Provider } = require('react-redux')
 const { StaticRouter } = require('react-router-dom/server')
 const ReactDOMServer = require('react-dom/server')
+const _ = require('lodash')
 const Components = require('../../components')
 const setUpStore = require('../../store/setUp')
 
 const ComponentsLibrary = {
   articles: <Components.Articles />,
   article: <Components.Article />,
-  articleForm: <Components.ArticleForm />,
-  home: <Components.Home />,
+  articleForm: {
+    create: <Components.ArticleForm.create />,
+    edit: <Components.ArticleForm.edit />
+  },
   loginForm: <Components.LoginForm />,
 }
 
-const getComponent = name => ComponentsLibrary[name]
+const getComponent = name => _.get(ComponentsLibrary, name)
 
 const getInitialComponentsTree = (store, componentName) => {
   return ReactDOMServer.renderToString(

@@ -2,7 +2,7 @@ const React = require('react')
 
 const CheckBox = ({ text, onChange, checked = false }) => {
   return (
-    <label class="checkbox">
+    <label className="checkbox">
       {text}
       <input
         type="checkbox"
@@ -10,7 +10,7 @@ const CheckBox = ({ text, onChange, checked = false }) => {
         onChange={() => onChange(!checked)}
         className="checkbox__input"
       />
-      <span class="checkbox__checkmark"></span>
+      <span className="checkbox__checkmark"></span>
     </label>
   )
 }

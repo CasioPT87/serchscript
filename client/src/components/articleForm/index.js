@@ -7,75 +7,66 @@ const { createArticle, updateArticle } = require('../../store/async')
 
 const MODE = {
   create: 'CREATE',
-  update: 'UPDATE',
+  edit: 'EDIT',
 }
 
 const getDispatchAction = mode => {
   switch (mode) {
     case MODE.create:
       return createArticle
-    case MODE.update:
+    case MODE.edit:
       return updateArticle
     default:
       return () => {}
   }
 }
 
-function articleForm() {
+const getButtonText = mode => {
+  switch (mode) {
+    case MODE.create:
+      return 'Create'
+    case MODE.edit:
+      return 'Update'
+    default:
+      return 'Create'
+  }
+}
+
+const getRichTextDataFeed = ({ mode, article }) => {
+  switch (mode) {
+    case MODE.create:
+      return null
+    case MODE.edit:
+      return article?.content
+    default:
+      return null
+  }
+}
+
+const ArticleForm = mode => () => {
   const dispatch = useDispatch()
   const article = useSelector(store => store.article)
   const [title, setTitle] = useState('')
-  const [mode, setMode] = useState(MODE.create)
-  const [id, setId] = useState(null)
   const [description, setDescription] = useState('')
   const [content, setContent] = useState('')
   const [hidden, setHidden] = useState(false)
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const pathname = window.location.pathname
-      const pathnameBits = pathname.split('/')
-      const lastBit = pathnameBits.pop()
-      if (lastBit === 'edit') {
-        const id = pathnameBits.pop()
-        setMode(MODE.update)
-        setId(id)
-      }
-    }
-  }, [])
-
-  useEffect(() => {
-    if (article) {
-      if (mode === MODE.create) {
-        reset()
-      } else if (mode === MODE.update) {
-        const { title, description, content, hidden } = article
-        setTitle(title)
-        setDescription(description)
-        setContent(JSON.parse(content))
-        setHidden(hidden)
-      }
+    if (article && mode === MODE.edit) {
+      const { title, description, hidden } = article
+      setTitle(title)
+      setDescription(description)
+      setHidden(hidden)
     }
   }, [article, mode])
-
-  const reset = (message = '', error = null) => {
-    if (error) {
-      return setMessage(error.message)
-    }
-    setTitle('')
-    setDescription('')
-    setContent('')
-    setMessage(message)
-    setHidden(false)
-  }
 
   let handleSubmit = async e => {
     e.preventDefault()
     try {
       const response = await dispatch(
         getDispatchAction(mode)({
-          id,
+          id: article?._id,
           title,
           description,
           content,
@@ -83,9 +74,9 @@ function articleForm() {
         })
       )
 
-      reset(response?.message || 'action succeeded')
+      setMessage(response?.message || 'action succeeded')
     } catch (e) {
-      return reset(null, e)
+      return setMessage(e.message)
     }
   }
 
@@ -109,11 +100,11 @@ function articleForm() {
         />
         <ArticleCreator
           setText={setContent}
-          articleContent={article?.content}
+          articleContent={getRichTextDataFeed({ mode, article })}
         />
 
         <button className="form__submit" type="submit">
-          Create
+          {getButtonText(mode)}
         </button>
 
         <div className="message">{message ? <p>{message}</p> : null}</div>
@@ -122,4 +113,7 @@ function articleForm() {
   )
 }
 
-module.exports = articleForm
+module.exports = {
+  create: ArticleForm(MODE.create),
+  edit: ArticleForm(MODE.edit)
+}

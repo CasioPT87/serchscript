@@ -8,7 +8,7 @@ router.get('/new', async (req, res) => {
   return sendSSRResposeView({
     res,
     fetchers: [],
-    dataName: 'articleForm',
+    dataName: 'articleForm.create',
   })
 })
 
@@ -17,7 +17,7 @@ router.get('/:id/edit', async (req, res) => {
     req,
     res,
     fetchers: ['fetchArticle'],
-    dataName: 'articleForm',
+    dataName: 'articleForm.edit',
   })
 })
 

@@ -36,7 +36,6 @@ const show = async req => {
   if (!req.isLogged) {
     queryParams.hidden = false
   }
-  console.log('hola')
   const article = await Article.findOne({
     ...queryParams,
   }).populate('comments')

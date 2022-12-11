@@ -6,7 +6,6 @@ const { rawContentToHtml } = require('../../../utils')
 const { useEffect, useState } = React
 
 const Card = ({ article }) => {
-  console.log({ article })
   const logged = useSelector(state => state.logged)
   const [content, setContent] = useState(null)
 
