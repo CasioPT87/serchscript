@@ -18,7 +18,9 @@ const Article = () => {
   const logged = useSelector(state => state.logged)
 
   useEffect(() => {
+    console.log('mounting single article')
     if (typeof window !== 'undefined') {
+      console.log('inside the window thing')
       pathname = window.location.pathname
       const urlArticleTitleId = pathname.split('/')[2]
       if (!article || article.titleId !== urlArticleTitleId) {

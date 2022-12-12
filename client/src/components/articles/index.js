@@ -14,6 +14,7 @@ const Articles = () => {
   const articles = useSelector(state => state.articles)
   const fetchArticlesByPage = page => dispatch(fetchArticles({ page, limit }))
   useEffect(() => {
+    console.log('mounting articles')
     if (_.isEmpty(articles.list)) fetchArticlesByPage(1)
   }, [])
 
