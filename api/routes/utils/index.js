@@ -12,7 +12,7 @@ const verifyToken = token => {
 
 const COOKIE = {
   httpOnly: false, // so the front-end js can get the cookie
-  secure: process.env.NODE_ENV === 'development' ? false : true, 
+  secure: process.env.NODE_ENV === 'development' ? false : true,
   sameSite: 'Strict',
   domain: process.env.DOMAIN,
 }
