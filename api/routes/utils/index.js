@@ -14,7 +14,7 @@ const COOKIE = {
   httpOnly: process.env.NODE_ENV === 'development' ? false : true,
   secure: process.env.NODE_ENV === 'development' ? false : true,
   sameSite: 'Strict',
-  domain: process.env.DOMAIN, 
+  domain: process.env.DOMAIN,
 }
 
 const createCookie = (res, token) => {

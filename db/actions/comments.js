@@ -1,8 +1,8 @@
 const Comment = require('../../db/models/comment')
 const _ = require('lodash')
-const ObjectId = require('mongoose').Types.ObjectId;
+const ObjectId = require('mongoose').Types.ObjectId
 const { escape } = require('validator')
-const xssFilters = require('xss-filters');
+const xssFilters = require('xss-filters')
 
 // create new
 const create = req => {
@@ -10,14 +10,14 @@ const create = req => {
   if (content && articleId) {
     console.log({ content, hidden, articleId })
     console.log(_.isBoolean(hidden), ObjectId.isValid(articleId))
-    if (_.isBoolean(hidden) &&  ObjectId.isValid(articleId)) {
+    if (_.isBoolean(hidden) && ObjectId.isValid(articleId)) {
       const comment = new Comment()
       comment.content = xssFilters.inHTMLData(escape(content))
       comment.hidden = hidden
       comment.article = escape(articleId)
       return comment.save()
     }
-    throw new Error('something wrong about this comment, man!') 
+    throw new Error('something wrong about this comment, man!')
   }
   throw new Error('article id and content are necessary to create a comment')
 }
