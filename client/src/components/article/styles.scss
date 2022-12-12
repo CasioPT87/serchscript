@@ -7,11 +7,11 @@
 }
 
 .article__inner {
-  padding: 2em;
+  padding: 4em;
 }
 
 @media (max-width: 800px) {
-  .ariticle {
+  .article {
     padding: 1em;
   }
   .article__inner {
@@ -27,6 +27,21 @@
 .article__description {
   display: flex;
   justify-content: center;
+}
+
+.article__content {
+
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+  }
+}
+
+// for the first img of the article
+.article__content > img:first-of-type {
+  width: 100%;
 }
 
 .article__edit-button {
