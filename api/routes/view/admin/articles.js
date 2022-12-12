@@ -12,6 +12,7 @@ router.get('/new', async (req, res) => {
   })
 })
 
+// returns form to edit a new article
 router.get('/:id/edit', async (req, res) => {
   return sendSSRResposeView({
     req,

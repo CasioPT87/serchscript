@@ -12,15 +12,15 @@ module.exports = {
     update: actionsArticle.update,
   },
   comments: {
-    index: actionsComment.index,
-    indexForArticle: actionsComment.indexForArticle,
-    destroy: actionsComment.destroy,
-    destroyAll: actionsComment.destroyAll,
+    // index: actionsComment.index,
+    // indexForArticle: actionsComment.indexForArticle,
+    // destroy: actionsComment.destroy,
+    // destroyAll: actionsComment.destroyAll,
     create: actionsComment.create,
-    update: actionsComment.update,
+    // update: actionsComment.update,
   },
   auth: {
     show: actionsAuth.show,
-    create: actionsAuth.create,
+    // create: actionsAuth.create,
   },
 }

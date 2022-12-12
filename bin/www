@@ -11,6 +11,9 @@ var app = require('../app');
 var debug = require('debug')('backend:server');
 var http = require('http');
 
+// disables the x-powered-by header banner, so it's less obvious that the app runs in express
+app.disable('x-powered-by')
+
 /**
  * Get port from environment and store in Express.
  */

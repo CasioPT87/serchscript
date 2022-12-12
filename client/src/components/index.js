@@ -23,5 +23,5 @@ module.exports = {
   Comments,
   Paginator,
   CheckBox,
-  Warning
+  Warning,
 }

@@ -43,7 +43,12 @@ const Article = () => {
           <Link to={`/admin/articles/${article._id}/edit`}>Edit</Link>
         </div>
       )}
-      {logged && <Warning show={article.hidden} text="this article is currently hidden" /> }
+      {logged && (
+        <Warning
+          show={article.hidden}
+          text="this article is currently hidden"
+        />
+      )}
       <h1 className="article__title">{article.title}</h1>
       <h3 className="article__description">{article.description}</h3>
       <div className="article__inner">

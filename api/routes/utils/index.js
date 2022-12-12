@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken')
-const { secret } = require('../../constants')
+
+const secret = process.env.SECRET
 
 const createToken = user => {
-  return jwt.sign({ name: user.name }, secret)
+  return jwt.sign({ name: user.name }, secret, { expiresIn: '8h' })
 }
 
 const verifyToken = token => {
@@ -10,9 +11,10 @@ const verifyToken = token => {
 }
 
 const COOKIE = {
-  // httpOnly: true,
+  httpOnly: process.env.NODE_ENV === 'development' ? false : true,
   secure: process.env.NODE_ENV === 'development' ? false : true,
   sameSite: 'Strict',
+  domain: process.env.DOMAIN, 
 }
 
 const createCookie = (res, token) => {

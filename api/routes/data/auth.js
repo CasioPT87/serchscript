@@ -3,7 +3,7 @@ const db = require('../../../db/actions')
 const router = express.Router()
 const { createToken, createCookie, clearCookie } = require('../utils')
 
-// get list
+// create new user
 // router.post('/create', async (req, res, next) => {
 //   const user = await db.auth.show(req)
 //   if (user)
@@ -19,7 +19,7 @@ const { createToken, createCookie, clearCookie } = require('../utils')
 //   return res.status(500).send({ message: 'error creating user' })
 // })
 
-// get one
+// tries to login session
 router.post('/login', async (req, res) => {
   const user = await db.auth.show(req)
   if (!user) {
@@ -39,6 +39,7 @@ router.post('/login', async (req, res) => {
   }
 })
 
+// delete sesson for user
 router.get('/logout', async (req, res) => {
   clearCookie(res)
   return res.json({ message: 'cookie deleted!' })

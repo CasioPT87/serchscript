@@ -1,5 +1,5 @@
 .card {
-  padding: 1em;
+  // padding: 0.5em;
   border-bottom: 0.05em solid var(--dark-middle);
 
   a {
@@ -10,4 +10,18 @@
 .card__title,
 .card__text {
   color: var(--dark);
+  margin-bottom: 0;
+}
+
+.card__inner {
+  padding: 1em;
+}
+
+.card__date {
+  display: inline-block;
+  font-size: 0.7em;
+  padding: 0.4em 0.6em;
+  color: var(--light);
+  background-color: var(--secondary-light);
+  border-radius: 0.2em;
 }
