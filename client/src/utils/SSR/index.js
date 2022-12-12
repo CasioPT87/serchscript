@@ -37,7 +37,7 @@ const renderHtml = (html, preloadedState) => {
   <html>
     <head>
       <meta charset="utf-8">
-      <title>SSR react</title>
+      <title>serchscript</title>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
       <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="/react.bundle.js"></script>
       <link rel="stylesheet" type="text/css" href="/react.css">

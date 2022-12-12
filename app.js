@@ -4,6 +4,8 @@ const express = require('express')
 const helmet = require('helmet')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
+const favicon = require('serve-favicon')
+const path = require('path')
 const connect = require('./db/connection')
 const routes = require('./api/routes')
 const { hasValidCredentials } = require('./api/routes/utils')
@@ -11,6 +13,8 @@ const { hasValidCredentials } = require('./api/routes/utils')
 global.__basedir = __dirname
 
 const app = express()
+
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 console.log('node env', process.env.NODE_ENV)
 
