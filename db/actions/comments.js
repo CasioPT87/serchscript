@@ -8,8 +8,6 @@ const xssFilters = require('xss-filters')
 const create = req => {
   const { content, hidden = false, articleId } = req.body
   if (content && articleId) {
-    console.log({ content, hidden, articleId })
-    console.log(_.isBoolean(hidden), ObjectId.isValid(articleId))
     if (_.isBoolean(hidden) && ObjectId.isValid(articleId)) {
       const comment = new Comment()
       comment.content = xssFilters.inHTMLData(escape(content))

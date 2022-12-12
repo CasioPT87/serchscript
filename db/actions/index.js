@@ -21,6 +21,6 @@ module.exports = {
   },
   auth: {
     show: actionsAuth.show,
-    // create: actionsAuth.create,
+    create: actionsAuth.create,
   },
 }
