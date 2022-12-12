@@ -114,7 +114,7 @@ const login =
   ({ name, password }) =>
   async (dispatch, getState) => {
     try {
-      let response = await fetch('/data/auth/create', {
+      let response = await fetch('/data/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
