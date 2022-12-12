@@ -14,7 +14,7 @@ const {
   convertFromHTML,
 } = require('draft-js')
 
-const data = require('../../../../data/hey')
+const data = require('../../../../data/old-backup-cheatsheets')
 
 const getHTMLForCheatsheet = cs => {
   const key = Object.keys(cs)[0]
