@@ -22,11 +22,8 @@
   color: var(--light);
   padding: 1em 2em;
   border: 0;
+  max-width: 100%;
   cursor: pointer;
-
-  &--separated-sides {
-    margin: 0 2em;
-  }
 }
 
 .form__message {

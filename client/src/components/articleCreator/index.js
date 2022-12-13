@@ -132,7 +132,6 @@ class RichText extends React.Component {
           />
         </div>
 
-        <label htmlFor="myfile">Add Image</label>
         <input
           type="file"
           id="myfile"
