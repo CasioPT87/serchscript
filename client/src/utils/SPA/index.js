@@ -42,7 +42,12 @@ const replaceElements = () => {
           <Footer />
         </BrowserRouter>
       </MainFrame>
-    </Provider>
+    </Provider>,
+    { onRecoverableError: (error, other) => {
+      console.log('there has been an error')
+      console.log({ error })
+      console.log({ other })
+    }}
   )
 }
 
