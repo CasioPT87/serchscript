@@ -1,22 +1,22 @@
-var express = require('express')
+const express = require('express')
 const db = require('../../../../db/actions')
-var router = express.Router()
+const { dataActionHandler } = require('../../utils')
+
+const router = express.Router()
 
 // create new
-router.post('/', async (req, res) => {
-  const article = await db.articles.create(req)
-  return res.json(article)
+router.post('/', async (req, res, next) => {
+  return dataActionHandler({ action: db.articles.create, req, res, next })
 })
 
 // update one
-router.put('/:id', async (req, res) => {
-  const article = await db.articles.update(req)
-  return res.json(article)
+router.put('/:id', async (req, res, next) => {
+  return dataActionHandler({ action: db.articles.update, req, res, next })
 })
 
 // delete one
-router.delete('/:id', async req => {
-  return db.articles.destroy(req)
+router.delete('/:id', async (req, res, next) => {
+  return dataActionHandler({ action: db.articles.destroy, req, res, next })
 })
 
 module.exports = router

@@ -1,10 +1,10 @@
-var express = require('express')
+const express = require('express')
 const { createWriteStream } = require('fs')
 const busboy = require('busboy')
-var router = express.Router()
+const router = express.Router()
 
 // save photo
-router.post('/', function (req, res) {
+router.post('/', function (req, res, next) {
   const bb = busboy({ headers: req.headers })
 
   let filename
@@ -18,6 +18,14 @@ router.post('/', function (req, res) {
   bb.on('close', () => {
     res.status(200).json({ filename: filename })
   })
+
+  //handling errors
+  bb.on('error', e => {
+    next(e)
+  })
+  req.on('aborted', next)
+  //
+
   req.pipe(bb)
 })
 

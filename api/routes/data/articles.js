@@ -1,17 +1,17 @@
-var express = require('express')
+const express = require('express')
 const db = require('../../../db/actions')
-var router = express.Router()
+const { dataActionHandler } = require('../utils')
+
+const router = express.Router()
 
 // get list
 router.get('/', async (req, res, next) => {
-  const articles = await db.articles.index(req)
-  return res.json(articles)
+  return dataActionHandler({ action: db.articles.index, req, res, next })
 })
 
 // get one
-router.get('/:titleId', async (req, res) => {
-  const article = await db.articles.show(req)
-  return res.json(article)
+router.get('/:titleId', async (req, res, next) => {
+  return dataActionHandler({ action: db.articles.show, req, res, next })
 })
 
 module.exports = router

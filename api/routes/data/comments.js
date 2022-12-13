@@ -1,11 +1,13 @@
-var express = require('express')
+const express = require('express')
 const db = require('../../../db/actions')
-var router = express.Router()
+const { dataActionHandler } = require('../utils')
+
+
+const router = express.Router()
 
 // create new
-router.post('/', async (req, res) => {
-  const comment = await db.comments.create(req)
-  return res.json(comment)
+router.post('/', async (req, res, next) => {
+  return dataActionHandler({ action: db.comments.create, req, res, next })
 })
 
 module.exports = router

@@ -20,29 +20,35 @@ const { createToken, createCookie, clearCookie } = require('../utils')
 // })
 
 // tries to login session
-router.post('/login', async (req, res) => {
-  const user = await db.auth.show(req)
-  if (!user) {
-    return res.status(404).json({
-      message: `We don't know who you are... we have already called internet police...`,
-    })
-  } else {
-    if (user.validPassword(req.body.password)) {
-      const token = await createToken(user)
-      createCookie(res, token)
-      res.send({ message: `Welcome back, ${user.name}` })
-    } else {
-      return res.status(400).json({
-        message: 'Your password is not good, man',
+router.post('/login', async (req, res, next) => {
+  try {
+    const user = await db.auth.show(req)
+    if (!user) {
+      return res.status(404).json({
+        message: `We don't know who you are... we have already called internet police...`,
       })
+    } else {
+      if (user.validPassword(req.body.password)) {
+        const token = await createToken(user)
+        createCookie(res, token)
+        res.send({ message: `Welcome back, ${user.name}` })
+      } else {
+        return res.status(400).json({
+          message: 'Your password is not good, man',
+        })
+      }
     }
+  } catch (e) {
+    next(e)
   }
 })
 
 // delete sesson for user
-router.get('/logout', async (req, res) => {
-  clearCookie(res)
-  return res.json({ message: 'cookie deleted!' })
+router.get('/logout', async (req, res, next) => {
+  return new Promise(succ => {
+    clearCookie(res)
+    succ('cookie deleted!!')
+  }).then(message => res.json({ message }))
 })
 
 module.exports = router
