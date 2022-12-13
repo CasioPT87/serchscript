@@ -21,13 +21,13 @@ const getComponent = name => _.get(ComponentsLibrary, name)
 const getInitialComponentsTree = (store, componentName) => {
   return ReactDOMServer.renderToString(
     <Provider store={store}>
-      <StaticRouter>
-        <Components.MainFrame>
+      <Components.MainFrame>
+        <StaticRouter>
           <Components.Header />
           {getComponent(componentName)}
           <Components.Footer />
-        </Components.MainFrame>
-      </StaticRouter>
+        </StaticRouter>
+      </Components.MainFrame>
     </Provider>
   )
 }
@@ -39,8 +39,12 @@ const renderHtml = (html, preloadedState) => {
       <meta charset="utf-8">
       <title>serchscript</title>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-      <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="/react.bundle.js"></script>
+
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <script defer src="/react.bundle.js"></script>
       <link rel="stylesheet" type="text/css" href="/react.css">
+      
     </head>
   
     <body>

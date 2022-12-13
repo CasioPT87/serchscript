@@ -32,8 +32,8 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         imgSrc: [`'self'`, `data:`, `*`, `c:`],
-        scriptSrc: [`'self'`, process.env.DOMAIN],
-        styleSrc: [`'self'`, process.env.DOMAIN],
+        scriptSrc: [`'self'`, `'unsafe-inline'`],
+        styleSrc: [`'self'`, `*`],
       },
     },
   })

@@ -1,7 +1,7 @@
 const { BrowserRouter, Route, Routes } = require('react-router-dom')
 
 const React = require('react')
-const ReactDOM = require('react-dom/client')
+const ReactDOMClient = require('react-dom/client')
 const setUpStore = require('../../store/setUp')
 const { Provider } = require('react-redux')
 
@@ -22,8 +22,8 @@ const replaceElements = () => {
   // Allow the passed state to be garbage-collected
   delete window.__PRELOADED_STATE__
 
-  const root = ReactDOM.createRoot(document.getElementById('root'))
-  root.render(
+  ReactDOMClient.hydrateRoot(
+    document.getElementById('root'),
     <Provider store={store}>
       <MainFrame>
         <BrowserRouter>
