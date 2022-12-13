@@ -1,7 +1,9 @@
 const React = require('react')
 const { useState, useEffect } = require('react')
 const { useDispatch } = require('react-redux')
-const { article: { create: createArticle } } = require('../../store/async')
+const {
+  article: { create: createArticle },
+} = require('../../store/async')
 const {
   EditorState,
   convertToRaw,

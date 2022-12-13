@@ -3,7 +3,9 @@ const { useSelector, useDispatch } = require('react-redux')
 const parse = require('html-react-parser')
 const { Link } = require('react-router-dom')
 const { rawContentToHtml } = require('../../utils')
-const { article: { show: showArticle} } = require('../../store/async')
+const {
+  article: { show: showArticle },
+} = require('../../store/async')
 const Comments = require('../comments')
 const Warning = require('../warning')
 
@@ -12,6 +14,7 @@ const { useEffect, useState } = React
 const Article = () => {
   const dispatch = useDispatch()
   const [content, setContent] = useState(null)
+  const [message, setMessage] = useState('')
   const article = useSelector(state => {
     return state.article
   })
@@ -22,7 +25,9 @@ const Article = () => {
       pathname = window.location.pathname
       const urlArticleTitleId = pathname.split('/')[2]
       if (!article || article.titleId !== urlArticleTitleId) {
-        dispatch(showArticle(urlArticleTitleId))
+        dispatch(showArticle(urlArticleTitleId)).then(response => {
+          if (response.error) setMessage(response.message)
+        })
       }
     }
   }, [])

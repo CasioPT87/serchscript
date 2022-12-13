@@ -15,6 +15,10 @@
   cursor: text;
 }
 
+.form__input--small {
+  max-width: 15em;
+}
+
 .form__submit {
   font-family: var(--font-family);
   font-size: 1em;

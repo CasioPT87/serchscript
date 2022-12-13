@@ -9,7 +9,7 @@ const {
 const fetchArticles =
   ({ page, limit }) =>
   async (dispatch, getState) => {
-    return new Promise(async(resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       const response = await fetch(`/data/articles?page=${page}&limit=${limit}`)
       if (response.ok) {
         const responseData = await response.json()
@@ -18,34 +18,38 @@ const fetchArticles =
       } else {
         reject()
       }
-    }).then(data => {
-      return { message: 'articles fetched' }
-    }).catch(e => {
-      return { message: 'problem fetching articles' }
     })
+      .then(data => {
+        return { message: 'articles fetched', error: false }
+      })
+      .catch(e => {
+        return { message: 'problem fetching articles', error: true }
+      })
   }
 
 // article
-const fetchArticle =
-  titleId =>
-  async (dispatch, getState) => {
-    return new Promise(async(resolve, reject) => {
-      const response = await fetch(`/data/articles/${titleId}`)
-      if (response.ok) {
-        const responseData = await response.json()
-        await dispatch(addArticle(responseData))
-        resolve(responseData)
-      } else {
-        reject()
-      }
-    }).then(data => {
-      return { message: 'articles fetched' }
-    }).catch(e => {
-      return { message: 'problem fetching articles' }
+const fetchArticle = titleId => async (dispatch, getState) => {
+  return new Promise(async (resolve, reject) => {
+    const response = await fetch(`/data/articles/${titleId}`)
+    if (response.ok) {
+      const responseData = await response.json()
+      await dispatch(addArticle(responseData))
+      resolve(responseData)
+    } else {
+      reject()
+    }
+  })
+    .then(data => {
+      return { message: 'articles fetched', error: false }
     })
-  }
+    .catch(e => {
+      return { message: 'problem fetching articles', error: true }
+    })
+}
 
-const createUpdateArticle = method => ({ id, title, description, content, hidden = false }) =>
+const createUpdateArticle =
+  method =>
+  ({ id, title, description, content, hidden = false }) =>
   async (dispatch, getState) => {
     return new Promise(async (resolve, reject) => {
       const digestedEntities = await uploadImages(content)
@@ -70,10 +74,11 @@ const createUpdateArticle = method => ({ id, title, description, content, hidden
         await dispatch(addArticle(responseData))
         resolve(responseData)
       } else {
-        reject(responseData)
+        reject()
       }
-    }).then(data => ({ message: data.message }))
-    .catch(e => ({ message: e.message }))
+    })
+      .then(data => ({ message: data.message, error: false }))
+      .catch(e => ({ message: e.message, error: true }))
   }
 
 //images
@@ -129,14 +134,21 @@ const login =
       })
 
       if (response.ok) {
+        const responseData = await response.json()
         await dispatch(setLogged(true))
-        resolve()
+        resolve(responseData)
       } else {
-        reject()
+        const responseData = await response.json()
+        await dispatch(setLogged(false))
+        reject(responseData)
       }
-    }).catch(() => {
-      dispatch(setLogged(false))
     })
+      .then(data => {
+        return { message: data.message, error: false }
+      })
+      .catch(data => {
+        return { message: data.message, error: true }
+      })
   }
 
 const logout = () => async (dispatch, getState) => {
@@ -145,7 +157,7 @@ const logout = () => async (dispatch, getState) => {
     if (response.ok && response.status < 300) {
       dispatch(setLogged(false))
     } else {
-      return { message: 'problem logging out'}
+      return { message: 'problem logging out', error: true }
     }
   })
 }
@@ -175,8 +187,9 @@ const createComment =
       } else {
         reject()
       }
-    }).then(() => ({ message: 'Comment created successfully'}))
-    .catch(() => ({ message: 'Create comment failed'}))
+    })
+      .then(() => ({ message: 'Comment created successfully', error: false }))
+      .catch(() => ({ message: 'Create comment failed', error: true }))
   }
 
 module.exports = {
@@ -184,13 +197,13 @@ module.exports = {
     create: createUpdateArticle('POST'),
     update: createUpdateArticle('PUT'),
     show: fetchArticle,
-    list: fetchArticles
+    list: fetchArticles,
   },
   comment: {
-    create: createComment
+    create: createComment,
   },
   auth: {
     login,
-    logout
-  }
+    logout,
+  },
 }

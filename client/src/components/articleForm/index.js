@@ -65,21 +65,17 @@ const ArticleForm = mode => () => {
 
   let handleSubmit = async e => {
     e.preventDefault()
-    try {
-      const response = await dispatch(
-        getDispatchAction(mode)({
-          id: article?._id,
-          title,
-          description,
-          content,
-          hidden,
-        })
-      )
+    const response = await dispatch(
+      getDispatchAction(mode)({
+        id: article?._id,
+        title,
+        description,
+        content,
+        hidden,
+      })
+    )
 
-      setMessage(response?.message || 'action succeeded')
-    } catch (e) {
-      return setMessage(e.message)
-    }
+    setMessage(response.message)
   }
 
   return (
