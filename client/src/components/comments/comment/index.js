@@ -1,6 +1,6 @@
 const React = require('react')
 const { useDispatch } = require('react-redux')
-const { createComment } = require('../../../store/async')
+const { comment: { create: createComment } } = require('../../../store/async')
 
 const { useState, useEffect } = React
 

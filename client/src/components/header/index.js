@@ -3,7 +3,7 @@ const React = require('react')
 const { useDispatch, useSelector } = require('react-redux')
 const { getCookie } = require('../../utils')
 const { setLogged } = require('../../store/actions')
-const { logout } = require('../../store/async')
+const { auth: { logout } } = require('../../store/async')
 const NavItem = require('./navItem')
 const routes = require('../../routes')
 

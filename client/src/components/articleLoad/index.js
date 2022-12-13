@@ -1,15 +1,10 @@
 const React = require('react')
 const { useState, useEffect } = require('react')
-const { useSelector, useDispatch } = require('react-redux')
-const ArticleCreator = require('../articleCreator')
-const { createArticle, updateArticle } = require('../../store/async')
+const { useDispatch } = require('react-redux')
+const { article: { create: createArticle } } = require('../../store/async')
 const {
-  Editor,
   EditorState,
-  RichUtils,
-  AtomicBlockUtils,
   convertToRaw,
-  convertFromRaw,
   ContentState,
   convertFromHTML,
 } = require('draft-js')

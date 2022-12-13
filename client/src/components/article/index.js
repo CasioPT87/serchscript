@@ -3,7 +3,7 @@ const { useSelector, useDispatch } = require('react-redux')
 const parse = require('html-react-parser')
 const { Link } = require('react-router-dom')
 const { rawContentToHtml } = require('../../utils')
-const { fetchArticle } = require('../../store/async')
+const { article: { show: showArticle} } = require('../../store/async')
 const Comments = require('../comments')
 const Warning = require('../warning')
 
@@ -22,7 +22,7 @@ const Article = () => {
       pathname = window.location.pathname
       const urlArticleTitleId = pathname.split('/')[2]
       if (!article || article.titleId !== urlArticleTitleId) {
-        dispatch(fetchArticle(urlArticleTitleId))
+        dispatch(showArticle(urlArticleTitleId))
       }
     }
   }, [])

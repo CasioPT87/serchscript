@@ -3,7 +3,9 @@ const { useState, useEffect } = require('react')
 const { useSelector, useDispatch } = require('react-redux')
 const ArticleCreator = require('../articleCreator')
 const CheckBox = require('../checkbox')
-const { createArticle, updateArticle } = require('../../store/async')
+const {
+  article: { create: createArticle, update: updateArticle },
+} = require('../../store/async')
 
 const MODE = {
   create: 'CREATE',

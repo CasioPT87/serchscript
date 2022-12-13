@@ -1,4 +1,3 @@
-const fetch = require('node-fetch')
 const {
   addArticles,
   addArticle,
@@ -6,20 +5,78 @@ const {
   addArticleComment,
 } = require('../actions')
 
+// articles
 const fetchArticles =
   ({ page, limit }) =>
   async (dispatch, getState) => {
-    const response = await fetch(`/data/articles?page=${page}&limit=${limit}`)
-    const responseData = await response.json()
-    dispatch(addArticles(responseData))
+    return new Promise(async(resolve, reject) => {
+      const response = await fetch(`/data/articles?page=${page}&limit=${limit}`)
+      if (response.ok) {
+        const responseData = await response.json()
+        await dispatch(addArticles(responseData))
+        resolve(responseData)
+      } else {
+        reject()
+      }
+    }).then(data => {
+      return { message: 'articles fetched' }
+    }).catch(e => {
+      return { message: 'problem fetching articles' }
+    })
   }
 
-const fetchArticle = titleId => async (dispatch, getState) => {
-  const response = await fetch(`/data/articles/${titleId}`)
-  const responseData = await response.json()
-  dispatch(addArticle(responseData))
-}
+// article
+const fetchArticle =
+  titleId =>
+  async (dispatch, getState) => {
+    return new Promise(async(resolve, reject) => {
+      const response = await fetch(`/data/articles/${titleId}`)
+      if (response.ok) {
+        const responseData = await response.json()
+        await dispatch(addArticle(responseData))
+        resolve(responseData)
+      } else {
+        reject()
+      }
+    }).then(data => {
+      return { message: 'articles fetched' }
+    }).catch(e => {
+      return { message: 'problem fetching articles' }
+    })
+  }
 
+const createUpdateArticle = method => ({ id, title, description, content, hidden = false }) =>
+  async (dispatch, getState) => {
+    return new Promise(async (resolve, reject) => {
+      const digestedEntities = await uploadImages(content)
+      let path = '/data/admin/articles' // for POST
+      if (method === 'PUT') path = `/data/admin/articles/${id}`
+      const response = await fetch(path, {
+        method,
+        headers: {
+          'Content-Type': 'application/json',
+          Connection: 'keep-alive',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          title,
+          description,
+          content: JSON.stringify({ ...content, entityMap: digestedEntities }),
+          hidden,
+        }),
+      })
+      if (response.ok) {
+        const responseData = await response.json()
+        await dispatch(addArticle(responseData))
+        resolve(responseData)
+      } else {
+        reject(responseData)
+      }
+    }).then(data => ({ message: data.message }))
+    .catch(e => ({ message: e.message }))
+  }
+
+//images
 const uploadImages = async ({ entityMap }) => {
   const entityMapValues = Object.values(entityMap)
   const uploadRequests = entityMapValues.map(async (entity, index) => {
@@ -41,6 +98,8 @@ const uploadImages = async ({ entityMap }) => {
       },
       body,
     })
+
+    if (!response.ok) throw new Error('problem uploading image')
     return response.json()
   })
 
@@ -54,135 +113,84 @@ const uploadImages = async ({ entityMap }) => {
   return Object.assign({}, entityMapValues)
 }
 
-const createArticle =
-  ({ title, description, content, hidden = false }) =>
-  async (dispatch, getState) => {
-    const digestedEntities = await uploadImages(content)
-
-    const response = await fetch('/data/admin/articles', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Connection: 'keep-alive',
-        Accept: '*/*',
-      },
-      body: JSON.stringify({
-        title,
-        description,
-        content: JSON.stringify({ ...content, entityMap: digestedEntities }),
-        hidden,
-      }),
-    })
-    const responseData = await response.json()
-    if (response.ok) {
-      dispatch(addArticle(responseData))
-    }
-
-    return { message: responseData.message }
-  }
-
-const updateArticle =
-  ({ id, title, description, content, hidden = false }) =>
-  async (dispatch, getState) => {
-    const digestedEntities = await uploadImages(content)
-
-    const response = await fetch(`/data/admin/articles/${id}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Connection: 'keep-alive',
-        Accept: '*/*',
-      },
-      body: JSON.stringify({
-        title,
-        description,
-        content: JSON.stringify({ ...content, entityMap: digestedEntities }),
-        hidden,
-      }),
-    })
-
-    const responseData = await response.json()
-
-    if (response.ok) {
-      dispatch(addArticle(responseData))
-    }
-
-    return { message: responseData.message }
-  }
-
+// auth
 const login =
   ({ name, password }) =>
   async (dispatch, getState) => {
-    try {
-      let response = await fetch('/data/auth/login', {
+    return new Promise(async (resolve, reject) => {
+      const response = await fetch('/data/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Connection: 'keep-alive',
-          Accept: '*/*',
+          Accept: 'application/json',
         },
         body: JSON.stringify({ name, password }),
       })
 
-      if (response.ok && response.status < 300) {
-        dispatch(setLogged(true))
+      if (response.ok) {
+        await dispatch(setLogged(true))
+        resolve()
       } else {
-        dispatch(setLogged(false))
+        reject()
       }
-      return response.json()
-    } catch (e) {
-      await dispatch(setLogged(false))
-      throw e
-    }
+    }).catch(() => {
+      dispatch(setLogged(false))
+    })
   }
 
 const logout = () => async (dispatch, getState) => {
-  try {
-    let response = await fetch('/data/auth/logout')
-
+  return new Promise(async (resolve, reject) => {
+    const response = await fetch('/data/auth/logout')
     if (response.ok && response.status < 300) {
       dispatch(setLogged(false))
+    } else {
+      return { message: 'problem logging out'}
     }
-
-    return response.json()
-  } catch (e) {
-    console.log('Error loging out')
-  }
+  })
 }
 
+// comment
 const createComment =
   ({ articleId, content }) =>
   async (dispatch, getState) => {
-    const response = await fetch(`/data/comments`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Connection: 'keep-alive',
-        Accept: '*/*',
-      },
-      body: JSON.stringify({
-        articleId,
-        content,
-      }),
-    })
+    return new Promise(async (resolve, reject) => {
+      const response = await fetch(`/data/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Connection: 'keep-alive',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          articleId,
+          content,
+        }),
+      })
 
-    const responseData = await response.json()
-
-    if (response.ok) {
-      dispatch(addArticleComment(responseData))
-      return { message: 'comment created succesfully' }
-    }
-
-    return { message: 'problem creating comment' }
+      if (response.ok) {
+        const responseData = await response.json()
+        await dispatch(addArticleComment(responseData))
+        resolve()
+      } else {
+        reject()
+      }
+    }).then(() => ({ message: 'Comment created successfully'}))
+    .catch(() => ({ message: 'Create comment failed'}))
   }
 
 module.exports = {
-  fetchArticles,
-  fetchArticle,
-  createArticle,
-  uploadImages,
-  updateArticle,
-  login,
-  logout,
-  createComment,
+  article: {
+    create: createUpdateArticle('POST'),
+    update: createUpdateArticle('PUT'),
+    show: fetchArticle,
+    list: fetchArticles
+  },
+  comment: {
+    create: createComment
+  },
+  auth: {
+    login,
+    logout
+  }
 }

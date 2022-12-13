@@ -1,7 +1,7 @@
 const React = require('react')
 const { useState } = require('react')
 const { useDispatch } = require('react-redux')
-const { login } = require('../../store/async')
+const { auth: { login } } = require('../../store/async')
 
 function loginForm() {
   const dispatch = useDispatch()
