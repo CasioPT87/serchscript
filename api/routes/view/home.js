@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
     res,
     fetchers: ['fetchArticles'],
     dataName: 'articles',
-    errorHandler: next
+    errorHandler: next,
   })
 })
 

@@ -10,7 +10,7 @@ router.get('/:titleId', async (req, res, next) => {
     res,
     fetchers: ['fetchArticle'],
     dataName: 'article',
-    errorHandler: next
+    errorHandler: next,
   })
 })
 

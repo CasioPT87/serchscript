@@ -1,5 +1,5 @@
 const express = require('express')
-require("@babel/register");
+require('@babel/register')
 const { sendSSRResposeView } = require('../utils')
 const router = express.Router()
 
@@ -9,7 +9,7 @@ router.get('/new', async (req, res, next) => {
     res,
     fetchers: [],
     dataName: 'articleForm.create',
-    errorHandler: next
+    errorHandler: next,
   })
 })
 
@@ -20,7 +20,7 @@ router.get('/:id/edit', async (req, res, next) => {
     res,
     fetchers: ['fetchArticle'],
     dataName: 'articleForm.edit',
-    errorHandler: next
+    errorHandler: next,
   })
 })
 

@@ -9,7 +9,7 @@ router.get('/', async (req, res, next) => {
     res,
     fetchers: [],
     dataName: 'loginForm',
-    errorHandler: next
+    errorHandler: next,
   })
 })
 

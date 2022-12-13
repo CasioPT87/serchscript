@@ -2,7 +2,6 @@ const express = require('express')
 const db = require('../../../db/actions')
 const { dataActionHandler } = require('../utils')
 
-
 const router = express.Router()
 
 // create new
