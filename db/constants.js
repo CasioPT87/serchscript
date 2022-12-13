@@ -1,5 +1,5 @@
 const defaults = {
-  limitArticlesPerPage: 10,
+  limitArticlesPerPage: 5,
   initialArticlesPage: 1,
 }
 

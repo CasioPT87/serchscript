@@ -22,8 +22,8 @@ const replaceElements = () => {
   // Allow the passed state to be garbage-collected
   delete window.__PRELOADED_STATE__
 
-  const root = ReactDOMClient.createRoot(document.getElementById('root'))
-  root.render(
+  ReactDOMClient.hydrateRoot(
+    document.getElementById('root'),
     <Provider store={store}>
       <MainFrame>
         <BrowserRouter>

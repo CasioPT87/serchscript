@@ -9,8 +9,8 @@ const rawContentToHtml = rawContent => {
   const cooked = convertFromRaw(rawContent)
   const preHtml = convertToHTML(cooked)
   return preHtml
-    .replaceAll('<figure>', '<img src="')
-    .replaceAll('</figure>', '" >')
+    .replace(/<figure>/g, '<img src="')
+    .replace(/<\/figure>/g, '" >')
 }
 
 const getCookie = () =>
