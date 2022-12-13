@@ -22,8 +22,8 @@ const replaceElements = () => {
   // Allow the passed state to be garbage-collected
   delete window.__PRELOADED_STATE__
 
-  ReactDOMClient.hydrateRoot(
-    document.getElementById('root'),
+  const root = ReactDOMClient.createRoot(document.getElementById('root'))
+  root.render(
     <Provider store={store}>
       <MainFrame>
         <BrowserRouter>
@@ -42,12 +42,7 @@ const replaceElements = () => {
           <Footer />
         </BrowserRouter>
       </MainFrame>
-    </Provider>,
-    { onRecoverableError: (error, other) => {
-      console.log('there has been an error')
-      console.log({ error })
-      console.log({ other })
-    }}
+    </Provider>
   )
 }
 
