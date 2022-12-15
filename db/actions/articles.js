@@ -22,6 +22,8 @@ const index = async req => {
     limit,
   }
 
+  console.log({ page, limit })
+
   const textSearchFilter = text
     ? {
         $or: [
@@ -39,7 +41,7 @@ const index = async req => {
     return Article.paginate({ ...textSearchFilter }, options)
   }
 
-  return Article.paginate({ ...textSearchFilter, hidden: false })
+  return Article.paginate({ ...textSearchFilter, hidden: false }, options)
 }
 
 // get one
