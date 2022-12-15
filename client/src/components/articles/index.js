@@ -14,8 +14,19 @@ const Articles = () => {
   const limit = 5
   const dispatch = useDispatch()
   const [message, setMessage] = useState('')
+  const [searchText, setSearchText] = useState('')
   const articles = useSelector(state => state.articles)
-  const fetchArticlesByPage = page => dispatch(listArticles({ page, limit }))
+  const fetchArticlesByPage = page => dispatch(listArticles({ page, limit, text: searchText }))
+  const search = text => {
+    dispatch(listArticles({ page: 0, limit, text }))
+    setSearchText(text)
+  }
+
+  const clearSearchText = () => {
+    dispatch(listArticles({ page: 0, limit, text: '' }))
+    setSearchText('')
+  }
+
   useEffect(() => {
     if (_.isEmpty(articles.list)) {
       fetchArticlesByPage(1).then(response => {
@@ -29,7 +40,7 @@ const Articles = () => {
 
   return (
     <div className="articles articles--bg-light">
-      <Searcher clear={() => {}} search={() => {}}/>
+      <Searcher clear={clearSearchText} search={search} />
       {message && <div className="message">{message}</div>}
       <ul className="articles__list">
         {articles.list.docs.map(article => (

@@ -11,6 +11,9 @@ const index = async req => {
   const page = _.isEmpty(req.query)
     ? defaults.initialArticlesPage
     : Number(req.query.page)
+  const text = _.isEmpty(req.query)
+    ? defaults.initialArticlesTextSearch
+    : String(req.query.text)
 
   const options = {
     select: ['title', 'titleId', 'description', 'hidden', 'createdAt'],
@@ -19,11 +22,24 @@ const index = async req => {
     limit,
   }
 
+  const textSearchFilter = text
+    ? {
+        $or: [
+          {
+            title:new RegExp(text, 'i'),
+          },
+          {
+            description: new RegExp(text, 'i')
+          },
+        ],
+      }
+    : {}
+
   if (req.isLogged) {
-    return Article.paginate({}, options)
+    return Article.paginage({ ...textSearchFilter }, options)
   }
 
-  return Article.paginate({ hidden: false }, options)
+  return Article.paginate({ ...textSearchFilter })
 }
 
 // get one
