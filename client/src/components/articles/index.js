@@ -36,18 +36,24 @@ const Articles = () => {
     }
   }, [])
 
-  if (_.isEmpty(articles.list) || articles.list?.docs.length === 0)
-    return <div>there is no articles yet</div>
+  const cards = () => {
+    if (articles?.list?.docs && articles.list.docs.length > 0) {
+      return (
+        <ul className="articles__list">
+          {articles.list.docs.map(article => (
+            <Card key={article._id} article={article} />
+          ))}
+        </ul>
+      )
+    }
+    return <div className='articles__message-default'>No articles found</div>
+  }
 
   return (
     <div className="articles articles--bg-light">
       <Searcher clear={clearSearchText} search={search} />
       {message && <div className="message">{message}</div>}
-      <ul className="articles__list">
-        {articles.list.docs.map(article => (
-          <Card key={article._id} article={article} />
-        ))}
-      </ul>
+      {cards()}
       <Paginator fetchPage={fetchArticlesByPage} limit={limit} />
     </div>
   )

@@ -1,10 +1,16 @@
 .articles__list {
   max-width: 80%;
-  min-height: 100vh;
   margin: auto;
   padding: 0;
 }
 
 .articles--bg-light {
   background-color: var(--dark-light);
+}
+
+.articles__message-default {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40vh;
 }
