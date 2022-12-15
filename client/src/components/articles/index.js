@@ -2,6 +2,7 @@ const React = require('react')
 const _ = require('lodash')
 const { useSelector, useDispatch } = require('react-redux')
 const Card = require('./card')
+const Searcher = require('../searcher')
 const Paginator = require('../paginator')
 const {
   article: { list: listArticles },
@@ -28,6 +29,7 @@ const Articles = () => {
 
   return (
     <div className="articles articles--bg-light">
+      <Searcher clear={() => {}} search={() => {}}/>
       {message && <div className="message">{message}</div>}
       <ul className="articles__list">
         {articles.list.docs.map(article => (

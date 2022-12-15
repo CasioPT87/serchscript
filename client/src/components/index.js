@@ -10,6 +10,7 @@ const ArticleLoad = require('./articleLoad')
 const Paginator = require('./paginator')
 const CheckBox = require('./checkbox')
 const Warning = require('./warning')
+const Searcher = require('./searcher')
 
 module.exports = {
   Article,
@@ -24,4 +25,5 @@ module.exports = {
   Paginator,
   CheckBox,
   Warning,
+  Searcher
 }
