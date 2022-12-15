@@ -1,7 +1,7 @@
 const defaults = {
   limitArticlesPerPage: 5,
   initialArticlesPage: 1,
-  initialArticlesTextSearch: ''
+  initialArticlesTextSearch: '',
 }
 
 module.exports = { defaults }

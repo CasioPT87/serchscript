@@ -10,7 +10,9 @@ const fetchArticles =
   ({ page, limit, text }) =>
   async (dispatch, getState) => {
     return new Promise(async (resolve, reject) => {
-      const response = await fetch(`/data/articles?page=${page}&limit=${limit}&text=${text}`)
+      const response = await fetch(
+        `/data/articles?page=${page}&limit=${limit}&text=${text}`
+      )
       if (response.ok) {
         const responseData = await response.json()
         await dispatch(addArticles(responseData))

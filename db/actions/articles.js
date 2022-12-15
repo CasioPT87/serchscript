@@ -26,10 +26,10 @@ const index = async req => {
     ? {
         $or: [
           {
-            title:new RegExp(text, 'i'),
+            title: new RegExp(text, 'i'),
           },
           {
-            description: new RegExp(text, 'i')
+            description: new RegExp(text, 'i'),
           },
         ],
       }
