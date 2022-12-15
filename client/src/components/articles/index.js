@@ -46,7 +46,7 @@ const Articles = () => {
         </ul>
       )
     }
-    return <div className='articles__message-default'>No articles found</div>
+    return <div className="articles__message-default">No articles found</div>
   }
 
   return (

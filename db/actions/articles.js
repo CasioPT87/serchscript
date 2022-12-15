@@ -36,10 +36,10 @@ const index = async req => {
     : {}
 
   if (req.isLogged) {
-    return Article.paginage({ ...textSearchFilter }, options)
+    return Article.paginate({ ...textSearchFilter }, options)
   }
 
-  return Article.paginate({ ...textSearchFilter })
+  return Article.paginate({ ...textSearchFilter, hidden: false })
 }
 
 // get one
