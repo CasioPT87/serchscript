@@ -1,11 +1,15 @@
-.article-form--light {
-  background-color: var(--dark-super-light);
+.article-form {
+  background-color: var(--terciary);
 }
 
 .form {
   display: flex;
   flex-direction: column;
   padding: 2em;
+
+  label {
+    color: var(--quinary);
+  }
 }
 
 .form__input {
@@ -23,7 +27,7 @@
   font-family: var(--font-family);
   font-size: 1em;
   background-color: var(--primary);
-  color: var(--light);
+  color: var(--senary);
   padding: 1em 2em;
   border: 0;
   max-width: 100%;
@@ -34,5 +38,5 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--dark);
+  color: var(--quinary);
 }

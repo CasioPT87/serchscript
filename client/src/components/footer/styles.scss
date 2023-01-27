@@ -1,11 +1,4 @@
 .footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  height: 3em;
   border-top: 0.2em solid var(--primary);
-}
-
-.footer__text {
-  color: var(--primary);
-  text-transform: uppercase;
 }

@@ -1,11 +1,11 @@
+.articles {
+  background-color: var(--terciary);
+}
+
 .articles__list {
   max-width: 80%;
   margin: auto;
   padding: 0;
-}
-
-.articles--bg-light {
-  background-color: var(--dark-light);
 }
 
 .articles__message-default {

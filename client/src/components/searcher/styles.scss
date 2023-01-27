@@ -8,7 +8,7 @@
   padding: 1em;
   font-size: 1em;
   margin: 1em;
-  border-radius: .5em;
+  border-radius: 0.5em;
   cursor: text;
 }
 
@@ -16,12 +16,12 @@
   display: inline-block;
   font-size: 1.5em;
   border-radius: 10em;
-  background-color: #1890FF;
+  background-color: var(--primary);
   height: 1.5em;
   width: 1.5em;
   border: 0;
   line-height: 0;
-  color: var(--light);
+  color: var(--senary);
   cursor: pointer;
 }
 

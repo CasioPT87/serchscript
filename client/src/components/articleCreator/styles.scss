@@ -1,8 +1,8 @@
 @import 'draft-js/dist/Draft.css';
 
 .RichEditor-root {
-  background: var(--light);
-  border: 0.05em solid var(--dark-middle);
+  background: var(--senary);
+  border: 0.05em solid var(--septenary);
   font-family: var(--font-family);
   font-size: 1em;
   padding: 1em;
@@ -11,7 +11,7 @@
 
 .RichEditor-editor {
   font-size: 1em;
-  border-top: 0.05em solid var(--dark-middle);
+  border-top: 0.05em solid var(--septenary);
   cursor: text;
   font-size: 1em;
   margin-top: 1em;
@@ -32,8 +32,8 @@
 }
 
 .RichEditor-editor .RichEditor-blockquote {
-  border-left: 5px solid #eee;
-  color: #666;
+  border-left: 5px solid var(--senary);
+  color: var(--septenary);
   font-family: 'Hoefler Text', 'Georgia', serif;
   font-style: italic;
   margin: 1em 0;
@@ -41,7 +41,7 @@
 }
 
 .RichEditor-editor .public-DraftStyleDefault-pre {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--quaternary);
   font-family: 'Inconsolata', 'Menlo', 'Consolas', monospace;
   font-size: 0.8em;
   padding: 1.5em;
@@ -55,7 +55,7 @@
 }
 
 .RichEditor-styleButton {
-  color: #999;
+  color: var(--septenary);
   cursor: pointer;
   margin-right: 16px;
   padding: 2px 0;
@@ -63,5 +63,5 @@
 }
 
 .RichEditor-activeButton {
-  color: #5890ff;
+  color: var(--secondary);
 }

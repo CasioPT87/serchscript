@@ -1,13 +1,13 @@
 .card {
-  background-color: #111216;
+  background-color: var(--quaternary);
   margin-bottom: 0.5em;
   border-radius: 1em;
   padding: 1em 3em;
-  border: .05em solid var(--dark-middle);
-  transition: all .1s ease-in-out;
+  border: 0.05em solid var(--quinary);
+  transition: all 0.1s ease-in-out;
 
   &:hover {
-    border: .1em solid #1890FF;
+    border: 0.1em solid var(--secondary);
     transform: scale(101%);
   }
 
@@ -19,19 +19,22 @@
 .card__title,
 .card__text,
 .card__date {
-  color: white;
   margin: 1em 0;
 }
 
+.card__title {
+  color: var(--senary);
+}
+
 .card__text {
-  color: #A4ACB6;
+  color: var(--septenary);
 }
 
 .card__date {
   display: inline-block;
   font-size: 0.7em;
   padding: 0.4em 0.6em;
-  color: var(--light);
+  color: var(--senary);
   background-color: var(--primary);
   border-radius: 0.2em;
 }

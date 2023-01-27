@@ -16,11 +16,11 @@
   padding: 1em 1.2em;
   background-color: var(--primary);
   border-radius: 0.2em;
-  color: var(--light);
+  color: var(--senary);
   cursor: pointer;
 
   &--isCurrent {
-    background-color: var(--light);
+    background-color: var(--senary);
     color: var(--primary);
     border: 0.1em solid var(--primary);
   }
@@ -29,4 +29,5 @@
 .paginator__text {
   display: flex;
   justify-content: center;
+  color: var(--secondary);
 }

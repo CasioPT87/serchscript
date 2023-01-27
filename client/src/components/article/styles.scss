@@ -1,25 +1,26 @@
 .article {
   padding: 1em 2em;
-  background-color: var(--dark-super-light);
+  background-color: var(--terciary);
 }
-
 
 .article__inner {
   padding: 2em 12em;
-  background-color: #111216;
-  color: #A4ACB6;
+  background-color: var(--quaternary);
+  color: var(--septenary);
   border-radius: 1em;
-  border: 0.2em solid #1890FF;
+  border: 0.2em solid var(--secondary);
 
   h1 {
     text-align: center;
-    color: white;
     margin: 2em 0;
+  }
+
+  h1, h2, h3 {
+    color: var(--senary);
   }
 }
 
 @media (max-width: 1100px) {
-
   .article__inner {
     padding: 1em 6em;
   }
@@ -35,20 +36,20 @@
 }
 
 .article__warning {
-  color: white;
+  color: var(--quinary);
 }
 
 .article__title {
   display: flex;
   justify-content: center;
   font-size: 2em;
-  color: rgb(221, 221, 221);
+  color: var(--quinary);
 }
 
 .article__description {
   display: flex;
   justify-content: center;
-  color: #1890FF;
+  color: var(--secondary);
   margin-bottom: 2em;
 }
 
@@ -76,8 +77,8 @@
 
   a {
     padding: 0.5em 2em;
-    color: var(--light);
-    background-color: var(--primary-dark);
+    color: var(--quinary);
+    background-color: var(--secondary);
     text-decoration: none;
   }
 }
@@ -86,6 +87,6 @@
   pre {
     margin: 2em 0;
     padding: 1em;
-    background-color: var(--dark-light);
+    background-color: var(--terciary);
   }
 }

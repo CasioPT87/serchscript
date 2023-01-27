@@ -50,7 +50,7 @@ const Articles = () => {
   }
 
   return (
-    <div className="articles articles--bg-light">
+    <div className="articles">
       <Searcher clear={clearSearchText} search={search} />
       {message && <div className="message">{message}</div>}
       {cards()}
