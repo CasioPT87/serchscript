@@ -42,7 +42,7 @@ const Article = () => {
   if (!article) return null
 
   return (
-    <div className="article article--light">
+    <div className="article">
       {logged && (
         <div className="article__edit-button">
           <Link to={`/admin/articles/${article._id}/edit`}>Edit</Link>

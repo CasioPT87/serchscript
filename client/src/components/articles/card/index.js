@@ -13,16 +13,14 @@ const Card = ({ article }) => {
 
   return (
     <li key={article._id} className="card">
-      <div className="card__inner">
-        <Link to={`/articles/${article.titleId}`}>
-          <Warning show={article.hidden} text="article hidden for the public" />
+      <Link to={`/articles/${article.titleId}`}>
+        <Warning show={article.hidden} text="article hidden for the public" />
 
-          <h3 className="card__title">{article.title}</h3>
-          <p className="card__text">{article.description}</p>
+        <h2 className="card__title">{article.title}</h2>
+        <p className="card__text">{article.description}</p>
 
-          <p className="card__date">{moment(createdAt).format('MM-DD-YYYY')}</p>
-        </Link>
-      </div>
+        <p className="card__date">{moment(createdAt).format('MM-DD-YYYY')}</p>
+      </Link>
     </li>
   )
 }

@@ -22,9 +22,7 @@ UserSchema.methods.setPassword = function (password) {
 
   // Hashing user's salt and password with 1000 iterations,
 
-  this.hash = crypto
-    .pbkdf2Sync(password, this.salt, 1000, 64, `sha512`)
-    .toString(`hex`)
+  const hash = crypto.pbkdf2Sync(password, salt, 1000, 64, `sha512`).toString(`hex`)
 }
 
 // Method to check the entered password is correct or not

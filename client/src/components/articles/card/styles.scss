@@ -1,6 +1,15 @@
 .card {
-  // padding: 0.5em;
-  border-bottom: 0.05em solid var(--dark-middle);
+  background-color: #111216;
+  margin-bottom: 0.5em;
+  border-radius: 1em;
+  padding: 1em 3em;
+  border: .05em solid var(--dark-middle);
+  transition: all .1s ease-in-out;
+
+  &:hover {
+    border: .1em solid #1890FF;
+    transform: scale(101%);
+  }
 
   a {
     text-decoration: none;
@@ -8,13 +17,14 @@
 }
 
 .card__title,
-.card__text {
-  color: var(--dark);
-  margin-bottom: 0;
+.card__text,
+.card__date {
+  color: white;
+  margin: 1em 0;
 }
 
-.card__inner {
-  padding: 1em;
+.card__text {
+  color: #A4ACB6;
 }
 
 .card__date {
@@ -22,6 +32,6 @@
   font-size: 0.7em;
   padding: 0.4em 0.6em;
   color: var(--light);
-  background-color: var(--secondary-light);
+  background-color: var(--primary);
   border-radius: 0.2em;
 }
