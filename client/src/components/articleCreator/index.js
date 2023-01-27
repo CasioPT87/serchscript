@@ -16,13 +16,6 @@ class RichText extends React.Component {
   constructor(props) {
     super(props)
     this.state = { editorState: EditorState.createEmpty() }
-
-    this.focus = () => this.refs.editor.focus()
-
-    this.handleKeyCommand = command => this._handleKeyCommand(command)
-    this.onTab = e => this._onTab(e)
-    this.toggleBlockType = type => this._toggleBlockType(type)
-    this.toggleInlineStyle = style => this._toggleInlineStyle(style)
   }
 
   componentDidMount() {
@@ -39,27 +32,31 @@ class RichText extends React.Component {
       this.props.setText(convertToRaw(editorState.getCurrentContent()))
     })
   }
-
-  _handleKeyCommand(command) {
-    const { editorState } = this.state
-    const newState = RichUtils.handleKeyCommand(editorState, command)
-    if (newState) {
-      this.onChange(newState)
-      return true
+  
+  handleReturn = (e) => {
+    const selection = this.state.editorState.getSelection()
+    const blockType = this.state.editorState
+      .getCurrentContent()
+      .getBlockForKey(selection.getStartKey())
+      .getType()
+      
+    if (e.keyCode === 13 && blockType === 'code-block') {
+      this.onChange(RichUtils.insertSoftNewline(this.state.editorState));
+      return 'handled';
     }
-    return false
+    return 'not-handled';
   }
 
-  _onTab(e) {
+  onTab = (e) => {
     const maxDepth = 4
     this.onChange(RichUtils.onTab(e, this.state.editorState, maxDepth))
   }
 
-  _toggleBlockType(blockType) {
+  toggleBlockType = (blockType) => {
     this.onChange(RichUtils.toggleBlockType(this.state.editorState, blockType))
   }
 
-  _toggleInlineStyle(inlineStyle) {
+  toggleInlineStyle = (inlineStyle) => {
     this.onChange(
       RichUtils.toggleInlineStyle(this.state.editorState, inlineStyle)
     )
@@ -87,13 +84,14 @@ class RichText extends React.Component {
       newEditorState,
       entityKey,
       imageSrc
-    )
-
-    this.setState({
-      editorState: nextState,
-    })
-  }
-
+      )
+      
+      this.setState({
+        editorState: nextState,
+      })
+    }
+  
+      
   render() {
     const { editorState } = this.state
 
@@ -109,6 +107,7 @@ class RichText extends React.Component {
 
     return (
       <div className="RichEditor-root">
+        <div className={className} onClick={this.focus}>
         <BlockStyleControls
           editorState={editorState}
           onToggle={this.toggleBlockType}
@@ -117,12 +116,11 @@ class RichText extends React.Component {
           editorState={editorState}
           onToggle={this.toggleInlineStyle}
         />
-        <div className={className} onClick={this.focus}>
           <Editor
             blockStyleFn={getBlockStyle}
             customStyleMap={styleMap}
             editorState={editorState}
-            handleKeyCommand={this.handleKeyCommand}
+            handleReturn={this.handleReturn}
             onChange={this.onChange}
             onTab={this.onTab}
             placeholder="Tell a story..."
@@ -138,7 +136,7 @@ class RichText extends React.Component {
           name="myfile"
           onChange={e => this.insertImage(e.target.files[0])}
           className="form__submit form__submit--separated-sides"
-        ></input>
+        />
       </div>
     )
   }

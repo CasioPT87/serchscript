@@ -19,7 +19,7 @@ const Articles = () => {
 
   const fetchArticlesByPage = page =>
     dispatch(listArticles({ page, limit, text: searchText }))
-    
+
   const search = text => {
     dispatch(listArticles({ page: 0, limit, text }))
     setSearchText(text)
