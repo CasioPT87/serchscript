@@ -16,8 +16,10 @@ const Articles = () => {
   const [message, setMessage] = useState('')
   const [searchText, setSearchText] = useState('')
   const articles = useSelector(state => state.articles)
+
   const fetchArticlesByPage = page =>
     dispatch(listArticles({ page, limit, text: searchText }))
+    
   const search = text => {
     dispatch(listArticles({ page: 0, limit, text }))
     setSearchText(text)
