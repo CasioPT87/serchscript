@@ -58,7 +58,7 @@ app.use(function (err, req, res, next) {
   res.locals.message = err.message
 
   if (isDev) {
-    console.log(err)
+    // console.log(err)
     res.locals.error = isDev ? err : {}
   }
 

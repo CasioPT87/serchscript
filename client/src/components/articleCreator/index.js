@@ -32,31 +32,31 @@ class RichText extends React.Component {
       this.props.setText(convertToRaw(editorState.getCurrentContent()))
     })
   }
-  
-  handleReturn = (e) => {
+
+  handleReturn = e => {
     const selection = this.state.editorState.getSelection()
     const blockType = this.state.editorState
       .getCurrentContent()
       .getBlockForKey(selection.getStartKey())
       .getType()
-      
+
     if (e.keyCode === 13 && blockType === 'code-block') {
-      this.onChange(RichUtils.insertSoftNewline(this.state.editorState));
-      return 'handled';
+      this.onChange(RichUtils.insertSoftNewline(this.state.editorState))
+      return 'handled'
     }
-    return 'not-handled';
+    return 'not-handled'
   }
 
-  onTab = (e) => {
+  onTab = e => {
     const maxDepth = 4
     this.onChange(RichUtils.onTab(e, this.state.editorState, maxDepth))
   }
 
-  toggleBlockType = (blockType) => {
+  toggleBlockType = blockType => {
     this.onChange(RichUtils.toggleBlockType(this.state.editorState, blockType))
   }
 
-  toggleInlineStyle = (inlineStyle) => {
+  toggleInlineStyle = inlineStyle => {
     this.onChange(
       RichUtils.toggleInlineStyle(this.state.editorState, inlineStyle)
     )
@@ -84,14 +84,13 @@ class RichText extends React.Component {
       newEditorState,
       entityKey,
       imageSrc
-      )
-      
-      this.setState({
-        editorState: nextState,
-      })
-    }
-  
-      
+    )
+
+    this.setState({
+      editorState: nextState,
+    })
+  }
+
   render() {
     const { editorState } = this.state
 
@@ -108,14 +107,14 @@ class RichText extends React.Component {
     return (
       <div className="RichEditor-root">
         <div className={className} onClick={this.focus}>
-        <BlockStyleControls
-          editorState={editorState}
-          onToggle={this.toggleBlockType}
-        />
-        <InlineStyleControls
-          editorState={editorState}
-          onToggle={this.toggleInlineStyle}
-        />
+          <BlockStyleControls
+            editorState={editorState}
+            onToggle={this.toggleBlockType}
+          />
+          <InlineStyleControls
+            editorState={editorState}
+            onToggle={this.toggleInlineStyle}
+          />
           <Editor
             blockStyleFn={getBlockStyle}
             customStyleMap={styleMap}
