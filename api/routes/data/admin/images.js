@@ -2,12 +2,10 @@ const express = require('express')
 const { createWriteStream } = require('fs')
 const busboy = require('busboy')
 const router = express.Router()
-const uploadDropbox = require('./utils/dropboxManager')
 const { Storage } = require('megajs')
 
 // save photo
 router.post('/', async function (req, res, next) {
-
   const bb = busboy({ headers: req.headers })
 
   const storage = await new Storage({
@@ -20,7 +18,10 @@ router.post('/', async function (req, res, next) {
   bb.on('file', (name, file, info) => {
     const { filename: _filename, encoding, mimeType } = info
     filename = _filename
-    const metaStream = storage.upload({ name: filename, allowUploadBuffering: true })
+    const metaStream = storage.upload({
+      name: filename,
+      allowUploadBuffering: true,
+    })
     file.pipe(metaStream)
   })
 
@@ -33,7 +34,7 @@ router.post('/', async function (req, res, next) {
     next(e)
   })
   req.on('aborted', next)
-  
+
   req.pipe(bb)
 })
 
