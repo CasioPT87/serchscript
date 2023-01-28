@@ -2,9 +2,11 @@ const express = require('express')
 const { createWriteStream } = require('fs')
 const busboy = require('busboy')
 const router = express.Router()
+const uploadDropbox = require('./utils/dropboxManager')
 
 // save photo
-router.post('/', function (req, res, next) {
+router.post('/', async function (req, res, next) {
+  await uploadDropbox(req, res, next)
   const bb = busboy({ headers: req.headers })
 
   let filename
