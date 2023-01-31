@@ -29,7 +29,7 @@ router.post('/login', async (req, res, next) => {
       })
     } else {
       if (user.validPassword(req.body.password)) {
-        const token = await createToken(user)
+        const token = createToken(user)
         createCookie(res, token)
         res.send({ message: `Welcome back, ${user.name}` })
       } else {

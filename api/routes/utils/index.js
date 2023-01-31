@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const secret = process.env.SECRET
 
 const createToken = user => {
-  return jwt.sign({ name: user.name }, secret, { expiresIn: '8h' })
+  return jwt.sign({ name: user.name }, secret, { expiresIn: '8h' }) // token expires in 8 hours
 }
 
 const verifyToken = token => {
@@ -20,7 +20,7 @@ const COOKIE = {
 const createCookie = (res, token) => {
   res.cookie('serchScriptSession', token, {
     ...COOKIE,
-    maxAge: 900000, // cookie will be removed after 8 hours
+    maxAge: 8 * 60 * 60 * 1000, // cookie will be removed after 8 hours
   })
 }
 
