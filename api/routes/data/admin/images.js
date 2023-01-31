@@ -17,7 +17,7 @@ router.post('/', async function (req, res, next) {
   } catch (e) {
     // logger: 'error connecting Mega: error.message'
   }
- 
+
   let filename
 
   bb.on('file', (name, file, info) => {
