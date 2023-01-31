@@ -7,7 +7,7 @@ const Paginator = ({ fetchPage, limit }) => {
   })
 
   const firtItemIndex = (page - 1) * limit + 1
-  const lastItemIndex = page * limit
+  const lastItemIndex = Math.min(page * limit, totalDocs)
 
   const itemsText = `Showing articles from ${firtItemIndex} to ${lastItemIndex} of ${totalDocs}`
 
