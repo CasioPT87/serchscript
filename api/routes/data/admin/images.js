@@ -9,11 +9,15 @@ const path = require('path')
 router.post('/', async function (req, res, next) {
   const bb = busboy({ headers: req.headers })
 
-  const storage = await new Storage({
-    email: process.env.META_USERNAME,
-    password: process.env.META_PASS,
-  }).ready
-
+  try {
+    const storage = await new Storage({
+      email: process.env.META_USERNAME,
+      password: process.env.META_PASS,
+    }).ready
+  } catch (e) {
+    // logger: 'error connecting Mega: error.message'
+  }
+ 
   let filename
 
   bb.on('file', (name, file, info) => {
@@ -23,9 +27,15 @@ router.post('/', async function (req, res, next) {
       name: filename,
       allowUploadBuffering: true,
     })
+
     const imageStoragePath = path.join(process.cwd(), `/public/${_filename}`)
+
     file.pipe(metaStream)
     file.pipe(createWriteStream(imageStoragePath))
+
+    file.on('error', e => {
+      // logger: error saving file: e.message
+    })
   })
 
   bb.on('close', () => {
