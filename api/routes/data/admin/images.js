@@ -3,6 +3,7 @@ const { createWriteStream } = require('fs')
 const busboy = require('busboy')
 const router = express.Router()
 const { Storage } = require('megajs')
+const path = require('path')
 
 // save photo
 router.post('/', async function (req, res, next) {
@@ -22,7 +23,9 @@ router.post('/', async function (req, res, next) {
       name: filename,
       allowUploadBuffering: true,
     })
+    const imageStoragePath = path.join(process.cwd(), `/public/${_filename}`)
     file.pipe(metaStream)
+    file.pipe(createWriteStream(imageStoragePath))
   })
 
   bb.on('close', () => {
