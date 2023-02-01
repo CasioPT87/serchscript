@@ -21,10 +21,11 @@ const { createToken, createCookie, clearCookie } = require('../utils')
 
 // tries to login session
 router.post('/login', async (req, res, next) => {
+  console.log('logiiiiiin')
   try {
     const user = await db.auth.show(req)
     if (!user) {
-      return res.status(404).json({
+      return res.status(401).json({
         message: `We don't know who you are... we have already called internet police...`,
       })
     } else {
@@ -33,7 +34,7 @@ router.post('/login', async (req, res, next) => {
         createCookie(res, token)
         res.send({ message: `Welcome back, ${user.name}` })
       } else {
-        return res.status(400).json({
+        return res.status(401).json({
           message: 'Your password is not good, man',
         })
       }

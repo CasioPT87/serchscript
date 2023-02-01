@@ -54,27 +54,28 @@ const serverRequest =
         }
 
         const response = await fetch(url.toString(), requestOptions)
-        if (response.ok && response.status < 300) {
+
+        let responseData
+
+        try {
           const contentType = response.headers.get('content-type')
-          try {
-            let data
-            if (contentType && contentType.indexOf('application/json') !== -1) {
-              data = await response.json()
-            } else {
-              data = await response.text()
-            }
-            res(data)
-          } catch (e) {
-            rej(e.message)
+          if (contentType && contentType.indexOf('application/json') !== -1) {
+            responseData = await response.json()
+          } else {
+            responseData = await response.text()
           }
+        } catch (e) {
+          rej(e.message)
+        }
+
+        if (response.ok && response.status < 300) {
+          res(responseData)
         } else {
-          rej(`sever error: ${response.statusText}`)
+          rej(responseData)
         }
       })
         .then(async data => {
-          console.log('exito!!')
           if (config.successDispatch && Array.isArray(config.successDispatch)) {
-            console.log({ fn: config.successDispatch })
             const dispatches = createDispatchFns({
               fns: config.successDispatch,
               payload: data,
@@ -85,7 +86,6 @@ const serverRequest =
           return data
         })
         .catch(async error => {
-          console.log({ error })
           if (config.failDispatch && Array.isArray(config.failDispatch)) {
             const dispatches = createDispatchFns({
               fns: config.failDispatch,

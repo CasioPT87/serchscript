@@ -50,7 +50,7 @@ const requestConfig = {
     login: {
       method: 'POST',
       path: '/data/auth/login',
-      successDispatch: [() => actions.setLogged(true)],
+      successDispatch: [() => actions.setLogged(true), actions.setAuthMessage],
       failDispatch: [() => actions.setLogged(false), actions.setAuthMessage],
     },
     logout: {
