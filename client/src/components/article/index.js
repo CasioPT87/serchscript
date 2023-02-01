@@ -31,13 +31,10 @@ const Article = () => {
 
   useEffect(() => {
     if (article && article.content) {
-      console.log('aqui', article.content)
       const contentHtml = rawContentToHtml(JSON.parse(article.content))
       setContent(contentHtml)
     }
   }, [article])
-
-  console.log({ article, content })
 
   if (!article || !content) return null
 
