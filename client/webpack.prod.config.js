@@ -1,5 +1,4 @@
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const clientConfig = {
@@ -9,6 +8,9 @@ const clientConfig = {
     new MiniCssExtractPlugin({
       filename: "[name].css",
     }),
+    new Dotenv({
+      path: '../front.prod.env',
+    })
   ],
   entry: {
     react: {

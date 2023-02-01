@@ -1,3 +1,6 @@
+// THIS COMPONENT WAS USED ONLY TO CREATE ARTICLES FROM JSON DATA FROM A DIFFERENT PROJECT
+// IT IS NOT USED IN THE PRODUCTION APPLICATION
+
 const React = require('react')
 const { useState, useEffect } = require('react')
 const { useDispatch } = require('react-redux')

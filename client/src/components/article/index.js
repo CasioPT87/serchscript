@@ -22,12 +22,10 @@ const Article = () => {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      pathname = window.location.pathname
-      const urlArticleTitleId = pathname.split('/')[2]
-      if (!article || article.titleId !== urlArticleTitleId) {
-        dispatch(showArticle(urlArticleTitleId)).then(response => {
-          if (response.error) setMessage(response.message)
-        })
+      const pathname = window.location.pathname
+      const articleTitleId = pathname.split('/')[2]
+      if (!article || article.titleId !== articleTitleId) {
+        dispatch(showArticle({ pathParams: { articleTitleId } }))
       }
     }
   }, [])

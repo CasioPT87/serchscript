@@ -13,28 +13,26 @@ const { useEffect, useState } = React
 const Articles = () => {
   const limit = 5
   const dispatch = useDispatch()
-  const [message, setMessage] = useState('')
   const [searchText, setSearchText] = useState('')
   const articles = useSelector(state => state.articles)
 
-  const fetchArticlesByPage = page =>
-    dispatch(listArticles({ page, limit, text: searchText }))
+  const fetchArticleList = ({ page, text }) =>
+    dispatch(listArticles({ searchParams: { page, limit, text } }))
 
   const search = text => {
-    dispatch(listArticles({ page: 0, limit, text }))
+    console.log('search:', text)
+    fetchArticleList({ page: 1, text })
     setSearchText(text)
   }
 
   const clearSearchText = () => {
-    dispatch(listArticles({ page: 0, limit, text: '' }))
+    fetchArticleList({ page: 1, text: '' })
     setSearchText('')
   }
 
   useEffect(() => {
     if (_.isEmpty(articles.list)) {
-      fetchArticlesByPage(1).then(response => {
-        if (response.error) setMessage(response.message)
-      })
+      fetchArticleList({ page: 1, text: '' })
     }
   }, [])
 
@@ -54,9 +52,11 @@ const Articles = () => {
   return (
     <div className="articles">
       <Searcher clear={clearSearchText} search={search} />
-      {message && <div className="message">{message}</div>}
       {cards()}
-      <Paginator fetchPage={fetchArticlesByPage} limit={limit} />
+      <Paginator
+        fetchPage={page => fetchArticleList({ page, searchText })}
+        limit={limit}
+      />
     </div>
   )
 }

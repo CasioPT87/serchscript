@@ -23,7 +23,7 @@ const Comment = ({ comment, articleId }) => {
 
   const onSubmit = async () => {
     const response = await dispatch(
-      createComment({ articleId, content: value })
+      createComment({ data: { articleId, content: value } })
     )
     setMessage(response.message)
     setValue('')

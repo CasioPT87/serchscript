@@ -75,7 +75,7 @@ const create = async req => {
   } = req.body
   const article = new Article()
   article.setTitleId(title)
-  if (!article.titleId) throw new Error('couldnt set title for article')
+  if (!article.titleId) throw new Error('error setting title for article')
   const sameTitleIdArticle = await show({
     isLogged: true,
     params: { titleId: article.titleId },
@@ -84,7 +84,7 @@ const create = async req => {
     throw new Error('article with this title already exists')
   article.title = title
   article.description = description
-  article.content = content
+  article.content = JSON.stringify(content)
   article.hidden = hidden
   article.fecha = new Date().toISOString()
 

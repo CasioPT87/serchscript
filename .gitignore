@@ -1,6 +1,7 @@
 # env variables
 .env
-
+.front.dev.env
+.front.prod.env
 
 # Logs
 logs

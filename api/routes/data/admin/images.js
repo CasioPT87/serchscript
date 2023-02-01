@@ -9,14 +9,10 @@ const path = require('path')
 router.post('/', async function (req, res, next) {
   const bb = busboy({ headers: req.headers })
 
-  try {
-    const storage = await new Storage({
-      email: process.env.META_USERNAME,
-      password: process.env.META_PASS,
-    }).ready
-  } catch (e) {
-    // logger: 'error connecting Mega: error.message'
-  }
+  const storage = await new Storage({
+    email: process.env.META_USERNAME,
+    password: process.env.META_PASS,
+  }).ready
 
   let filename
 
@@ -39,7 +35,7 @@ router.post('/', async function (req, res, next) {
   })
 
   bb.on('close', () => {
-    res.status(200).json({ filename: filename })
+    res.status(200).json({ filename })
   })
 
   //handling errors

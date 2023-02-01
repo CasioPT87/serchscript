@@ -13,7 +13,7 @@ function loginForm() {
 
   let handleSubmit = async e => {
     e.preventDefault()
-    const response = await dispatch(login({ name, password }))
+    const response = await dispatch(login({ data: { name, password } }))
     setMessage(response.message)
   }
 

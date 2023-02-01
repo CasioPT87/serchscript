@@ -5,6 +5,7 @@ const ArticleCreator = require('../articleCreator')
 const CheckBox = require('../checkbox')
 const {
   article: { create: createArticle, update: updateArticle },
+  image: { upload: uploadImages },
 } = require('../../store/async')
 
 const MODE = {
@@ -65,17 +66,19 @@ const ArticleForm = mode => () => {
 
   let handleSubmit = async e => {
     e.preventDefault()
-    const response = await dispatch(
-      getDispatchAction(mode)({
-        id: article?._id,
-        title,
-        description,
-        content,
-        hidden,
+    const imagesUploadedData = await dispatch(uploadImages(content))
+    const dispatchAction = getDispatchAction(mode)
+    await dispatch(
+      dispatchAction(imagesUploadedData)({
+        pathParams: { articleId: article?._id },
+        data: {
+          title,
+          description,
+          content,
+          hidden,
+        },
       })
     )
-
-    setMessage(response.message)
   }
 
   return (
