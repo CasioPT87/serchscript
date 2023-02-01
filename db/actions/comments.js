@@ -16,7 +16,7 @@ const create = (req, res) => {
       return comment.save()
     }
     res.status(400)
-    res.send('Error: Create comment failed')
+    res.send('Error: Comment creation failed')
   }
   res.status(500)
   res.send('Error: Server failed creating a comment')
