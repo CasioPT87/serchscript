@@ -148,19 +148,19 @@ const createDigestedArticleEntityMap = ({ uploadResponses, content }) => {
 }
 
 const createDigestedContent = ({ digestedEntities, content }) => {
-  return JSON.stringify({ ...content, entityMap: digestedEntities })
+  return { ...content, entityMap: digestedEntities }
 }
 
 const processArticle = conf => uploadedImagesData => payload => {
-  //   const {
-  //     data: { content },
-  //   } = payload
-  //   const digestedEntities = createDigestedArticleEntityMap({
-  //     uploadResponses: uploadedImagesData,
-  //     content,
-  //   })
-  //   const digestedContent = createDigestedContent({ digestedEntities, content })
-  //   payload.data.content = digestedContent
+  const {
+    data: { content },
+  } = payload
+  const digestedEntities = createDigestedArticleEntityMap({
+    uploadResponses: uploadedImagesData,
+    content,
+  })
+  const digestedContent = createDigestedContent({ digestedEntities, content })
+  payload.data.content = digestedContent
   return serverRequest(conf)(payload)
 }
 

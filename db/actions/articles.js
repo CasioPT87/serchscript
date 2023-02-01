@@ -71,8 +71,10 @@ const create = async req => {
     content = 'El contenido esta vacio',
     hidden = true,
   } = req.body
+
   const article = new Article()
   article.setTitleId(title)
+
   if (!article.titleId) throw new Error('error setting title for article')
   const sameTitleIdArticle = await show({
     isLogged: true,
@@ -101,7 +103,7 @@ const update = async req => {
       title,
       titleId: paramCase(title),
       description,
-      content,
+      content: JSON.stringify(content),
       hidden,
     },
     { new: true }
