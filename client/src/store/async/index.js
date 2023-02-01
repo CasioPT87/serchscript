@@ -2,7 +2,7 @@ const requestConfig = require('./config')
 
 const serverRequest =
   config =>
-  ({ pathParams, searchParams, formDataProps, data }) => {
+  ({ pathParams, searchParams, formDataProps, data } = {}) => {
     console.log('server request')
     return async (dispatch, getState) => {
       return new Promise(async (res, rej) => {
@@ -16,7 +16,7 @@ const serverRequest =
         let pathname = config.path
         if (config.pathParams) {
           config.pathParams.forEach(pathParam => {
-            const replacement = pathParams[pathParam]
+            const replacement = pathParams && pathParams[pathParam]
             if (replacement)
               pathname = pathname.replaceAll(`:${pathParam}`, replacement)
           })
@@ -26,7 +26,7 @@ const serverRequest =
 
         if (config.searchParams) {
           config.searchParams.forEach(searchParam => {
-            const value = searchParams[searchParam]
+            const value = searchParams && searchParams[searchParam]
             if (value) url.searchParams.append(searchParam, value)
           })
         }
@@ -34,7 +34,7 @@ const serverRequest =
         if (config.formDataProps) {
           body = new FormData()
           config.formDataProps.forEach(formDataProp => {
-            const value = formDataProps[formDataProp]
+            const value = formDataProps && formDataProps[formDataProp]
             if (value) body.append(formDataProp, value)
           })
         }
@@ -72,21 +72,25 @@ const serverRequest =
         }
       })
         .then(async data => {
-          console.log({ data })
+          console.log('exito!!')
           if (config.successDispatch && Array.isArray(config.successDispatch)) {
+            console.log({ fn: config.successDispatch })
             const dispatches = createDispatchFns({
               fns: config.successDispatch,
               payload: data,
+              dispatch,
             })
             await Promise.all(dispatches)
           }
           return data
         })
         .catch(async error => {
+          console.log({ error })
           if (config.failDispatch && Array.isArray(config.failDispatch)) {
             const dispatches = createDispatchFns({
               fns: config.failDispatch,
               payload: error,
+              dispatch,
             })
             await Promise.all(dispatches)
           }
@@ -94,9 +98,9 @@ const serverRequest =
     }
   }
 
-const createDispatchFns = ({ fns, payload }) => {
+const createDispatchFns = ({ fns, payload, dispatch }) => {
   return fns.map(eachDispatchFn => {
-    return eachDispatchFn(payload)
+    return dispatch(eachDispatchFn(payload))
   })
 }
 
@@ -162,7 +166,7 @@ const processArticle = conf => uploadedImagesData => payload => {
   return serverRequest(conf)(payload)
 }
 
-module.exports = {
+const serverRequests = {
   article: {
     create: processArticle(requestConfig.articles.create),
     update: processArticle(requestConfig.articles.update),
@@ -180,3 +184,5 @@ module.exports = {
     logout: serverRequest(requestConfig.auth.logout),
   },
 }
+
+module.exports = serverRequests

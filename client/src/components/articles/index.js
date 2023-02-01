@@ -21,18 +21,18 @@ const Articles = () => {
 
   const search = text => {
     console.log('search:', text)
-    fetchArticleList({ page: 1, text })
+    fetchArticleList({ page: 0, text })
     setSearchText(text)
   }
 
   const clearSearchText = () => {
-    fetchArticleList({ page: 1, text: '' })
+    fetchArticleList({ page: 0, text: '' })
     setSearchText('')
   }
 
   useEffect(() => {
     if (_.isEmpty(articles.list)) {
-      fetchArticleList({ page: 1, text: '' })
+      fetchArticleList({ page: 0, text: '' })
     }
   }, [])
 
@@ -54,7 +54,7 @@ const Articles = () => {
       <Searcher clear={clearSearchText} search={search} />
       {cards()}
       <Paginator
-        fetchPage={page => fetchArticleList({ page, searchText })}
+        fetchPage={page => fetchArticleList({ page, text: searchText })}
         limit={limit}
       />
     </div>

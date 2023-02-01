@@ -12,8 +12,8 @@ const reducer = (state = initialState, action = {}) => {
 
   if (typeof payload === 'string' || payload instanceof String)
     message = payload
-  if (payload instanceof Error || payload.message) message = payload.message
-  if (payload.message) message = payload.message
+  if (payload instanceof Error || payload?.message) message = payload.message
+  if (payload?.message) message = payload?.message
 
   switch (action.type) {
     case 'SET_ARTICLE_MESSAGE':

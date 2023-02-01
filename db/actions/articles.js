@@ -5,15 +5,17 @@ const Article = require('../../db/models/article')
 
 // get list
 const index = async req => {
-  const limit = _.isEmpty(req.query)
+  const limit = _.isEmpty(req.query.limit)
     ? defaults.limitArticlesPerPage
     : Number(req.query.limit)
-  const page = _.isEmpty(req.query)
+  const page = _.isEmpty(req.query.page)
     ? defaults.initialArticlesPage
     : Number(req.query.page)
-  const text = _.isEmpty(req.query)
+  const text = _.isEmpty(req.query.text)
     ? defaults.initialArticlesTextSearch
     : String(req.query.text)
+
+  console.log({ limit, page, text })
 
   const options = {
     select: ['title', 'titleId', 'description', 'hidden', 'createdAt'],

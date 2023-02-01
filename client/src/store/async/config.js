@@ -26,7 +26,7 @@ const requestConfig = {
       method: 'PUT',
       path: '/data/admin/articles/:articleId',
       pathParams: ['articleId'],
-      successDispatch: [actions.addArticle],
+      successDispatch: [actions.addArticle, () => articleRequest.list()],
       failDispatch: [actions.setArticleMessage],
     },
   },
@@ -48,14 +48,14 @@ const requestConfig = {
   },
   auth: {
     login: {
-      method: 'GET',
-      path: '/data/auth/logout',
+      method: 'POST',
+      path: '/data/auth/login',
       successDispatch: [() => actions.setLogged(true)],
       failDispatch: [() => actions.setLogged(false), actions.setAuthMessage],
     },
     logout: {
-      method: 'POST',
-      path: '/data/auth/login',
+      method: 'GET',
+      path: '/data/auth/logout',
       successDispatch: [() => actions.setLogged(false), actions.setAuthMessage],
       failDispatch: [() => actions.setAuthMessage('Problem logging out')],
     },

@@ -4,7 +4,7 @@ const { useSelector, useDispatch } = require('react-redux')
 const ArticleCreator = require('../articleCreator')
 const CheckBox = require('../checkbox')
 const {
-  article: { create: createArticle, update: updateArticle },
+  article: { create: createArticle, update: updateArticle, list: listArticles },
   image: { upload: uploadImages },
 } = require('../../store/async')
 
@@ -53,7 +53,6 @@ const ArticleForm = mode => () => {
   const [description, setDescription] = useState('')
   const [content, setContent] = useState('')
   const [hidden, setHidden] = useState(false)
-  const [message, setMessage] = useState('')
 
   useEffect(() => {
     if (article && mode === MODE.edit) {
@@ -68,7 +67,7 @@ const ArticleForm = mode => () => {
     e.preventDefault()
     const imagesUploadedData = await dispatch(uploadImages(content))
     const dispatchAction = getDispatchAction(mode)
-    await dispatch(
+    const response = await dispatch(
       dispatchAction(imagesUploadedData)({
         pathParams: { articleId: article?._id },
         data: {
@@ -79,6 +78,7 @@ const ArticleForm = mode => () => {
         },
       })
     )
+    if (response) dispatch(listArticles({}))
   }
 
   return (
@@ -107,8 +107,6 @@ const ArticleForm = mode => () => {
         <button className="form__submit" type="submit">
           {getButtonText(mode)}
         </button>
-
-        <div className="message">{message ? <p>{message}</p> : null}</div>
       </form>
     </div>
   )
