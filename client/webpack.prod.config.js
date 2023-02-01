@@ -1,5 +1,6 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const Dotenv = require('dotenv-webpack');
 
 const clientConfig = {
   context: __dirname,
@@ -9,7 +10,7 @@ const clientConfig = {
       filename: "[name].css",
     }),
     new Dotenv({
-      path: '../front.prod.env',
+      path: path.resolve(__dirname, '../front.prod.env'),
     })
   ],
   entry: {
