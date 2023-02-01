@@ -73,19 +73,32 @@ const serverRequest =
       })
         .then(async data => {
           console.log({ data })
-          if (config.successCallback) {
-            await dispatch(config.successCallback(data))
+          if (config.successDispatch && Array.isArray(config.successDispatch)) {
+            const dispatches = createDispatchFns({
+              fns: config.successDispatch,
+              payload: data,
+            })
+            await Promise.all(dispatches)
           }
           return data
         })
-        .catch(async e => {
-          console.log('error!!')
-          console.log({ e })
-          // dispatch error here
-          // dispatch(config.successCallback(data))
+        .catch(async error => {
+          if (config.failDispatch && Array.isArray(config.failDispatch)) {
+            const dispatches = createDispatchFns({
+              fns: config.failDispatch,
+              payload: error,
+            })
+            await Promise.all(dispatches)
+          }
         })
     }
   }
+
+const createDispatchFns = ({ fns, payload }) => {
+  return fns.map(eachDispatchFn => {
+    return eachDispatchFn(payload)
+  })
+}
 
 const uploadImages =
   conf =>
@@ -93,32 +106,30 @@ const uploadImages =
   async (dispatch, getState) => {
     const { method, path } = conf
 
-    const uploadRequests = Object.values(entityMap).map(
-      async (entity, index) => {
-        const {
-          data: { file, id },
-        } = entity
+    const uploadRequests = Object.values(entityMap).map(async entity => {
+      const {
+        data: { file, id },
+      } = entity
 
-        if (!file || typeof file === 'string') return Promise.resolve(entity)
-        const body = new FormData()
-        body.append('name', id)
-        body.append('file', file, id)
+      if (!file || typeof file === 'string') return Promise.resolve(entity)
+      const body = new FormData()
+      body.append('name', id)
+      body.append('file', file, id)
 
-        const response = await fetch(path, {
-          method,
-          cache: 'no-cache',
-          credentials: 'same-origin',
-          headers: {
-            Accept: '*/*',
-            'Accept-Encoding': 'gzip, deflate, gr',
-          },
-          body,
-        })
+      const response = await fetch(path, {
+        method,
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+          Accept: '*/*',
+          'Accept-Encoding': 'gzip, deflate, gr',
+        },
+        body,
+      })
 
-        if (!response.ok) throw new Error('problem uploading image')
-        return response.json()
-      }
-    )
+      if (!response.ok) throw new Error('problem uploading image')
+      return response.json()
+    })
 
     return Promise.all(uploadRequests)
   }

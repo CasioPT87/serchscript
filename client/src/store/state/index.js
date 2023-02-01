@@ -4,6 +4,11 @@ const defaultState = {
   },
   article: null,
   logged: false,
+  message: {
+    article: null,
+    articles: null,
+    auth: null,
+  },
 }
 
 module.exports = defaultState
