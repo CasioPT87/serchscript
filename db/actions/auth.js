@@ -4,8 +4,6 @@ const crypto = require('crypto')
 // get one
 const show = async req => {
   const { name } = req.body
-  console.log({ name })
-  console.log({ password: req.body.password })
   return User.findOne({ name })
 }
 

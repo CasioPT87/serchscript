@@ -19,14 +19,20 @@ const requestConfig = {
     create: {
       method: 'POST',
       path: '/data/admin/articles',
-      successDispatch: [actions.addArticle],
+      successDispatch: [
+        actions.addArticle,
+        () => actions.setArticleMessage('Article successfully created'),
+      ],
       failDispatch: [actions.setArticleMessage],
     },
     update: {
       method: 'PUT',
       path: '/data/admin/articles/:articleId',
       pathParams: ['articleId'],
-      successDispatch: [actions.addArticle, () => articleRequest.list()],
+      successDispatch: [
+        actions.addArticle,
+        () => actions.setArticleMessage('Article successfully updated'),
+      ],
       failDispatch: [actions.setArticleMessage],
     },
   },

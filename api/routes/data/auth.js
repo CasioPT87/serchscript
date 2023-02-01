@@ -21,7 +21,6 @@ const { createToken, createCookie, clearCookie } = require('../utils')
 
 // tries to login session
 router.post('/login', async (req, res, next) => {
-  console.log('logiiiiiin')
   try {
     const user = await db.auth.show(req)
     if (!user) {

@@ -3,10 +3,8 @@ const requestConfig = require('./config')
 const serverRequest =
   config =>
   ({ pathParams, searchParams, formDataProps, data } = {}) => {
-    console.log('server request')
     return async (dispatch, getState) => {
       return new Promise(async (res, rej) => {
-        console.log(process.env.SERVER_DOMAIN)
         const url = new URL(process.env.SERVER_DOMAIN)
         let body = null
         const headers = {
@@ -154,15 +152,15 @@ const createDigestedContent = ({ digestedEntities, content }) => {
 }
 
 const processArticle = conf => uploadedImagesData => payload => {
-  const {
-    data: { content },
-  } = payload
-  const digestedEntities = createDigestedArticleEntityMap({
-    uploadResponses: uploadedImagesData,
-    content,
-  })
-  const digestedContent = createDigestedContent({ digestedEntities, content })
-  payload.data.content = digestedContent
+  //   const {
+  //     data: { content },
+  //   } = payload
+  //   const digestedEntities = createDigestedArticleEntityMap({
+  //     uploadResponses: uploadedImagesData,
+  //     content,
+  //   })
+  //   const digestedContent = createDigestedContent({ digestedEntities, content })
+  //   payload.data.content = digestedContent
   return serverRequest(conf)(payload)
 }
 

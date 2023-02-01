@@ -14,7 +14,6 @@ const { useEffect, useState } = React
 const Article = () => {
   const dispatch = useDispatch()
   const [content, setContent] = useState(null)
-  const [message, setMessage] = useState('')
   const article = useSelector(state => {
     return state.article
   })
@@ -31,13 +30,16 @@ const Article = () => {
   }, [])
 
   useEffect(() => {
-    if (article) {
+    if (article && article.content) {
+      console.log('aqui', article.content)
       const contentHtml = rawContentToHtml(JSON.parse(article.content))
       setContent(contentHtml)
     }
   }, [article])
 
-  if (!article) return null
+  console.log({ article, content })
+
+  if (!article || !content) return null
 
   return (
     <div className="article">
@@ -56,7 +58,9 @@ const Article = () => {
       <h3 className="article__description">{article.description}</h3>
       <div className="article__inner">
         {content && <div className="article__content">{parse(content)}</div>}
-        <Comments comments={article.comments} articleId={article._id} />
+        {article.comments && (
+          <Comments comments={article.comments} articleId={article._id} />
+        )}
       </div>
     </div>
   )

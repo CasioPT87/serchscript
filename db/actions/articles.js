@@ -15,16 +15,12 @@ const index = async req => {
     ? defaults.initialArticlesTextSearch
     : String(req.query.text)
 
-  console.log({ limit, page, text })
-
   const options = {
     select: ['title', 'titleId', 'description', 'hidden', 'createdAt'],
     sort: { createdAt: 'asc' },
     page,
     limit,
   }
-
-  console.log({ page, limit })
 
   const textSearchFilter = text
     ? {

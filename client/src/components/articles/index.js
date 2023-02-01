@@ -20,7 +20,6 @@ const Articles = () => {
     dispatch(listArticles({ searchParams: { page, limit, text } }))
 
   const search = text => {
-    console.log('search:', text)
     fetchArticleList({ page: 0, text })
     setSearchText(text)
   }

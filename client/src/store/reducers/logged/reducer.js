@@ -5,7 +5,7 @@ const reducer = (state = initialState, action = {}) => {
     case 'SET_LOGGED':
       return action.payload
     default:
-      return initialState
+      return state
   }
 }
 
