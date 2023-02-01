@@ -47,11 +47,6 @@ class RichText extends React.Component {
     return 'not-handled'
   }
 
-  onTab = e => {
-    const maxDepth = 4
-    this.onChange(RichUtils.onTab(e, this.state.editorState, maxDepth))
-  }
-
   toggleBlockType = blockType => {
     this.onChange(RichUtils.toggleBlockType(this.state.editorState, blockType))
   }
@@ -121,8 +116,7 @@ class RichText extends React.Component {
             editorState={editorState}
             handleReturn={this.handleReturn}
             onChange={this.onChange}
-            onTab={this.onTab}
-            placeholder="Tell a story..."
+            placeholder="Tell us a story..."
             ref="editor"
             spellCheck={true}
             blockRendererFn={mediaBlockRenderer}

@@ -7,6 +7,7 @@ const {
   article: { create: createArticle, update: updateArticle, list: listArticles },
   image: { upload: uploadImages },
 } = require('../../store/async')
+const { setArticleMessage } = require('../../store/actions')
 
 const MODE = {
   create: 'CREATE',
@@ -66,6 +67,14 @@ const ArticleForm = mode => () => {
 
   let handleSubmit = async e => {
     e.preventDefault()
+
+    if (!title || !description || !content) {
+      return dispatch(
+        setArticleMessage(
+          `Error: Article lacking title, description or content`
+        )
+      )
+    }
     const imagesUploadedData = await dispatch(uploadImages(content))
     const dispatchAction = getDispatchAction(mode)
     const response = await dispatch(
