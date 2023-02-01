@@ -64,24 +64,29 @@ const destroyAll = () => {
 }
 
 // create new
-const create = async req => {
+const create = async (req, res) => {
   const {
-    title = 'Escribe un titulo',
-    description = 'Escribe una descripcion',
-    content = 'El contenido esta vacio',
+    title = 'Default title',
+    description = 'Default description',
+    content = null,
     hidden = true,
   } = req.body
 
   const article = new Article()
   article.setTitleId(title)
 
-  if (!article.titleId) throw new Error('error setting title for article')
+  if (!article.titleId) {
+    res.status(422)
+    return res.send('Error: Articles need a title')
+  }
   const sameTitleIdArticle = await show({
     isLogged: true,
     params: { titleId: article.titleId },
   })
-  if (sameTitleIdArticle)
-    throw new Error('article with this title already exists')
+  if (sameTitleIdArticle) {
+    res.status(409)
+    return res.send('Error: Article title is duplicated')
+  }
   article.title = title
   article.description = description
   article.content = JSON.stringify(content)

@@ -5,7 +5,7 @@ const { escape } = require('validator')
 const xssFilters = require('xss-filters')
 
 // create new
-const create = req => {
+const create = (req, res) => {
   const { content, hidden = false, articleId } = req.body
   if (content && articleId) {
     if (_.isBoolean(hidden) && ObjectId.isValid(articleId)) {
@@ -15,9 +15,11 @@ const create = req => {
       comment.article = escape(articleId)
       return comment.save()
     }
-    throw new Error('something wrong about this comment, man!')
+    res.status(400)
+    res.send('Error: Create comment failed')
   }
-  throw new Error('article id and content are necessary to create a comment')
+  res.status(500)
+  res.send('Error: Server failed creating a comment')
 }
 
 // delete all

@@ -49,6 +49,7 @@ const getRichTextDataFeed = ({ mode, article }) => {
 const ArticleForm = mode => () => {
   const dispatch = useDispatch()
   const article = useSelector(store => store.article)
+  const message = useSelector(store => store.message.article)
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [content, setContent] = useState('')
@@ -82,7 +83,7 @@ const ArticleForm = mode => () => {
   }
 
   return (
-    <div className="article-form article-form--light">
+    <div className="article-form">
       <form className="form" onSubmit={handleSubmit}>
         <CheckBox checked={hidden} onChange={setHidden} text="Hidden" />
         <input
@@ -108,6 +109,7 @@ const ArticleForm = mode => () => {
           {getButtonText(mode)}
         </button>
       </form>
+      {!!message && <div className="article-form__message">{message}</div>}
     </div>
   )
 }

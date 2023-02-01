@@ -2,6 +2,14 @@
   background-color: var(--terciary);
 }
 
+.article-form__message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 2em;
+  color: var(--secondary);
+}
+
 .form {
   display: flex;
   flex-direction: column;

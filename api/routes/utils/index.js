@@ -46,10 +46,13 @@ const hasValidCredentials = req => {
 
 const dataActionHandler = ({ action, req, res, next }) => {
   return new Promise(succ => {
-    succ(action(req))
+    succ(action(req, res))
   })
     .then(result => res.json(result))
-    .catch(next)
+    .catch(e => {
+      console.log({ e })
+      next(e)
+    })
 }
 
 module.exports = {

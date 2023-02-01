@@ -1,6 +1,6 @@
 const React = require('react')
 const { useState } = require('react')
-const { useDispatch } = require('react-redux')
+const { useDispatch, useSelector } = require('react-redux')
 const {
   auth: { login },
 } = require('../../store/async')
@@ -9,12 +9,11 @@ function loginForm() {
   const dispatch = useDispatch()
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
-  const [message, setMessage] = useState('Who are you, again?')
+  const message = useSelector(state => state.message.auth)
 
   let handleSubmit = async e => {
     e.preventDefault()
-    const response = await dispatch(login({ data: { name, password } }))
-    setMessage(response.message)
+    dispatch(login({ data: { name, password } }))
   }
 
   return (
@@ -38,9 +37,11 @@ function loginForm() {
         <button className="form__submit" type="submit">
           Send credentials
         </button>
-        <div className="form__input  form__input--small form__message">
-          {message}
-        </div>
+        {!!message && (
+          <div className="form__input  form__input--small form__message">
+            {message}
+          </div>
+        )}
       </form>
     </div>
   )
