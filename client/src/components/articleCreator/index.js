@@ -12,6 +12,12 @@ const { getFileExtension } = require('../../utils')
 
 const { useEffect, useState } = React
 
+const createUuidName = filename => {
+  const uuid = uuidv4()
+  const extension = getFileExtension(filename)
+  return `${uuid}.${extension}`
+}
+
 class RichText extends React.Component {
   constructor(props) {
     super(props)
@@ -58,9 +64,7 @@ class RichText extends React.Component {
   }
 
   insertImage = file => {
-    const uuid = uuidv4()
-    const extension = getFileExtension(file.name)
-    const id = `${uuid}.${extension}`
+    const id = createUuidName(file.name)
     const { editorState } = this.state
     const contentState = editorState.getCurrentContent()
     const contentStateWithEntity = contentState.createEntity(
