@@ -13,12 +13,13 @@ const Searcher = ({ search, clear }) => {
   return (
     <div className="searcher">
       <button
-        className="searcher__button searcher__button--clear"
+        className="searcher__button searcher__button--search"
         onClick={() => {
-          setText('')
-          clear()
+          search(text)
         }}
-      />
+      >
+        <img src="search.png" />
+      </button>
 
       <form onSubmit={submit}>
         <input
@@ -33,11 +34,14 @@ const Searcher = ({ search, clear }) => {
       </form>
 
       <button
-        className="searcher__button searcher__button--search"
+        className="searcher__button searcher__button--clear"
         onClick={() => {
-          search(text)
+          setText('')
+          clear()
         }}
-      />
+      >
+        <img src="clear.png" />
+      </button>
     </div>
   )
 }

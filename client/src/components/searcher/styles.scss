@@ -14,25 +14,10 @@
 
 .searcher__button {
   display: inline-block;
-  font-size: 1.5em;
-  border-radius: 10em;
-  background-color: var(--primary);
-  height: 1.5em;
-  width: 1.5em;
+  background-color: transparent;
+  height: 40px;
+  width: 40px;
   border: 0;
-  line-height: 0;
   color: var(--senary);
   cursor: pointer;
-}
-
-.searcher__button--clear:before {
-  content: '✖';
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-}
-
-.searcher__button--search:before {
-  content: '➔';
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
 }
