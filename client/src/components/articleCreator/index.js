@@ -29,8 +29,6 @@ class RichText extends React.Component {
 
   onChange = editorState => {
     this.setState({ editorState }, () => {
-      console.log(editorState.getCurrentContent())
-      console.log(convertToRaw(editorState.getCurrentContent()))
       this.props.setText(convertToRaw(editorState.getCurrentContent()))
     })
   }
