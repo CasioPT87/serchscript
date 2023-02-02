@@ -89,7 +89,7 @@ const create = async (req, res) => {
   }
   article.title = title
   article.description = description
-  article.content = JSON.stringify(content)
+  article.content = content
   article.hidden = hidden
   article.fecha = new Date().toISOString()
 
@@ -108,7 +108,7 @@ const update = async req => {
       title,
       titleId: paramCase(title),
       description,
-      content: JSON.stringify(content),
+      content: content,
       hidden,
     },
     { new: true }

@@ -137,7 +137,8 @@ const uploadImages =
   }
 
 const createDigestedArticleEntityMap = ({ uploadResponses, content }) => {
-  const { entityMapValues } = content
+  const { entityMap } = content
+  const entityMapValues = Object.values(entityMap)
   const _entityMapValues = Object.assign({}, entityMapValues) // creating copy to avoid mutating the original object
   for (let i = 0; i < _entityMapValues.length; i++) {
     const filename = uploadResponses[i].filename || uploadResponses[i].data.file
@@ -148,7 +149,7 @@ const createDigestedArticleEntityMap = ({ uploadResponses, content }) => {
 }
 
 const createDigestedContent = ({ digestedEntities, content }) => {
-  return { ...content, entityMap: digestedEntities }
+  return JSON.stringify({ ...content, entityMap: digestedEntities })
 }
 
 const processArticle = conf => uploadedImagesData => payload => {
