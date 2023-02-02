@@ -1,15 +1,20 @@
 const React = require('react')
-const { useState } = require('react')
+const { useState, useEffect } = require('react')
 const { useDispatch, useSelector } = require('react-redux')
 const {
   auth: { login },
 } = require('../../store/async')
+const { resetMessage } = require('../../store/actions')
 
 function loginForm() {
   const dispatch = useDispatch()
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const message = useSelector(state => state.message.auth)
+
+  useEffect(() => {
+    dispatch(resetMessage())
+  }, [])
 
   let handleSubmit = async e => {
     e.preventDefault()

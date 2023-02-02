@@ -7,7 +7,7 @@ const {
   article: { create: createArticle, update: updateArticle, list: listArticles },
   image: { upload: uploadImages },
 } = require('../../store/async')
-const { setArticleMessage } = require('../../store/actions')
+const { setArticleMessage, resetMessage } = require('../../store/actions')
 
 const MODE = {
   create: 'CREATE',
@@ -55,6 +55,10 @@ const ArticleForm = mode => () => {
   const [description, setDescription] = useState('')
   const [content, setContent] = useState('')
   const [hidden, setHidden] = useState(false)
+
+  useEffect(() => {
+    dispatch(resetMessage())
+  }, [])
 
   useEffect(() => {
     if (article && mode === MODE.edit) {
