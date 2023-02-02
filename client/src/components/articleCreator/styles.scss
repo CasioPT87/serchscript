@@ -74,6 +74,16 @@
   display: inline-block;
 }
 
+.RichEditor-linkButton {
+  display: block;
+  background-color: transparent;
+  border: 0;
+  font-size: 1em;
+  padding-left: 0;
+  color: var(--septenary);
+  cursor: pointer;
+}
+
 .RichEditor-activeButton {
   color: var(--secondary);
 }

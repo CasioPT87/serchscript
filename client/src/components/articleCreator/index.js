@@ -6,6 +6,7 @@ const {
   AtomicBlockUtils,
   convertToRaw,
   convertFromRaw,
+  CompositeDecorator,
 } = require('draft-js')
 const { v4: uuidv4 } = require('uuid')
 const { getFileExtension } = require('../../utils')
@@ -18,9 +19,32 @@ const createUuidName = filename => {
   return `${uuid}.${extension}`
 }
 
+function findLinkEntities(contentBlock, callback, contentState) {
+  contentBlock.findEntityRanges(character => {
+    const entityKey = character.getEntity()
+    return (
+      entityKey !== null &&
+      contentState.getEntity(entityKey).getType() === 'LINK'
+    )
+  }, callback)
+}
+
+const Link = props => {
+  const { url } = props.contentState.getEntity(props.entityKey).getData()
+  console.log({ url })
+  return <a href={url}>{url}</a>
+}
+
+const decorator = new CompositeDecorator([
+  {
+    strategy: findLinkEntities,
+    component: Link,
+  },
+])
 class RichText extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = { editorState: EditorState.createEmpty() }
   }
 
@@ -29,7 +53,7 @@ class RichText extends React.Component {
     if (articleContent) {
       const articleData = JSON.parse(articleContent)
       const contentState = convertFromRaw(articleData)
-      this.onChange(EditorState.createWithContent(contentState))
+      this.onChange(EditorState.createWithContent(contentState, decorator))
     }
   }
 
@@ -45,8 +69,6 @@ class RichText extends React.Component {
       .getCurrentContent()
       .getBlockForKey(selection.getStartKey())
       .getType()
-
-    console.log({ blockType })
 
     if (
       e.keyCode === 13 &&
@@ -66,6 +88,39 @@ class RichText extends React.Component {
   toggleInlineStyle = inlineStyle => {
     this.onChange(
       RichUtils.toggleInlineStyle(this.state.editorState, inlineStyle)
+    )
+  }
+
+  onLink = () => {
+    const { editorState } = this.state
+    const contentState = editorState.getCurrentContent()
+    const selection = editorState.getSelection()
+    const startOffset = selection.getStartOffset()
+    const endOffset = selection.getEndOffset()
+    const startKey = selection.getStartKey()
+    const block = contentState.getBlockForKey(startKey)
+    const blockText = block.getText()
+    const selectedText = blockText.substring(startOffset, endOffset)
+
+    const contentStateWithEntity = contentState.createEntity(
+      'LINK',
+      'MUTABLE',
+      { url: selectedText }
+    )
+
+    const entityKey = contentStateWithEntity.getLastCreatedEntityKey()
+
+    // Apply entity
+    let nextEditorState = EditorState.set(editorState, {
+      currentContent: contentStateWithEntity,
+    })
+
+    this.onChange(
+      RichUtils.toggleLink(
+        nextEditorState,
+        nextEditorState.getSelection(),
+        entityKey
+      )
     )
   }
 
@@ -121,6 +176,16 @@ class RichText extends React.Component {
               editorState={editorState}
               onToggle={this.toggleInlineStyle}
             />
+            <button
+              type="text"
+              className="RichEditor-linkButton"
+              onClick={e => {
+                e.preventDefault()
+                this.onLink()
+              }}
+            >
+              Link
+            </button>
           </div>
 
           <Editor
