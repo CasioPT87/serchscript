@@ -1,5 +1,5 @@
 .article {
-  padding: 1em 2em;
+  padding: 1em 0;
   background-color: var(--terciary);
 }
 
@@ -7,8 +7,9 @@
   padding: 2em 12em;
   background-color: var(--quaternary);
   color: var(--septenary);
-  border-radius: 1em;
-  border: 0.2em solid var(--secondary);
+  border: 0.1em solid var(--secondary);
+  border-left: 0;
+  border-right: 0;
 
   h1 {
     text-align: center;
@@ -23,15 +24,8 @@
 }
 
 @media (max-width: 1100px) {
-  .article {
-    padding: 1em 0;
-  }
-
   .article__inner {
     padding: 1em 6em;
-    border-radius: 0;
-    border-left: 0;
-    border-right: 0;
   }
 }
 
