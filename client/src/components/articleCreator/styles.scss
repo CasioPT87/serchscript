@@ -9,6 +9,17 @@
   margin-bottom: 1em;
 }
 
+.RichEditor-root__addImage {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  padding: 0.6em;
+  border: 0.2em solid var(--primary);
+  background-color: var(--secondary);
+  color: var(--quinary);
+  z-index: 10;
+}
+
 .RichEditor-editor {
   font-size: 1em;
   border-top: 0.05em solid var(--septenary);
@@ -65,4 +76,12 @@
 
 .RichEditor-activeButton {
   color: var(--secondary);
+}
+
+.controls {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background-color: var(--senary);
 }

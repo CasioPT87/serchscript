@@ -31,6 +31,17 @@
   max-width: 15em;
 }
 
+.form__submit--hidden {
+  display: none;
+}
+
+.form__submit--sticky-bottom {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+}
+
 .form__submit {
   font-family: var(--font-family);
   font-size: 1em;

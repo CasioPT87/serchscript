@@ -112,14 +112,17 @@ class RichText extends React.Component {
     return (
       <div className="RichEditor-root">
         <div className={className} onClick={this.focus}>
-          <BlockStyleControls
-            editorState={editorState}
-            onToggle={this.toggleBlockType}
-          />
-          <InlineStyleControls
-            editorState={editorState}
-            onToggle={this.toggleInlineStyle}
-          />
+          <div className="controls">
+            <BlockStyleControls
+              editorState={editorState}
+              onToggle={this.toggleBlockType}
+            />
+            <InlineStyleControls
+              editorState={editorState}
+              onToggle={this.toggleInlineStyle}
+            />
+          </div>
+
           <Editor
             blockStyleFn={getBlockStyle}
             customStyleMap={styleMap}
@@ -133,12 +136,15 @@ class RichText extends React.Component {
           />
         </div>
 
+        <label for="addFile" className="RichEditor-root__addImage">
+          Add Image
+        </label>
         <input
           type="file"
-          id="myfile"
+          id="addFile"
           name="myfile"
           onChange={e => this.insertImage(e.target.files[0])}
-          className="form__submit form__submit--separated-sides"
+          className="form__submit--hidden"
         />
       </div>
     )

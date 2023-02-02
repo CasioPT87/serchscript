@@ -118,7 +118,10 @@ const ArticleForm = mode => () => {
           articleContent={getRichTextDataFeed({ mode, article })}
         />
 
-        <button className="form__submit" type="submit">
+        <button
+          className="form__submit form__submit--sticky-bottom"
+          type="submit"
+        >
           {getButtonText(mode)}
         </button>
       </form>
