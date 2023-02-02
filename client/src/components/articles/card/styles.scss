@@ -19,6 +19,14 @@
   }
 }
 
+@media (max-width: 1100px) {
+  .card {
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+}
+
 .card__title,
 .card__text,
 .card__date {

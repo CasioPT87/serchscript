@@ -8,6 +8,12 @@
   padding: 0;
 }
 
+@media (max-width: 1100px) {
+  .articles__list {
+    max-width: 100%;
+  }
+}
+
 .articles__message-default {
   display: flex;
   justify-content: center;
