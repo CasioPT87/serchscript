@@ -51,6 +51,7 @@
 .article__title {
   display: flex;
   justify-content: center;
+  text-align: center;
   font-size: 2em;
   color: var(--quinary);
 }
@@ -58,6 +59,7 @@
 .article__description {
   display: flex;
   justify-content: center;
+  text-align: center;
   color: var(--secondary);
   margin-bottom: 2em;
 }
