@@ -16,7 +16,7 @@ const serverRequest =
           config.pathParams.forEach(pathParam => {
             const replacement = pathParams && pathParams[pathParam]
             if (replacement)
-              pathname = pathname.replaceAll(`:${pathParam}`, replacement)
+              pathname = pathname.replace(`:${pathParam}`, replacement)
           })
         }
 
