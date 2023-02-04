@@ -16,7 +16,7 @@ const rawContentToHtml = rawContent => {
       }
       if (entity.type === 'IMAGE') {
         console.log({ entity, originalText })
-        return <img src={`/images/${entity?.data?.file}`} alt="article image" />
+        return <img src={`/${entity?.data?.file}`} alt="article image" />
       }
       return originalText
     },
