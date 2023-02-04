@@ -227,9 +227,10 @@ const mediaBlockRenderer = block => {
 }
 
 const Media = props => {
+  console.log(props.block.getEntityAt(0))
   const entity = props.contentState.getEntity(props.block.getEntityAt(0))
-  const { file } = entity.getData()
-  const type = entity.getType()
+  const file = entity?.getData()?.file
+  const type = entity?.getType()
   const [base64Image, setBase64Image] = useState(null)
 
   useEffect(() => {

@@ -53,24 +53,7 @@ const serverRequest =
 
         const response = await fetch(url.toString(), requestOptions)
 
-        let responseData
-
-        try {
-          const contentType = response.headers.get('content-type')
-          if (contentType && contentType.indexOf('application/json') !== -1) {
-            responseData = await response.json()
-          } else {
-            responseData = await response.text()
-          }
-        } catch (e) {
-          rej(e.message)
-        }
-
-        if (response.ok && response.status < 300) {
-          res(responseData)
-        } else {
-          rej(responseData)
-        }
+        responseDealer({ response, res, rej })
       })
         .then(async data => {
           if (config.successDispatch && Array.isArray(config.successDispatch)) {
@@ -90,23 +73,19 @@ const serverRequest =
               payload: error,
               dispatch,
             })
-            await Promise.all(dispatches)
+            await Promise.all(dispatches).catch(e =>
+              console.log('error sending message')
+            )
           }
         })
     }
   }
 
-const createDispatchFns = ({ fns, payload, dispatch }) => {
-  return fns.map(eachDispatchFn => {
-    return dispatch(eachDispatchFn(payload))
-  })
-}
-
 const uploadImages =
-  conf =>
+  config =>
   ({ entityMap }) =>
   async (dispatch, getState) => {
-    const { method, path } = conf
+    const { method, path } = config
 
     const uploadRequests = Object.values(entityMap).map(async entity => {
       const {
@@ -129,12 +108,53 @@ const uploadImages =
         body,
       })
 
-      if (!response.ok) throw new Error('problem uploading image')
-      return response.json()
+      return new Promise(async (res, rej) => {
+        await responseDealer({ response, res, rej })
+      })
+        .then(data => data)
+        .catch(async error => {
+          if (config.failDispatch && Array.isArray(config.failDispatch)) {
+            const dispatches = createDispatchFns({
+              fns: config.failDispatch,
+              payload: error,
+              dispatch,
+            })
+            await Promise.all(dispatches).catch(e =>
+              console.log('error sending message')
+            )
+          }
+        })
     })
 
     return Promise.all(uploadRequests)
   }
+
+const createDispatchFns = ({ fns, payload, dispatch }) => {
+  return fns.map(eachDispatchFn => {
+    return dispatch(eachDispatchFn(payload))
+  })
+}
+
+const responseDealer = async ({ response, res, rej }) => {
+  let responseData
+
+  try {
+    const contentType = response.headers.get('content-type')
+    if (contentType && contentType.indexOf('application/json') !== -1) {
+      responseData = await response.json()
+    } else {
+      responseData = await response.text()
+    }
+  } catch (e) {
+    rej(e.message)
+  }
+
+  if (response.ok && response.status < 300) {
+    res(responseData)
+  } else {
+    rej(responseData)
+  }
+}
 
 const createDigestedArticleEntityMap = ({ uploadResponses, content }) => {
   const { entityMap } = content

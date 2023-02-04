@@ -9,17 +9,20 @@ const getFileExtension = filename => {
 
 const rawContentToHtml = rawContent => {
   const cooked = convertFromRaw(rawContent)
-  const preHtml = convertToHTML({
+  return convertToHTML({
     entityToHTML: (entity, originalText) => {
       if (entity.type === 'LINK') {
         return <a href={entity.data.url}>{originalText}</a>
       }
+      if (entity.type === 'IMAGE') {
+        console.log({ entity, originalText })
+        return <img src={`/images/${entity?.data?.file}`} alt="article image" />
+      }
       return originalText
     },
   })(cooked)
-  return preHtml
-    .replace(/<figure>/g, '<img src="')
-    .replace(/<\/figure>/g, '" >')
+    .replace(/<figure>/g, '')
+    .replace(/<\/figure>/g, '')
 }
 
 const getCookie = () =>

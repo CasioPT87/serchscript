@@ -1,18 +1,25 @@
 const express = require('express')
-const { createWriteStream } = require('fs')
+const { createWriteStream, createReadStream } = require('fs')
 const busboy = require('busboy')
 const router = express.Router()
 const { Storage } = require('megajs')
 const path = require('path')
+const { addAbortSignal } = require('stream')
 
 class BackupManager {
-  constructor(file, filename, onError) {
+  constructor(file, filename, onError, onSuccess, abortSignal) {
     this.file = file
     this.filename = filename
     this.onError = onError
+    this.onSuccess = onSuccess
+    this.abortSignal = abortSignal
   }
 
-  async upload() {
+  upload = imagePath => async () => {
+    console.log('backup uoload')
+
+    const saveStream = createReadStream(imagePath)
+
     const storage = await new Storage({
       email: process.env.META_USERNAME,
       password: process.env.META_PASS,
@@ -23,66 +30,88 @@ class BackupManager {
       allowUploadBuffering: true,
     })
 
-    uploadStream.on('error', () => {
-      this.onError()
-    })
+    uploadStream.on('finish', this.onSuccess)
 
-    this.file.pipe(uploadStream)
+    uploadStream.on('error', this.onError)
+
+    const stream = addAbortSignal(this.abortSignal, uploadStream)
+
+    saveStream.pipe(stream)
   }
 }
 
 class ImageManager {
-  constructor(file, filename, onError) {
+  constructor(file, filename, onError, onSuccess, backupService, abortSignal) {
     this.file = file
-    this.storagePathBase = path.join(process.cwd(), `/public/${filename}`)
+    this.storagePathBase = path.join(
+      process.cwd(),
+      `/public/images/${filename}`
+    )
     this.onError = onError
+    this.abortSignal = abortSignal
+
+    this.backupService = new backupService(
+      file,
+      filename,
+      onError,
+      onSuccess,
+      abortSignal
+    )
   }
 
-  upload() {
-    const writableStream = createWriteStream(this.storagePathBase)
-
-    writableStream.on('error', () => {
-      this.onError()
-    })
-
-    this.file.pipe(writableStream)
+  start() {
+    this.upload(this.backupService.upload)
   }
-}
 
-const onError = (res, filename = '-unknown file name-') => {
-  res.status(409).send(`Error: Image ${filename} upload failed`)
+  upload = () => {
+    const saveStream = createWriteStream(this.storagePathBase)
+
+    saveStream.on('error', this.onError)
+    saveStream.on('finish', this.backupService.upload(this.storagePathBase))
+
+    const abortableStream = addAbortSignal(this.abortSignal, saveStream)
+
+    this.file.pipe(abortableStream)
+  }
 }
 
 // save photo
 router.post('/', async function (req, res, next) {
   const bb = busboy({ headers: req.headers })
 
-  let _filename = 'unkown file name'
-
   bb.on('file', (name, file, info) => {
     const { filename, encoding, mimeType } = info
 
-    _filename = filename
+    const abortController = new AbortController()
 
-    const _onError = () => onError(res, filename)
+    const onError = () => {
+      res.status(409).send(`Error: Image ${filename} upload failed`)
+    }
 
-    new BackupManager(file, filename, _onError).upload()
-    new ImageManager(file, filename, _onError).upload()
+    const onSuccess = () => {
+      res.status(200).json({ filename })
+    }
 
-    file.on('close', () => {
-      res.status(200).json({ filename: _filename })
-    })
+    new ImageManager(
+      file,
+      filename,
+      onError,
+      onSuccess,
+      BackupManager,
+      abortController.signal
+    ).upload()
 
     file.on('error', e => {
-      onError(res, filename)
+      abortController.abort()
+      onError()
     })
   })
 
   //handling errors
   bb.on('error', e => {
+    abort()
     res.status(409).send(`Error: Image upload failed`)
   })
-  req.on('aborted', () => onError(res))
 
   req.pipe(bb)
 })
