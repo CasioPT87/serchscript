@@ -70,10 +70,7 @@ class RichText extends React.Component {
       .getBlockForKey(selection.getStartKey())
       .getType()
 
-    if (
-      e.keyCode === 13 &&
-      (blockType === 'code-block' || blockType === 'unstyled')
-    ) {
+    if (e.keyCode === 13 && blockType === 'code-block') {
       this.onChange(RichUtils.insertSoftNewline(this.state.editorState))
       return 'handled'
     }
