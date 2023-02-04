@@ -43,10 +43,7 @@ class BackupManager {
 class ImageManager {
   constructor(file, filename, onError, onSuccess, backupService, abortSignal) {
     this.file = file
-    this.storagePathBase = path.join(
-      process.cwd(),
-      `/public/images/${filename}`
-    )
+    this.storagePathBase = path.join(process.cwd(), `/public/${filename}`)
     this.onError = onError
     this.abortSignal = abortSignal
 
