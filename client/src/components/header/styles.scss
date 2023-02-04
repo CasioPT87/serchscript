@@ -49,7 +49,7 @@
   cursor: pointer;
 }
 
-@media (max-width: 400px) {
+@media (max-width: $small-screen) {
   .header__icon {
     display: none;
   }

@@ -27,15 +27,23 @@
     font-family: 'Hoefler Text', 'Georgia', serif;
     font-style: italic;
   }
+
+  a {
+    color: var(--secondary);
+
+    &:visited {
+      color: var(--octonary);
+    }
+  }
 }
 
-@media (max-width: 1100px) {
+@media (max-width: $middle-big-screen) {
   .article__inner {
     padding: 1em 6em;
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: $middle-screen) {
   .article {
     padding: 1em 0;
   }

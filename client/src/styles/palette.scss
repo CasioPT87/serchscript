@@ -1,19 +1,21 @@
 :root {
-  --primary: #b60d50; //
+  --primary: #b60d50;
   --secondary: #1890ff;
   --terciary: #191c20;
   --quaternary: #111216;
   --quinary: #dddddd;
   --senary: #fff;
   --septenary: #a4acb6;
+  --octonary: #ab14ff;
   --dark: #000;
 
   --font-family: Plus Jakarta Sans, ui-sans-serif, system-ui, -apple-system,
     BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
     sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
     'Noto Color Emoji';
-
-  --small-screen: 400px;
-  --middle-screen: 800px;
-  --big-screen: 1400px;
 }
+
+$small-screen: 400px;
+$middle-screen: 800px;
+$middle-big-screen: 1100px;
+$big-screen: 1400px;
