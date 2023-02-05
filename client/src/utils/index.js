@@ -15,10 +15,14 @@ const rawContentToHtml = rawContent => {
         return <a href={entity.data.url}>{originalText}</a>
       }
       if (entity.type === 'IMAGE') {
-        console.log({ entity, originalText })
         return <img src={`/${entity?.data?.file}`} alt="article image" />
       }
       return originalText
+    },
+    blockToHTML: block => {
+      if (block.type === 'unstyled' && block.text === '') {
+        return <br />
+      }
     },
   })(cooked)
     .replace(/<figure>/g, '')

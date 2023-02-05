@@ -7,6 +7,7 @@ const {
   convertToRaw,
   convertFromRaw,
   CompositeDecorator,
+  Modifier,
 } = require('draft-js')
 const { v4: uuidv4 } = require('uuid')
 const { getFileExtension } = require('../../utils')
@@ -64,14 +65,28 @@ class RichText extends React.Component {
   }
 
   handleReturn = e => {
-    const selection = this.state.editorState.getSelection()
-    const blockType = this.state.editorState
+    const { editorState } = this.state
+    const selection = editorState.getSelection()
+    const blockType = editorState
       .getCurrentContent()
       .getBlockForKey(selection.getStartKey())
       .getType()
 
     if (e.keyCode === 13 && blockType === 'code-block') {
-      this.onChange(RichUtils.insertSoftNewline(this.state.editorState))
+      this.onChange(RichUtils.insertSoftNewline(editorState))
+      return 'handled'
+    }
+
+    // this makes the return key to create a new block (hooray!!)
+    if (e.keyCode === 13 && blockType !== 'code-block') {
+      const currentContent = editorState.getCurrentContent()
+      const selection = editorState.getSelection()
+      const textWithEntity = Modifier.splitBlock(currentContent, selection)
+
+      this.onChange(
+        EditorState.push(editorState, textWithEntity, 'split-block')
+      )
+
       return 'handled'
     }
 
