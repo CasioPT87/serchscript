@@ -1,5 +1,5 @@
 const Articles = require('./articles')
-const Article = require('./article')
+const Article = require('./article/index.tsx')
 const LoginForm = require('./loginForm')
 const ArticleForm = require('./articleForm')
 const MainFrame = require('./mainFrame')

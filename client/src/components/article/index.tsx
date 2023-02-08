@@ -14,10 +14,10 @@ const { useEffect, useState } = React
 const Article = () => {
   const dispatch = useDispatch()
   const [content, setContent] = useState(null)
-  const article = useSelector(state => {
+  const article = useSelector((state: any) => {
     return state.article
   })
-  const logged = useSelector(state => state.logged)
+  const logged = useSelector((state: any) => state.logged)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

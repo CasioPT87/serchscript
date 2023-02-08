@@ -1,5 +1,8 @@
 const express = require('express')
-require('@babel/register')
+require('@babel/register')({
+  extensions: ['.js', '.tsx'],
+  presets: ['@babel/preset-typescript'],
+})
 const { sendSSRResposeView } = require('./utils')
 const router = express.Router()
 

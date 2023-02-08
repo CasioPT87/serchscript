@@ -32,6 +32,12 @@ const clientConfig = {
         exclude: /node_modules/,
         use: "babel-loader",
       },
+      // typescript rules
+      {
+        test: /\.(ts|tsx)?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+      },
       // CSS rules
       {
         test: /\.s[ac]ss$/i,
