@@ -1,4 +1,3 @@
-const React = require('react')
 const { useSelector, useDispatch } = require('react-redux')
 const parse = require('html-react-parser')
 const { Link } = require('react-router-dom')
@@ -13,7 +12,7 @@ const { useEffect, useState } = React
 
 const Article: React.FC = (): JSX.Element => {
   const dispatch = useDispatch()
-  const [content, setContent] = useState(null)
+  const [content, setContent] = useState<null | string>(null)
   const article = useSelector((state: any) => {
     return state.article
   })
