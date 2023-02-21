@@ -11,7 +11,7 @@ const Warning = require('../warning')
 
 const { useEffect, useState } = React
 
-const Article = () => {
+const Article: React.FC = (): JSX.Element => {
   const dispatch = useDispatch()
   const [content, setContent] = useState(null)
   const article = useSelector((state: any) => {
