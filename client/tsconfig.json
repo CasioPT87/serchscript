@@ -2,11 +2,13 @@
   "compilerOptions": {
     "noImplicitAny": true,
     "sourceMap": true,
-    "module": "es6",
+    "module": "CommonJS",
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node16",
+    "esModuleInterop": true
+    // "allowUmdGlobalAccess": true
   },
   "include": ["./src/**/*"]
 }

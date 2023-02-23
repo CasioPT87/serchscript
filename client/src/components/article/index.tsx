@@ -1,22 +1,24 @@
-const { useSelector, useDispatch } = require('react-redux')
-const parse = require('html-react-parser')
-const { Link } = require('react-router-dom')
-const { rawContentToHtml } = require('../../utils')
-const {
-  article: { show: showArticle },
-} = require('../../store/async')
-const Comments = require('../comments')
-const Warning = require('../warning')
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import type { RootStateOrAny } from 'react-redux'
+import parse from 'html-react-parser'
+import { Link } from 'react-router-dom'
+import { rawContentToHtml } from '../../utils'
+import { article as articleAsync } from '../../store/async'
+import Comments from '../comments'
+import Warning from '../warning'
 
-const { useEffect, useState } = React
+const { show: showArticle } = articleAsync
+
+const { useState, useEffect } = React
 
 const Article: React.FC = (): JSX.Element => {
   const dispatch = useDispatch()
   const [content, setContent] = useState<null | string>(null)
-  const article = useSelector((state: any) => {
+  const article = useSelector((state: RootStateOrAny) => {
     return state.article
   })
-  const logged = useSelector((state: any) => state.logged)
+  const logged = useSelector((state: RootStateOrAny) => state.logged)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
