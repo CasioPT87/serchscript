@@ -6,7 +6,7 @@ const Searcher = require('../searcher')
 const Paginator = require('../paginator')
 const {
   article: { list: listArticles },
-} = require('../../store/async')
+} = require('../../store/async/index.ts')
 
 const { useEffect, useState } = React
 

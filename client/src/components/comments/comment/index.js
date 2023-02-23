@@ -2,7 +2,7 @@ const React = require('react')
 const { useDispatch } = require('react-redux')
 const {
   comment: { create: createComment },
-} = require('../../../store/async')
+} = require('../../../store/async/index.ts')
 
 const { useState, useEffect } = React
 

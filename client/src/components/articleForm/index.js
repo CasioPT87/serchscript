@@ -6,7 +6,7 @@ const CheckBox = require('../checkbox')
 const {
   article: { create: createArticle, update: updateArticle, list: listArticles },
   image: { upload: uploadImages },
-} = require('../../store/async')
+} = require('../../store/async/index.ts')
 const { setArticleMessage, resetMessage } = require('../../store/actions')
 
 const MODE = {

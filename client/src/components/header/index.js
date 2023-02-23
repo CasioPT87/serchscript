@@ -5,7 +5,7 @@ const { getCookie } = require('../../utils')
 const { setLogged } = require('../../store/actions')
 const {
   auth: { logout },
-} = require('../../store/async')
+} = require('../../store/async/index.ts')
 const NavItem = require('./navItem')
 const routes = require('../../routes')
 

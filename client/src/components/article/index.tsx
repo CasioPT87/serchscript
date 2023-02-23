@@ -4,7 +4,7 @@ import type { RootStateOrAny } from 'react-redux'
 import parse from 'html-react-parser'
 import { Link } from 'react-router-dom'
 import { rawContentToHtml } from '../../utils'
-const { article: articleAsync } = require('../../store/async')
+const { article: articleAsync } = require('../../store/async/index.ts')
 const Comments = require('../comments/index.tsx')
 import Warning from '../warning'
 

@@ -1,19 +1,26 @@
 const requestConfig = require('./config')
 
+type RequestParams = {
+  pathParams?: any
+  searchParams?: any
+  formDataProps?: any
+  data?: any
+}
+
 const serverRequest =
-  config =>
-  ({ pathParams, searchParams, formDataProps, data } = {}) => {
-    return async (dispatch, getState) => {
+  (config: any) =>
+  ({ pathParams, searchParams, formDataProps, data }: RequestParams = {}) => {
+    return async (dispatch: any) => {
       return new Promise(async (res, rej) => {
         const url = new URL(process.env.SERVER_DOMAIN)
-        let body = null
-        const headers = {
+        let body: any = null
+        const headers: any = {
           Accept: '*/*',
         }
 
         let pathname = config.path
         if (config.pathParams) {
-          config.pathParams.forEach(pathParam => {
+          config.pathParams.forEach((pathParam: any) => {
             const replacement = pathParams && pathParams[pathParam]
             if (replacement)
               pathname = pathname.replace(`:${pathParam}`, replacement)
@@ -23,7 +30,7 @@ const serverRequest =
         url.pathname = pathname
 
         if (config.searchParams) {
-          config.searchParams.forEach(searchParam => {
+          config.searchParams.forEach((searchParam: any) => {
             const value = searchParams && searchParams[searchParam]
             if (value) url.searchParams.append(searchParam, value)
           })
@@ -31,7 +38,7 @@ const serverRequest =
 
         if (config.formDataProps) {
           body = new FormData()
-          config.formDataProps.forEach(formDataProp => {
+          config.formDataProps.forEach((formDataProp: any) => {
             const value = formDataProps && formDataProps[formDataProp]
             if (value) body.append(formDataProp, value)
           })
@@ -41,7 +48,7 @@ const serverRequest =
           body = JSON.stringify(data)
         }
 
-        const requestOptions = {
+        const requestOptions: any = {
           method: config.method,
           headers,
         }
@@ -82,12 +89,12 @@ const serverRequest =
   }
 
 const uploadImages =
-  config =>
-  ({ entityMap }) =>
-  async (dispatch, getState) => {
+  (config: any) =>
+  ({ entityMap }: any) =>
+  async (dispatch: any) => {
     const { method, path } = config
 
-    const uploadRequests = Object.values(entityMap).map(async entity => {
+    const uploadRequests = Object.values(entityMap).map(async (entity: any) => {
       const {
         data: { file, id },
       } = entity
@@ -129,13 +136,13 @@ const uploadImages =
     return Promise.all(uploadRequests)
   }
 
-const createDispatchFns = ({ fns, payload, dispatch }) => {
-  return fns.map(eachDispatchFn => {
+const createDispatchFns = ({ fns, payload, dispatch }: any) => {
+  return fns.map((eachDispatchFn: any) => {
     return dispatch(eachDispatchFn(payload))
   })
 }
 
-const responseDealer = async ({ response, res, rej }) => {
+const responseDealer = async ({ response, res, rej }: any) => {
   let responseData
 
   try {
@@ -156,36 +163,37 @@ const responseDealer = async ({ response, res, rej }) => {
   }
 }
 
-const createDigestedArticleEntityMap = ({ uploadResponses, content }) => {
+const createDigestedArticleEntityMap = ({ uploadResponses, content }: any) => {
   const { entityMap } = content
   const entityMapValues = Object.values(entityMap)
   const _entityMapValues = [...entityMapValues]
 
   for (let i = 0; i < _entityMapValues.length; i++) {
     const filename = uploadResponses[i].filename || uploadResponses[i].data.file
-    const entity = _entityMapValues[i]
+    const entity: any = _entityMapValues[i]
     entity.data.file = filename
   }
 
   return _entityMapValues
 }
 
-const createDigestedContent = ({ digestedEntities, content }) => {
+const createDigestedContent = ({ digestedEntities, content }: any) => {
   return JSON.stringify({ ...content, entityMap: digestedEntities })
 }
 
-const processArticle = conf => uploadedImagesData => payload => {
-  const {
-    data: { content },
-  } = payload
-  const digestedEntities = createDigestedArticleEntityMap({
-    uploadResponses: uploadedImagesData,
-    content,
-  })
-  const digestedContent = createDigestedContent({ digestedEntities, content })
-  payload.data.content = digestedContent
-  return serverRequest(conf)(payload)
-}
+const processArticle =
+  (conf: any) => (uploadedImagesData: any) => (payload: any) => {
+    const {
+      data: { content },
+    } = payload
+    const digestedEntities = createDigestedArticleEntityMap({
+      uploadResponses: uploadedImagesData,
+      content,
+    })
+    const digestedContent = createDigestedContent({ digestedEntities, content })
+    payload.data.content = digestedContent
+    return serverRequest(conf)(payload)
+  }
 
 const serverRequests = {
   article: {

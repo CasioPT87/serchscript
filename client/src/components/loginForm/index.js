@@ -3,7 +3,7 @@ const { useState, useEffect } = require('react')
 const { useDispatch, useSelector } = require('react-redux')
 const {
   auth: { login },
-} = require('../../store/async')
+} = require('../../store/async/index.ts')
 const { resetMessage } = require('../../store/actions')
 
 function loginForm() {

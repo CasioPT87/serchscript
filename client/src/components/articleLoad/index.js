@@ -6,7 +6,7 @@ const { useState, useEffect } = require('react')
 const { useDispatch } = require('react-redux')
 const {
   article: { create: createArticle },
-} = require('../../store/async')
+} = require('../../store/async/index.ts')
 const {
   EditorState,
   convertToRaw,
