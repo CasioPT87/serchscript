@@ -1,6 +1,6 @@
 import type { Article, ArticleList, Message, Logged } from '../types/entities'
 
-interface StoreType {
+export interface StoreType {
   articles: ArticleList
   article: Article
   logged: Logged

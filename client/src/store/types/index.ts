@@ -10,8 +10,6 @@ type RequestParams = {
   data?: any
 }
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = typeof defaultState
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof unusedStore.dispatch
 

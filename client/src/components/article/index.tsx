@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import type { RootStateOrAny } from 'react-redux'
 import parse from 'html-react-parser'
 import { Link } from 'react-router-dom'
 import { rawContentToHtml } from '../../utils'
@@ -8,15 +7,17 @@ const { article: articleAsync } = require('../../store/async/index.ts')
 const Comments = require('../comments/index.tsx')
 import Warning from '../warning'
 
+import type { StoreType } from '../../store/state/index'
+
 const { show: showArticle } = articleAsync
 
 const Article: React.FC = (): JSX.Element => {
   const dispatch = useDispatch()
   const [content, setContent] = useState<null | string>(null)
-  const article = useSelector((state: RootStateOrAny) => {
+  const article = useSelector((state: StoreType) => {
     return state.article
   })
-  const logged = useSelector((state: RootStateOrAny) => state.logged)
+  const logged = useSelector((state: StoreType) => state.logged)
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
