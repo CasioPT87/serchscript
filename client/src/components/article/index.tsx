@@ -13,7 +13,7 @@ const { show: showArticle } = articleAsync
 const Article: React.FC = (): JSX.Element => {
   const dispatch = useDispatch()
   const [content, setContent] = useState<null | string>(null)
-  const article = useSelector((state: any) => {
+  const article = useSelector((state: RootStateOrAny) => {
     return state.article
   })
   const logged = useSelector((state: RootStateOrAny) => state.logged)

@@ -14,7 +14,7 @@ const ArticleSchema = Schema(
       type: Schema.Types.ObjectId,
       ref: 'User',
     },
-    fecha: { type: Date },
+    date: { type: Date },
     comments: [
       {
         type: Schema.Types.ObjectId,

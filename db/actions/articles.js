@@ -91,7 +91,7 @@ const create = async (req, res) => {
   article.description = description
   article.content = content
   article.hidden = hidden
-  article.fecha = new Date().toISOString()
+  article.date = new Date().toISOString()
 
   return article.save()
 }
