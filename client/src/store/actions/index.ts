@@ -1,39 +1,41 @@
-const addArticles = articles => ({
+export type Action = <T>(arg: T) => { type: string; payload: T }
+
+const addArticles: Action = articles => ({
   type: 'ADD_ARTICLES',
   payload: articles,
 })
 
-const addArticle = article => ({
+const addArticle: Action = article => ({
   type: 'ADD_ARTICLE',
   payload: article,
 })
 
-const addArticleComment = comment => ({
+const addArticleComment: Action = comment => ({
   type: 'ADD_ARTICLE_COMMENT',
   payload: comment,
 })
 
-const setLogged = logged => ({
+const setLogged: Action = logged => ({
   type: 'SET_LOGGED',
   payload: logged,
 })
 
-const setArticleMessage = message => ({
+const setArticleMessage: Action = message => ({
   type: 'SET_ARTICLE_MESSAGE',
   payload: message,
 })
 
-const setArticlesMessage = message => ({
+const setArticlesMessage: Action = message => ({
   type: 'SET_ARTICLES_MESSAGE',
   payload: message,
 })
 
-const setAuthMessage = message => ({
+const setAuthMessage: Action = message => ({
   type: 'SET_AUTH_MESSAGE',
   payload: message,
 })
 
-const resetMessage = () => ({
+const resetMessage: Action = () => ({
   type: 'RESET_MESSAGE',
   payload: null,
 })

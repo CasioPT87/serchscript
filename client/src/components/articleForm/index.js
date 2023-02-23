@@ -7,7 +7,10 @@ const {
   article: { create: createArticle, update: updateArticle, list: listArticles },
   image: { upload: uploadImages },
 } = require('../../store/async/index.ts')
-const { setArticleMessage, resetMessage } = require('../../store/actions')
+const {
+  setArticleMessage,
+  resetMessage,
+} = require('../../store/actions/index.ts')
 
 const MODE = {
   create: 'CREATE',

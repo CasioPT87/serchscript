@@ -4,7 +4,7 @@ const { useDispatch, useSelector } = require('react-redux')
 const {
   auth: { login },
 } = require('../../store/async/index.ts')
-const { resetMessage } = require('../../store/actions')
+const { resetMessage } = require('../../store/actions/index.ts')
 
 function loginForm() {
   const dispatch = useDispatch()

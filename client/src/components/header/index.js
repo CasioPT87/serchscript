@@ -2,7 +2,7 @@ const { Link } = require('react-router-dom')
 const React = require('react')
 const { useDispatch, useSelector } = require('react-redux')
 const { getCookie } = require('../../utils')
-const { setLogged } = require('../../store/actions')
+const { setLogged } = require('../../store/actions/index.ts')
 const {
   auth: { logout },
 } = require('../../store/async/index.ts')

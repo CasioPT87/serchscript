@@ -1,4 +1,4 @@
-const actions = require('../actions')
+const actions = require('../actions/index.ts')
 
 const requestConfig = {
   articles: {
