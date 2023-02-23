@@ -1,21 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import type { RootStateOrAny } from 'react-redux'
 import parse from 'html-react-parser'
 import { Link } from 'react-router-dom'
 import { rawContentToHtml } from '../../utils'
-import { article as articleAsync } from '../../store/async'
-import Comments from '../comments'
+const { article: articleAsync } = require('../../store/async')
+const Comments = require('../comments/index.tsx')
 import Warning from '../warning'
 
 const { show: showArticle } = articleAsync
 
-const { useState, useEffect } = React
-
 const Article: React.FC = (): JSX.Element => {
   const dispatch = useDispatch()
   const [content, setContent] = useState<null | string>(null)
-  const article = useSelector((state: RootStateOrAny) => {
+  const article = useSelector((state: any) => {
     return state.article
   })
   const logged = useSelector((state: RootStateOrAny) => state.logged)
