@@ -1,11 +1,5 @@
 const requestConfig = require('./config')
-
-type RequestParams = {
-  pathParams?: any
-  searchParams?: any
-  formDataProps?: any
-  data?: any
-}
+import type { RequestParams } from '../types/index'
 
 const serverRequest =
   (config: any) =>
