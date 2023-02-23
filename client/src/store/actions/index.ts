@@ -1,4 +1,5 @@
-export type Action = <T>(arg: T) => { type: string; payload: T }
+export type Action = <T>(arg: T) => ActionReturn<T>
+export type ActionReturn<T> = { type: string; payload: T }
 
 const addArticles: Action = articles => ({
   type: 'ADD_ARTICLES',

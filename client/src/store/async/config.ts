@@ -1,6 +1,7 @@
 const actions = require('../actions/index.ts')
+import type { RequestConfig } from '../types/config/index'
 
-const requestConfig = {
+const requestConfig: RequestConfig = {
   articles: {
     list: {
       method: 'GET',

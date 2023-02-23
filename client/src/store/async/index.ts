@@ -1,8 +1,9 @@
-const requestConfig = require('./config')
+const requestConfig = require('./config.ts')
+import type { MethodConfig } from '../types/config/index'
 import type { RequestParams } from '../types/index'
 
 const serverRequest =
-  (config: any) =>
+  (config: MethodConfig) =>
   ({ pathParams, searchParams, formDataProps, data }: RequestParams = {}) => {
     return async (dispatch: any) => {
       return new Promise(async (res, rej) => {
