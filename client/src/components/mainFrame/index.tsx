@@ -1,6 +1,4 @@
-const React = require('react')
-
-const MainFrame = ({ children }) => {
+const MainFrame = ({ children }: { children: JSX.Element }) => {
   return <div className="main-frame">{children}</div>
 }
 

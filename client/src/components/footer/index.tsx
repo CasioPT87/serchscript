@@ -1,6 +1,4 @@
-const { Link } = require('react-router-dom')
-
-const React = require('react')
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return <div className="footer" />

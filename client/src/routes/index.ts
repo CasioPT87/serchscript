@@ -1,4 +1,24 @@
-module.exports = {
+export interface Route {
+  path: string
+  text: string
+}
+
+interface Routes {
+  homeIcon: {
+    src: string
+    text: string
+  }
+  home: Route
+  articles: {
+    list: Route
+    create: Route
+  }
+  auth: {
+    login: Route
+  }
+}
+
+const routes: Routes = {
   homeIcon: {
     src: '/images/logo.png',
     text: 'serchscript blog logo',
@@ -24,3 +44,5 @@ module.exports = {
     },
   },
 }
+
+module.exports = routes

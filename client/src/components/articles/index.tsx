@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 const _ = require('lodash')
 import { useSelector, useDispatch } from 'react-redux'
-import { AnyAction } from 'redux'
-import { ThunkDispatch } from 'redux-thunk'
-import { ServerRequest } from '../../store/async/index'
-import { StoreType } from '../../store/state/index'
+import type { AnyAction } from 'redux'
+import type { ThunkDispatch } from 'redux-thunk'
+import type { ServerRequest } from '../../store/async/index'
+import type { StoreType } from '../../store/state/index'
 const Card = require('./card/index.tsx')
 const Searcher = require('../searcher/index.tsx')
 const Paginator = require('../paginator/index.tsx')

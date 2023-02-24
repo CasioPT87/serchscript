@@ -1,22 +1,25 @@
-const React = require('react')
-const { useState, useEffect } = require('react')
-const { useDispatch, useSelector } = require('react-redux')
-const {
-  auth: { login },
-} = require('../../store/async/index.ts')
-const { resetMessage } = require('../../store/actions/index.ts')
+import { useState, useEffect, SyntheticEvent } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Action } from '../../store/actions/index'
+import { ServerRequest } from '../../store/async/index'
+import { StoreType } from '../../store/state/index'
+const { auth: authAsync } = require('../../store/async/index.ts')
+const actions = require('../../store/actions/index.ts')
+
+const login = authAsync.login as ServerRequest['auth']['login']
+const resetMessage = actions.resetMessage as Action
 
 function loginForm() {
   const dispatch = useDispatch()
-  const [name, setName] = useState('')
-  const [password, setPassword] = useState('')
-  const message = useSelector(state => state.message.auth)
+  const [name, setName] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  const message = useSelector((state: StoreType) => state.message.auth)
 
   useEffect(() => {
     dispatch(resetMessage())
   }, [])
 
-  let handleSubmit = async e => {
+  let handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
     dispatch(login({ data: { name, password } }))
   }

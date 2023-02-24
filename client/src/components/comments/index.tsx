@@ -1,5 +1,5 @@
 const React = require('react')
-const CommentElement = require('./comment')
+const CommentElement = require('./comment/index.tsx')
 
 const Comments = ({ comments, articleId }: any) => {
   return (

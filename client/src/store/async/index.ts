@@ -44,7 +44,7 @@ const serverRequest =
     pathParams = null,
     searchParams = null,
     data = null,
-  }: RequestParams = {}): ThunkAction<void, StoreType, unknown, AnyAction> => {
+  }: RequestParams = {}): ThunkAction<any, StoreType, unknown, AnyAction> => {
     return async dispatch => {
       return new Promise(async (res, rej) => {
         const url = new URL(process.env.SERVER_DOMAIN)

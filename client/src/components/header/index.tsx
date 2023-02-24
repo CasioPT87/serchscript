@@ -1,19 +1,21 @@
-const { Link } = require('react-router-dom')
-const React = require('react')
-const { useDispatch, useSelector } = require('react-redux')
+import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import type { StoreType } from '../../store/state'
+import { ServerRequest } from '../../store/async'
+import { Action } from '../../store/actions'
 const { getCookie } = require('../../utils')
-const { setLogged } = require('../../store/actions/index.ts')
-const {
-  auth: { logout },
-} = require('../../store/async/index.ts')
-const NavItem = require('./navItem')
-const routes = require('../../routes')
+const actions = require('../../store/actions/index.ts')
+const { auth: authAsync } = require('../../store/async/index.ts')
+const NavItem = require('./navItem/index.tsx')
+const routes = require('../../routes/index.ts')
 
-const { useEffect } = React
+const setLogged = actions.setLogged as Action
+const logout = authAsync.logout as ServerRequest['auth']['logout']
 
 const Header = () => {
   const dispatch = useDispatch()
-  const logged = useSelector(state => state.logged)
+  const logged = useSelector((state: StoreType) => state.logged)
 
   useEffect(() => {
     const cookie = getCookie()
