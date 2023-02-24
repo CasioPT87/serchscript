@@ -246,7 +246,29 @@ const processArticle =
     return serverRequest(conf)({ data: digestedContent })
   }
 
-const serverRequests = {
+type AsyncRequest = typeof serverRequest
+type AsyncUploadImage = typeof uploadImages
+
+export type ServerRequest = {
+  article: {
+    create: ReturnType<typeof processArticle>
+    update: ReturnType<typeof processArticle>
+    show: ReturnType<AsyncRequest>
+    list: ReturnType<AsyncRequest>
+  }
+  comment: {
+    create: ReturnType<AsyncRequest>
+  }
+  image: {
+    upload: ReturnType<AsyncUploadImage>
+  }
+  auth: {
+    login: ReturnType<AsyncRequest>
+    logout: ReturnType<AsyncRequest>
+  }
+}
+
+const serverRequests: ServerRequest = {
   article: {
     create: processArticle(requestConfig.articles.create),
     update: processArticle(requestConfig.articles.update),

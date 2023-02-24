@@ -1,34 +1,45 @@
-const React = require('react')
-const { useState, useEffect } = require('react')
-const { useSelector, useDispatch } = require('react-redux')
+import { useState, useEffect, SyntheticEvent } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 const ArticleCreator = require('../articleCreator')
 const CheckBox = require('../checkbox')
 const {
-  article: { create: createArticle, update: updateArticle, list: listArticles },
-  image: { upload: uploadImages },
+  article: articleAsync,
+  image: imageAsync,
 } = require('../../store/async/index.ts')
 const {
   setArticleMessage,
   resetMessage,
 } = require('../../store/actions/index.ts')
 
+import type { StoreType } from '../../store/state/index'
+import type { ServerRequest } from '../../store/async/index'
+import { Article } from '../../store/types/entities/index'
+import { Content } from '../../store/types/async/index'
+
+const createArticle = articleAsync.create as ServerRequest['article']['create']
+const updateArticle = articleAsync.update as ServerRequest['article']['update']
+const listArticles = articleAsync.list as ServerRequest['article']['list']
+const uploadImages = imageAsync.upload as ServerRequest['image']['upload']
+
 const MODE = {
   create: 'CREATE',
   edit: 'EDIT',
-}
+} as const
 
-const getDispatchAction = mode => {
+type ModeOptions = typeof MODE[keyof typeof MODE]
+
+const getDispatchAction = (mode: ModeOptions) => {
   switch (mode) {
     case MODE.create:
       return createArticle
     case MODE.edit:
       return updateArticle
     default:
-      return () => {}
+      return updateArticle
   }
 }
 
-const getButtonText = mode => {
+const getButtonText = (mode: ModeOptions) => {
   switch (mode) {
     case MODE.create:
       return 'Create'
@@ -39,7 +50,13 @@ const getButtonText = mode => {
   }
 }
 
-const getRichTextDataFeed = ({ mode, article }) => {
+const getRichTextDataFeed = ({
+  mode,
+  article,
+}: {
+  mode: ModeOptions
+  article: Article
+}) => {
   switch (mode) {
     case MODE.create:
       return null
@@ -50,14 +67,14 @@ const getRichTextDataFeed = ({ mode, article }) => {
   }
 }
 
-const ArticleForm = mode => () => {
+const ArticleForm = (mode: ModeOptions) => () => {
   const dispatch = useDispatch()
-  const article = useSelector(store => store.article)
-  const message = useSelector(store => store.message.article)
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [content, setContent] = useState('')
-  const [hidden, setHidden] = useState(false)
+  const article = useSelector((state: StoreType) => state.article)
+  const message = useSelector((store: StoreType) => store.message.article)
+  const [title, setTitle] = useState<string>('')
+  const [description, setDescription] = useState<string>('')
+  const [content, setContent] = useState<'' | Content>('')
+  const [hidden, setHidden] = useState<boolean>(false)
 
   useEffect(() => {
     dispatch(resetMessage())
@@ -72,7 +89,7 @@ const ArticleForm = mode => () => {
     }
   }, [article, mode])
 
-  let handleSubmit = async e => {
+  let handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
 
     if (!title || !description || !content) {
@@ -82,7 +99,7 @@ const ArticleForm = mode => () => {
         )
       )
     }
-    const imagesUploadedData = await dispatch(uploadImages(content))
+    const imagesUploadedData: any = await dispatch(uploadImages(content))
     const dispatchAction = getDispatchAction(mode)
     const response = await dispatch(
       dispatchAction(imagesUploadedData)({

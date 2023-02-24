@@ -8,8 +8,9 @@ const Comments = require('../comments/index.tsx')
 import Warning from '../warning'
 
 import type { StoreType } from '../../store/state/index'
+import type { ServerRequest } from '../../store/async/index'
 
-const { show: showArticle } = articleAsync
+const showArticle = articleAsync.show as ServerRequest['article']['show']
 
 const Article: React.FC = (): JSX.Element => {
   const dispatch = useDispatch()

@@ -24,7 +24,14 @@ interface ContentRest {
   [index: string]: any
 }
 
-export type Content = EntityMap & ContentRest
+export type Content = { entityMap: EntityMap } & ContentRest
+
+export type ArticleForm = {
+  title: string
+  description: string
+  content: Content
+  hidden: boolean
+}
 
 export interface ImageResponse {
   filename: string
