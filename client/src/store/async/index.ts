@@ -1,15 +1,16 @@
 const requestConfig = require('./config.ts')
 import type { MethodConfig, RequestConfig } from '../types/config/index'
 import type { RequestParams } from '../types/index'
+import type {
+  RequestOptions,
+  EntityMap,
+  EntityMapValue,
+  Content,
+  ImageResponse,
+} from '../types/async/index'
 import { AnyAction } from 'redux'
 import { StoreType } from '../state/index'
 import { ThunkAction } from 'redux-thunk'
-
-interface RequestOptions {
-  method: MethodConfig['method']
-  headers: { Accept: '*/*'; 'Content-Type'?: 'application/json' }
-  body?: BodyInit
-}
 
 const createRequestOptions = ({
   config,
@@ -100,28 +101,6 @@ const serverRequest =
         })
     }
   }
-
-interface ModifiedEntityMap {
-  data?: {
-    file: string
-  }
-}
-
-type EntityMapValue = {
-  data: { file: File | string; id: string }
-} & ModifiedEntityMap
-
-interface EntityMap {
-  [index: string]: EntityMapValue
-}
-
-type ContentRest = {
-  [index: string]: any
-}
-
-type Content = EntityMap & ContentRest
-
-type ImageResponse = { filename: string }
 
 const uploadImages =
   (config: RequestConfig['image']['upload']) =>
