@@ -4,7 +4,7 @@ import type { RequestParams } from '../types/index'
 
 const serverRequest =
   (config: MethodConfig) =>
-  ({ pathParams, searchParams, formDataProps, data }: RequestParams = {}) => {
+  ({ pathParams, searchParams, data }: RequestParams = {}) => {
     return async (dispatch: any) => {
       return new Promise(async (res, rej) => {
         const url = new URL(process.env.SERVER_DOMAIN)
@@ -28,14 +28,6 @@ const serverRequest =
           config.searchParams.forEach((searchParam: any) => {
             const value = searchParams && searchParams[searchParam]
             if (value) url.searchParams.append(searchParam, value)
-          })
-        }
-
-        if (config.formDataProps) {
-          body = new FormData()
-          config.formDataProps.forEach((formDataProp: any) => {
-            const value = formDataProps && formDataProps[formDataProp]
-            if (value) body.append(formDataProp, value)
           })
         }
 
