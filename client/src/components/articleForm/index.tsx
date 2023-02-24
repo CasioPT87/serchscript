@@ -14,7 +14,7 @@ const {
 import type { StoreType } from '../../store/state/index'
 import type { ServerRequest } from '../../store/async/index'
 import { Article } from '../../store/types/entities/index'
-import { Content } from '../../store/types/async/index'
+import { Content, ImageResponse } from '../../store/types/async/index'
 
 const createArticle = articleAsync.create as ServerRequest['article']['create']
 const updateArticle = articleAsync.update as ServerRequest['article']['update']
@@ -99,7 +99,8 @@ const ArticleForm = (mode: ModeOptions) => () => {
         )
       )
     }
-    const imagesUploadedData: any = await dispatch(uploadImages(content))
+    const dispatchThunk: any = dispatch
+    const imagesUploadedData = await dispatchThunk(uploadImages(content))
     const dispatchAction = getDispatchAction(mode)
     const response = await dispatch(
       dispatchAction(imagesUploadedData)({

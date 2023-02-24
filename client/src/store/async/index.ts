@@ -7,6 +7,7 @@ import type {
   EntityMapValue,
   Content,
   ImageResponse,
+  ArticleForm,
 } from '../types/async/index'
 import { AnyAction } from 'redux'
 import { StoreType } from '../state/index'
@@ -108,8 +109,8 @@ const uploadImages =
     entityMap,
   }: {
     entityMap: EntityMap
-  }): ThunkAction<void, StoreType, unknown, AnyAction> =>
-  async dispatch => {
+  }): ((dispatch: any) => Promise<ImageResponse[]>) =>
+  async (dispatch): Promise<ImageResponse[]> => {
     const { method, path } = config
 
     const uploadRequests = Object.values(entityMap).map(async entity => {
@@ -151,7 +152,7 @@ const uploadImages =
         })
     })
 
-    return Promise.all(uploadRequests)
+    return Promise.all(uploadRequests) as Promise<ImageResponse[]>
   }
 
 const createDispatchFns = ({
@@ -234,16 +235,18 @@ const processArticle =
       | RequestConfig['articles']['update']
   ) =>
   (uploadedImagesData: ImageResponse[]) =>
-  (payload: { data: { content: Content } }) => {
+  (payload: RequestParams) => {
     const {
-      data: { content },
+      data: { title, description, content, hidden },
     } = payload
     const digestedEntities = createDigestedArticleEntityMap({
       uploadResponses: uploadedImagesData,
       content,
     })
     const digestedContent = createDigestedContent({ digestedEntities, content })
-    return serverRequest(conf)({ data: digestedContent })
+    return serverRequest(conf)({
+      data: { title, description, content: digestedContent, hidden },
+    })
   }
 
 type AsyncRequest = typeof serverRequest
