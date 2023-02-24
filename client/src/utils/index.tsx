@@ -1,13 +1,13 @@
 const React = require('react')
 
-const { convertToHTML } = require('draft-convert')
-const { convertFromRaw } = require('draft-js')
+import { convertToHTML } from 'draft-convert'
+import { convertFromRaw, RawDraftContentState } from 'draft-js'
 
-const getFileExtension = filename => {
+const getFileExtension = (filename: string) => {
   return filename.slice(((filename.lastIndexOf('.') - 1) >>> 0) + 2)
 }
 
-const rawContentToHtml = rawContent => {
+const rawContentToHtml = (rawContent: RawDraftContentState) => {
   const cooked = convertFromRaw(rawContent)
   return convertToHTML({
     entityToHTML: (entity, originalText) => {
@@ -29,7 +29,7 @@ const rawContentToHtml = rawContent => {
     .replace(/<\/figure>/g, '')
 }
 
-const getCookie = () =>
+const getCookie = (): string =>
   document.cookie
     .split('; ')
     .filter(row => row.startsWith('serchScriptSession='))

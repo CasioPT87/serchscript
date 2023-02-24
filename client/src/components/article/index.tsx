@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import parse from 'html-react-parser'
 import { Link } from 'react-router-dom'
-import { rawContentToHtml } from '../../utils'
+const { rawContentToHtml } = require('../../utils/index.tsx')
 const { article: articleAsync } = require('../../store/async/index.ts')
 const Comments = require('../comments/index.tsx')
 const Warning = require('../warning/index.tsx')

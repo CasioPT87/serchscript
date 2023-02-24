@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import type { StoreType } from '../../store/state'
 import { ServerRequest } from '../../store/async'
 import { Action } from '../../store/actions'
-const { getCookie } = require('../../utils')
+const { getCookie } = require('../../utils/index.tsx')
 const actions = require('../../store/actions/index.ts')
 const { auth: authAsync } = require('../../store/async/index.ts')
 const NavItem = require('./navItem/index.tsx')
