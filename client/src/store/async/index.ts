@@ -1,49 +1,75 @@
 const requestConfig = require('./config.ts')
-import type { MethodConfig } from '../types/config/index'
+import type { MethodConfig, RequestConfig } from '../types/config/index'
 import type { RequestParams } from '../types/index'
+import { AnyAction } from 'redux'
+import { StoreType } from '../state/index'
+import { ThunkAction } from 'redux-thunk'
+
+interface RequestOptions {
+  method: MethodConfig['method']
+  headers: { Accept: '*/*'; 'Content-Type'?: 'application/json' }
+  body?: BodyInit
+}
+
+const createRequestOptions = ({
+  config,
+  data,
+}: {
+  config: MethodConfig
+  data: object
+}): RequestOptions => {
+  let body = null
+
+  const headers: { Accept: '*/*'; 'Content-Type'?: 'application/json' } = {
+    Accept: '*/*',
+  }
+
+  if (data) {
+    body = JSON.stringify(data)
+    headers['Content-Type'] = 'application/json'
+  }
+
+  return {
+    method: config.method,
+    headers,
+    body,
+  }
+}
 
 const serverRequest =
   (config: MethodConfig) =>
-  ({ pathParams, searchParams, data }: RequestParams = {}) => {
-    return async (dispatch: any) => {
+  ({
+    pathParams = null,
+    searchParams = null,
+    data = null,
+  }: RequestParams = {}): ThunkAction<void, StoreType, unknown, AnyAction> => {
+    return async dispatch => {
       return new Promise(async (res, rej) => {
         const url = new URL(process.env.SERVER_DOMAIN)
-        let body: any = null
-        const headers: any = {
-          Accept: '*/*',
-        }
 
         let pathname = config.path
         if (config.pathParams) {
-          config.pathParams.forEach((pathParam: any) => {
-            const replacement = pathParams && pathParams[pathParam]
-            if (replacement)
-              pathname = pathname.replace(`:${pathParam}`, replacement)
+          config.pathParams.forEach(pathParam => {
+            const hasReplacement = Boolean(pathParams && pathParams[pathParam])
+            if (hasReplacement)
+              pathname = pathname.replace(
+                `:${pathParam}`,
+                pathParams[pathParam]
+              )
           })
         }
 
         url.pathname = pathname
 
         if (config.searchParams) {
-          config.searchParams.forEach((searchParam: any) => {
-            const value = searchParams && searchParams[searchParam]
-            if (value) url.searchParams.append(searchParam, value)
+          config.searchParams.forEach(searchParam => {
+            const hasValue = Boolean(searchParams && searchParams[searchParam])
+            if (hasValue)
+              url.searchParams.append(searchParam, searchParams[searchParam])
           })
         }
 
-        if (data) {
-          body = JSON.stringify(data)
-        }
-
-        const requestOptions: any = {
-          method: config.method,
-          headers,
-        }
-
-        if (body) {
-          headers['Content-Type'] = 'application/json'
-          requestOptions.body = body
-        }
+        const requestOptions = createRequestOptions({ config, data })
 
         const response = await fetch(url.toString(), requestOptions)
 
@@ -75,13 +101,39 @@ const serverRequest =
     }
   }
 
+interface ModifiedEntityMap {
+  data?: {
+    file: string
+  }
+}
+
+type EntityMapValue = {
+  data: { file: File | string; id: string }
+} & ModifiedEntityMap
+
+interface EntityMap {
+  [index: string]: EntityMapValue
+}
+
+type ContentRest = {
+  [index: string]: any
+}
+
+type Content = EntityMap & ContentRest
+
+type ImageResponse = { filename: string }
+
 const uploadImages =
-  (config: any) =>
-  ({ entityMap }: any) =>
-  async (dispatch: any) => {
+  (config: RequestConfig['image']['upload']) =>
+  ({
+    entityMap,
+  }: {
+    entityMap: EntityMap
+  }): ThunkAction<void, StoreType, unknown, AnyAction> =>
+  async dispatch => {
     const { method, path } = config
 
-    const uploadRequests = Object.values(entityMap).map(async (entity: any) => {
+    const uploadRequests = Object.values(entityMap).map(async entity => {
       const {
         data: { file, id },
       } = entity
@@ -102,11 +154,11 @@ const uploadImages =
         body,
       })
 
-      return new Promise(async (res, rej) => {
+      return new Promise(async (res, rej): Promise<void> => {
         await responseDealer({ response, res, rej })
       })
-        .then(data => data)
-        .catch(async error => {
+        .then((data: ImageResponse) => data)
+        .catch(async (error: Error) => {
           if (config.failDispatch && Array.isArray(config.failDispatch)) {
             const dispatches = createDispatchFns({
               fns: config.failDispatch,
@@ -123,13 +175,29 @@ const uploadImages =
     return Promise.all(uploadRequests)
   }
 
-const createDispatchFns = ({ fns, payload, dispatch }: any) => {
-  return fns.map((eachDispatchFn: any) => {
+const createDispatchFns = ({
+  fns,
+  payload,
+  dispatch,
+}: {
+  fns: MethodConfig['failDispatch']
+  payload: any
+  dispatch: (arg: any) => void
+}) => {
+  return fns.map(eachDispatchFn => {
     return dispatch(eachDispatchFn(payload))
   })
 }
 
-const responseDealer = async ({ response, res, rej }: any) => {
+const responseDealer = async ({
+  response,
+  res,
+  rej,
+}: {
+  response: Response
+  res: (value: unknown) => void
+  rej: (reason?: any) => void
+}) => {
   let responseData
 
   try {
@@ -150,26 +218,44 @@ const responseDealer = async ({ response, res, rej }: any) => {
   }
 }
 
-const createDigestedArticleEntityMap = ({ uploadResponses, content }: any) => {
+const createDigestedArticleEntityMap = ({
+  uploadResponses,
+  content,
+}: {
+  uploadResponses: ImageResponse[]
+  content: EntityMap
+}): EntityMapValue[] => {
   const { entityMap } = content
-  const entityMapValues = Object.values(entityMap)
+  const entityMapValues = Object.values(entityMap) as EntityMapValue[]
   const _entityMapValues = [...entityMapValues]
 
   for (let i = 0; i < _entityMapValues.length; i++) {
-    const filename = uploadResponses[i].filename || uploadResponses[i].data.file
-    const entity: any = _entityMapValues[i]
+    const filename = uploadResponses[i].filename
+    const entity = _entityMapValues[i]
     entity.data.file = filename
   }
 
   return _entityMapValues
 }
 
-const createDigestedContent = ({ digestedEntities, content }: any) => {
+const createDigestedContent = ({
+  digestedEntities,
+  content,
+}: {
+  digestedEntities: EntityMapValue[]
+  content: Content
+}): string => {
   return JSON.stringify({ ...content, entityMap: digestedEntities })
 }
 
 const processArticle =
-  (conf: any) => (uploadedImagesData: any) => (payload: any) => {
+  (
+    conf:
+      | RequestConfig['articles']['create']
+      | RequestConfig['articles']['update']
+  ) =>
+  (uploadedImagesData: ImageResponse[]) =>
+  (payload: { data: { content: Content } }) => {
     const {
       data: { content },
     } = payload
@@ -178,8 +264,7 @@ const processArticle =
       content,
     })
     const digestedContent = createDigestedContent({ digestedEntities, content })
-    payload.data.content = digestedContent
-    return serverRequest(conf)(payload)
+    return serverRequest(conf)({ data: digestedContent })
   }
 
 const serverRequests = {

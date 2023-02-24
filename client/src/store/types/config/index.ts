@@ -8,7 +8,7 @@ type ImageMethod = 'upload'
 type CommentMethod = 'create'
 type AuthMethod = 'login' | 'logout'
 
-type DispatchType = () => ActionReturn<any>
+type DispatchType = (...arg: any) => ActionReturn<any>
 
 export interface MethodConfig {
   method: Method
