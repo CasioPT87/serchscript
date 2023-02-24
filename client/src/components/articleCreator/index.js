@@ -10,7 +10,7 @@ const {
   Modifier,
 } = require('draft-js')
 const { v4: uuidv4 } = require('uuid')
-const { getFileExtension } = require('../../utils')
+const { getFileExtension } = require('../../utils/index.tsx')
 
 const { useEffect, useState } = React
 

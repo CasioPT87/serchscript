@@ -1,11 +1,11 @@
 import type { Article, ArticleList, Message, Logged } from '../types/entities'
 
-export interface StoreType {
+export type StoreType = Readonly<{
   articles: ArticleList
   article: Article
   logged: Logged
   message: Message
-}
+}>
 
 const defaultState: StoreType = {
   articles: {
