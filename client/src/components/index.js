@@ -1,4 +1,4 @@
-const Articles = require('./articles')
+const Articles = require('./articles/index.tsx')
 const Article = require('./article/index.tsx')
 const LoginForm = require('./loginForm')
 const ArticleForm = require('./articleForm/index.tsx')

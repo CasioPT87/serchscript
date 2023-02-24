@@ -1,11 +1,12 @@
-const React = require('react')
-const { useSelector } = require('react-redux')
-const { Link } = require('react-router-dom')
-const moment = require('moment')
+import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import moment from 'moment'
+import { StoreType } from '../../../store/state/index'
+import { Article } from '../../../store/types/entities/index'
 const Warning = require('../../warning')
 
-const Card = ({ article }) => {
-  const logged = useSelector(state => state.logged)
+const Card = ({ article }: { article: Article }) => {
+  const logged = useSelector((state: StoreType) => state.logged)
 
   if (!article) return null
 

@@ -1,25 +1,35 @@
-const React = require('react')
+import { useEffect, useState } from 'react'
 const _ = require('lodash')
-const { useSelector, useDispatch } = require('react-redux')
-const Card = require('./card')
+import { useSelector, useDispatch } from 'react-redux'
+import { AnyAction } from 'redux'
+import { ThunkDispatch } from 'redux-thunk'
+import { ServerRequest } from '../../store/async/index'
+import { StoreType } from '../../store/state/index'
+const Card = require('./card/index.tsx')
 const Searcher = require('../searcher')
 const Paginator = require('../paginator')
-const {
-  article: { list: listArticles },
-} = require('../../store/async/index.ts')
+const { article: articleAsync } = require('../../store/async/index.ts')
 
-const { useEffect, useState } = React
+const listArticles = articleAsync.list as ServerRequest['article']['list']
 
 const Articles = () => {
   const limit = 5
   const dispatch = useDispatch()
-  const [searchText, setSearchText] = useState('')
-  const articles = useSelector(state => state.articles)
+  const [searchText, setSearchText] = useState<string>('')
+  const articles = useSelector((state: StoreType) => state.articles)
 
-  const fetchArticleList = ({ page, text }) =>
-    dispatch(listArticles({ searchParams: { page, limit, text } }))
+  const fetchArticleList = ({
+    page,
+    text,
+  }: {
+    page: number
+    text: string
+  }): void => {
+    const dispatchThunk: ThunkDispatch<StoreType, unknown, AnyAction> = dispatch
+    dispatchThunk(listArticles({ searchParams: { page, limit, text } }))
+  }
 
-  const search = text => {
+  const search = (text: string): void => {
     fetchArticleList({ page: 0, text })
     setSearchText(text)
   }
@@ -53,7 +63,9 @@ const Articles = () => {
       <Searcher clear={clearSearchText} search={search} />
       {cards()}
       <Paginator
-        fetchPage={page => fetchArticleList({ page, text: searchText })}
+        fetchPage={(page: number) =>
+          fetchArticleList({ page, text: searchText })
+        }
         limit={limit}
       />
     </div>
