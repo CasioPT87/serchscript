@@ -109,8 +109,8 @@ const uploadImages =
     entityMap,
   }: {
     entityMap: EntityMap
-  }): ((dispatch: any) => Promise<ImageResponse[]>) =>
-  async (dispatch): Promise<ImageResponse[]> => {
+  }): ThunkAction<Promise<ImageResponse[]>, StoreType, unknown, AnyAction> =>
+  async dispatch => {
     const { method, path } = config
 
     const uploadRequests = Object.values(entityMap).map(async entity => {

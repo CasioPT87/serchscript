@@ -13,8 +13,10 @@ const {
 
 import type { StoreType } from '../../store/state/index'
 import type { ServerRequest } from '../../store/async/index'
+import type { ThunkDispatch } from 'redux-thunk'
 import { Article } from '../../store/types/entities/index'
-import { Content, ImageResponse } from '../../store/types/async/index'
+import { Content } from '../../store/types/async/index'
+import { AnyAction } from 'redux'
 
 const createArticle = articleAsync.create as ServerRequest['article']['create']
 const updateArticle = articleAsync.update as ServerRequest['article']['update']
@@ -99,7 +101,8 @@ const ArticleForm = (mode: ModeOptions) => () => {
         )
       )
     }
-    const dispatchThunk: any = dispatch
+
+    const dispatchThunk: ThunkDispatch<StoreType, unknown, AnyAction> = dispatch
     const imagesUploadedData = await dispatchThunk(uploadImages(content))
     const dispatchAction = getDispatchAction(mode)
     const response = await dispatch(
