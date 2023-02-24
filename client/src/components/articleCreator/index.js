@@ -32,7 +32,6 @@ function findLinkEntities(contentBlock, callback, contentState) {
 
 const Link = props => {
   const { url } = props.contentState.getEntity(props.entityKey).getData()
-  console.log({ url })
   return <a href={url}>{url}</a>
 }
 

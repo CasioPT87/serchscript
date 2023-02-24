@@ -73,7 +73,6 @@ const ArticleForm = mode => () => {
   }, [article, mode])
 
   let handleSubmit = async e => {
-    console.log('handle submit!!!')
     e.preventDefault()
 
     if (!title || !description || !content) {
@@ -84,8 +83,6 @@ const ArticleForm = mode => () => {
       )
     }
     const imagesUploadedData = await dispatch(uploadImages(content))
-    console.log('hola')
-    console.log({ imagesUploadedData })
     const dispatchAction = getDispatchAction(mode)
     const response = await dispatch(
       dispatchAction(imagesUploadedData)({
