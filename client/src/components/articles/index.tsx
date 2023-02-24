@@ -6,8 +6,8 @@ import { ThunkDispatch } from 'redux-thunk'
 import { ServerRequest } from '../../store/async/index'
 import { StoreType } from '../../store/state/index'
 const Card = require('./card/index.tsx')
-const Searcher = require('../searcher')
-const Paginator = require('../paginator')
+const Searcher = require('../searcher/index.tsx')
+const Paginator = require('../paginator/index.tsx')
 const { article: articleAsync } = require('../../store/async/index.ts')
 
 const listArticles = articleAsync.list as ServerRequest['article']['list']

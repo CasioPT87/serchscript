@@ -1,13 +1,9 @@
-import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
-import { StoreType } from '../../../store/state/index'
 import { Article } from '../../../store/types/entities/index'
-const Warning = require('../../warning')
+const Warning = require('../../warning/index.tsx')
 
 const Card = ({ article }: { article: Article }) => {
-  const logged = useSelector((state: StoreType) => state.logged)
-
   if (!article) return null
 
   const createdAt = article.createdAt

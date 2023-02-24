@@ -7,10 +7,10 @@ const Header = require('./header')
 const Footer = require('./footer')
 const Comments = require('./comments/index.tsx')
 const ArticleLoad = require('./articleLoad')
-const Paginator = require('./paginator')
-const CheckBox = require('./checkbox')
-const Warning = require('./warning')
-const Searcher = require('./searcher')
+const Paginator = require('./paginator/index.tsx')
+const CheckBox = require('./checkbox/index.tsx')
+const Warning = require('./warning/index.tsx')
+const Searcher = require('./searcher/index.tsx')
 
 module.exports = {
   Article,

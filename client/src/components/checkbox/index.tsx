@@ -1,6 +1,10 @@
-const React = require('react')
+type Props = {
+  text: string
+  onChange: (value: boolean) => void
+  checked: boolean
+}
 
-const CheckBox = ({ text, onChange, checked = false }) => {
+const CheckBox = ({ text, onChange, checked = false }: Props) => {
   return (
     <label className="checkbox">
       {text}

@@ -1,8 +1,13 @@
-const React = require('react')
-const { useSelector } = require('react-redux')
+import { useSelector } from 'react-redux'
+import { StoreType } from '../../store/state/index'
 
-const Paginator = ({ fetchPage, limit }) => {
-  const { page, totalDocs, totalPages } = useSelector(state => {
+type Props = {
+  fetchPage: (page: number) => void
+  limit: number
+}
+
+const Paginator = ({ fetchPage, limit }: Props) => {
+  const { page, totalDocs, totalPages } = useSelector((state: StoreType) => {
     return state.articles.list
   })
 
@@ -14,7 +19,7 @@ const Paginator = ({ fetchPage, limit }) => {
   return (
     <div className="paginator">
       <div className="paginator__buttons">
-        {[...Array(totalPages).keys()].map(pageNumber => {
+        {Array.from(Array(totalPages).keys()).map(pageNumber => {
           const isCurrentPage = page === pageNumber + 1
           let classNames = 'paginator__button'
           if (isCurrentPage)

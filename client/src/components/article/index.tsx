@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { rawContentToHtml } from '../../utils'
 const { article: articleAsync } = require('../../store/async/index.ts')
 const Comments = require('../comments/index.tsx')
-import Warning from '../warning'
+const Warning = require('../warning/index.tsx')
 
 import type { StoreType } from '../../store/state/index'
 import type { ServerRequest } from '../../store/async/index'

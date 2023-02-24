@@ -1,12 +1,15 @@
-const React = require('react')
+import { SyntheticEvent, useState } from 'react'
 
-const { useState } = React
+type Props = {
+  search: (text: string) => void
+  clear: () => void
+}
 
-const Searcher = ({ search, clear }) => {
+const Searcher = ({ search, clear }: Props) => {
   const [text, setText] = useState('')
 
-  const submit = ev => {
-    ev.preventDefault()
+  const submit = (e: SyntheticEvent) => {
+    e.preventDefault()
     search(text)
   }
 

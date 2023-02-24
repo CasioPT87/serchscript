@@ -1,6 +1,4 @@
-const React = require('react')
-
-const Warning = ({ show, text }) => {
+const Warning = ({ show, text }: { show: boolean; text: string }) => {
   if (!show) return null
   return <h3 className="warning">{text}</h3>
 }
