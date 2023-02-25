@@ -36,6 +36,16 @@ const renderHtml = (html, preloadedState) => {
   return `<!DOCTYPE html>
   <html>
     <head>
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-M00466EX76"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-M00466EX76');
+      </script>
+      
       <meta charset="utf-8">
       <title>serchscript</title>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
