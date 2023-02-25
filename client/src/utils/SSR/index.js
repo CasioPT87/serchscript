@@ -24,7 +24,7 @@ const getInitialComponentsTree = (store, componentName) => {
       <Components.MainFrame>
         <StaticRouter>
           <Components.Header />
-          {getComponent(componentName)}
+          <main>{getComponent(componentName)}</main>
           <Components.Footer />
         </StaticRouter>
       </Components.MainFrame>

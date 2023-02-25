@@ -28,17 +28,22 @@ const replaceElements = () => {
       <MainFrame>
         <BrowserRouter>
           <Header />
-          <Routes>
-            <Route path="/" element={<Articles />} />
-            <Route path="articles/:titleId" element={<Article />} />
-            <Route path="admin/articles/new" element={<ArticleForm.create />} />
-            {/* <Route path="articles/load" element={<ArticleLoad />} /> just to load all data from prev app -RIP flamyduck -*/}
-            <Route
-              path="admin/articles/:id/edit"
-              element={<ArticleForm.edit />}
-            />
-            <Route path="auth" element={<LoginForm />} />
-          </Routes>
+          <main>
+            <Routes>
+              <Route path="/" element={<Articles />} />
+              <Route path="articles/:titleId" element={<Article />} />
+              <Route
+                path="admin/articles/new"
+                element={<ArticleForm.create />}
+              />
+              {/* <Route path="articles/load" element={<ArticleLoad />} /> just to load all data from prev app -RIP flamyduck -*/}
+              <Route
+                path="admin/articles/:id/edit"
+                element={<ArticleForm.edit />}
+              />
+              <Route path="auth" element={<LoginForm />} />
+            </Routes>
+          </main>
           <Footer />
         </BrowserRouter>
       </MainFrame>

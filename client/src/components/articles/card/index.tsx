@@ -17,7 +17,9 @@ const Card = ({ article }: { article: Article }) => {
         <h2 className="card__title">{article.title}</h2>
         <p className="card__text">{article.description}</p>
 
-        <p className="card__date">{moment(createdAt).format('MM-DD-YYYY')}</p>
+        <time className="card__date">
+          {moment(createdAt).format('MM-DD-YYYY')}
+        </time>
       </Link>
     </li>
   )

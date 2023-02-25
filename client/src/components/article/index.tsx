@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import parse from 'html-react-parser'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 const { rawContentToHtml } = require('../../utils/index.tsx')
 const { article: articleAsync } = require('../../store/async/index.ts')
 const Comments = require('../comments/index.tsx')
@@ -19,6 +20,9 @@ const Article: React.FC = (): JSX.Element => {
     return state.article
   })
   const logged = useSelector((state: StoreType) => state.logged)
+
+  const createdAt = moment(article.createdAt).format('MMMM YYYY')
+  const updatedAt = moment(article.updatedAt).format('MMMM YYYY')
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -40,7 +44,7 @@ const Article: React.FC = (): JSX.Element => {
   if (!article || !content) return null
 
   return (
-    <div className="article">
+    <article className="article">
       {logged && (
         <div className="article__edit-button">
           <Link to={`/admin/articles/${article._id}/edit`}>Edit</Link>
@@ -52,15 +56,26 @@ const Article: React.FC = (): JSX.Element => {
           text="this article is currently hidden"
         />
       )}
-      <h1 className="article__title">{article.title}</h1>
-      <h3 className="article__description">{article.description}</h3>
-      <div className="article__inner">
+      <section>
+        <h1 className="article__title">{article.title}</h1>
+        <h3 className="article__description">{article.description}</h3>
+        <p className="article_dates">
+          <time>{createdAt}</time>
+          {createdAt !== updatedAt && (
+            <>
+              {', last updated '}
+              <time>{updatedAt}</time>
+            </>
+          )}
+        </p>
+      </section>
+      <section className="article__inner">
         {content && <div className="article__content">{parse(content)}</div>}
         {article.comments && (
           <Comments comments={article.comments} articleId={article._id} />
         )}
-      </div>
-    </div>
+      </section>
+    </article>
   )
 }
 
