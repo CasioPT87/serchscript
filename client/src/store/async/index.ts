@@ -96,7 +96,7 @@ const serverRequest =
               dispatch,
             })
             await Promise.all(dispatches).catch(e =>
-              console.log('error sending message')
+              console.error('error sending request')
             )
           }
         })
@@ -146,7 +146,7 @@ const uploadImages =
               dispatch,
             })
             await Promise.all(dispatches).catch(e =>
-              console.log('error sending message')
+              console.error('error uploading image')
             )
           }
         })
