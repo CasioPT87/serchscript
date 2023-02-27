@@ -82,6 +82,7 @@
     "jest-environment-jsdom": "^29.4.3",
     "nodemon": "^2.0.15",
     "prettier": "2.7.1",
-    "source-map-support": "^0.4.14"
+    "source-map-support": "^0.4.14",
+    "ts-node": "^10.9.1"
   }
 }
