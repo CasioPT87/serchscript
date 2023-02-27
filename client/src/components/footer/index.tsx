@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Footer = () => {
-  return <div className="footer" test-id="eyy" />
+  return <div className="footer" data-testid="eyy" />
 }
 
 module.exports = Footer
