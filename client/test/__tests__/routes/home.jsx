@@ -1,12 +1,12 @@
 const React = require('react')
 const { fireEvent, screen } = require('@testing-library/react')
-const { Footer } = require('../../../../src/components')
+const { Articles } = require('../../../src/components')
 const renderWithProviders = require('../../utils/test-utils')
 
-describe('Footer Component', () => {
+describe('Articles Component', () => {
   test('there is a footer there', () => {
-    renderWithProviders(<Footer />)
+    renderWithProviders(<Articles />)
 
-    expect(screen.getByRole('contentinfo')).toBeInTheDocument()
+    expect(screen.getByRole('navigation')).toBeInTheDocument()
   })
 })
