@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1677508356494" clover="3.2.0">
-  <project timestamp="1677508356495" name="All files">
-    <metrics statements="591" coveredstatements="218" conditionals="196" coveredconditionals="22" methods="158" coveredmethods="20" elements="945" coveredelements="260" complexity="0" loc="591" ncloc="591" packages="31" files="32" classes="32"/>
+<coverage generated="1677513198887" clover="3.2.0">
+  <project timestamp="1677513198887" name="All files">
+    <metrics statements="602" coveredstatements="259" conditionals="200" coveredconditionals="43" methods="160" coveredmethods="33" elements="962" coveredelements="335" complexity="0" loc="602" ncloc="602" packages="31" files="33" classes="33"/>
     <package name="client.src.components">
       <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="index.js" path="/home/sergio/Projects/cucarachas/client/src/components/index.js">
@@ -298,9 +298,9 @@
       </file>
     </package>
     <package name="client.src.components.articles">
-      <metrics statements="30" coveredstatements="21" conditionals="6" coveredconditionals="3" methods="9" coveredmethods="4"/>
+      <metrics statements="31" coveredstatements="24" conditionals="6" coveredconditionals="3" methods="9" coveredmethods="5"/>
       <file name="index.tsx" path="/home/sergio/Projects/cucarachas/client/src/components/articles/index.tsx">
-        <metrics statements="30" coveredstatements="21" conditionals="6" coveredconditionals="3" methods="9" coveredmethods="4"/>
+        <metrics statements="31" coveredstatements="24" conditionals="6" coveredconditionals="3" methods="9" coveredmethods="5"/>
         <line num="2" count="2" type="stmt"/>
         <line num="8" count="2" type="stmt"/>
         <line num="9" count="2" type="stmt"/>
@@ -311,10 +311,10 @@
         <line num="16" count="1" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
-        <line num="19" count="1" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
-        <line num="28" count="0" type="stmt"/>
-        <line num="29" count="0" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
@@ -323,6 +323,7 @@
         <line num="39" count="0" type="stmt"/>
         <line num="42" count="1" type="stmt"/>
         <line num="43" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="44" count="1" type="stmt"/>
         <line num="48" count="1" type="stmt"/>
         <line num="49" count="1" type="cond" truecount="2" falsecount="2"/>
         <line num="50" count="0" type="stmt"/>
@@ -395,11 +396,11 @@
       </file>
     </package>
     <package name="client.src.components.footer">
-      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
       <file name="index.tsx" path="/home/sergio/Projects/cucarachas/client/src/components/footer/index.tsx">
-        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <metrics statements="3" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="2" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
         <line num="7" count="2" type="stmt"/>
       </file>
     </package>
@@ -473,7 +474,7 @@
         <metrics statements="14" coveredstatements="12" conditionals="2" coveredconditionals="1" methods="4" coveredmethods="3"/>
         <line num="10" count="2" type="stmt"/>
         <line num="11" count="1" type="stmt"/>
-        <line num="12" count="1" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
         <line num="15" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
         <line num="18" count="1" type="stmt"/>
@@ -523,9 +524,9 @@
       </file>
     </package>
     <package name="client.src.store.actions">
-      <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="0"/>
+      <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="1"/>
       <file name="index.ts" path="/home/sergio/Projects/cucarachas/client/src/store/actions/index.ts">
-        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="0"/>
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="1"/>
         <line num="4" count="2" type="stmt"/>
         <line num="9" count="2" type="stmt"/>
         <line num="14" count="2" type="stmt"/>
@@ -538,7 +539,7 @@
       </file>
     </package>
     <package name="client.src.store.async">
-      <metrics statements="98" coveredstatements="17" conditionals="42" coveredconditionals="0" methods="33" coveredmethods="3"/>
+      <metrics statements="99" coveredstatements="47" conditionals="44" coveredconditionals="19" methods="33" coveredmethods="12"/>
       <file name="config.ts" path="/home/sergio/Projects/cucarachas/client/src/store/async/config.ts">
         <metrics statements="10" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
@@ -553,95 +554,96 @@
         <line num="72" count="2" type="stmt"/>
       </file>
       <file name="index.ts" path="/home/sergio/Projects/cucarachas/client/src/store/async/index.ts">
-        <metrics statements="88" coveredstatements="14" conditionals="42" coveredconditionals="0" methods="26" coveredmethods="3"/>
+        <metrics statements="89" coveredstatements="44" conditionals="44" coveredconditionals="19" methods="26" coveredmethods="12"/>
         <line num="1" count="2" type="stmt"/>
         <line num="16" count="2" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-        <line num="29" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="29" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="30" count="0" type="stmt"/>
         <line num="31" count="0" type="stmt"/>
-        <line num="34" count="0" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
         <line num="42" count="2" type="stmt"/>
         <line num="43" count="10" type="cond" truecount="0" falsecount="1"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="49" count="0" type="stmt"/>
-        <line num="50" count="0" type="stmt"/>
-        <line num="52" count="0" type="stmt"/>
-        <line num="53" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="50" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="53" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="54" count="0" type="stmt"/>
         <line num="55" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="56" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="57" count="0" type="stmt"/>
-        <line num="64" count="0" type="stmt"/>
-        <line num="66" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="67" count="0" type="stmt"/>
-        <line num="68" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="69" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="70" count="0" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
-        <line num="76" count="0" type="stmt"/>
-        <line num="78" count="0" type="stmt"/>
-        <line num="81" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="82" count="0" type="stmt"/>
-        <line num="87" count="0" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="66" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="68" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="69" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="83" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="84" count="0" type="stmt"/>
         <line num="89" count="0" type="stmt"/>
-        <line num="92" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="93" count="0" type="stmt"/>
-        <line num="98" count="0" type="stmt"/>
-        <line num="99" count="0" type="stmt"/>
-        <line num="107" count="2" type="stmt"/>
-        <line num="108" count="2" type="stmt"/>
-        <line num="113" count="0" type="stmt"/>
-        <line num="114" count="0" type="stmt"/>
+        <line num="91" count="0" type="stmt"/>
+        <line num="94" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="95" count="1" type="stmt"/>
+        <line num="100" count="1" type="stmt"/>
+        <line num="101" count="0" type="stmt"/>
+        <line num="109" count="2" type="stmt"/>
+        <line num="110" count="2" type="stmt"/>
+        <line num="115" count="0" type="stmt"/>
         <line num="116" count="0" type="stmt"/>
-        <line num="119" count="0" type="stmt"/>
-        <line num="121" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="122" count="0" type="stmt"/>
-        <line num="123" count="0" type="stmt"/>
+        <line num="118" count="0" type="stmt"/>
+        <line num="121" count="0" type="stmt"/>
+        <line num="123" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="124" count="0" type="stmt"/>
+        <line num="125" count="0" type="stmt"/>
         <line num="126" count="0" type="stmt"/>
-        <line num="137" count="0" type="stmt"/>
-        <line num="138" count="0" type="stmt"/>
+        <line num="128" count="0" type="stmt"/>
+        <line num="139" count="0" type="stmt"/>
         <line num="140" count="0" type="stmt"/>
-        <line num="142" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="143" count="0" type="stmt"/>
-        <line num="148" count="0" type="stmt"/>
-        <line num="149" count="0" type="stmt"/>
-        <line num="155" count="0" type="stmt"/>
-        <line num="158" count="2" type="stmt"/>
-        <line num="167" count="0" type="stmt"/>
-        <line num="168" count="0" type="stmt"/>
-        <line num="172" count="2" type="stmt"/>
-        <line num="183" count="0" type="stmt"/>
-        <line num="184" count="0" type="stmt"/>
-        <line num="185" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="186" count="0" type="stmt"/>
-        <line num="188" count="0" type="stmt"/>
-        <line num="191" count="0" type="stmt"/>
-        <line num="194" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="195" count="0" type="stmt"/>
+        <line num="142" count="0" type="stmt"/>
+        <line num="144" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="145" count="0" type="stmt"/>
+        <line num="150" count="0" type="stmt"/>
+        <line num="151" count="0" type="stmt"/>
+        <line num="157" count="0" type="stmt"/>
+        <line num="160" count="2" type="stmt"/>
+        <line num="169" count="1" type="stmt"/>
+        <line num="170" count="1" type="stmt"/>
+        <line num="174" count="2" type="stmt"/>
+        <line num="185" count="1" type="stmt"/>
+        <line num="186" count="1" type="stmt"/>
+        <line num="187" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="188" count="1" type="stmt"/>
+        <line num="190" count="0" type="stmt"/>
+        <line num="193" count="0" type="stmt"/>
+        <line num="196" count="1" type="cond" truecount="2" falsecount="2"/>
         <line num="197" count="0" type="stmt"/>
-        <line num="201" count="2" type="stmt"/>
-        <line num="208" count="0" type="stmt"/>
-        <line num="209" count="0" type="stmt"/>
+        <line num="199" count="1" type="stmt"/>
+        <line num="203" count="2" type="stmt"/>
         <line num="210" count="0" type="stmt"/>
+        <line num="211" count="0" type="stmt"/>
         <line num="212" count="0" type="stmt"/>
-        <line num="213" count="0" type="stmt"/>
         <line num="214" count="0" type="stmt"/>
         <line num="215" count="0" type="stmt"/>
-        <line num="218" count="0" type="stmt"/>
-        <line num="221" count="2" type="stmt"/>
-        <line num="228" count="0" type="stmt"/>
-        <line num="232" count="2" type="stmt"/>
-        <line num="237" count="4" type="stmt"/>
-        <line num="238" count="0" type="stmt"/>
-        <line num="241" count="0" type="stmt"/>
-        <line num="242" count="0" type="stmt"/>
-        <line num="246" count="0" type="stmt"/>
-        <line num="247" count="0" type="stmt"/>
-        <line num="274" count="2" type="stmt"/>
-        <line num="293" count="2" type="stmt"/>
+        <line num="216" count="0" type="stmt"/>
+        <line num="217" count="0" type="stmt"/>
+        <line num="220" count="0" type="stmt"/>
+        <line num="223" count="2" type="stmt"/>
+        <line num="230" count="0" type="stmt"/>
+        <line num="234" count="2" type="stmt"/>
+        <line num="239" count="4" type="stmt"/>
+        <line num="240" count="0" type="stmt"/>
+        <line num="243" count="0" type="stmt"/>
+        <line num="244" count="0" type="stmt"/>
+        <line num="248" count="0" type="stmt"/>
+        <line num="249" count="0" type="stmt"/>
+        <line num="276" count="2" type="stmt"/>
+        <line num="295" count="2" type="stmt"/>
       </file>
     </package>
     <package name="client.src.store.reducers">
@@ -695,9 +697,9 @@
       </file>
     </package>
     <package name="client.src.store.reducers.message">
-      <metrics statements="15" coveredstatements="10" conditionals="17" coveredconditionals="9" methods="1" coveredmethods="1"/>
+      <metrics statements="15" coveredstatements="11" conditionals="17" coveredconditionals="10" methods="1" coveredmethods="1"/>
       <file name="reducer.js" path="/home/sergio/Projects/cucarachas/client/src/store/reducers/message/reducer.js">
-        <metrics statements="15" coveredstatements="10" conditionals="17" coveredconditionals="9" methods="1" coveredmethods="1"/>
+        <metrics statements="15" coveredstatements="11" conditionals="17" coveredconditionals="10" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="9" count="2" type="cond" truecount="1" falsecount="1"/>
         <line num="10" count="6" type="stmt"/>
@@ -706,12 +708,12 @@
         <line num="14" count="0" type="stmt"/>
         <line num="15" count="6" type="cond" truecount="3" falsecount="1"/>
         <line num="16" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="18" count="6" type="cond" truecount="1" falsecount="4"/>
+        <line num="18" count="6" type="cond" truecount="2" falsecount="3"/>
         <line num="20" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
         <line num="30" count="0" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
-        <line num="37" count="6" type="stmt"/>
+        <line num="37" count="5" type="stmt"/>
         <line num="41" count="2" type="stmt"/>
       </file>
     </package>
@@ -726,7 +728,7 @@
         <line num="5" count="2" type="stmt"/>
         <line num="7" count="2" type="stmt"/>
         <line num="9" count="2" type="stmt"/>
-        <line num="10" count="2" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
         <line num="17" count="2" type="stmt"/>
       </file>
     </package>
@@ -739,9 +741,9 @@
       </file>
     </package>
     <package name="client.src.utils">
-      <metrics statements="18" coveredstatements="5" conditionals="8" coveredconditionals="0" methods="7" coveredmethods="0"/>
+      <metrics statements="18" coveredstatements="7" conditionals="8" coveredconditionals="0" methods="7" coveredmethods="2"/>
       <file name="index.tsx" path="/home/sergio/Projects/cucarachas/client/src/utils/index.tsx">
-        <metrics statements="18" coveredstatements="5" conditionals="8" coveredconditionals="0" methods="7" coveredmethods="0"/>
+        <metrics statements="18" coveredstatements="7" conditionals="8" coveredconditionals="0" methods="7" coveredmethods="2"/>
         <line num="1" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
@@ -756,22 +758,34 @@
         <line num="23" count="0" type="cond" truecount="0" falsecount="4"/>
         <line num="24" count="0" type="stmt"/>
         <line num="32" count="2" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
         <line num="38" count="2" type="stmt"/>
       </file>
     </package>
     <package name="client.test.utils">
-      <metrics statements="7" coveredstatements="7" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
+      <metrics statements="16" coveredstatements="13" conditionals="5" coveredconditionals="4" methods="4" coveredmethods="3"/>
+      <file name="server-mocks.js" path="/home/sergio/Projects/cucarachas/client/test/utils/server-mocks.js">
+        <metrics statements="9" coveredstatements="6" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+      </file>
       <file name="test-utils.js" path="/home/sergio/Projects/cucarachas/client/test/utils/test-utils.js">
         <metrics statements="7" coveredstatements="7" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
         <line num="4" count="2" type="stmt"/>
-        <line num="16" count="2" type="stmt"/>
-        <line num="20" count="2" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
         <line num="23" count="2" type="stmt"/>
       </file>
     </package>

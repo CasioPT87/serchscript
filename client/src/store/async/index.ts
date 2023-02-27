@@ -47,7 +47,9 @@ const serverRequest =
   }: RequestParams = {}): ThunkAction<any, StoreType, unknown, AnyAction> => {
     return async dispatch => {
       return new Promise(async (res, rej) => {
-        const url = new URL(process.env.SERVER_DOMAIN)
+        const url = new URL(
+          process.env.SERVER_DOMAIN || process.env.DEFAULT_SERVER_DOMAIN
+        )
 
         let pathname = config.path
         if (config.pathParams) {
@@ -74,6 +76,8 @@ const serverRequest =
         const requestOptions = createRequestOptions({ config, data })
 
         const response = await fetch(url.toString(), requestOptions)
+
+        console.log({ response })
 
         responseDealer({ response, res, rej })
       })
