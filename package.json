@@ -12,7 +12,8 @@
     "build": "webpack --config ./client/webpack.prod.config.js",
     "clean": "rm -rf dist",
     "prepare": "husky install",
-    "pretty": "prettier --write ."
+    "pretty": "prettier --write .",
+    "test": "jest"
   },
   "dependencies": {
     "@babel/core": "^7.17.8",
@@ -75,7 +76,10 @@
     "xss-filters": "^1.2.7"
   },
   "devDependencies": {
+    "@testing-library/react": "^14.0.0",
     "husky": "^8.0.0",
+    "jest": "^29.4.3",
+    "jest-environment-jsdom": "^29.4.3",
     "nodemon": "^2.0.15",
     "prettier": "2.7.1",
     "source-map-support": "^0.4.14"
