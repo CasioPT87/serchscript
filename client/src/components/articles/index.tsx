@@ -59,7 +59,7 @@ const Articles = () => {
   }
 
   return (
-    <div className="articles">
+    <nav className="articles">
       <Searcher clear={clearSearchText} search={search} />
       {cards()}
       <Paginator
@@ -68,7 +68,7 @@ const Articles = () => {
         }
         limit={limit}
       />
-    </div>
+    </nav>
   )
 }
 
