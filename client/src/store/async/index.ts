@@ -52,24 +52,32 @@ const serverRequest =
         )
 
         let pathname = config.path
-        if (config.pathParams) {
-          config.pathParams.forEach(pathParam => {
-            const hasReplacement = Boolean(pathParams && pathParams[pathParam])
+        if (config.pathParams && pathParams) {
+          config.pathParams.forEach(configPathParam => {
+            const hasReplacement = Boolean(
+              configPathParam && pathParams?.[configPathParam]
+            )
+            console.log()
             if (hasReplacement)
               pathname = pathname.replace(
-                `:${pathParam}`,
-                pathParams[pathParam]
+                `:${configPathParam}`,
+                pathParams[configPathParam]
               )
           })
         }
 
         url.pathname = pathname
 
-        if (config.searchParams) {
-          config.searchParams.forEach(searchParam => {
-            const hasValue = Boolean(searchParams && searchParams[searchParam])
+        if ((config.searchParams, searchParams)) {
+          config.searchParams.forEach(configSearchParam => {
+            const hasValue = Boolean(
+              configSearchParam && searchParams?.[configSearchParam]
+            )
             if (hasValue)
-              url.searchParams.append(searchParam, searchParams[searchParam])
+              url.searchParams.append(
+                configSearchParam,
+                searchParams[configSearchParam]
+              )
           })
         }
 
@@ -240,6 +248,7 @@ const processArticle =
   (payload: RequestParams) => {
     const {
       data: { title, description, content, hidden },
+      pathParams,
     } = payload
     const digestedEntities = createDigestedArticleEntityMap({
       uploadResponses: uploadedImagesData,
@@ -248,6 +257,7 @@ const processArticle =
     const digestedContent = createDigestedContent({ digestedEntities, content })
     return serverRequest(conf)({
       data: { title, description, content: digestedContent, hidden },
+      pathParams,
     })
   }
 
