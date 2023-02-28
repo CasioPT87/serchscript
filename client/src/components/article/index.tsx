@@ -14,8 +14,8 @@ import type { ServerRequest } from '../../store/async/index'
 const showArticle = articleAsync.show as ServerRequest['article']['show']
 
 const Article: React.FC = (): JSX.Element => {
+  let contentHtml = null
   const dispatch = useDispatch()
-  const [content, setContent] = useState<null | string>(null)
   const article = useSelector((state: StoreType) => {
     return state.article
   })
@@ -31,14 +31,11 @@ const Article: React.FC = (): JSX.Element => {
     }
   }, [])
 
-  useEffect(() => {
-    if (article && article.content) {
-      const contentHtml = rawContentToHtml(JSON.parse(article.content))
-      setContent(contentHtml)
-    }
-  }, [article])
+  if (article && article.content) {
+    contentHtml = rawContentToHtml(JSON.parse(article.content))
+  }
 
-  if (!article || !content) return null
+  if (!article || !contentHtml) return null
 
   const createdAt = moment(article.createdAt).format('MMMM YYYY')
   const updatedAt = moment(article.updatedAt).format('MMMM YYYY')
@@ -70,7 +67,9 @@ const Article: React.FC = (): JSX.Element => {
         </p>
       </section>
       <section className="article__inner">
-        {content && <div className="article__content">{parse(content)}</div>}
+        {contentHtml && (
+          <div className="article__content">{parse(contentHtml)}</div>
+        )}
         {article.comments && (
           <Comments comments={article.comments} articleId={article._id} />
         )}

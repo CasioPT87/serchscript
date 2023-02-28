@@ -39,7 +39,7 @@ app.use(
           `https://*.googletagmanager.com`,
         ],
         styleSrc: [`'self'`, `*`],
-        connectSrc: [`https://*.google-analytics.com/`],
+        connectSrc: [`'self'`, `https://*.google-analytics.com/`],
       },
     },
   })
