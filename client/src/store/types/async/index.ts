@@ -35,4 +35,7 @@ export type ArticleForm = {
 
 export interface ImageResponse {
   filename: string
+  data?: {
+    id: string
+  }
 }

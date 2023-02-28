@@ -219,7 +219,7 @@ const createDigestedArticleEntityMap = ({
   const _entityMapValues = [...entityMapValues]
 
   for (let i = 0; i < _entityMapValues.length; i++) {
-    const filename = uploadResponses[i].filename
+    const filename = uploadResponses[i].filename || uploadResponses[i].data.id
     const entity = _entityMapValues[i]
     entity.data.file = filename
   }
