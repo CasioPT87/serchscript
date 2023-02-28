@@ -16,8 +16,6 @@ class BackupManager {
   }
 
   upload = imagePath => async () => {
-    console.log('backup uoload')
-
     const saveStream = createReadStream(imagePath)
 
     const storage = await new Storage({

@@ -77,8 +77,6 @@ const serverRequest =
 
         const response = await fetch(url.toString(), requestOptions)
 
-        console.log({ response })
-
         responseDealer({ response, res, rej })
       })
         .then(async data => {

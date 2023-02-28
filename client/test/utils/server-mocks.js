@@ -12,7 +12,6 @@ module.exports = {
       )
     }),
     rest.get('http://localhost:8880/data/articles', (req, res, ctx) => {
-      console.log('paishaaaaaa')
       // Check if the user is authenticated in this session
       const isAuthenticated = getCookie()
       if (!isAuthenticated) {
