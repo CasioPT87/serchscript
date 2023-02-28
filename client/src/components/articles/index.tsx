@@ -39,12 +39,6 @@ const Articles = () => {
     setSearchText('')
   }
 
-  useEffect(() => {
-    if (_.isEmpty(articles.list)) {
-      fetchArticleList({ page: 0, text: '' })
-    }
-  }, [])
-
   const cards = () => {
     if (articles?.list?.docs && articles.list.docs.length > 0) {
       return (

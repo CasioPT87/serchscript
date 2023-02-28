@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">78.12% </span>
+                <span class="strong">72.41% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>25/32</span>
+                <span class='fraction'>21/29</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">75% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">50% </span>
-                <span class="quiet">Branches</span>
-                <span class='fraction'>3/6</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">55.55% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/9</span>
+                <span class='fraction'>4/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">77.41% </span>
+                <span class="strong">71.42% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>24/31</span>
+                <span class='fraction'>20/28</span>
             </div>
         
             
@@ -132,13 +132,7 @@
 <a name='L67'></a><a href='#L67'>67</a>
 <a name='L68'></a><a href='#L68'>68</a>
 <a name='L69'></a><a href='#L69'>69</a>
-<a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a>
-<a name='L74'></a><a href='#L74'>74</a>
-<a name='L75'></a><a href='#L75'>75</a>
-<a name='L76'></a><a href='#L76'>76</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L70'></a><a href='#L70'>70</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -156,7 +150,7 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -165,8 +159,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -184,18 +178,12 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -233,15 +221,15 @@ const Articles = () =&gt; {
   const [searchText, setSearchText] = useState&lt;string&gt;('')
   const articles = useSelector((state: StoreType) =&gt; state.articles)
 &nbsp;
-  const fetchArticleList = ({
+  const fetchArticleList = <span class="fstat-no" title="function not covered" >({</span>
     page,
     text,
   }: {
     page: number
     text: string
   }): void =&gt; {
-    const dispatchThunk: ThunkDispatch&lt;StoreType, unknown, AnyAction&gt; = dispatch
-    dispatchThunk(listArticles({ searchParams: { page, limit, text } }))
+    const dispatchThunk: ThunkDispatch&lt;StoreType, unknown, AnyAction&gt; = <span class="cstat-no" title="statement not covered" >dispatch</span>
+<span class="cstat-no" title="statement not covered" >    dispatchThunk(listArticles({ searchParams: { page, limit, text } }))</span>
   }
 &nbsp;
   const search = <span class="fstat-no" title="function not covered" >(t</span>ext: string): void =&gt; {
@@ -254,23 +242,17 @@ const Articles = () =&gt; {
 <span class="cstat-no" title="statement not covered" >    setSearchText('')</span>
   }
 &nbsp;
-  useEffect(() =&gt; {
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (_.isEmpty(articles.list)) {
-      fetchArticleList({ page: 0, text: '' })
-    }
-  }, [])
-&nbsp;
   const cards = () =&gt; {
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (articles?.list?.docs &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >articles.list.docs.length &gt; 0)</span> {
-<span class="cstat-no" title="statement not covered" >      return (</span>
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (articles?.list?.docs &amp;&amp; articles.list.docs.length &gt; 0) {
+      return (
         &lt;ul className="articles__list"&gt;
-          {articles.list.docs.map(<span class="fstat-no" title="function not covered" >ar</span>ticle =&gt; (
-<span class="cstat-no" title="statement not covered" >            &lt;Card key={article._id} article={article} /&gt;</span>
+          {articles.list.docs.map(article =&gt; (
+            &lt;Card key={article._id} article={article} /&gt;
           ))}
         &lt;/ul&gt;
       )
     }
-    return &lt;div className="articles__message-default"&gt;No articles found&lt;/div&gt;
+<span class="cstat-no" title="statement not covered" >    return &lt;div className="articles__message-default"&gt;No articles found&lt;/div&gt;</span>
   }
 &nbsp;
   return (
@@ -295,7 +277,7 @@ module.exports = Articles
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-02-28T08:27:02.377Z
+                at 2023-02-28T13:48:31.603Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

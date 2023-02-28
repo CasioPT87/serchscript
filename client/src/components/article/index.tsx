@@ -21,9 +21,6 @@ const Article: React.FC = (): JSX.Element => {
   })
   const logged = useSelector((state: StoreType) => state.logged)
 
-  const createdAt = moment(article.createdAt).format('MMMM YYYY')
-  const updatedAt = moment(article.updatedAt).format('MMMM YYYY')
-
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const pathname = window.location.pathname
@@ -42,6 +39,9 @@ const Article: React.FC = (): JSX.Element => {
   }, [article])
 
   if (!article || !content) return null
+
+  const createdAt = moment(article.createdAt).format('MMMM YYYY')
+  const updatedAt = moment(article.updatedAt).format('MMMM YYYY')
 
   return (
     <article className="article">
