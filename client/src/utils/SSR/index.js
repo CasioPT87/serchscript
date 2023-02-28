@@ -33,6 +33,8 @@ const getInitialComponentsTree = (store, componentName) => {
 }
 
 const renderHtml = (html, preloadedState) => {
+  const initialState = JSON.stringify(preloadedState).replace(/</g, '\\u003c')
+
   return `<!DOCTYPE html>
   <html>
     <head>
@@ -62,10 +64,7 @@ const renderHtml = (html, preloadedState) => {
       <script>
         // WARNING: See the following for security issues around embedding JSON in HTML:
         // https://redux.js.org/usage/server-rendering#security-considerations
-        window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
-          /</g,
-          '\\u003c'
-        )}
+        window.__PRELOADED_STATE__ = ${initialState}
       </script>
     </body>
   </html>`

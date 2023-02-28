@@ -33,8 +33,13 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         imgSrc: [`'self'`, `data:`, `*`, `c:`],
-        scriptSrc: [`'self'`, `'unsafe-inline'`],
+        scriptSrc: [
+          `'self'`,
+          `'unsafe-inline'`,
+          `https://*.googletagmanager.com`,
+        ],
         styleSrc: [`'self'`, `*`],
+        connectSrc: [`https://*.google-analytics.com/`],
       },
     },
   })
