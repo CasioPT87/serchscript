@@ -1,6 +1,11 @@
 const React = require('react')
 const { server } = require('../../env/after')
-const { fireEvent, screen, waitFor } = require('@testing-library/react')
+const {
+  fireEvent,
+  screen,
+  waitFor,
+  waitForElement,
+} = require('@testing-library/react')
 const { Articles } = require('../../../src/components')
 const defaultState = require('../../../src/store/state/index.ts')
 const {
@@ -31,29 +36,29 @@ describe('Articles Component', () => {
       preloadedState: appState,
     })
 
-    expect(getByRole('navigation')).toBeInTheDocument()
+    const homeArticleCard = getByRole('heading', { name: /first article/i })
+
+    expect(homeArticleCard).toBeInTheDocument()
   })
 
-  it.only('directs to article when clicking on element of the list', async () => {
+  it('directs to article when clicking on element of the list', async () => {
     const appState = {
       ...defaultState,
       articles: {
         list: getArticleListResponse(false),
       },
     }
-    const { getByRole, getByText } = renderWithProviders(<Articles />, {
+    const { getByRole, getByText } = renderWithRoutes(null, {
       preloadedState: appState,
     })
 
-    fireEvent.click(screen.getByRole('heading', { name: /first article/i }))
+    const homeArticleCard = getByRole('heading', { name: /first article/i })
 
-    const header = await waitFor(() =>
-      getByRole('heading', { name: /first article/i })
-    )
+    fireEvent.click(homeArticleCard)
+
     const content = await waitFor(() => getByText(/my article 1/i))
 
-    screen.debug()
-
-    expect(getByRole('navigation')).toBeInTheDocument()
+    expect(homeArticleCard).not.toBeInTheDocument()
+    expect(content).toBeInTheDocument()
   })
 })

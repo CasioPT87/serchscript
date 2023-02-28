@@ -4,6 +4,8 @@ const articleList = [
     titleId: 'first-article',
     title: 'first article',
     description: 'my title 1',
+    content:
+      '{"blocks":[{"key":"8vq27","text":"my article 1","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":[]}',
     hidden: false,
     createdAt: '2023-02-27T22:56:53.926Z',
   },
@@ -12,6 +14,8 @@ const articleList = [
     titleId: 'second-article',
     title: 'second article',
     description: 'my title 2',
+    content:
+      '{"blocks":[{"key":"8vq27","text":"my article 2","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":[]}',
     hidden: false,
     createdAt: '2023-02-27T22:56:53.926Z',
   },
@@ -20,6 +24,8 @@ const articleList = [
     titleId: 'third-article',
     title: 'third article',
     description: 'my title 3',
+    content:
+      '{"blocks":[{"key":"8vq27","text":"my article 3","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":[]}',
     hidden: false,
     createdAt: '2023-02-27T22:56:53.926Z',
   },
@@ -28,6 +34,8 @@ const articleList = [
     titleId: 'fourth-article',
     title: 'fourth article',
     description: 'my title 4',
+    content:
+      '{"blocks":[{"key":"8vq27","text":"my article 4","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":[]}',
     hidden: false,
     createdAt: '2023-02-27T22:56:53.926Z',
   },
@@ -36,6 +44,8 @@ const articleList = [
     titleId: 'fifth-article',
     title: 'fifth article',
     description: 'my title 5',
+    content:
+      '{"blocks":[{"key":"8vq27","text":"my article 5","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":[]}',
     hidden: false,
     createdAt: '2023-02-27T22:56:53.926Z',
   },
@@ -44,6 +54,8 @@ const articleList = [
     titleId: 'sixth-article',
     title: 'sixth article',
     description: 'my title 6',
+    content:
+      '{"blocks":[{"key":"8vq27","text":"my article 6","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":[]}',
     hidden: true,
     createdAt: '2023-02-27T22:56:53.926Z',
   },
@@ -51,11 +63,24 @@ const articleList = [
     _id: '63fd35359d44c4a9c6f8e11g',
     titleId: 'seventh-article',
     title: 'seventh article',
+    content:
+      '{"blocks":[{"key":"8vq27","text":"my article 7","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}],"entityMap":[]}',
     description: 'my title 7',
     hidden: false,
     createdAt: '2023-02-27T22:56:53.926Z',
   },
 ]
+
+const getArticle = (titleId, isAuthenticated = false) => {
+  return articleList
+    .filter(a => {
+      if (!isAuthenticated) {
+        return !a.hidden
+      }
+      return true
+    })
+    .find(a => a.titleId === titleId)
+}
 
 const getArticleListResponse = authorized => {
   let docs = articleList
@@ -78,4 +103,5 @@ const getArticleListResponse = authorized => {
 
 module.exports = {
   getArticleListResponse,
+  getArticle,
 }

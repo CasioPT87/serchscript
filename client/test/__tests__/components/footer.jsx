@@ -1,9 +1,9 @@
 const React = require('react')
 const { fireEvent, screen } = require('@testing-library/react')
 const { Footer } = require('../../../src/components')
-const renderWithProviders = require('../../utils/test-utils')
+const { renderWithProviders } = require('../../utils/test-utils')
 
-describe.skip('Footer Component', () => {
+describe('Footer Component', () => {
   test('there is a footer there', () => {
     renderWithProviders(<Footer />)
 

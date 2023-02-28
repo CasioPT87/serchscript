@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/10</span>
+                <span class='fraction'>8/10</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">66.66% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/3</span>
+                <span class='fraction'>2/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">50% </span>
+                <span class="strong">80% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/10</span>
+                <span class='fraction'>8/10</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -95,7 +95,8 @@
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
 <a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -106,16 +107,17 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -129,25 +131,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { rest } from 'msw'
 const { getCookie } = require('../../src/utils/index.tsx')
-const { getArticleListResponse } = require('./data-mocks')
+const { getArticleListResponse, getArticle } = require('./data-mocks')
 &nbsp;
-const createURL = (path) =&gt; {
+const createURL = path =&gt; {
   return `${process.env.DEFAULT_SERVER_DOMAIN}${path}`
 }
 &nbsp;
 module.exports = {
   handlers: [
-    rest.get(createURL('/articles/:titleId'), <span class="fstat-no" title="function not covered" >(r</span>eq, res, ctx) =&gt; {
+    rest.get(createURL('/data/articles/:titleId'), (req, res, ctx) =&gt; {
+      const { titleId } = req.params
       // Check if the user is authenticated in this session
-      const isAuthenticated = <span class="cstat-no" title="statement not covered" >getCookie()</span>
+      const isAuthenticated = getCookie()
       // If authenticated, return a mocked user details
-<span class="cstat-no" title="statement not covered" >      return res(</span>
+&nbsp;
+      return res(
         ctx.status(200),
-        ctx.json(getArticleListResponse(isAuthenticated))
+        ctx.json(getArticle(titleId, isAuthenticated))
       )
     }),
     rest.get(createURL('/data/articles'), <span class="fstat-no" title="function not covered" >(r</span>eq, res, ctx) =&gt; {
-<span class="cstat-no" title="statement not covered" >      console.log('holaaaa')</span>
       // Check if the user is authenticated in this session
       const isAuthenticated = <span class="cstat-no" title="statement not covered" >getCookie()</span>
       // If authenticated, return a mocked user details
@@ -166,7 +169,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-02-28T13:48:31.603Z
+                at 2023-02-28T16:03:06.198Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

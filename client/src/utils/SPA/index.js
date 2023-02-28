@@ -1,20 +1,11 @@
 const { BrowserRouter, Route, Routes } = require('react-router-dom')
-
 const React = require('react')
 const ReactDOMClient = require('react-dom/client')
 const setUpStore = require('../../store/setUp')
 const { Provider } = require('react-redux')
+const { Main } = require('./main')
 
-const {
-  Articles,
-  Article,
-  ArticleLoad,
-  MainFrame,
-  ArticleForm,
-  LoginForm,
-  Header,
-  Footer,
-} = require('../../components')
+const { MainFrame, Header, Footer } = require('../../components')
 
 const replaceElements = () => {
   const store = setUpStore(window.__PRELOADED_STATE__)
@@ -28,22 +19,7 @@ const replaceElements = () => {
       <MainFrame>
         <BrowserRouter>
           <Header />
-          <main>
-            <Routes>
-              <Route path="/" element={<Articles />} />
-              <Route path="articles/:titleId" element={<Article />} />
-              <Route
-                path="admin/articles/new"
-                element={<ArticleForm.create />}
-              />
-              {/* <Route path="articles/load" element={<ArticleLoad />} /> just to load all data from prev app -RIP flamyduck -*/}
-              <Route
-                path="admin/articles/:id/edit"
-                element={<ArticleForm.edit />}
-              />
-              <Route path="auth" element={<LoginForm />} />
-            </Routes>
-          </main>
+          <Main />
           <Footer />
         </BrowserRouter>
       </MainFrame>
@@ -52,3 +28,5 @@ const replaceElements = () => {
 }
 
 replaceElements()
+
+module.export = { Main }

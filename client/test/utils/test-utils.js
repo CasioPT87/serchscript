@@ -2,8 +2,8 @@ const React = require('react')
 const { render } = require('@testing-library/react')
 const createStore = require('../../src/store/setUp')
 const { Provider } = require('react-redux')
-const { App } = require('../../src/utils/SPA')
-const { MemoryRouter } = require('react-router-dom')
+const { Main } = require('../../src/utils/SPA/main')
+const { BrowserRouter, MemoryRouter } = require('react-router-dom')
 
 function renderWithProviders(
   ui,
@@ -39,9 +39,9 @@ function renderWithRoutes(
   function Wrapper() {
     return (
       <Provider store={store}>
-        <MemoryRouter initialEntries={initialEntries}>
-          <App />
-        </MemoryRouter>
+        <BrowserRouter initialEntries={initialEntries}>
+          <Main />
+        </BrowserRouter>
       </Provider>
     )
   }
