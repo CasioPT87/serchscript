@@ -57,7 +57,6 @@ const serverRequest =
             const hasReplacement = Boolean(
               configPathParam && pathParams?.[configPathParam]
             )
-            console.log()
             if (hasReplacement)
               pathname = pathname.replace(
                 `:${configPathParam}`,
@@ -68,7 +67,7 @@ const serverRequest =
 
         url.pathname = pathname
 
-        if ((config.searchParams, searchParams)) {
+        if (config.searchParams && searchParams) {
           config.searchParams.forEach(configSearchParam => {
             const hasValue = Boolean(
               configSearchParam && searchParams?.[configSearchParam]

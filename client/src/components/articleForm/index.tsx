@@ -105,7 +105,6 @@ const ArticleForm = (mode: ModeOptions) => () => {
     const dispatchThunk: ThunkDispatch<StoreType, unknown, AnyAction> = dispatch
     const imagesUploadedData = await dispatchThunk(uploadImages(content))
     const dispatchAction = getDispatchAction(mode)
-    console.log({ id: article?._id })
     const response = await dispatch(
       dispatchAction(imagesUploadedData)({
         pathParams: { articleId: article?._id },
