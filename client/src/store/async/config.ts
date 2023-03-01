@@ -48,6 +48,7 @@ const requestConfig: RequestConfig = {
     create: {
       method: 'POST',
       path: '/data/comments',
+      successDispatch: [actions.addArticleComment],
       failDispatch: [
         () => actions.setArticleMessage('Server failed creating comment'),
       ],

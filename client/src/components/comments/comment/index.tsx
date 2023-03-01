@@ -48,7 +48,7 @@ const Comment = ({
         disabled={!!comment}
         onChange={onChange}
         value={value}
-        placeholder="drop a comment :)"
+        placeholder={comment === null ? 'drop a comment :)' : ''}
         className="comment__field"
       />
       {message && <div className="comment__message">{message}</div>}
