@@ -44,7 +44,7 @@ const cheatsheetMachine = () => {
   })
 }
 
-function articleLoad() {
+function ArticleLoad() {
   const dispatch = useDispatch()
   const [title, setTitle] = useState('this is a fake title')
   const [description, setDescription] = useState('this is a fake description')
@@ -117,4 +117,4 @@ function articleLoad() {
   )
 }
 
-module.exports = articleLoad
+module.exports = ArticleLoad

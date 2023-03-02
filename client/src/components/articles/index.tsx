@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 const _ = require('lodash')
 import { useSelector, useDispatch } from 'react-redux'
 import type { AnyAction } from 'redux'

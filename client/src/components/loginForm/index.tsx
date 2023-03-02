@@ -10,7 +10,7 @@ const { useFormInput } = require('../../hooks/useFormInput')
 const login = authAsync.login as ServerRequest['auth']['login']
 const resetMessage = actions.resetMessage as Action
 
-function loginForm() {
+function LoginForm() {
   const dispatch = useDispatch()
   const userNameProps = useFormInput('')
   const userPasswordProps = useFormInput('')
@@ -58,4 +58,4 @@ function loginForm() {
   )
 }
 
-module.exports = loginForm
+module.exports = LoginForm
