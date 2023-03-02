@@ -1,18 +1,19 @@
-import React, { useState, useEffect, SyntheticEvent } from 'react'
+import React, { useEffect, SyntheticEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Action } from '../../store/actions/index'
 import { ServerRequest } from '../../store/async/index'
 import { StoreType } from '../../store/state/index'
 const { auth: authAsync } = require('../../store/async/index.ts')
 const actions = require('../../store/actions/index.ts')
+const { useFormInput } = require('../../hooks/useFormInput')
 
 const login = authAsync.login as ServerRequest['auth']['login']
 const resetMessage = actions.resetMessage as Action
 
 function loginForm() {
   const dispatch = useDispatch()
-  const [name, setName] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
+  const userNameProps = useFormInput('')
+  const userPasswordProps = useFormInput('')
   const message = useSelector((state: StoreType) => state.message.auth)
 
   useEffect(() => {
@@ -21,7 +22,11 @@ function loginForm() {
 
   let handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault()
-    dispatch(login({ data: { name, password } }))
+    dispatch(
+      login({
+        data: { name: userNameProps.value, password: userNameProps.value },
+      })
+    )
   }
 
   return (
@@ -30,16 +35,14 @@ function loginForm() {
         <input
           className="form__input form__input--small"
           type="text"
-          value={name}
           placeholder="username"
-          onChange={e => setName(e.target.value)}
+          {...userNameProps}
         />
         <input
           className="form__input form__input--small"
           type="password"
-          value={password}
           placeholder="your password"
-          onChange={e => setPassword(e.target.value)}
+          {...userPasswordProps}
         />
 
         <button className="form__submit" type="submit">
