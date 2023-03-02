@@ -1,76 +1,79 @@
-# cucarachas
+# serchscript
 
-First run docker containers
+Read about this project at the project itself here: https://www.serchscript.com/articles/about-this-app
 
-Then go to mongosh cli
+or if you prefer to stay here, I'll copy paste the content:
 
-type `use admin`
+## Hello there! Welcome!
+The website you are visiting is a blog and it's been developed using pretty common technologies:
 
-then type `db.auth(‘username’,’password’)` -which are at the docker-compose yaml file-
++ **React.js**: Popular frontend javascript framework.
++ **React-Redux.js**: Library to manage application state
++ **Typescript**: Superset of javascript that adds static typing to the language
++ **Webpack**: Javascript bundler
++ **Node.js**: Express.js, actually, as backend javascript framework
++ **MongoDB**: NoSQL database
++ **Draft.js**: WYSIWYG package, used to create and update the articles of the blog (including this one)
++ **Docker**: To create an environment for development
++ **Git**: For version control
++ **React-Router**, **Jest, Babel**, **SASS**, and more...
 
-then `use cucarachas`
+But what is actually interesting about this project is that it serves both **SSR (Server Side Rendered)** and **CSR (Client Side Rendered)** content. So to say, it acts both as a SSR app, in the way other frameworks would, as Next.js or Gatsby.js, and also as **SPA** (Single Page Application) in the way Create-React-App does, for example.
 
-and finally we create the user with its permissions:
+Two in one go.
 
-`db.createUser({ user:'jamon',pwd:'pass', roles:[{role:'readWrite',db:'cucarachas'}]})`
+## Why would you want to do that?
+Both SSR and SPA apps have their pros and cons, which we'll summarize in the following lines:
 
-dev notes:
+### SSR - pros
+HTML, javascript code and actual data is sent from the server in one go. That allows Google crawler to inspect the data and figure out what that particular page is all about, so it can be correctly indexed. If you care about SEO, SSR is the way to go.
 
-— Como hacemos el SSR —
+### SPA - pros
+Because HTML and javascript code (not data) is sent from a different server, it can load the whole application all at once. Data is then requested on demand to the backend. This allows a much better experience for the user, enjoying a smoother navigation throughout the app, not having to wait for the backend to render the page every time.
 
+### SSR - cons
+Not optimal user experience, as explain before.
 
+### SPA - cons
+Not SEO friendly. Also shows those awkward "loading" spinners when the user visits the site.
 
-1 - when we receive a request, it stores in res.reactComponent the “AppString”, that creates a store (redux), the component the we want (e.g “Articles”) and send all that to “renderHtml”
+## How it works
+They say that a sequence diagram is worth a thousand words:
 
+![serchscript app diagram](https://user-images.githubusercontent.com/7117662/222445160-c539d1c5-8d24-4f6c-9b86-7bf91a21e176.png)
 
+How do we know it works?
+Let's check it ourselves opening the network tab of the browser
 
-2 - renderHtml will put the component inside a div with id = “root” and the store in window.__PRELOAD_STATE__ . All this html is what will be sent initially the browser.
+![network tab first render](https://user-images.githubusercontent.com/7117662/222445405-510f2591-54aa-4816-8523-25090c1911e1.JPG)
 
+You can see that when visiting one of the blog's articles the server sends a rendered html.
 
+![netword tab second render](https://user-images.githubusercontent.com/7117662/222445481-7ad81ba8-c87f-43e8-aa8d-1030ffff4cb0.JPG)
 
-3 - but the trick is that this html has <script src=“react.bundle.js”>, este bundle ha sido creado por webpack, a partir del archivo client/src/index.js
-
-
-
-4 - este client/src/index.js crea su store de la misma manera que en AppString. Pero ademas, una vez que ha creado la store, borra window.__PRELOADED_STATE__. Y encima de eso, aqui tenemos todas las rutas de “react-router-dom”. Como lo servimos todo con un “hydrate” de React (que reemplaza lo que hay dentro de “root”), pues este “script” reemplazara lo que hay dentro de “root” (todo lo que teniamos antes) y ahora ya podemos hacer lo que nos de la gana
-
-
-
-— Como aplicarle estilos a esto —
-
-
-
-La idea seria utilizar css-modules. Para eso vas a tener que ver como hacerlo con webpack, my friend. Por otra parte… queremos hacer eso? Me da a mi que lo suyo seria que los estilos estuvieran ya aplicados cuando bajan la primera vez…. hummmmm, vamos a ver, vamos a ver,…. quizas seria lo suyo que webpack creara un bundle de cada component….? vamos a leernos las docu de webpack bien…
-
-
-
-notas sobre webpack:
-
-
-
-conceptos basicos:
-
-
-
-entry: el path al archivo que webpack utilizara como inicio de su dependency graph. De ahi webpack ya se imagina que archivos dependen de el y hace toda la dependency graph.
-
-
-output: le dice a webpack donde crear el bundle (o los bundles) y como llamarlo/s.
+article image
+And later, when navigating to a different article, the frontend will only request data (json, in our case):
 
 
-loaders: Como webpack solo entiende js y JSON, los loaders convierten otros lenguajes (css,… lo que sea) y los convierte en “modules” que pueden ser consumidos por webpack. Los loaders tienen dos propiedades: “test” => el tipo de archivos que tienen que ser transformados, y “use” => el loader para esos archivos. Un ejemplo:
+article image
+I use this blog for my personal notes. I know, didn't need to do all this to have my own blog, but I enjoyed it :)
 
 
-  module: {
+The code is available in **GitHub** to be used in any way:
 
-    rules: [{ test: /\.txt$/, use: 'raw-loader' }],
+https://github.com/CasioPT87/serchscript
 
-  },
 
-plugins: Mientras que los loaders transforman, los plugins pueden hacer mucho mas, como bundle optimization, asset management e injection of env variables. Los plugins necesitan que los “require” y luego que los metas en el array “plugins”. Un ejemplo:
+You can search for **posts of this blog** here:
 
-plugins: [new HtmlWebpackPlugin({ template: './src/index.html' })],
+https://www.serchscript.com
 
-** echale un ojito al html-webpack-plugin este
 
-mode: puede ser “development”, “production” o “none”. cada uno le dice a webpack cual es el ratio tiempo-en-crear-bundle / tamano-bundle
+And if you want to **contact me**, this is my **Linkedin** profile:
+
+https://www.linkedin.com/in/sergio-ibanez-moreno-76ab2095/
+
+
+Thanks for reading!!
+
+
