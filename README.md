@@ -1,6 +1,6 @@
 # serchscript
 
-Read about this project at the project itself here: https://www.serchscript.com/articles/about-this-app
+Read about this project at the project itself: https://www.serchscript.com/articles/about-this-app
 
 or if you prefer to stay here, I'll copy paste the content:
 
