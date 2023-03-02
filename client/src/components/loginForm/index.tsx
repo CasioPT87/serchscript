@@ -5,7 +5,7 @@ import { ServerRequest } from '../../store/async/index'
 import { StoreType } from '../../store/state/index'
 const { auth: authAsync } = require('../../store/async/index.ts')
 const actions = require('../../store/actions/index.ts')
-const { useFormInput } = require('../../hooks/useFormInput')
+const useFormInput = require('../../hooks/useFormInput.tsx')
 
 const login = authAsync.login as ServerRequest['auth']['login']
 const resetMessage = actions.resetMessage as Action
