@@ -24,7 +24,7 @@ function LoginForm() {
     e.preventDefault()
     dispatch(
       login({
-        data: { name: userNameProps.value, password: userNameProps.value },
+        data: { name: userNameProps.value, password: userPasswordProps.value },
       })
     )
   }

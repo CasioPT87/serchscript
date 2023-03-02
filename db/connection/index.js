@@ -3,7 +3,8 @@ const { MONGODB_URI } = process.env
 
 const connect = () => {
   const mongoDB =
-    MONGODB_URI || 'mongodb://jamon:pass@localhost:27017/cucarachas'
+    MONGODB_URI ||
+    `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@localhost:27017/${process.env.DB_USERNAME}`
   mongoose
     .connect(mongoDB)
     .then(() => console.log('connected to the db!!'))
