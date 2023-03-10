@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>0/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
@@ -88,27 +88,17 @@
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -122,45 +112,40 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">const React = require('react')
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const React = require('react')
 const { Route, Routes } = require('react-router-dom')
 const {
-    Articles,
-    Article,
-    ArticleForm,
-    LoginForm,
+  Articles,
+  Article,
+  ArticleForm,
+  LoginForm,
 } = require('../../components')
 &nbsp;
-const Main = () =&gt; {
-    return (
-        &lt;main&gt;
-            &lt;Routes&gt;
-                &lt;Route path="/" element={&lt;Articles /&gt;} /&gt;
-                &lt;Route path="articles/:titleId" element={&lt;Article /&gt;} /&gt;
-                &lt;Route
-                    path="admin/articles/new"
-                    element={&lt;ArticleForm.create /&gt;}
-                /&gt;
-                {/* &lt;Route path="articles/load" element={&lt;ArticleLoad /&gt;} /&gt; just to load all data from prev app -RIP flamyduck -*/}
-                &lt;Route
-                    path="admin/articles/:id/edit"
-                    element={&lt;ArticleForm.edit /&gt;}
-                /&gt;
-                &lt;Route path="auth" element={&lt;LoginForm /&gt;} /&gt;
-            &lt;/Routes&gt;
-        &lt;/main&gt;
-    )
+const Main = <span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >  return (</span>
+    &lt;main&gt;
+      &lt;Routes&gt;
+        &lt;Route path="/" element={&lt;Articles /&gt;} /&gt;
+        &lt;Route path="articles/:titleId" element={&lt;Article /&gt;} /&gt;
+        &lt;Route path="admin/articles/new" element={&lt;ArticleForm.create /&gt;} /&gt;
+        {/* &lt;Route path="articles/load" element={&lt;ArticleLoad /&gt;} /&gt; just to load all data from prev app -RIP flamyduck -*/}
+        &lt;Route path="admin/articles/:id/edit" element={&lt;ArticleForm.edit /&gt;} /&gt;
+        &lt;Route path="auth" element={&lt;LoginForm /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/main&gt;
+  )
 }
 &nbsp;
-module.exports = { Main }</pre></td></tr></table></pre>
+module.exports = { Main }
+&nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-02-28T16:03:06.198Z
+                at 2023-03-10T09:16:24.463Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

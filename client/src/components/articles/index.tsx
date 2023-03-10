@@ -8,6 +8,7 @@ import type { StoreType } from '../../store/state/index'
 const Card = require('./card/index.tsx')
 const Searcher = require('../searcher/index.tsx')
 const Paginator = require('../paginator/index.tsx')
+const ArticleLinkList = require('../articleLinkList/index.tsx')
 const { article: articleAsync } = require('../../store/async/index.ts')
 
 const listArticles = articleAsync.list as ServerRequest['article']['list']
@@ -55,7 +56,10 @@ const Articles = () => {
   return (
     <nav className="articles">
       <Searcher clear={clearSearchText} search={search} />
-      {cards()}
+      <>
+        {cards()}
+        <ArticleLinkList />
+      </>
       <Paginator
         fetchPage={(page: number) =>
           fetchArticleList({ page, text: searchText })

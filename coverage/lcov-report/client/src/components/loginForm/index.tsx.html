@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">27.77% </span>
+                <span class="strong">35.29% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/18</span>
+                <span class='fraction'>6/17</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">29.41% </span>
+                <span class="strong">37.5% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/17</span>
+                <span class='fraction'>6/16</span>
             </div>
         
             
@@ -121,40 +121,33 @@
 <a name='L56'></a><a href='#L56'>56</a>
 <a name='L57'></a><a href='#L57'>57</a>
 <a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -178,22 +171,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState, useEffect, SyntheticEvent } from 'react'
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useEffect, SyntheticEvent } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Action } from '../../store/actions/index'
 import { ServerRequest } from '../../store/async/index'
 import { StoreType } from '../../store/state/index'
 const { auth: authAsync } = require('../../store/async/index.ts')
 const actions = require('../../store/actions/index.ts')
+const useFormInput = require('../../hooks/useFormInput.tsx')
 &nbsp;
 const login = authAsync.login as ServerRequest['auth']['login']
 const resetMessage = actions.resetMessage as Action
 &nbsp;
-function <span class="fstat-no" title="function not covered" >loginForm(</span>) {
+function <span class="fstat-no" title="function not covered" >LoginForm(</span>) {
   const dispatch = <span class="cstat-no" title="statement not covered" >useDispatch()</span>
-  const [name, setName] = <span class="cstat-no" title="statement not covered" >useState&lt;string&gt;('')</span>
-  const [password, setPassword] = <span class="cstat-no" title="statement not covered" >useState&lt;string&gt;('')</span>
+  const userNameProps = <span class="cstat-no" title="statement not covered" >useFormInput('')</span>
+  const userPasswordProps = <span class="cstat-no" title="statement not covered" >useFormInput('')</span>
   const message = <span class="cstat-no" title="statement not covered" >useSelector(<span class="fstat-no" title="function not covered" >(s</span>tate: StoreType) =&gt; <span class="cstat-no" title="statement not covered" >state.message.auth)</span></span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  useEffect(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
@@ -202,7 +209,11 @@ function <span class="fstat-no" title="function not covered" >loginForm(</span>)
 &nbsp;
   let handleSubmit = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync (e: SyntheticEvent) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    e.preventDefault()</span>
-<span class="cstat-no" title="statement not covered" >    dispatch(login({ data: { name, password } }))</span>
+<span class="cstat-no" title="statement not covered" >    dispatch(</span>
+      login({
+        data: { name: userNameProps.value, password: userPasswordProps.value },
+      })
+    )
   }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return (</span>
@@ -211,16 +222,14 @@ function <span class="fstat-no" title="function not covered" >loginForm(</span>)
         &lt;input
           className="form__input form__input--small"
           type="text"
-          value={name}
           placeholder="username"
-          onChange={<span class="fstat-no" title="function not covered" >e </span>=&gt; <span class="cstat-no" title="statement not covered" >setName(e.target.value)}</span>
+          {...userNameProps}
         /&gt;
         &lt;input
           className="form__input form__input--small"
           type="password"
-          value={password}
           placeholder="your password"
-          onChange={<span class="fstat-no" title="function not covered" >e </span>=&gt; <span class="cstat-no" title="statement not covered" >setPassword(e.target.value)}</span>
+          {...userPasswordProps}
         /&gt;
 &nbsp;
         &lt;button className="form__submit" type="submit"&gt;
@@ -236,7 +245,7 @@ function <span class="fstat-no" title="function not covered" >loginForm(</span>)
   )
 }
 &nbsp;
-module.exports = loginForm
+module.exports = LoginForm
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -244,7 +253,7 @@ module.exports = loginForm
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-02-28T16:03:06.198Z
+                at 2023-03-10T09:16:24.463Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

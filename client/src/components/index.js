@@ -1,5 +1,6 @@
 const Articles = require('./articles/index.tsx')
 const Article = require('./article/index.tsx')
+const ArticleLinkList = require('./articleLinkList/index.tsx')
 const LoginForm = require('./loginForm/index.tsx')
 const ArticleForm = require('./articleForm/index.tsx')
 const MainFrame = require('./mainFrame/index.tsx')
@@ -15,6 +16,7 @@ const Searcher = require('./searcher/index.tsx')
 module.exports = {
   Article,
   ArticleLoad,
+  ArticleLinkList,
   Articles,
   LoginForm,
   ArticleForm,
