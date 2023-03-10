@@ -11,7 +11,7 @@ router.get('/', async (req, res, next) => {
   return sendSSRResposeView({
     req,
     res,
-    fetchers: ['fetchArticles'],
+    fetchers: ['fetchArticles', 'fetchArticleLinks'],
     dataName: 'articles',
     errorHandler: next,
   })

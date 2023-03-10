@@ -9,6 +9,10 @@ router.get('/', async (req, res, next) => {
   return dataActionHandler({ action: db.articles.index, req, res, next })
 })
 
+router.get('/links', async (req, res, next) => {
+  return dataActionHandler({ action: db.articles.links, req, res, next })
+})
+
 // get one
 router.get('/:titleId', async (req, res, next) => {
   return dataActionHandler({ action: db.articles.show, req, res, next })

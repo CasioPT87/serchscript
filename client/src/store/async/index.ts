@@ -269,6 +269,7 @@ export type ServerRequest = {
     update: ReturnType<typeof processArticle>
     show: ReturnType<AsyncRequest>
     list: ReturnType<AsyncRequest>
+    links: ReturnType<AsyncRequest>
   }
   comment: {
     create: ReturnType<AsyncRequest>
@@ -288,6 +289,7 @@ const serverRequests: ServerRequest = {
     update: processArticle(requestConfig.articles.update),
     show: serverRequest(requestConfig.articles.show),
     list: serverRequest(requestConfig.articles.list),
+    links: serverRequest(requestConfig.articles.links),
   },
   comment: {
     create: serverRequest(requestConfig.comment.create),

@@ -41,11 +41,17 @@ const resetMessage: Action = () => ({
   payload: null,
 })
 
+const setArticleLinkList: Action = articleLinkList => ({
+  type: 'SET_ARTICLE_LINK_LIST',
+  payload: articleLinkList,
+})
+
 module.exports = {
   addArticles,
   addArticle,
   addArticleComment,
   setLogged,
+  setArticleLinkList,
   setArticleMessage,
   setArticlesMessage,
   setAuthMessage,

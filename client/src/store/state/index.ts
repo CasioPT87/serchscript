@@ -1,10 +1,17 @@
-import type { Article, ArticleList, Message, Logged } from '../types/entities'
+import type {
+  Article,
+  ArticleList,
+  Message,
+  Logged,
+  ArticleLinkList,
+} from '../types/entities'
 
 export type StoreType = Readonly<{
   articles: ArticleList
   article: Article
   logged: Logged
   message: Message
+  articleLinkList?: ArticleLinkList[]
 }>
 
 const defaultState: StoreType = {
@@ -18,6 +25,7 @@ const defaultState: StoreType = {
     articles: null,
     auth: null,
   },
+  articleLinkList: null,
 }
 
 module.exports = defaultState

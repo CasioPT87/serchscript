@@ -53,3 +53,8 @@ export interface Message {
   articles: string | null
   auth: string | null
 }
+
+export interface ArticleLinkList {
+  display: string
+  path: string
+}

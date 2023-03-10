@@ -21,9 +21,13 @@ describe('ArticleLink List Component', () => {
   afterAll(() => server.close())
 
   it('renders', async () => {
-    const { getByTestId } = renderWithProviders(<ArticleLinkList />)
+    const { getByRole, within } = renderWithProviders(<ArticleLinkList />)
 
-    expect(getByTestId('articlelink-list')).toBeInTheDocument()
+    const list = getByRole('list')
+
+    screen.debug()
+
+    expect(list).toBeInTheDocument()
   })
 
   //   it('renders when there is articles created', async () => {

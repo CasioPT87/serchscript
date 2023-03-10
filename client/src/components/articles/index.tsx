@@ -54,19 +54,21 @@ const Articles = () => {
   }
 
   return (
-    <nav className="articles">
+    <div className="home">
       <Searcher clear={clearSearchText} search={search} />
-      <>
-        {cards()}
-        <ArticleLinkList />
-      </>
+      <div className="main">
+        <nav className="articles">{cards()}</nav>
+        <aside>
+          <ArticleLinkList />
+        </aside>
+      </div>
       <Paginator
         fetchPage={(page: number) =>
           fetchArticleList({ page, text: searchText })
         }
         limit={limit}
       />
-    </nav>
+    </div>
   )
 }
 

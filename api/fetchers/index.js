@@ -11,6 +11,10 @@ const fetchers = {
     path: 'article',
     fetch: db.articles.show,
   },
+  fetchArticleLinks: {
+    path: 'articleLinkList',
+    fetch: db.articles.links,
+  },
   fetchComments: {
     path: 'comments.list',
     fetch: db.comments.index,

@@ -14,7 +14,7 @@ const Searcher = ({ search, clear }: Props) => {
   }
 
   return (
-    <div className="searcher">
+    <div role="search" className="searcher">
       <button
         className="searcher__button searcher__button--search"
         onClick={() => {
@@ -32,7 +32,7 @@ const Searcher = ({ search, clear }: Props) => {
           onChange={ev => {
             setText(ev.target.value)
           }}
-          placeholder="search articles"
+          placeholder="filter by title"
         />
       </form>
 

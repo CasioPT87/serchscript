@@ -121,4 +121,10 @@ const destroy = async req => {
   return Article.findOneAndDelete({ _id: id })
 }
 
-module.exports = { index, show, destroyAll, create, update, destroy }
+const links = async req => {
+  const hey = Article.find({}, 'title titleId')
+  console.log('hey', hey)
+  return Article.find({}, 'title titleId')
+}
+
+module.exports = { index, show, destroyAll, create, update, destroy, links }

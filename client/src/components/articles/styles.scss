@@ -1,4 +1,19 @@
+.home {
+  .main {
+    display: flex;
+
+    .articles {
+      flex-grow: 3;
+    }
+
+    aside {
+      flex-grow: 1;
+    }
+  }
+}
+
 .articles {
+  flex-grow: 3;
   background-color: var(--terciary);
 }
 

@@ -1,9 +1,8 @@
-import * as Actions from '../../actions/index'
 import type { ActionReturn } from '../../actions/index'
 
 type Method = 'GET' | 'POST' | 'DELETE' | 'PUT'
 
-type ArticleMethod = 'list' | 'show' | 'create' | 'update'
+type ArticleMethod = 'list' | 'show' | 'create' | 'update' | 'links'
 type ImageMethod = 'upload'
 type CommentMethod = 'create'
 type AuthMethod = 'login' | 'logout'

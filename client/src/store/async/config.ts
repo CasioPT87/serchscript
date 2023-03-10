@@ -36,6 +36,12 @@ const requestConfig: RequestConfig = {
       ],
       failDispatch: [actions.setArticleMessage],
     },
+    links: {
+      method: 'GET',
+      path: '/data/articles/links',
+      successDispatch: [actions.setArticleLinkList],
+      failDispatch: [],
+    },
   },
   image: {
     upload: {

@@ -10,6 +10,7 @@ module.exports = {
     destroyAll: actionsArticle.destroyAll,
     create: actionsArticle.create,
     update: actionsArticle.update,
+    links: actionsArticle.links,
   },
   comments: {
     // index: actionsComment.index,
