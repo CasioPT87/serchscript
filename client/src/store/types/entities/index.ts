@@ -55,6 +55,6 @@ export interface Message {
 }
 
 export interface ArticleLinkList {
-  display: string
-  path: string
+  title: string
+  titleId: string
 }

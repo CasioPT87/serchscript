@@ -8,6 +8,10 @@
 
     aside {
       flex-grow: 1;
+      @media (max-width: $middle-screen) {
+        flex-grow: 0;
+        display: none;
+      }
     }
   }
 }
