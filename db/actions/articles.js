@@ -123,9 +123,9 @@ const destroy = async req => {
 
 const links = async req => {
   if (req.isLogged) {
-    return Article.find({ hidden: false }, 'title titleId')
+    return Article.find('title titleId')
   }
-  return Article.find({}, 'title titleId')
+  return Article.find({ hidden: false }, 'title titleId')
 }
 
 module.exports = { index, show, destroyAll, create, update, destroy, links }
