@@ -122,8 +122,9 @@ const destroy = async req => {
 }
 
 const links = async req => {
-  const hey = Article.find({}, 'title titleId')
-  console.log('hey', hey)
+  if (req.isLogged) {
+    return Article.find({ hidden: false }, 'title titleId')
+  }
   return Article.find({}, 'title titleId')
 }
 
