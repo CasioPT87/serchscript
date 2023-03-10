@@ -22,10 +22,7 @@ describe('ArticleLink List Component', () => {
 
   it('renders', async () => {
     const { getByRole, within } = renderWithProviders(<ArticleLinkList />)
-
     const list = getByRole('list')
-
-    screen.debug()
 
     expect(list).toBeInTheDocument()
   })
