@@ -123,7 +123,7 @@ const destroy = async req => {
 
 const links = async req => {
   if (req.isLogged) {
-    return Article.find('title titleId')
+    return Article.find({}, 'title titleId')
   }
   return Article.find({ hidden: false }, 'title titleId')
 }
