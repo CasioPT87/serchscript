@@ -4,6 +4,7 @@
   border-radius: 1em;
   border: 0.05em solid var(--quinary);
   transition: all 0.1s ease-in-out;
+  list-style-type: none;
 
   &:hover {
     border: 0.1em solid var(--secondary);
