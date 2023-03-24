@@ -1,4 +1,5 @@
 import React, { useState, useEffect, SyntheticEvent } from 'react'
+const { decode } = require('he')
 import { useDispatch } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { ServerRequest } from '../../../store/async/index'
@@ -47,8 +48,8 @@ const Comment = ({
         readOnly={!!comment}
         disabled={!!comment}
         onChange={onChange}
-        value={value}
         placeholder={comment === null ? 'drop a comment :)' : ''}
+        value={decode(value)}
         className="comment__field"
       />
       {message && <div className="comment__message">{message}</div>}
